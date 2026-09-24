@@ -1,66 +1,140 @@
 # DATA266 Lab 1 — Team 5
 
-**GitHub repo:** https://github.com/snehas-SJSU/Data_266-Lab1  
+**GitHub:** https://github.com/snehas-SJSU/Data_266-Lab1  
 **Team number:** 5  
-**Members:** Sneha Singh (`sneha_singh/`), Ritika Mukesh Neema (`ritika_mukesh_neema/`)
+**Members:**
+- Sneha Singh → `sneha_singh/`
+- Ritika Mukesh Neema → `ritika_mukesh_neema/`
 
-No personal file paths, credentials, or API keys in committed files. Notebook prints are repo-relative (`task1_llm/...`), never `/Users/...`.
+This README covers **setup**, **how to reproduce a smoke test**, and **where results live** (Lab Section 1 & 5).
 
-## Datasets (Google Drive)
+No personal file paths, credentials, or API keys are committed. Paths in notebooks/logs are repo-relative (`task1_llm/...`). Runs are config-driven via each member’s `src/config.json`.
 
-Do **not** push raw datasets to GitHub. Zip each `data/` folder, upload to Drive, and paste links below with **Anyone with the link → Viewer**.
+---
 
-| Dataset | Local folder (not in git) | Drive link |
-|---|---|---|
-| TinyStories | `task1_llm/data/` | _add_ |
-| Yelp polarity | `task2_sentiment/data/` | _add_ |
-| Monet / Photo (Kaggle) | `task3_gan/data/monet_jpg/`, `photo_jpg/` | _add_ |
-
-Or one shared Drive folder: _add_
-
-## Tasks
-
-| Folder | Part | Dataset |
-|---|---|---|
-| `task1_llm/` | GPT from scratch | TinyStories |
-| `task2_sentiment/` | Yelp sentiment (3 models) | Yelp polarity |
-| `task3_gan/` | CycleGAN + Kaggle (structure ready; code next) | Monet / Photo |
-
-Each task folder:
-
-```
-sneha_singh/
-  src/                 executed .ipynb
-  data_processed/      my preprocessing only
-  checkpoints/         .pt / .pth weights
-  outputs/             plots, samples, predictions
-  metrics_report.csv
-  failure_analysis.md
-  results.md
-```
-
-## Reproduce (smoke test)
-
-**Part 1 LLM** — `task1_llm/sneha_singh/src/config.json` → `"smoke": true`:
+## 1. Setup
 
 ```bash
-jupyter nbconvert --to notebook --execute --inplace task1_llm/sneha_singh/src/part1_llm.ipynb
+git clone https://github.com/snehas-SJSU/Data_266-Lab1.git
+cd Data_266-Lab1
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-**Part 2 Yelp** — kernel **Python (HW1)** (`hw1-data266`), config `"smoke": true`:
+Optional: create a Jupyter kernel named `hw1-data266` if you use that name in Part 2 docs.
+
+**Datasets (not in GitHub):** raw data stays on Google Drive / Hugging Face. Keep only empty `data/` placeholders in git.
+
+| Dataset | Local folder | How to get it | Drive link |
+|---|---|---|---|
+| TinyStories | `task1_llm/data/` | notebook downloads, or place `TinyStories-valid.txt` here | _add_ |
+| Yelp polarity | `task2_sentiment/data/` | auto via Hugging Face `fancyzhx/yelp_polarity` | _add_ |
+| Monet / Photo | `task3_gan/data/monet_jpg/`, `photo_jpg/` | Kaggle competition data | _add_ |
+
+Shared Drive folder: _add_ (Anyone with the link → Viewer)
+
+---
+
+## 2. Repository layout
+
+```
+Data_266-Lab1/
+├── README.md
+├── requirements.txt
+├── task1_llm/
+│   ├── data/                      ← shared TinyStories (not pushed)
+│   ├── sneha_singh/
+│   └── ritika_mukesh_neema/
+├── task2_sentiment/
+│   ├── data/                      ← shared Yelp (not pushed; HF cache OK)
+│   ├── sneha_singh/
+│   └── ritika_mukesh_neema/
+├── task3_gan/
+│   ├── data/
+│   │   ├── monet_jpg/
+│   │   └── photo_jpg/
+│   ├── sneha_singh/
+│   └── ritika_mukesh_neema/
+├── reproducibility/
+│   ├── manifests/
+│   └── raw_logs/
+└── report/
+    └── DATA266_Lab1_Report_Team_5.pdf
+```
+
+### Per member (under each task)
+
+```
+<member_name>/
+  src/                 executed task notebooks + config.json
+  data_processed/      that member’s preprocessing only (not shared)
+  checkpoints/         trained weights (.pt / .pth)
+  outputs/             plots, samples, predictions, confusion matrices
+  metrics_report.csv   all required metrics for this task
+  failure_analysis.md  required failure / error write-up
+  results.md           architecture + hyperparameter justification
+```
+
+Part 3 also includes `evaluate_local.py`, `submission.csv`, and `full_metrics_report.csv`.
+
+---
+
+## 3. Where results live
+
+| What | Path |
+|---|---|
+| Part 1 notebook / metrics / results | `task1_llm/<member>/` |
+| Part 2 notebook / metrics / results | `task2_sentiment/<member>/` |
+| Part 3 CycleGAN + Kaggle files | `task3_gan/<member>/` |
+| Raw training logs | `reproducibility/raw_logs/<member>/` |
+| Run manifests (env + checkpoint map) | `reproducibility/manifests/<member>.md` |
+| Combined team report | `report/DATA266_Lab1_Report_Team_5.pdf` |
+
+Example (Sneha, Part 2 full run):
+- Metrics: `task2_sentiment/sneha_singh/metrics_report.csv`
+- Checkpoints: `task2_sentiment/sneha_singh/checkpoints/*_full.pt`
+- Manifest: `reproducibility/manifests/sneha_singh.md`
+
+---
+
+## 4. Reproduce a smoke test (grader command)
+
+Set `"smoke": true` in that member’s `src/config.json`, then run **one** of:
+
+**Part 1 — TinyStories GPT (recommended smoke):**
 
 ```bash
 jupyter nbconvert --to notebook --execute --inplace \
-  --ExecutePreprocessor.kernel_name=hw1-data266 \
+  task1_llm/sneha_singh/src/part1_llm.ipynb
+```
+
+**Part 2 — Yelp sentiment:**
+
+```bash
+jupyter nbconvert --to notebook --execute --inplace \
   task2_sentiment/sneha_singh/src/part2_sentiment.ipynb
 ```
 
-## Reproducibility
+Ritika’s runs use the same commands with `ritika_mukesh_neema` instead of `sneha_singh` once her notebooks are present.
 
-- Raw logs: `reproducibility/raw_logs/sneha_singh/`
-- Manifests: `reproducibility/manifests/`
-- Combined report: `report/DATA266_Lab1_Report_Team_5.pdf`
+Full runs: set `"smoke": false` in `config.json` (Part 1 prefers GPU/Colab; Part 2 is fine on CPU/MPS).
 
-## GPU lab
+---
 
-Smoke-test on this laptop first. Copy checkpoints and logs off the lab machine before the slot ends.
+## 5. Reproducibility notes
+
+- Raw logs under `reproducibility/raw_logs/` are left unedited after each run.
+- Each member appends a section to `reproducibility/manifests/<member>.md` (versions, device, checkpoints, reproduce command).
+- GPU lab machines are wiped after sessions — copy checkpoints and logs to this repo before leaving.
+
+---
+
+## 6. Status (Team 5)
+
+| Part | Sneha | Ritika |
+|---|---|---|
+| 1 LLM | Code + smoke; full GPU/Colab pending | Folder ready |
+| 2 Yelp | Full run complete | Folder ready |
+| 3 CycleGAN | Structure / stubs | Folder ready |
+| Report PDF | Pending | Pending |
