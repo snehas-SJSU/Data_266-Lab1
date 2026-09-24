@@ -1,7 +1,7 @@
-# DATA266 Lab 1 — Sneha Singh
+# DATA266 Lab 1 — Team 5
 
 **GitHub repo:** https://github.com/snehas-SJSU/Data_266-Lab1  
-**Team number:** _add from Canvas_  
+**Team number:** 5  
 **Members:** Sneha Singh (`sneha_singh/`), Ritika Mukesh Neema (`ritika_mukesh_neema/`)
 
 No personal file paths, credentials, or API keys in committed files. Notebook prints are repo-relative (`task1_llm/...`), never `/Users/...`.
@@ -59,7 +59,7 @@ jupyter nbconvert --to notebook --execute --inplace \
 
 - Raw logs: `reproducibility/raw_logs/sneha_singh/`
 - Manifests: `reproducibility/manifests/`
-- Combined report: `report/DATA266_Lab1_Report_Team_[N].pdf`
+- Combined report: `report/DATA266_Lab1_Report_Team_5.pdf`
 
 ## GPU lab
 

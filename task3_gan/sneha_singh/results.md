@@ -37,7 +37,7 @@ task3_gan/
 
 ## Kaggle
 - Competition: class signup (Monet / “Painter Myself” style)
-- Team name:
+- Team name: Team 5
 - Submission must be **this model’s inference only**
 - Public / private score:
 - Leaderboard rank:
