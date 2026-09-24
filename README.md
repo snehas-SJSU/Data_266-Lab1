@@ -76,7 +76,7 @@ Data_266-Lab1/
   results.md           architecture + hyperparameter justification
 ```
 
-Part 3 also includes `evaluate_local.py`, `submission.csv`, and `full_metrics_report.csv`.
+Part 3 also uses `evaluate_local.py`, `submission.csv`, and `full_metrics_report.csv` (added when CycleGAN work starts).
 
 ---
 
@@ -136,5 +136,5 @@ Full runs: set `"smoke": false` in `config.json` (Part 1 prefers GPU/Colab; Part
 |---|---|---|
 | 1 LLM | Code + smoke; full GPU/Colab pending | Folder ready |
 | 2 Yelp | Full run complete | Folder ready |
-| 3 CycleGAN | Structure / stubs | Folder ready |
+| 3 CycleGAN | Not started (empty member folder) | Folder ready |
 | Report PDF | Pending | Pending |
