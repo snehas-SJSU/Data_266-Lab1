@@ -1,0 +1,26 @@
+{
+  "member": "sneha_singh",
+  "sid4": 670,
+  "seed": 670,
+  "smoke": false,
+  "hf_dataset": "fancyzhx/yelp_polarity",
+  "max_len": 128,
+  "min_freq": 2,
+  "emb_dim": 100,
+  "n_train_smoke": 2000,
+  "n_val_smoke": 500,
+  "n_test_smoke": 500,
+  "n_train_full": 15000,
+  "n_val_full": 3000,
+  "n_test_full": 3000,
+  "batch_size": 64,
+  "epochs_smoke": 2,
+  "epochs_full": 5,
+  "learning_rate": 0.001,
+  "models": {
+    "baseline": "Baseline \u2014 mean pooling + linear",
+    "experimental_a": "Experimental A \u2014 BiLSTM",
+    "experimental_b": "Experimental B \u2014 TextCNN"
+  },
+  "notes": "Sneha Part 2: mean-emb baseline, BiLSTM, TextCNN."
+}

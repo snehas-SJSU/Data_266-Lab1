@@ -1,0 +1,3 @@
+direction,fid,kid,precision,recall,cycle_l1,lpips,content_cosine,g_loss,d_loss,cycle_loss,identity_loss,grad_norm,nan_count,param_count,train_time_sec,images_per_sec,peak_memory_mb,human_audit_score,inter_rater_agreement,kaggle_public,kaggle_private,kaggle_rank
+A2B,,,,,,,,,,,,,,,,,,,,,,
+B2A,,,,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,6 @@
+model=baseline smoke=False device=mps
+epoch 1 train_ce=0.5989 val_ce=0.4684
+epoch 2 train_ce=0.3903 val_ce=0.3202
+epoch 3 train_ce=0.2870 val_ce=0.2678
+epoch 4 train_ce=0.2325 val_ce=0.2442
+epoch 5 train_ce=0.1962 val_ce=0.2326

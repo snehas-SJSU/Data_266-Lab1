@@ -1,0 +1,42 @@
+# Datasets stay on Google Drive, not GitHub
+task1_llm/data/*
+!task1_llm/data/.gitkeep
+task2_sentiment/data/*
+!task2_sentiment/data/.gitkeep
+task3_gan/data/monet_jpg/*
+!task3_gan/data/monet_jpg/.gitkeep
+task3_gan/data/photo_jpg/*
+!task3_gan/data/photo_jpg/.gitkeep
+
+# Member preprocessing is not shared
+**/data_processed/**
+!**/data_processed/.gitkeep
+
+# Lab PDF — keep local for reference; do not push
+DATA266_Lab1_Fall_2026.pdf
+*.pdf
+!report/**/*.pdf
+
+# Editor / AI tooling (local only)
+.claude/
+.cursor/
+.code-review-graph/
+.cursorrules
+.mcp.json
+.opencode.json
+.windsurfrules
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+
+# Python / notebooks
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# Secrets — never commit
+.env
+*.pem
+*credentials*

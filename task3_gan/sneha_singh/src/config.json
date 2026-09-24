@@ -1,0 +1,17 @@
+{
+  "member": "sneha_singh",
+  "sid4": 670,
+  "seed": 670,
+  "smoke": true,
+  "image_size": 256,
+  "batch_size_smoke": 1,
+  "batch_size_full": 1,
+  "epochs_smoke": 1,
+  "epochs_full": 50,
+  "lr": 0.0002,
+  "lambda_cycle": 10.0,
+  "lambda_identity": 0.5,
+  "domain_A": "photo",
+  "domain_B": "monet",
+  "notes": "Sneha Part 3 CycleGAN. Smoke first on laptop; full train on GPU/Kaggle."
+}

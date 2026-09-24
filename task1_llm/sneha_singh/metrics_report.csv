@@ -1,0 +1,18 @@
+metric,value,notes
+train_cross_entropy,3.061886638402939,last train epoch CE
+val_cross_entropy,3.0659605264663696,last val epoch CE
+perplexity,21.45506024621551,exp(val_ce)
+bits_per_character,4.423246047094347,val_ce / ln(2)
+generalization_gap,0.004073888063430786,val_ce - train_ce
+top1_next_char_accuracy,0.1949462890625,val set
+distinct_1,0.175,temperature sample
+distinct_2,0.6890756302521008,temperature sample
+distinct_3,0.923728813559322,temperature sample
+repeated_4gram_rate,0.03418803418803419,temperature sample
+gradient_norm_max,2.420382261276245,"after clip, over train"
+nan_count,0,non-finite train losses
+parameter_count,3206912,all params
+train_tokens_per_sec,37738.02256143562,chars seen / wall time
+generation_tokens_per_sec,91.48454210877597,greedy+temp generate
+peak_memory_mb,0.0,cuda only; 0 on mps/cpu
+total_training_time_sec,1.7366039752960205,wall clock

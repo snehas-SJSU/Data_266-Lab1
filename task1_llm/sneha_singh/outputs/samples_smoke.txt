@@ -1,0 +1,8 @@
+PROMPT:
+ run away and hide. But then, her mom ca
+
+GREEDY:
+ run away and hide. But then, her mom ca                                                                                                                        
+
+TEMPERATURE 0.80:
+ run away and hide. But then, her mom caeohsttte g e nneayotr  tditttnissgbahsHF hn  etHttaiehly a ehoaa nlu hum t.d omybu d r a   tma  a  aatmacii o hm ihn due
