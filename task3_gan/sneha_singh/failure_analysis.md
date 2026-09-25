@@ -69,16 +69,16 @@ Looking at `outputs/loss_curves/losses.png`:
 ## MiFID / memorization
 
 Local A2B: FID **95.13**, MiFID **0.411**.
-When I rated, images looked like stylized versions of *that* photo, not pasted
-Monet paintings. The worry is more “same noisy texture everywhere” than true
-memorization. We’ll double-check that with Ritika on the sheet.
+When I rated, images looked like stylized versions of that photo, not pasted
+Monet paintings. The main issue is shared grainy texture across many outputs.
+Ritika and I will confirm that on the joint sheet.
 
-Numbers are from our local eval script — still better to match the class
-`real_stats.npz` / official script when we have it.
+Scores came from our local `evaluate_local.py`. We still need the course
+`real_stats.npz` / eval script before treating them as final leaderboard numbers.
 
-## If I retrain later
+## Next steps if we retrain
 
-1. More epochs or a bit more identity loss — maybe cleaner skies.
-2. Fix upsampling (resize-conv) to fight checkerboard.
-3. Run full B2A inference before quoting B2A LPIPS.
-4. Finish the joint 30 ratings → put κ in this file and in the metrics CSV.
+1. More epochs or slightly higher identity loss.
+2. Change upsampling to reduce checkerboard.
+3. Full B2A inference before reporting B2A LPIPS.
+4. Finish joint 30 ratings and record agreement here.

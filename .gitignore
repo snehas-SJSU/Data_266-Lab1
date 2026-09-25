@@ -9,7 +9,6 @@ task3_gan/data/photo_jpg/*
 !task3_gan/data/photo_jpg/.gitkeep
 task3_gan/data/real_stats.npz
 task3_gan/data/*.npz
-!task3_gan/data/README.md
 *.zip
 !report/**/*.zip
 
