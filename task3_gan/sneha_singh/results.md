@@ -24,15 +24,18 @@ Full-run budget:
 
 ## Metrics (local — already run)
 
-From `evaluate_local.py` on Mac, A2B photo→Monet:
+From `evaluate_local.py` on Mac:
 
-| Metric | Value |
-|---|---|
-| FID | 95.13 |
-| MiFID | 0.411 |
-| Leaderboard proxy (FID+MiFID)/2 | 47.77 |
+| Direction | FID | KID | MiFID | LPIPS | content cos | cycle L1 |
+|---|---|---|---|---|---|---|
+| A2B (photo→Monet) | 95.13 | 0.021 | 0.411 | 0.436 | 0.576 | 0.117 |
+| B2A (Monet→photo) | — | — | 0.569 | 0.931* | 0.228* | 0.102 |
 
-Same numbers are in `submission.csv` and `full_metrics_report.csv`.
+\*B2A LPIPS/content used only smoke preds (8 images). Full B2A FID/KID skipped for the same reason. A2B is the Kaggle direction.
+
+Also in CSV: precision/recall (A2B), G/D/cycle/identity losses, grad norm, nan_count=0, params, train time, peak memory.
+
+Same A2B FID/MiFID are in `submission.csv`.
 
 ## Kaggle
 

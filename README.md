@@ -134,7 +134,7 @@ python task3_gan/sneha_singh/evaluate_local.py
 - Public / private / rank: fill after submit
 
 **Status**
-- Sneha: train + local eval done. Still open: Drive links, Kaggle submit, Ritika audit column.
+- Sneha: train + local eval done. Open: Drive `best.pt` link, Kaggle submit + rank, Ritika audit column, full B2A metrics (optional).
 - Ritika: folder ready, content pending.
 
 **Data:** `task3_gan/data/monet_jpg/`, `photo_jpg/` from class Kaggle dataset.
@@ -169,5 +169,5 @@ Each large file gets its own share link. Paste into the last column.
 |---|---|---|
 | 1 LLM | Smoke done; full GPU still needed | Placeholder |
 | 2 Yelp | Full run done | Placeholder |
-| 3 CycleGAN | Train + eval done; Kaggle + Drive links open | Placeholder |
+| 3 CycleGAN | Train + eval done; Kaggle + Drive + joint audit open | Placeholder |
 | Report PDF | Not started | Not started |
