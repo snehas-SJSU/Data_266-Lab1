@@ -15,6 +15,7 @@ task3_gan/data/*.npz
 
 # Part 3: full weight files exceed GitHub 100MB; preds are huge — keep structure + samples
 task3_gan/**/checkpoints/*.pt
+!task3_gan/**/checkpoints/best_infer.pt
 task3_gan/**/outputs/pred_A2B/*.jpg
 task3_gan/**/outputs/pred_A2B/*.jpeg
 task3_gan/**/outputs/pred_A2B/*.png
