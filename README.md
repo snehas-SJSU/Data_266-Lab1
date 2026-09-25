@@ -116,6 +116,6 @@ Kaggle upload file: `task3_gan/sneha_singh/submission.csv` (FID + MiFID).
 | Part | Sneha | Ritika |
 |---|---|---|
 | 1 LLM | Smoke done on Mac; full 100K/10K ≥10 epochs still needed | Placeholder folders ready |
-| 2 Yelp | Full run done | Folder ready |
+| 2 Yelp | Full run done (15k/3k/3k, 5 epochs) | Placeholder folders ready |
 | 3 CycleGAN | Train + local eval done; Kaggle submit + Drive links still open | Folder ready |
 | Report PDF | Not started | Not started |
