@@ -47,13 +47,15 @@ So content is the strongest part; artifacts are the main complaint.
 
 From `full_metrics_report.csv`:
 
-| | cycle L1 | LPIPS vs source | content cosine vs source |
-|---|---|---|---|
-| A2B | 0.117 | 0.436 | 0.576 |
-| B2A | 0.102 | 0.931 (only smoke preds) | 0.228 (smoke) |
+| | cycle L1 | LPIPS vs source | content cosine vs source | FID | MiFID |
+|---|---|---|---|---|---|
+| A2B | 0.117 | 0.436 | 0.576 | 95.13 | 0.411 |
+| B2A | 0.102 | 0.329 | 0.632 | 96.36 | 0.433 |
 
 Cycle L1 around 0.1 feels fine after training (cycle loss went from ~7 → ~2.2).
-Content cosine ~0.58 matches what I see: scene is there, not pixel-perfect.
+A2B content cosine ~0.58 matches what I see: scene is there, not pixel-perfect.
+Full B2A (300) looks healthier than the old smoke numbers — LPIPS 0.33 and
+content cos 0.63, close to A2B.
 
 ## Training / loss curves
 
@@ -80,5 +82,4 @@ Scores came from our local `evaluate_local.py`. We still need the course
 
 1. More epochs or slightly higher identity loss.
 2. Change upsampling to reduce checkerboard.
-3. Full B2A inference before reporting B2A LPIPS.
-4. Finish joint 30 ratings and record agreement here.
+3. Finish joint 30 ratings and record agreement here.

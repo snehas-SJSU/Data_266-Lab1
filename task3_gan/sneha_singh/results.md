@@ -29,11 +29,11 @@ From `evaluate_local.py` on Mac:
 | Direction | FID | KID | MiFID | LPIPS | content cos | cycle L1 |
 |---|---|---|---|---|---|---|
 | A2B (photo→Monet) | 95.13 | 0.021 | 0.411 | 0.436 | 0.576 | 0.117 |
-| B2A (Monet→photo) | — | — | 0.569 | 0.931* | 0.228* | 0.102 |
+| B2A (Monet→photo) | 96.36 | 0.034 | 0.433 | 0.329 | 0.632 | 0.102 |
 
-\*B2A LPIPS/content used only smoke preds (8 images). Full B2A FID/KID skipped for the same reason. A2B is the Kaggle direction.
+Full A2B (7038) + full B2A (300 Monet). A2B is the Kaggle direction.
 
-Also in CSV: precision/recall (A2B), G/D/cycle/identity losses, grad norm, nan_count=0, params, train time, peak memory.
+Also in CSV: precision/recall, G/D/cycle/identity losses, grad norm, nan_count=0, params, train time, peak memory.
 
 Same A2B FID/MiFID are in `submission.csv`.
 
