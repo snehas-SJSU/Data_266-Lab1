@@ -22,17 +22,25 @@ Full-run budget:
 - ~87 min (`train_time_sec` ≈ 5238); peak memory ~4820 MB
 - Smoke run earlier on Mac (MPS)
 
-## Metrics
-Local eval on Mac (`evaluate_local.py`), A2B photo→Monet:
-- FID **95.13**, MiFID **0.411**, (FID+MiFID)/2 **47.77**
-- Full table: `full_metrics_report.csv`
-- Kaggle file: `submission.csv`
+## Metrics (local — already run)
+
+From `evaluate_local.py` on Mac, A2B photo→Monet:
+
+| Metric | Value |
+|---|---|
+| FID | 95.13 |
+| MiFID | 0.411 |
+| Leaderboard proxy (FID+MiFID)/2 | 47.77 |
+
+Same numbers are in `submission.csv` and `full_metrics_report.csv`.
 
 ## Kaggle
+
 - Team 5
-- File: `submission.csv` (FID + MiFID)
-- Public / private score: _fill after submit_
-- Rank: _fill after submit_
+- Upload file: `submission.csv` (`fid,mifid` = 95.13, 0.411)
+- Public score: _fill after Kaggle shows it_
+- Private score: _fill after Kaggle shows it_
+- Rank: _fill after Kaggle shows it_
 
 ## Notes
 - LSGAN + cycle + identity matches the CycleGAN paper recipe for this dataset.
