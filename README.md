@@ -20,35 +20,30 @@ pip install -r requirements.txt
 
 ## Google Drive
 
-Raw datasets and Part 3 `best.pt` are too large for GitHub (100 MB limit). We keep them on a shared Drive folder and copy them into the paths below on each machine.
+GitHub has the code and small files. Large files each get their **own Drive link** (share → Anyone with the link → Viewer). Paste that link in the last column.
 
-**Drive folder layout**
+| # | File / folder | Local path after download | Individual Drive link |
+|---|---|---|---|
+| 1 | TinyStories data | `task1_llm/data/` | _add_ |
+| 2 | Monet images (`monet_jpg`) | `task3_gan/data/monet_jpg/` | _add_ |
+| 3 | Photo images (`photo_jpg`) | `task3_gan/data/photo_jpg/` | _add_ |
+| 4 | `real_stats.npz` | `task3_gan/data/real_stats.npz` | _add_ |
+| 5 | **`best.pt`** (Part 3 full weights) | **`task3_gan/sneha_singh/checkpoints/best.pt`** | **_add_** |
+| 6 | `images.zip` (Part 3 preds) | `task3_gan/sneha_singh/images.zip` | _add_ |
+
+Yelp loads from Hugging Face in the Part 2 notebook (no Drive file required).
+
+**Drive folder names (for upload organization)**
 
 ```
 DATA266_Lab1_Team5_Drive/
-├── shared_data/
-│   ├── TinyStories/
-│   └── gan/
-│       ├── monet_jpg/
-│       ├── photo_jpg/
-│       └── real_stats.npz
-└── sneha_singh/
-    └── task3_gan/
-        ├── checkpoints/
-        │   └── best.pt
-        └── images.zip
+├── 01_tinystories/
+├── 02_monet_jpg/
+├── 03_photo_jpg/
+├── 04_real_stats.npz
+├── 05_sneha_best.pt          ← upload best.pt here, then paste link in row 5
+└── 06_sneha_images.zip
 ```
-
-| Item | Copy into local path | Drive link |
-|---|---|---|
-| Shared Drive (root) | — | _add_ |
-| TinyStories | `task1_llm/data/` | _add_ |
-| Monet + Photo | `task3_gan/data/monet_jpg/`, `photo_jpg/` | _add_ |
-| `real_stats.npz` | `task3_gan/data/real_stats.npz` | _add_ |
-| Part 3 `best.pt` | `task3_gan/sneha_singh/checkpoints/best.pt` | _add_ |
-| Part 3 `images.zip` | `task3_gan/sneha_singh/images.zip` | _add_ |
-
-Yelp data loads from Hugging Face in the Part 2 notebook.
 
 ---
 
