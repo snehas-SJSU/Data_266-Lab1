@@ -2,11 +2,17 @@
 # pip install -r requirements.txt
 
 torch>=2.0
+torchvision>=0.15
 numpy>=1.24
 matplotlib>=3.7
+Pillow>=9.0
 scikit-learn>=1.3
 datasets>=2.14
 nltk>=3.8
 jupyter>=1.0
 nbconvert>=7.0
 ipykernel>=6.0
+# Part 3 local metrics (Inception/VGG for measurement only — not for generation)
+torch-fidelity>=0.3.0
+lpips>=0.1.4
+# kaggle  # optional CLI for dataset download

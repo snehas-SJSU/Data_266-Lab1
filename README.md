@@ -136,5 +136,5 @@ Full runs: set `"smoke": false` in `config.json` (Part 1 prefers GPU/Colab; Part
 |---|---|---|
 | 1 LLM | Code + smoke; full GPU/Colab pending | Folder ready |
 | 2 Yelp | Full run complete | Folder ready |
-| 3 CycleGAN | Not started (empty member folder) | Folder ready |
+| 3 CycleGAN | Full Colab train + local eval; Kaggle submit pending | Folder ready |
 | Report PDF | Pending | Pending |

@@ -7,6 +7,22 @@ task3_gan/data/monet_jpg/*
 !task3_gan/data/monet_jpg/.gitkeep
 task3_gan/data/photo_jpg/*
 !task3_gan/data/photo_jpg/.gitkeep
+task3_gan/data/real_stats.npz
+task3_gan/data/*.npz
+!task3_gan/data/README.md
+*.zip
+!report/**/*.zip
+
+# Part 3: full weight files exceed GitHub 100MB; preds are huge — keep structure + samples
+task3_gan/**/checkpoints/*.pt
+task3_gan/**/outputs/pred_A2B/*.jpg
+task3_gan/**/outputs/pred_A2B/*.jpeg
+task3_gan/**/outputs/pred_A2B/*.png
+task3_gan/**/outputs/pred_B2A/*.jpg
+task3_gan/**/outputs/pred_B2A/*.jpeg
+task3_gan/**/outputs/pred_B2A/*.png
+# audit copies under human_audit/ are small and allowed
+!task3_gan/**/outputs/human_audit/**
 
 # Member preprocessing is not shared
 **/data_processed/**

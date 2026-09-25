@@ -1,0 +1,36 @@
+# Human audit sheet — Part 3 A2B (photo→Monet)
+# Fixed 30 indices into outputs/pred_A2B/%05d.jpg
+# Scores: style 0-2 (higher=better Monet feel), content 0-2 (higher=keeps photo layout),
+# artifacts 0-2 (higher=worse grid/noise), mem Y/N (looks copied from real Monet?)
+# Sneha columns filled (solo pass 2026-09-25). Ritika columns left blank for her pass.
+index,file,rater_sneha_style,rater_sneha_content,rater_sneha_artifacts,rater_sneha_mem,rater_ritika_style,rater_ritika_content,rater_ritika_artifacts,rater_ritika_mem,notes
+0,00000.jpg,1,2,2,N,,,,,sky has grid/grain; sun blown out; field layout ok
+242,00242.jpg,2,2,1,N,,,,,autumn trees + graves readable; mild grain
+485,00485.jpg,2,1,1,N,,,,,pretty sky/water; horizon objects soft
+727,00727.jpg,2,2,1,N,,,,,blossom tree clear; looks painterly
+970,00970.jpg,2,2,1,N,,,,,lighthouse + cottage kept; nice sky color
+1213,01213.jpg,2,2,1,N,,,,,mountain valley; structure holds
+1455,01455.jpg,0,1,2,N,,,,,very noisy bands; barely Monet; layout only rough
+1698,01698.jpg,1,2,2,N,,,,,content ok but heavy grain
+1941,01941.jpg,1,1,2,N,,,,,style muddy; some drift
+2183,02183.jpg,2,2,1,N,,,,,solid landscape stylization
+2426,02426.jpg,1,2,2,N,,,,,layout ok; checkerboard in flats
+2669,02669.jpg,2,2,1,N,,,,,waterfall readable; good brush feel
+2911,02911.jpg,1,1,2,N,,,,,noisy; content softer
+3154,03154.jpg,1,2,1,N,,,,,ok overall
+3397,03397.jpg,1,1,2,N,,,,,grainy; weak style
+3639,03639.jpg,1,1,1,N,,,,,flowers soft/blurry more than brushy
+3882,03882.jpg,2,2,1,N,,,,,decent Monet look
+4125,04125.jpg,1,1,2,N,,,,,artifacts dominate
+4367,04367.jpg,1,2,2,N,,,,,content ok; noisy sky
+4610,04610.jpg,2,2,1,N,,,,,good balance
+4853,04853.jpg,1,1,2,N,,,,,psychedelic/ray noise; not natural Monet
+5095,05095.jpg,1,2,1,N,,,,,usable
+5338,05338.jpg,2,2,1,N,,,,,nice stylization
+5581,05581.jpg,1,2,2,N,,,,,grid in flat areas
+5823,05823.jpg,2,2,1,N,,,,,solid
+6066,06066.jpg,2,1,1,N,,,,,style ok; mild content soft
+6309,06309.jpg,1,2,2,N,,,,,grainy
+6551,06551.jpg,1,1,2,N,,,,,weak
+6794,06794.jpg,1,2,1,N,,,,,eagle still clear (content); style mild not Monet-heavy
+7037,07037.jpg,2,2,1,N,,,,,fence + mountains kept; clean-ish
