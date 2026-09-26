@@ -139,7 +139,7 @@ python task3_gan/sneha_singh/evaluate_local.py
 | Local FID / MiFID | 95.13 / 0.411 |
 | Public / private / rank | _fill after submit_ |
 
-**Status:** train + full A2B/B2A local eval done (A2B FID 95.13 / MiFID 0.411; B2A FID 96.36 / MiFID 0.433). Open on my side: Drive `best.pt`, Kaggle submit + rank.
+**Status:** Train and full A2B/B2A local eval are done (A2B FID 95.13 / MiFID 0.411; B2A FID 96.36 / MiFID 0.433). Still need to put `best.pt` on Drive and submit `submission.csv` on Kaggle (then fill public/private/rank).
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 
