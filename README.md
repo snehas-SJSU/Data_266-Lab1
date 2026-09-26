@@ -2,11 +2,13 @@
 
 **GitHub:** https://github.com/snehas-SJSU/Data_266-Lab1  
 **Team:** 5  
-**Members:**
-- Sneha Singh → `sneha_singh/`
-- Ritika Mukesh Neema → `ritika_mukesh_neema/`
 
-Each person works in their own member folder under every task. Ritika’s folders are placeholders until she adds her work.
+| Member | Folder name |
+|---|---|
+| Sneha Singh | `sneha_singh/` |
+| Ritika Mukesh Neema | `ritika_mukesh_neema/` |
+
+Each person works only in their own member folder under every task. Shared data lives in `task*/data/`. Ritika’s folders are placeholders until she adds her work.
 
 ---
 
@@ -29,20 +31,20 @@ Data_266-Lab1/
 ├── README.md
 ├── requirements.txt
 ├── task1_llm/
-│   ├── data/
+│   ├── data/                         # shared TinyStories
 │   ├── sneha_singh/
 │   └── ritika_mukesh_neema/
 ├── task2_sentiment/
-│   ├── data/
+│   ├── data/                         # shared (optional cache)
 │   ├── sneha_singh/
 │   └── ritika_mukesh_neema/
 ├── task3_gan/
-│   ├── data/monet_jpg/  photo_jpg/
+│   ├── data/monet_jpg/  photo_jpg/   # shared
 │   ├── sneha_singh/
 │   └── ritika_mukesh_neema/
 ├── reproducibility/
-│   ├── manifests/
-│   └── raw_logs/
+│   ├── manifests/<member>.md
+│   └── raw_logs/<member>/
 └── report/
 ```
 
@@ -50,46 +52,45 @@ Data_266-Lab1/
 
 ## Part 1 — LLM (TinyStories)
 
-**Folders**
-- Sneha: `task1_llm/sneha_singh/`
-- Ritika: `task1_llm/ritika_mukesh_neema/` (placeholder)
+**Shared data:** `task1_llm/data/` (TinyStories). Drive link in Common table below.
 
-**What’s in Sneha’s folder**
+### Sneha Singh — `task1_llm/sneha_singh/`
+
 - `src/part1_llm.ipynb`, `src/config.json`
 - `metrics_report.csv`, `results.md`, `failure_analysis.md`
-- `checkpoints/best_smoke.pt`, smoke loss curve + samples
+- Smoke checkpoint + loss curve + samples
 - Raw log: `reproducibility/raw_logs/sneha_singh/task1_llm/`
 
 **How to run (smoke)**
 
 ```bash
-# set "smoke": true in task1_llm/sneha_singh/src/config.json
+# "smoke": true in task1_llm/sneha_singh/src/config.json
 jupyter nbconvert --to notebook --execute --inplace \
   task1_llm/sneha_singh/src/part1_llm.ipynb
 ```
 
 **Full GPU (lab machine — not done yet)**
 
-1. Put TinyStories under `task1_llm/data/` (2 GB valid file / URL already in `config.json`).
-2. Set `"smoke": false` in `task1_llm/sneha_singh/src/config.json`.
-3. Run `src/part1_llm.ipynb` on GPU (≥10 epochs, 100K / 10K).
-4. Refresh `metrics_report.csv`, `results.md`, `failure_analysis.md`, and push.
+1. Put TinyStories under `task1_llm/data/` (URL / file name in `config.json`).
+2. Set `"smoke": false` in her `src/config.json`.
+3. Run notebook on GPU (≥10 epochs, 100K / 10K).
+4. Refresh metrics / results / failure analysis and push.
 
-**Status**
-- Sneha: smoke done (Mac MPS). Full run still needed on GPU lab (100K / 10K, ≥10 epochs).
-- Ritika: folder ready, content pending.
+**Status:** smoke done (Mac MPS). Full run still needed on GPU lab.
 
-**Data:** `task1_llm/data/` (TinyStories). Drive link below if not downloaded via notebook.
+### Ritika Mukesh Neema — `task1_llm/ritika_mukesh_neema/`
+
+- Folder ready (placeholder). Own architecture / hyperparameters (different from Sneha).
+- **Status:** content pending.
 
 ---
 
 ## Part 2 — Yelp polarity sentiment
 
-**Folders**
-- Sneha: `task2_sentiment/sneha_singh/`
-- Ritika: `task2_sentiment/ritika_mukesh_neema/` (placeholder)
+**Shared data:** Hugging Face `fancyzhx/yelp_polarity` (each notebook downloads).
 
-**What’s in Sneha’s folder**
+### Sneha Singh — `task2_sentiment/sneha_singh/`
+
 - `src/part2_sentiment.ipynb`, `src/config.json`
 - 3 models: baseline (mean pool), BiLSTM, TextCNN
 - `metrics_report.csv`, `results.md`, `failure_analysis.md` (20 errors)
@@ -99,80 +100,103 @@ jupyter nbconvert --to notebook --execute --inplace \
 **How to run**
 
 ```bash
-# full run uses "smoke": false in config.json
+# "smoke": false in her config.json
 jupyter nbconvert --to notebook --execute --inplace \
   task2_sentiment/sneha_singh/src/part2_sentiment.ipynb
 ```
 
-**Status**
-- Sneha: full run done (~15k / 3k / 3k, 5 epochs). No re-run needed.
-- Ritika: folder ready, content pending.
-- Team model comparison: after Ritika has numbers.
+**Status:** full run done (~15k / 3k / 3k, 5 epochs). No re-run needed.
 
-**Data:** Hugging Face `fancyzhx/yelp_polarity` (notebook download).
+### Ritika Mukesh Neema — `task2_sentiment/ritika_mukesh_neema/`
+
+- Folder ready (placeholder). Own 3 models (different from Sneha).
+- **Status:** content pending.
+
+**Team:** model comparison table after Ritika has numbers.
 
 ---
 
 ## Part 3 — CycleGAN (photo ↔ Monet)
 
-**Folders**
-- Sneha: `task3_gan/sneha_singh/`
-- Ritika: `task3_gan/ritika_mukesh_neema/` (placeholder)
+**Shared data:** `task3_gan/data/monet_jpg/`, `photo_jpg/` (class Kaggle). Drive link in Common table below.
 
-**What’s in Sneha’s folder**
-- `src/part3_cyclegan.ipynb`, `src/config.json`
-- `evaluate_local.py`
+### Sneha Singh — `task3_gan/sneha_singh/`
+
+- `src/part3_cyclegan.ipynb`, `src/config.json`, `evaluate_local.py`, `infer_b2a.py`
 - `submission.csv` (FID + MiFID for Kaggle)
 - `full_metrics_report.csv`, `results.md`, `failure_analysis.md`
 - Sample grid + loss curves; 30-image audit under `outputs/human_audit/`
-- `checkpoints/` folder on git; **`best.pt` on Drive** (GitHub 100 MB limit)
+- `checkpoints/` on git is empty of weights; **`best.pt` on Drive** (GitHub 100 MB limit)
 
 **How to run**
-- Train: Colab / GPU, `"smoke": false` in config (already done on Tesla T4).
+
+- Train: Colab / GPU, `"smoke": false` (done on Tesla T4).
 - Local metrics:
 
 ```bash
 python task3_gan/sneha_singh/evaluate_local.py
 ```
 
-**Kaggle**
-- Upload: `task3_gan/sneha_singh/submission.csv`
-- Local scores: FID 95.13, MiFID 0.411
-- Public / private / rank: fill after submit
+**Kaggle (Sneha)**
 
-**Status**
-- Sneha: train + full A2B/B2A local eval done (A2B FID 95.13 / MiFID 0.411; B2A FID 96.36 / MiFID 0.433). Open: Drive `best.pt` link, Kaggle submit + rank, Ritika audit column.
-- Ritika: folder ready, content pending.
+| Item | Value |
+|---|---|
+| Upload file | `task3_gan/sneha_singh/submission.csv` |
+| Local FID / MiFID | 95.13 / 0.411 |
+| Public / private / rank | _fill after submit_ |
 
-**Data:** `task3_gan/data/monet_jpg/`, `photo_jpg/` from class Kaggle dataset.
+**Status:** train + full A2B/B2A local eval done (A2B FID 95.13 / MiFID 0.411; B2A FID 96.36 / MiFID 0.433). Open: Drive `best.pt`, Kaggle submit + rank, wait for Ritika’s audit column.
+
+### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
+
+- Folder ready (placeholder). Own CycleGAN config / train / `submission.csv`.
+- Same 30-image audit sheet: fill `rater_ritika_*` in the shared audit CSV (or her copy under her folder once she runs).
+- **Status:** content pending. Kaggle: her own `submission.csv` when ready.
+
+| Item | Value |
+|---|---|
+| Upload file | `task3_gan/ritika_mukesh_neema/submission.csv` |
+| Local FID / MiFID | _add_ |
+| Public / private / rank | _fill after submit_ |
+
+**Team:** joint audit agreement (κ) after both rate the 30 samples.
 
 ---
 
-## Google Drive (individual links)
+## Google Drive
 
-Each large file gets its own share link. Paste into the last column.
+### 1. Common links (shared datasets)
 
-| # | File / folder | Local path | Drive link |
-|---|---|---|---|
-| 1 | TinyStories | `task1_llm/data/` | _add_ |
-| 2 | Monet (`monet_jpg`) | `task3_gan/data/monet_jpg/` | _add_ |
-| 3 | Photos (`photo_jpg`) | `task3_gan/data/photo_jpg/` | _add_ |
-| 4 | `real_stats.npz` | `task3_gan/data/real_stats.npz` | _add_ |
-| 5 | Part 3 **`best.pt`** | `task3_gan/sneha_singh/checkpoints/best.pt` | _add_ |
-| 6 | Part 3 `images.zip` | `task3_gan/sneha_singh/images.zip` | _add_ |
+| File / folder | Drive link |
+|---|---|
+| TinyStories | _add_ |
+| Monet (`monet_jpg`) | _add_ |
+| Photos (`photo_jpg`) | _add_ |
+| `real_stats.npz` (if on Kaggle Data) | _add_ |
+
+### 2. Individual links (each person fills their column)
+
+| File / folder | Sneha Singh | Ritika Mukesh Neema |
+|---|---|---|
+| Part 1 checkpoint (after full train) | _add_ | _add_ |
+| Part 2 checkpoints | _add_ | _add_ |
+| Part 3 **`best.pt`** | _add_ | _add_ |
+| Part 3 `images.zip` (optional; not Kaggle submit) | _add_ | _add_ |
 
 ---
 
 ## Reproducibility
 
-- Manifests: `reproducibility/manifests/sneha_singh.md` (Ritika: `ritika_mukesh_neema.md` when she adds runs)
-- Raw logs: `reproducibility/raw_logs/<member>/`
+| Member | Manifest | Raw logs |
+|---|---|---|
+| Sneha Singh | `reproducibility/manifests/sneha_singh.md` | `reproducibility/raw_logs/sneha_singh/` |
+| Ritika Mukesh Neema | `reproducibility/manifests/ritika_mukesh_neema.md` (_add when she runs_) | `reproducibility/raw_logs/ritika_mukesh_neema/` |
 
 ---
 
 ## Team status
 
-| Part | Sneha | Ritika |
+| Part | Sneha Singh | Ritika Mukesh Neema |
 |---|---|---|
 | 1 LLM | Smoke done; full GPU still needed | Placeholder |
 | 2 Yelp | Full run done | Placeholder |
