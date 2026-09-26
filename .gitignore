@@ -23,9 +23,14 @@ task3_gan/**/outputs/pred_B2A/*.png
 # audit copies under human_audit/ are small and allowed
 !task3_gan/**/outputs/human_audit/**
 
-# Member preprocessing is not shared
+# Member preprocessing lives under each member's data_processed/ (PDF layout).
+# Keep regenerable caches off git only if huge; allow standard Part 1/2 outputs.
 **/data_processed/**
 !**/data_processed/.gitkeep
+!**/data_processed/arrays.npz
+!**/data_processed/vocab.json
+!**/data_processed/sequences.npz
+!**/data_processed/char_tokenizer.json
 
 # Lab PDF — keep local for reference; do not push
 DATA266_Lab1_Fall_2026.pdf
