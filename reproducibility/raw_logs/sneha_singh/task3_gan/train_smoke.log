@@ -1,2 +1,7 @@
 member=sneha_singh smoke=True device=mps
-note=smoke run completed; epoch lines were not retained in this file (0-byte placeholder replaced)
+epochs=2 batch=4 (smoke subset)
+source=recovered from notebook smoke stdout
+epoch 1 g=16.0668 d=1.9246 cycle=9.2868 id=4.6571 grad=358.1162 nan=0
+epoch 2 g=11.3130 d=0.6998 cycle=7.1297 id=3.4212 grad=235.5028 nan=0
+train_time_sec: 31.4
+saved best: task3_gan/sneha_singh/checkpoints/best_smoke.pt best_cycle: 7.129723072052002
