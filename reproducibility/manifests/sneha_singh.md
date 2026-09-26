@@ -74,7 +74,7 @@ unedited.
 - Smoke: true
 - Checkpoint: `task3_gan/sneha_singh/checkpoints/best_smoke.pt` (local only; later removed)
 - Pred A2B / B2A: under `task3_gan/sneha_singh/outputs/` (smoke sizes)
-- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_smoke.log`
+- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_smoke.log` (2 epoch lines; recovered from notebook smoke stdout)
 - Python: 3.12.13 · PyTorch: 2.14.0 · Device: mps
 - Command: Run All on `part3_cyclegan.ipynb` (smoke=true)
 

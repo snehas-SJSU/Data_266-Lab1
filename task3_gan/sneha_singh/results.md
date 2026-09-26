@@ -21,6 +21,7 @@ Full-run budget:
 - 80 epochs, batch size 4
 - ~87 min (`train_time_sec` ≈ 5238); peak memory ~4820 MB
 - Smoke run earlier on Mac (MPS)
+- Raw logs: `reproducibility/raw_logs/sneha_singh/task3_gan/train_smoke.log`, `train_full.log`
 
 ## Metrics (local — already run)
 
