@@ -68,8 +68,15 @@ jupyter nbconvert --to notebook --execute --inplace \
   task1_llm/sneha_singh/src/part1_llm.ipynb
 ```
 
+**Full GPU (lab machine — not done yet)**
+
+1. Put TinyStories under `task1_llm/data/` (2 GB valid file / URL already in `config.json`).
+2. Set `"smoke": false` in `task1_llm/sneha_singh/src/config.json`.
+3. Run `src/part1_llm.ipynb` on GPU (≥10 epochs, 100K / 10K).
+4. Refresh `metrics_report.csv`, `results.md`, `failure_analysis.md`, and push.
+
 **Status**
-- Sneha: smoke done (Mac MPS). Full run still needed (100K / 10K, ≥10 epochs).
+- Sneha: smoke done (Mac MPS). Full run still needed on GPU lab (100K / 10K, ≥10 epochs).
 - Ritika: folder ready, content pending.
 
 **Data:** `task1_llm/data/` (TinyStories). Drive link below if not downloaded via notebook.
@@ -134,7 +141,7 @@ python task3_gan/sneha_singh/evaluate_local.py
 - Public / private / rank: fill after submit
 
 **Status**
-- Sneha: train + local eval done. Open: Drive `best.pt` link, Kaggle submit + rank, Ritika audit column, full B2A metrics (optional).
+- Sneha: train + full A2B/B2A local eval done (A2B FID 95.13 / MiFID 0.411; B2A FID 96.36 / MiFID 0.433). Open: Drive `best.pt` link, Kaggle submit + rank, Ritika audit column.
 - Ritika: folder ready, content pending.
 
 **Data:** `task3_gan/data/monet_jpg/`, `photo_jpg/` from class Kaggle dataset.
@@ -169,5 +176,5 @@ Each large file gets its own share link. Paste into the last column.
 |---|---|---|
 | 1 LLM | Smoke done; full GPU still needed | Placeholder |
 | 2 Yelp | Full run done | Placeholder |
-| 3 CycleGAN | Train + eval done; Kaggle + Drive + joint audit open | Placeholder |
+| 3 CycleGAN | Train + full A2B/B2A eval done; Kaggle + Drive + joint audit open | Placeholder |
 | Report PDF | Not started | Not started |

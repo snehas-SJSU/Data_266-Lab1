@@ -24,9 +24,17 @@ All PDF metrics columns are in that CSV (CE, perplexity, BPC, gap, accuracy, dis
 
 ## Hardware
 - Smoke: Mac MPS (Apple Silicon)
-- Full GPU run: not done yet
+- Full GPU run: not done yet (planned on campus GPU lab)
+
+## GPU lab checklist (when I run full)
+1. Clone / pull this repo on the lab machine.
+2. Download TinyStories into `task1_llm/data/` (file name in `config.json`: `TinyStories-valid.txt`; ~2 GB if using the large split the lab expects).
+3. In `src/config.json` set `"smoke": false` (keeps `n_train_full=100000`, `n_val_full=10000`, `min_epochs=10`).
+4. Run `src/part1_llm.ipynb` with CUDA.
+5. Replace smoke metrics: `metrics_report.csv`, loss curve, samples, 3 failure cases in `failure_analysis.md`, then update this file’s Metrics / Hardware sections and push.
 
 ## Notes
 - 4 layers / 4 heads / 256 dim is small enough for TinyStories but still a real multi-block GPT.
 - Character-level matches the lab (no BPE).
 - Causal triu mask blocks future tokens in training and generation.
+- Config stays `"smoke": true` on git until the full GPU run finishes — flip only on the lab machine.
