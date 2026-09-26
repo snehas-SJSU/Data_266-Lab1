@@ -165,23 +165,37 @@ python task3_gan/sneha_singh/evaluate_local.py
 
 ## Google Drive
 
-### 1. Common links (shared datasets)
+### 1. Common links — 3 shared datasets
 
-| File / folder | Drive link |
-|---|---|
-| TinyStories | _add_ |
-| Monet (`monet_jpg`) | _add_ |
-| Photos (`photo_jpg`) | _add_ |
-| `real_stats.npz` (if on Kaggle Data) | _add_ |
+Same Drive folder for the team (raw data only):
 
-### 2. Individual links (each person fills their column)
-
-| File / folder | Sneha Singh | Ritika Mukesh Neema |
+| # | Dataset | Drive link |
 |---|---|---|
-| Part 1 checkpoint (after full train) | _add_ | _add_ |
-| Part 2 checkpoints | _add_ | _add_ |
-| Part 3 **`best.pt`** | _add_ | _add_ |
-| Part 3 `images.zip` (optional; not Kaggle submit) | _add_ | _add_ |
+| 1 | TinyStories (Part 1) | _add_ |
+| 2 | Monet paintings — `monet_jpg` (Part 3) | _add_ |
+| 3 | Photos — `photo_jpg` (Part 3) | _add_ |
+
+Optional (not one of the 3 datasets): `real_stats.npz` from Kaggle Data → Drive link _add_ if you download it.
+
+Part 2 Yelp polarity is downloaded from Hugging Face in the notebook — no shared Drive zip required.
+
+### 2. Individual links — Sneha / Ritika
+
+Part 1 and Part 2 checkpoints stay **on git** (they’re small enough).  
+Part 3 `best.pt` is ~108 MB → **Drive only** (GitHub 100 MB limit).  
+After Part 1 full GPU: check file size; if under 100 MB, commit it under `checkpoints/` like Part 2. Only use Drive if it’s over the limit.
+
+**Sneha Singh**
+
+| File | Drive link |
+|---|---|
+| Part 3 `best.pt` | _add_ |
+
+**Ritika Mukesh Neema**
+
+| File | Drive link |
+|---|---|
+| Part 3 `best.pt` | _add_ |
 
 ---
 
