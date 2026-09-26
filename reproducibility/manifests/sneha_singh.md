@@ -90,6 +90,7 @@ unedited.
 - Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` (**Drive** — GitHub 100 MB limit; link in root README)
 - Pred A2B: `outputs/pred_A2B` (7038 JPGs)
 - Pred B2A: `outputs/pred_B2A` (300 JPGs, full Monet set)
+- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full.log` (80 epoch lines; recovered from notebook Colab stdout into this path)
 - Metrics CSV: `task3_gan/sneha_singh/full_metrics_report.csv`
 - Submission: `task3_gan/sneha_singh/submission.csv` (fid≈95.13, mifid≈0.411) — Kaggle upload pending
 - Local A2B: FID 95.13, MiFID 0.411 · Local B2A: FID 96.36, MiFID 0.433

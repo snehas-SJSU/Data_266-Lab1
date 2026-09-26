@@ -1,0 +1,2 @@
+member=sneha_singh smoke=True device=mps
+note=smoke run completed; epoch lines were not retained in this file (0-byte placeholder replaced)
