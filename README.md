@@ -8,8 +8,6 @@
 | Sneha Singh | `sneha_singh/` |
 | Ritika Mukesh Neema | `ritika_mukesh_neema/` |
 
-Each person works only in their own member folder under every task. Shared data lives in `task*/data/`. Ritika’s folders are placeholders until she adds her work.
-
 ---
 
 ## Setup
@@ -80,8 +78,7 @@ jupyter nbconvert --to notebook --execute --inplace \
 
 ### Ritika Mukesh Neema — `task1_llm/ritika_mukesh_neema/`
 
-- Folder ready (placeholder). Own architecture / hyperparameters (different from Sneha).
-- **Status:** content pending.
+Notebook, config, metrics, and write-ups for her Part 1 run.
 
 ---
 
@@ -109,10 +106,7 @@ jupyter nbconvert --to notebook --execute --inplace \
 
 ### Ritika Mukesh Neema — `task2_sentiment/ritika_mukesh_neema/`
 
-- Folder ready (placeholder). Own 3 models (different from Sneha).
-- **Status:** content pending.
-
-**Team:** model comparison table after Ritika has numbers.
+Notebook, config, metrics, and write-ups for her Part 2 run (her own 3 models).
 
 ---
 
@@ -145,21 +139,17 @@ python task3_gan/sneha_singh/evaluate_local.py
 | Local FID / MiFID | 95.13 / 0.411 |
 | Public / private / rank | _fill after submit_ |
 
-**Status:** train + full A2B/B2A local eval done (A2B FID 95.13 / MiFID 0.411; B2A FID 96.36 / MiFID 0.433). Open: Drive `best.pt`, Kaggle submit + rank, wait for Ritika’s audit column.
+**Status:** train + full A2B/B2A local eval done (A2B FID 95.13 / MiFID 0.411; B2A FID 96.36 / MiFID 0.433). Open on my side: Drive `best.pt`, Kaggle submit + rank.
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 
-- Folder ready (placeholder). Own CycleGAN config / train / `submission.csv`.
-- Same 30-image audit sheet: fill `rater_ritika_*` in the shared audit CSV (or her copy under her folder once she runs).
-- **Status:** content pending. Kaggle: her own `submission.csv` when ready.
+Notebook, `evaluate_local.py`, `submission.csv`, metrics, and write-ups for her Part 3 run. Kaggle upload from her own `submission.csv`.
 
 | Item | Value |
 |---|---|
 | Upload file | `task3_gan/ritika_mukesh_neema/submission.csv` |
 | Local FID / MiFID | _add_ |
 | Public / private / rank | _fill after submit_ |
-
-**Team:** joint audit agreement (κ) after both rate the 30 samples.
 
 ---
 
@@ -204,7 +194,7 @@ After Part 1 full GPU: check file size; if under 100 MB, commit it under `checkp
 | Member | Manifest | Raw logs |
 |---|---|---|
 | Sneha Singh | `reproducibility/manifests/sneha_singh.md` | `reproducibility/raw_logs/sneha_singh/` |
-| Ritika Mukesh Neema | `reproducibility/manifests/ritika_mukesh_neema.md` (_add when she runs_) | `reproducibility/raw_logs/ritika_mukesh_neema/` |
+| Ritika Mukesh Neema | `reproducibility/manifests/ritika_mukesh_neema.md` | `reproducibility/raw_logs/ritika_mukesh_neema/` |
 
 ---
 
@@ -212,7 +202,7 @@ After Part 1 full GPU: check file size; if under 100 MB, commit it under `checkp
 
 | Part | Sneha Singh | Ritika Mukesh Neema |
 |---|---|---|
-| 1 LLM | Smoke done; full GPU still needed | Placeholder |
-| 2 Yelp | Full run done | Placeholder |
-| 3 CycleGAN | Train + full A2B/B2A eval done; Kaggle + Drive + joint audit open | Placeholder |
-| Report PDF | Not started | Not started |
+| 1 LLM | Smoke done; full GPU still needed | — |
+| 2 Yelp | Full run done | — |
+| 3 CycleGAN | Train + full A2B/B2A eval done; Kaggle + Drive open | — |
+| Report PDF | — | — |
