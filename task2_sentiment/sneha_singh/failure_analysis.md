@@ -4,23 +4,23 @@ Model used: **baseline** (full)
 
 | id | slice | gold | pred | confidence | error_type | snippet | testable_fix |
 |---|---|---|---|---|---|---|---|
-| 1 | confident_FP | 0 | 1 | 0.9984 | false_positive | line huge try pilot travel center | balance length / more epochs |
-| 2 | confident_FP | 0 | 1 | 0.9971 | false_positive | buffet vega least favorite | balance length / more epochs |
-| 3 | confident_FP | 0 | 1 | 0.9957 | false_positive | know good thai curry far service good | balance length / more epochs |
-| 4 | confident_FP | 0 | 1 | 0.9956 | false_positive | buffet awesome think bellagio buffet better upside drink beer wine latte coffee pretty good dessert selection highly recommend pumpkin banana gelato come back d | add negation handling |
-| 5 | confident_FP | 0 | 1 | 0.9948 | false_positive | parking lot dumb line rediculous best time go wednesday raining | balance length / more epochs |
-| 6 | confident_FN | 1 | 0 | 0.0002 | false_negative | service average amount food give money hard beat | balance length / more epochs |
-| 7 | confident_FN | 1 | 0 | 0.0037 | false_negative | bit expensive since hotel bar staff rock sushi not bad | add negation handling |
-| 8 | confident_FN | 1 | 0 | 0.0054 | false_negative | not use service told correction needed clothes would not look good could done take money preferred advise not work definitely back need something done | add negation handling |
-| 9 | confident_FN | 1 | 0 | 0.0158 | false_negative | come pho vega look no not find better pho even strip | add negation handling |
-| 10 | confident_FN | 1 | 0 | 0.0329 | false_negative | month ago grandma u goto coco yuk came visit told wife anything coco dennys etc funny suggesting chili black angus would bring coco time told wife done type pla | balance length / more epochs |
-| 11 | near_threshold | 1 | 0 | 0.4998 | false_negative | not often individual would drive four half hour bowl something fabby case folk pan roast redonkulous condemned death would last supper poor husband getting burn | add negation handling |
-| 12 | near_threshold | 0 | 1 | 0.5004 | false_positive | theme review dumplinghaus overpriced idea smart ndumplinghaus name implies offer variety chinese dumpling baozi larger type steamed dumpling thicker skin chines | add negation handling |
-| 13 | near_threshold | 1 | 0 | 0.4996 | false_negative | many pub feel like give full came last week based recommendation friend studied abroad year ago went order fajitas burger bartender asked student said asked see | add negation handling |
-| 14 | near_threshold | 0 | 1 | 0.5005 | false_positive | show bizarre tried storyline make sense point completely laughable dancing like high school cheerleader routine dancer amazing pole dancer hand best part nthe p | add negation handling |
-| 15 | near_threshold | 1 | 0 | 0.4988 | false_negative | bien que u00e7a soit un endroit extr u00eamement touristique en u00eame temp il tellement de recoins cach u00e9s et qui valent la peine u00eatre u00e9couvert da | add negation handling |
-| 16 | slice_specific_long | 1 | 0 | 0.2181 | false_negative | contrary review zero complaint service price getting tire service past year compared experience place like pep boy guy experienced know nalso one place not feel | add negation handling |
-| 17 | slice_specific_long | 0 | 1 | 0.5064 | false_positive | born raised italian family pretty darn picky pasta gravy tomato sauce unknowing great grandmother sauce first remember never opened make sauce always using toma | add negation handling |
-| 18 | slice_specific_long | 1 | 0 | 0.4115 | false_negative | port authority formerly known patransit pat operates fairly extensive network bus south hill light rail instead running school bus school district gave high sch | add negation handling |
-| 19 | slice_specific_long | 0 | 1 | 0.6558 | false_positive | walmart closest one shopped year recently remodeled carry grocery well normal retail section ni say store worst customer service ever seen employee not interest | add negation handling |
-| 20 | slice_specific_long | 1 | 0 | 0.1254 | false_negative | one occassion park not bad price see coupon going start getting nwe not spending much lately nwell least week hee hee anyway cut time short last trip not think  | add negation handling |
+| 1 | confident_FP | 0 | 1 | 1.0 | false_positive | food always good | balance length / more epochs |
+| 2 | confident_FP | 0 | 1 | 0.9998 | false_positive | good beer | balance length / more epochs |
+| 3 | confident_FP | 0 | 1 | 0.9996 | false_positive | found hair sub professional refunded nice friendly staff | balance length / more epochs |
+| 4 | confident_FP | 0 | 1 | 0.9992 | false_positive | house margs good cheap big like men | balance length / more epochs |
+| 5 | confident_FP | 0 | 1 | 0.999 | false_positive | closed loved place sandwich shop north la vega offered freshly made sandwich people friendly sad | balance length / more epochs |
+| 6 | confident_FN | 1 | 0 | 0.0 | false_negative | margarita wont ya dirty | balance length / more epochs |
+| 7 | confident_FN | 1 | 0 | 0.0 | false_negative | not restaurant closed | add negation handling |
+| 8 | confident_FN | 1 | 0 | 0.0 | false_negative | sago gulaman pretty good not sweet not bland right | add negation handling |
+| 9 | confident_FN | 1 | 0 | 0.0001 | false_negative | decent | balance length / more epochs |
+| 10 | confident_FN | 1 | 0 | 0.0002 | false_negative | closed due emergency sign said closed good nneed refund 20 voucher not want anyone else also inconvenienced | add negation handling |
+| 11 | near_threshold | 0 | 1 | 0.5003 | false_positive | came week night place not packed like reviewer mentioned service slow one guy handling every table definitely waited long time even saw nthe side little quantit | add negation handling |
+| 12 | near_threshold | 0 | 1 | 0.5005 | false_positive | disappointed went early morning wanting sit joy coffee coffee warm not good no comfortable relaxing place sit music way loud early day left without drinking cof | add negation handling |
+| 13 | near_threshold | 0 | 1 | 0.5014 | false_positive | wow people really full nwe first learned gallery year ago another trip scottsdale boyfriend interested art selection remembered year located scottsdale road hea | add negation handling |
+| 14 | near_threshold | 1 | 0 | 0.4971 | false_negative | place literally 50 foot work noodle ordered amazing quick prepare meal take earned customer back lunch next time service good offered water waited food even tak | balance length / more epochs |
+| 15 | near_threshold | 0 | 1 | 0.5033 | false_positive | wife asking go kneaders since moved phoenix shocked small portion even shocked heard total cost meal place expensive ni guess pay grandma attic hoarder atmosphe | add negation handling |
+| 16 | slice_specific_long | 0 | 1 | 0.5147 | false_positive | say found dress loved price range return customer service ni suppose could gotten get dress want negative experience taint wedding going well people helping u e | add negation handling |
+| 17 | slice_specific_long | 1 | 0 | 0.1992 | false_negative | thoroughly impressed airport nnot great world traveler reason see booked virgin transatlantic flight yes virgin lower case popping passport cherry not capital g | add negation handling |
+| 18 | slice_specific_long | 1 | 0 | 0.4549 | false_negative | summer time supposed healthy time trying watch eat always big guy not two fat twin matching motorcycle big know not little definitely eating appropriately howev | add negation handling |
+| 19 | slice_specific_long | 0 | 1 | 0.9154 | false_positive | geee ross half got take place first little back story dad whole family worked chinese restaurant philly born late 1990 mother say craved chinese food whole time | add negation handling |
+| 20 | slice_specific_long | 0 | 1 | 0.7196 | false_positive | opinion md wear three piece suit see doctor wearing three piece suit first thing come mind wearing suit wear suit class med school wear suit round residency kno | add negation handling |

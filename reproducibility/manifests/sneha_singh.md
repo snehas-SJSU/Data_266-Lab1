@@ -6,7 +6,6 @@ checkpoint maps to which result in the report. One section per reported result
 unedited.
 
 ---
-
 ## Run — Part 1 LLM (smoke)
 
 - Date: 2026-09-19 01:57 (last successful smoke; earlier same-day retries omitted)
@@ -45,28 +44,6 @@ unedited.
 
 ---
 
-## Run — Part 2 Sentiment (full)
-
-- Date: 2026-09-19 02:37
-- Task: `task2_sentiment`
-- Smoke: false
-- Train/val/test: 15000 / 3000 / 3000 · Epochs: 5
-- Checkpoints (on git):
-  - `task2_sentiment/sneha_singh/checkpoints/baseline_full.pt`
-  - `task2_sentiment/sneha_singh/checkpoints/experimental_a_full.pt`
-  - `task2_sentiment/sneha_singh/checkpoints/experimental_b_full.pt`
-- Raw logs:
-  - `reproducibility/raw_logs/sneha_singh/task2_sentiment/baseline_full.log`
-  - `reproducibility/raw_logs/sneha_singh/task2_sentiment/experimental_a_full.log`
-  - `reproducibility/raw_logs/sneha_singh/task2_sentiment/experimental_b_full.log`
-- Metrics CSV: `task2_sentiment/sneha_singh/metrics_report.csv`
-- Results / failures: `results.md`, `failure_analysis.md`
-- Python: 3.12.13 · PyTorch: 2.13.0 · Device: mps (Apple Silicon)
-- Platform: macOS-26.2-arm64-arm-64bit
-- Command: Run All on `task2_sentiment/sneha_singh/src/part2_sentiment.ipynb` (smoke=false)
-
----
-
 ## Run — Part 3 CycleGAN (smoke)
 
 - Date: 2026-09-24 16:52 (last smoke; earlier same-day retry omitted)
@@ -98,3 +75,24 @@ unedited.
 - Eval command: `python task3_gan/sneha_singh/evaluate_local.py` (Mac; fidelity backend CPU, LPIPS on MPS)
 - Train command: Colab Run All on `part3_cyclegan.ipynb` (smoke=false)
 - Exact GPU: Tesla T4 (`torch.cuda.get_device_name(0)`)
+
+## Run — Part 2 Sentiment (full)
+- Date: 2026-09-26 23:36
+- Task: task2_sentiment
+- Smoke: False
+- Train/val/test: 99989 / 10000 / 10000 (100000 sampled; 11 empty reviews dropped)
+- Test macro-F1: baseline 0.9226, BiLSTM 0.9184, TextCNN 0.9207
+- Epochs: 5
+- Checkpoint (baseline): task2_sentiment/sneha_singh/checkpoints/baseline_full.pt
+- Checkpoint (experimental_a): task2_sentiment/sneha_singh/checkpoints/experimental_a_full.pt
+- Checkpoint (experimental_b): task2_sentiment/sneha_singh/checkpoints/experimental_b_full.pt
+- Raw log (baseline): reproducibility/raw_logs/sneha_singh/task2_sentiment/baseline_full.log
+- Raw log (experimental_a): reproducibility/raw_logs/sneha_singh/task2_sentiment/experimental_a_full.log
+- Raw log (experimental_b): reproducibility/raw_logs/sneha_singh/task2_sentiment/experimental_b_full.log
+- Metrics CSV: task2_sentiment/sneha_singh/metrics_report.csv
+- Results: task2_sentiment/sneha_singh/results.md
+- Python: 3.12.13
+- PyTorch: 2.14.0
+- Device: Apple M4 (10 cores: 4 performance, 6 efficiency), 16 GB unified, MPS
+- Platform: macOS-26.2-arm64-arm-64bit
+- Command: Run All on task2_sentiment/sneha_singh/src/part2_sentiment.ipynb (config.json smoke=false)

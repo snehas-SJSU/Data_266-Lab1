@@ -102,7 +102,7 @@ jupyter nbconvert --to notebook --execute --inplace \
   task2_sentiment/sneha_singh/src/part2_sentiment.ipynb
 ```
 
-**Status:** full run done (~15k / 3k / 3k, 5 epochs). No re-run needed.
+**Status:** full run done (100k train sampled, 99,989 after empty-review drop / 10k val / 10k test, 5 epochs). Baseline macro-F1 0.923.
 
 ### Ritika Mukesh Neema — `task2_sentiment/ritika_mukesh_neema/`
 
@@ -203,6 +203,6 @@ After Part 1 full GPU: check file size; if under 100 MB, commit it under `checkp
 | Part | Sneha Singh | Ritika Mukesh Neema |
 |---|---|---|
 | 1 LLM | Smoke done; full GPU still needed | — |
-| 2 Yelp | Full run done | — |
+| 2 Yelp | Full run done (100k / 10k / 10k) | — |
 | 3 CycleGAN | Train + full A2B/B2A eval done; Kaggle + Drive open | — |
 | Report PDF | — | — |

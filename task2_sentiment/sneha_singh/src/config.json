@@ -10,9 +10,9 @@
   "n_train_smoke": 2000,
   "n_val_smoke": 500,
   "n_test_smoke": 500,
-  "n_train_full": 15000,
-  "n_val_full": 3000,
-  "n_test_full": 3000,
+  "n_train_full": 100000,
+  "n_val_full": 10000,
+  "n_test_full": 10000,
   "batch_size": 64,
   "epochs_smoke": 2,
   "epochs_full": 5,
@@ -22,5 +22,5 @@
     "experimental_a": "Experimental A \u2014 BiLSTM",
     "experimental_b": "Experimental B \u2014 TextCNN"
   },
-  "notes": "Sneha Part 2: mean-emb baseline, BiLSTM, TextCNN."
+  "notes": "Sneha Part 2: mean-emb baseline, BiLSTM, TextCNN. Full run is 100k/10k/10k from fancyzhx/yelp_polarity (560k train), not the entire corpus."
 }

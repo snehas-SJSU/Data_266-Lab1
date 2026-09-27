@@ -2,53 +2,52 @@
 
 Dataset: Yelp polarity (not IMDB). Embeddings learned from scratch. No pretrained LMs.
 
-## Models
-1. **Baseline** — mean pooling over learned embeddings + linear. Simple control so the other two have to beat something real.
-2. **Experimental A** — BiLSTM over embeddings. Keeps word order (negation, long reviews).
-3. **Experimental B** — TextCNN over embeddings. Local n-gram filters (3/4/5) for short phrases.
+## Models and why I chose them
+1. **Baseline** — mean pooling over learned embeddings + linear. Simple bag-of-embeddings control. If this is already strong, fancier models must beat it clearly.
+2. **Experimental A** — BiLSTM over embeddings. Keeps word order, so negation and long reviews can matter more than a mean pool.
+3. **Experimental B** — TextCNN over embeddings. Local n-gram filters (3/4/5) catch short phrases like "not good" / "highly recommend".
 
 ## Preprocessing
 - lowercasing, punctuation removal, English stopwords, WordNet lemmatization
 - vocab from training text only; `nn.Embedding` trained with each model
+- 100,000 train reviews sampled; 11 empty after cleaning, so 99,989 / 10,000 / 10,000 were used
 - EDA plot: `outputs/eda.png` (length + class balance)
 
 ## Hardware
-Same machine for baseline, BiLSTM, and TextCNN.
-- Chip: Apple M4 (10 cores: 4 performance, 6 efficiency)
-- Memory: 16 GB unified
-- Device: MPS (not CUDA)
-- Smoke: false (full run)
-- Train/val/test: 15000 / 3000 / 3000
+- Device: Apple M4 (10 cores: 4 performance, 6 efficiency), 16 GB unified, MPS
+- Smoke: False
+- Train/val/test sizes: 99989 / 10000 / 10000
 - Epochs: 5  |  batch: 64  |  emb_dim: 100  |  max_len: 128
-- Peak memory: `peak_memory_mb` is 0.0 for every model in `metrics_report.csv`. PyTorch records that counter with `torch.cuda.max_memory_allocated()`, which stays 0 on MPS. I am not substituting a guessed number.
 
 ## Test metrics (summary)
-- **baseline**: acc=0.9043  macro-F1=0.9043  ROC-AUC=0.9648  MCC=0.8086  Brier=0.0718  ECE=0.0194  time=10.6s
-- **experimental_a**: acc=0.8850  macro-F1=0.8849  ROC-AUC=0.9546  MCC=0.7702  Brier=0.0839  ECE=0.0278  time=439.3s
-- **experimental_b**: acc=0.8960  macro-F1=0.8960  ROC-AUC=0.9597  MCC=0.7921  Brier=0.0791  ECE=0.0264  time=11.9s
+- **baseline**: acc=0.9226  macro-F1=0.9226  ROC-AUC=0.9729  MCC=0.8452  Brier=0.0595  ECE=0.0115  time=114.1s  params=4763702
+- **experimental_a**: acc=0.9184  macro-F1=0.9184  ROC-AUC=0.9752  MCC=0.8370  Brier=0.0602  ECE=0.0169  time=1705.7s  params=4848750
+- **experimental_b**: acc=0.9207  macro-F1=0.9207  ROC-AUC=0.9747  MCC=0.8414  Brier=0.0607  ECE=0.0241  time=108.1s  params=4840878
 
-Full table: `metrics_report.csv` (P/R/F1 macro/micro/weighted, PR-AUC, bootstrap CIs, McNemar, length slices, params, CMs).
+Full table: `metrics_report.csv` (includes P/R/F1 macro/micro/weighted, PR-AUC, bootstrap CIs, McNemar, length slices).
 
-## Comparison (my three)
-- Best macro-F1: **baseline** (0.9043). Second: TextCNN (0.8960). BiLSTM was slowest and a bit behind.
-- McNemar vs baseline: A p≈0.001 (different), B p≈0.13 (not clearly different).
-- Short vs long slices: see `macro_f1_short` / `macro_f1_long` in the CSV.
+## Comparison (my three models)
+- Best macro-F1: **baseline** (0.9226). TextCNN is 0.9207. BiLSTM is 0.9184.
+- McNemar vs baseline: BiLSTM p=0.091, TextCNN p=0.424. On this 10k test set, neither experimental model is clearly different from the baseline.
+- Short-review macro-F1: baseline 0.925, TextCNN 0.924, BiLSTM 0.922.
+- Long-review macro-F1: baseline 0.917, TextCNN 0.915, BiLSTM 0.912.
+- Long reviews have a higher error rate for every model (baseline 0.081 long vs 0.074 short).
 
 ## Strengths
-- Same pipeline for all three, so the bake-off is fair.
-- Baseline is fast and strong.
-- TextCNN is good on short opinion phrases; BiLSTM tests order.
-- Calibration (Brier, ECE) and McNemar are reported, not only accuracy.
+- Same clean pipeline for all three models, so the bake-off is fair.
+- Baseline is fast and still competitive, which is useful as a sanity check.
+- TextCNN is strong on short opinion phrases; BiLSTM is there to test order-sensitive cases.
+- Calibration metrics (Brier, ECE) and McNemar are reported, not only accuracy.
 
-## Weaknesses
-- Full run still uses a subset of Yelp (15k train), not the entire corpus.
-- max_len=128 cuts long reviews.
-- Stopwords can hurt negation (`not` / `never`).
-- Peak memory is 0.0 because this run was on MPS, not CUDA.
-- Comparison with Ritika’s models is still to be added.
+## Weaknesses / limitations
+- Train size is 100k of the 560k Yelp train split, with 10k val and 10k test. Not the entire corpus.
+- max_len=128 truncates long reviews.
+- Stopword removal can drop useful words like "not" if cleaning is too aggressive (I already keep short tokens carefully, but negation is still hard).
+- Peak memory is 0.0 because this run is MPS. torch.cuda.max_memory_allocated() stays 0, and I am not guessing a number.
+- Error review is automatic sampling of hard cases; a human pass on wording can still refine error types.
 
 ## Future work
-- Keep negation words in the tokenizer.
-- Small attention pool on BiLSTM.
-- More data / longer train.
-- Extra slices (reviews with "but", very short text).
+- Keep negation words in the tokenizer (do not drop "not" / "never").
+- Try a small attention pooling head on BiLSTM.
+- Tune CNN filter counts / kernel set, and train longer on the full Yelp train split.
+- Add more robustness slices (very short reviews, reviews with "but", foreign-language noise).
