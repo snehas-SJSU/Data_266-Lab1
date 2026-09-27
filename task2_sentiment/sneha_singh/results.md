@@ -13,10 +13,14 @@ Dataset: Yelp polarity (not IMDB). Embeddings learned from scratch. No pretraine
 - EDA plot: `outputs/eda.png` (length + class balance)
 
 ## Hardware
-- Device: mps (Apple Silicon)
-- Smoke: False (full run)
-- Train/val/test: ~15000 / 3000 / 3000
+Same machine for baseline, BiLSTM, and TextCNN.
+- Chip: Apple M4 (10 cores: 4 performance, 6 efficiency)
+- Memory: 16 GB unified
+- Device: MPS (not CUDA)
+- Smoke: false (full run)
+- Train/val/test: 15000 / 3000 / 3000
 - Epochs: 5  |  batch: 64  |  emb_dim: 100  |  max_len: 128
+- Peak memory: `peak_memory_mb` is 0.0 for every model in `metrics_report.csv`. PyTorch records that counter with `torch.cuda.max_memory_allocated()`, which stays 0 on MPS. I am not substituting a guessed number.
 
 ## Test metrics (summary)
 - **baseline**: acc=0.9043  macro-F1=0.9043  ROC-AUC=0.9648  MCC=0.8086  Brier=0.0718  ECE=0.0194  time=10.6s
@@ -40,8 +44,8 @@ Full table: `metrics_report.csv` (P/R/F1 macro/micro/weighted, PR-AUC, bootstrap
 - Full run still uses a subset of Yelp (15k train), not the entire corpus.
 - max_len=128 cuts long reviews.
 - Stopwords can hurt negation (`not` / `never`).
-- Peak memory shows 0 on MPS; would be filled on CUDA.
-- Teammate comparison waits on Ritika’s numbers.
+- Peak memory is 0.0 because this run was on MPS, not CUDA.
+- Comparison with Ritika’s models is still to be added.
 
 ## Future work
 - Keep negation words in the tokenizer.
