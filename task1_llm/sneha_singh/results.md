@@ -1,32 +1,31 @@
 # Part 1 — GPT from scratch (Sneha Singh)
 
-## Architecture
-- Tokenizer: character-level (`char_to_idx` / `idx_to_char`)
-- Split: 100000 train / 10000 val (own seed=670 split)
-- n_layer=4, n_head=4, n_embd=256, block_size=128
-- Causal mask: yes
-- No prebuilt Transformer / attention modules
+I trained a small character-level GPT on TinyStories. The attention code is mine. I did not use `nn.Transformer` or `nn.MultiheadAttention`.
 
-## Hyperparameters
-- Epochs: 10 (full)
-- Optimizer: AdamW, lr=0.001
-- Warmup steps: 100 then cosine decay
-- Batch size: 32
-- Dropout: 0.1
+## What I built
+- Character tokenizer (`char_to_idx` / `idx_to_char`), not BPE
+- 4 layers, 4 heads, embedding size 256, context of 128 characters
+- A causal mask, so a position cannot see future characters
+- My own split from `TinyStories-train.txt`: 100,000 train windows and 10,000 val windows, seed 670
 
-## Metrics
-See `metrics_report.csv` (filled by notebook section 1.5).
-- Last train CE: 0.9120
-- Last val CE: 0.8571
-- Perplexity: 2.3562
-- Top-1 next-char acc: 0.7288
+## Training
+This is the full run (`smoke` is false), not the old 2-epoch laptop smoke test.
+
+- 10 epochs
+- AdamW, learning rate 0.001
+- 100 warmup steps, then cosine decay
+- Batch size 32, dropout 0.1
+
+## How it did
+- Train cross-entropy 0.912, validation cross-entropy 0.857
+- Perplexity 2.36
+- Next-character accuracy 0.729
+- No NaN losses. About 3.25 million parameters. Training took 457 seconds.
+
+The loss curve is `outputs/loss_curves.png`. A short generation is `outputs/samples.txt`. Every column is in `metrics_report.csv`.
 
 ## Hardware
-- Device used: cuda: NVIDIA GeForce RTX 5090
-- Smoke run: False
+NVIDIA GeForce RTX 5090, CUDA, mixed precision. Peak memory was about 349 MB. The raw log is `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log`.
 
-## Notes
-Why this config (for viva):
-- 4 layers / 4 heads / 256 dim is small enough for TinyStories but still a real multi-block GPT.
-- Character-level matches the lab (no BPE / tiktoken).
-- Causal triu mask stops future leakage during training and generation.
+## Why this size
+Four layers is small, but it is still a real stack of blocks, and it stays inside the “write it yourself” rule. Character tokens are what the lab asked for. The causal mask is what stops the model from peeking ahead while it trains and while it writes.
