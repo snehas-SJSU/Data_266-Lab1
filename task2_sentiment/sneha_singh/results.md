@@ -14,7 +14,9 @@ Dataset: Yelp polarity (not IMDB). Embeddings learned from scratch. No pretraine
 - EDA plot: `outputs/eda.png` (length + class balance)
 
 ## Hardware
-- Device: Apple M4 (10 cores: 4 performance, 6 efficiency), 16 GB unified, MPS
+- baseline: Apple M4 (10 cores: 4 performance, 6 efficiency), 16 GB unified, MPS
+- experimental_a: Apple M4 (10 cores: 4 performance, 6 efficiency), 16 GB unified, MPS
+- experimental_b: Apple M4 (10 cores: 4 performance, 6 efficiency), 16 GB unified, MPS
 - Smoke: False
 - Train/val/test sizes: 99989 / 10000 / 10000
 - Epochs: 5  |  batch: 64  |  emb_dim: 100  |  max_len: 128
