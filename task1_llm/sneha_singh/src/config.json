@@ -2,9 +2,11 @@
   "member": "sneha_singh",
   "sid4": 670,
   "seed": 670,
-  "smoke": true,
+  "smoke": false,
   "dataset_file": "TinyStories-valid.txt",
   "dataset_url": "https://huggingface.co/datasets/roneneldan/TinyStories/resolve/main/TinyStories-valid.txt",
+  "dataset_file_full": "TinyStories-train.txt",
+  "dataset_url_full": "https://huggingface.co/datasets/roneneldan/TinyStories/resolve/main/TinyStories-train.txt",
   "block_size": 128,
   "n_train_full": 100000,
   "n_val_full": 10000,
@@ -22,7 +24,7 @@
   "n_epochs_smoke": 2,
   "gen_tokens": 120,
   "temperature": 0.8,
-  "notes": "Sneha Part 1: weight tying, GPT-2 init, AdamW no decay on bias/LN, non-overlapping windows randomly sampled from full corpus, CUDA autocast.",
+  "notes": "Reported full run. smoke false. Notebook downloads TinyStories-train.txt (not committed). 100000 train / 10000 val, 10 epochs. Checkpoint: checkpoints/best.pt.",
   "window_stride": 128,
   "weight_decay": 0.1
 }

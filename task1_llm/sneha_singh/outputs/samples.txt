@@ -1,0 +1,9 @@
+PROMPT:
+some changes. She added some nice colors
+
+GREEDY:
+some changes. She added some nice colors and shows them them to the park. She said, "Thank you, Mommy. You are very happy. You are very happy. You are very happ
+
+TEMPERATURE 0.80:
+some changes. She added some nice colors the box and made me sure the door. She saw an amazing tree, but she was feeling so happy that she didn't stop anymore.
+

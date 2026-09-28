@@ -7,7 +7,7 @@
 
 > Draft for the final PDF. **Sneha’s sections** are filled from the repo.  
 > **Ritika’s sections** are empty placeholders.  
-> Part 1 full-GPU numbers and Kaggle public score are still TBD on my side.
+> Kaggle public score is still TBD on my side. Part 1 full run is in.
 
 ---
 
@@ -15,7 +15,7 @@
 
 | Part | Sneha Singh | Ritika Mukesh Neema |
 |---|---|---|
-| 1 — GPT (TinyStories) | Own model + train (smoke done; full GPU pending) | Own model (pending) |
+| 1 — GPT (TinyStories) | Own model + full GPU run done | Own model (pending) |
 | 2 — Yelp polarity | 3 models, full run done | Own 3 models (pending) |
 | 3 — CycleGAN | Train + local eval + audit (my column) | Own train + audit column (pending) |
 | Report / Drive / Kaggle | My half + my Drive / CSV | Her half + her Drive / CSV |
@@ -37,39 +37,34 @@ Train a small GPT from scratch on TinyStories (character-level). No `nn.Transfor
 - Causal triu mask
 - Weight tying + AdamW (no decay on bias / LayerNorm)
 
-### Training plan
-| Setting | Smoke (done) | Full (GPU lab — TBD) |
-|---|---|---|
-| Split | 256 / 64 | 100K / 10K |
-| Epochs | 2 | ≥10 |
-| Device | Mac MPS | Campus GPU |
-| Config | `smoke: true` on git | flip to `false` on lab machine only |
+### Training
+| Setting | Full run (reported) |
+|---|---|
+| Split | 100000 train / 10000 val |
+| Epochs | 10 |
+| Device | NVIDIA GeForce RTX 5090, AMP |
+| Config | `smoke: false` |
+| Time | 457 s, peak memory 349 MB |
 
-### Metrics (smoke only — replace after full run)
+### Metrics
 
 | Metric | Value |
 |---|---|
-| Train CE | 3.06 |
-| Val CE | 3.07 |
-| Perplexity | 21.46 |
-| Top-1 next-char acc | 0.19 |
+| Train CE | 0.912 |
+| Val CE | 0.857 |
+| Perplexity | 2.36 |
+| Top-1 next-char acc | 0.729 |
 
 Full columns: `task1_llm/sneha_singh/metrics_report.csv`.
 
-**Figures to paste after full GPU:** loss curve + sample generations from `task1_llm/sneha_singh/outputs/`  
-(Right now I only have smoke plots: `loss_curves_smoke.png`, `samples_smoke.txt`.)
+Figures: `task1_llm/sneha_singh/outputs/loss_curves.png`, `outputs/samples.txt`.
 
-### Failure cases (smoke — refresh after full GPU)
-1. **Repetition** — greedy decoding sticks on `the the the…`
-2. **Broken spelling** — glued junk like `sheeollhete` at temperature 0.8
-3. **Lost story** — prompt about Mia reading; continuation never comes back
+### Failure cases
+1. **Repetition** — greedy decoding loops on “You are very happy.”
+2. **Word duplication** — greedy emits “them them”.
+3. **Lost thread** — temperature 0.8 drifts from colors to a box, a door, then a tree.
 
 Details: `task1_llm/sneha_singh/failure_analysis.md`.
-
-### What I still owe for Part 1
-- Full train on GPU lab  
-- New metrics, samples, 3 failure snippets  
-- Then rewrite this subsection
 
 ---
 
@@ -221,14 +216,13 @@ _Placeholder — Ritika fills architecture, train hardware, metrics, `submission
 # Closing (team)
 
 - Individual folders on git hold the real notebooks, CSVs, and plots.  
-- Part 1 / Part 2 checkpoints stay on git if under 100 MB. Part 3 `best.pt` (~108 MB) goes on Drive — link in root README.  
-- This draft becomes `DATA266_Lab1_Report_Team_5.pdf` once Part 1 full run, Kaggle scores, and Ritika’s sections are in.
+- Part 1 `best.pt` (12 MB) and Part 2 checkpoints stay on git. Part 3 `best.pt` (113 MB) goes on Drive — link in root README.  
+- This draft becomes `DATA266_Lab1_Report_Team_5.pdf` once Kaggle scores and Ritika’s sections are in.
 
 **Sneha — still open before PDF is final**
-1. Part 1 full GPU + refresh this Part 1.A (then commit checkpoint to git if &lt;100 MB)  
-2. Upload Kaggle CSV → paste public score here  
-3. Drive `best.pt` link in README  
-4. Merge Ritika’s write-ups + κ into one PDF with her  
+1. Upload Kaggle CSV → paste public score here  
+2. Drive `best.pt` link in README  
+3. Merge Ritika’s write-ups + κ into one PDF with her  
 
 ---
 

@@ -1,0 +1,13 @@
+member=sneha_singh smoke=False device=cuda
+n_layer=4 n_head=4 n_embd=256 block_size=128 stride=128
+n_train=100000 n_val=10000 batch_size=32 lr=0.001 warmup=100 epochs=10 amp=True
+epoch 1 train_ce=1.7406 val_ce=1.2762 lr=0.000977
+epoch 2 train_ce=1.3215 val_ce=1.1203 lr=0.000907
+epoch 3 train_ce=1.1747 val_ce=1.0329 lr=0.000797
+epoch 4 train_ce=1.0854 val_ce=0.9742 lr=0.000657
+epoch 5 train_ce=1.0295 val_ce=0.9368 lr=0.000503
+epoch 6 train_ce=0.9899 val_ce=0.9057 lr=0.000347
+epoch 7 train_ce=0.9595 val_ce=0.8839 lr=0.000207
+epoch 8 train_ce=0.9359 val_ce=0.8682 lr=0.000096
+epoch 9 train_ce=0.9199 val_ce=0.8590 lr=0.000025
+epoch 10 train_ce=0.9120 val_ce=0.8571 lr=0.000000

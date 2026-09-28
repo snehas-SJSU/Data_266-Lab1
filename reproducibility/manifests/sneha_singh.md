@@ -20,7 +20,27 @@ unedited.
 - Device: mps (Apple Silicon)
 - Platform: macOS-26.2-arm64-arm-64bit
 - Command: Run All on `task1_llm/sneha_singh/src/part1_llm.ipynb` (`config.json` smoke=true)
-- Note: full GPU run (100K/10K, ≥10 epochs) not done yet — will add a new section after that run.
+- Note: smoke metrics were replaced in `metrics_report.csv` by the full run below. This smoke log is unchanged.
+
+---
+## Run — Part 1 LLM (full)
+
+- Date: 2026-09-28 14:12
+- Task: `task1_llm`
+- Smoke: false
+- Split: 100000 train / 10000 val windows, 10 epochs, block 128
+- Checkpoint: `task1_llm/sneha_singh/checkpoints/best.pt` (12 MB, on git)
+- Metrics CSV: `task1_llm/sneha_singh/metrics_report.csv`
+- Val CE 0.8571, perplexity 2.356, top-1 next-char accuracy 0.729
+- Results / failures: `task1_llm/sneha_singh/results.md`, `failure_analysis.md`
+- Raw log: `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log`
+- Python: 3.11.16
+- PyTorch: 2.12.0.dev20260408+cu128
+- Device: cuda: NVIDIA GeForce RTX 5090
+- Platform: Windows-10-10.0.26200-SP0
+- Train time: 457 s; peak_memory_mb: 349; nan_count: 0; params: 3254272
+- Command: Run All on `task1_llm/sneha_singh/src/part1_llm.ipynb` (`config.json` smoke=false)
+- Dataset file `TinyStories-train.txt` is not on git (Drive).
 
 ---
 

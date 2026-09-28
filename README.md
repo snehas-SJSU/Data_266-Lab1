@@ -54,27 +54,22 @@ Data_266-Lab1/
 
 ### Sneha Singh — `task1_llm/sneha_singh/`
 
-- `src/part1_llm.ipynb`, `src/config.json`
+- `src/part1_llm.ipynb`, `src/config.json` (`smoke: false`)
 - `metrics_report.csv`, `results.md`, `failure_analysis.md`
-- Smoke checkpoint + loss curve + samples
-- Raw log: `reproducibility/raw_logs/sneha_singh/task1_llm/`
+- `checkpoints/best.pt` (12 MB, full run)
+- Loss curve + samples under `outputs/`
+- Raw log: `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log`
 
-**How to run (smoke)**
+**How to run**
+
+`config.json` is the full run: 100000 / 10000, 10 epochs. The notebook downloads `TinyStories-train.txt` into `task1_llm/data/` if it is missing. That file stays off git.
 
 ```bash
-# "smoke": true in task1_llm/sneha_singh/src/config.json
 jupyter nbconvert --to notebook --execute --inplace \
   task1_llm/sneha_singh/src/part1_llm.ipynb
 ```
 
-**Full GPU (lab machine — not done yet)**
-
-1. Put TinyStories under `task1_llm/data/` (URL / file name in `config.json`).
-2. Set `"smoke": false` in her `src/config.json`.
-3. Run notebook on GPU (≥10 epochs, 100K / 10K).
-4. Refresh metrics / results / failure analysis and push.
-
-**Status:** smoke done (Mac MPS). Full run still needed on GPU lab.
+**Status:** full run done (2026-09-28, NVIDIA GeForce RTX 5090, 10 epochs). Val CE 0.857, perplexity 2.36, top-1 next-char accuracy 0.729. Smoke log from the earlier Mac run is still in `train_smoke.log`.
 
 ### Ritika Mukesh Neema — `task1_llm/ritika_mukesh_neema/`
 
@@ -171,9 +166,9 @@ Part 2 Yelp polarity is downloaded from Hugging Face in the notebook — no shar
 
 ### 2. Individual links — Sneha / Ritika
 
-Part 1 and Part 2 checkpoints stay **on git** (they’re small enough).  
-Part 3 `best.pt` is ~108 MB → **Drive only** (GitHub 100 MB limit).  
-After Part 1 full GPU: check file size; if under 100 MB, commit it under `checkpoints/` like Part 2. Only use Drive if it’s over the limit.
+Part 1 `best.pt` (12 MB) and Part 2 checkpoints stay **on git**.  
+Part 3 `best.pt` is 113 MB → **Drive only** (GitHub 100 MB limit).  
+Part 1 `TinyStories-train.txt` (1.92 GB) is the Drive upload, not a git file.
 
 **Sneha Singh**
 

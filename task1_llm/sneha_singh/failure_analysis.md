@@ -1,24 +1,25 @@
-# Part 1 — Generation failure cases (Sneha)
+# Part 1 - Generation failure cases (Sneha)
 
-These three cases are from the **smoke** run (2 epochs, tiny split). I will refresh snippets after the full GPU train (≥10 epochs, 100K / 10K).
+These three cases are from the full GPU run (10 epochs, 100K/10K TinyStories, RTX 5090). Val CE 0.857, perplexity 2.36, top-1 next-char accuracy 72.9%.
 
-## Case 1 — Repetition
-**Snippet (greedy):**
+## Case 1 - Repetition loop (greedy)
+**Snippet (greedy decoding):**
 ```
-...she he and the the the the the the t and the the the the t the the...
+...You are very happy. You are very happy. You are very happ...
 ```
-**Observation:** After a short start (`As Mia read the book, she`), greedy decoding locks onto `the` and repeats it. The model knows `the` is common, but not how to keep the story moving.
+**Observation:** Greedy decoding gets stuck in a short repetition loop. Once the model predicts "You are very happy.", the same context comes back next step, so the same continuation is picked again. Fix: temperature/top-k sampling or a repetition penalty.
 
-## Case 2 — Broken grammar / nonsense tokens
-**Snippet (temperature 0.8):**
+## Case 2 - Word duplication (greedy)
+**Snippet (greedy decoding):**
 ```
-...sheeollhete the ng ay tre the thedss band F he vet thaie ly...
+...She added some nice colors and shows them them to the park.
 ```
-**Observation:** Words are glued together (`sheeollhete`, `thedss`) and letters look random. Character-level models invent bad spellings when they are under-trained.
+**Observation:** The model emits "them them". Character-level GPTs have no word-level boundary awareness, so once a plausible word is complete, the next-char distribution can still favor re-starting the same word. More training or a bigram repetition penalty would help.
 
-## Case 3 — Loss of coherence
-**Snippet (temperature 0.8, continued):**
+## Case 3 - Loss of coherence (temperature 0.8)
+**Snippet (temperature 0.8 sampling):**
 ```
-...coFheand luleum t. bomy wad hed thery s s and acim o he iln the
+...She added some nice colors the box and made me sure the door.
+She saw an amazing tree, but she was feeling so happy that she did not stop anymore.
 ```
-**Observation:** The prompt was about Mia reading a book. The continuation never comes back to Mia, the book, or a clear event. Capital `F`, broken words, and empty `s s` pieces show the story thread is gone.
+**Observation:** Individual clauses are grammatical but do not connect to the prompt or each other. Topic drifts colors -> box -> door -> tree with no narrative thread. Expected for a 3.2M param character-level model with a 128-char context window. Fixes: larger context, larger model, or word/BPE tokenization.
