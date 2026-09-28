@@ -14,7 +14,7 @@
   "n_monet_full": -1,
   "n_photo_full": -1,
   "photos_per_epoch_smoke": 8,
-  "photos_per_epoch_full": 400,
+  "photos_per_epoch_full": 800,
   "n_res_blocks": 9,
   "ngf": 64,
   "ndf": 64,
@@ -23,11 +23,11 @@
   "lambda_cycle": 10.0,
   "lambda_identity": 0.5,
   "pool_size": 50,
-  "label_smoothing": 1.0,
+  "label_smoothing": 0.9,
   "num_workers": 0,
   "save_every": 1,
   "n_sample_grid": 4,
   "n_submit_smoke": 16,
   "n_submit_full": 7038,
-  "notes": "CycleGAN paper arch (9 ResNet @256, PatchGAN, LSGAN, D/2, pool=50). Budget: batch=4, 40+40 epochs, ~400 photos/epoch reshuffled (full photo set still used for Kaggle submit)."
+  "notes": "CycleGAN ResNet-9 @256, PatchGAN, LSGAN, D/2, pool=50. Upsample is nearest x2 + stride-1 conv (no ConvTranspose). label_smoothing 0.9. Budget: batch=4, 40+40 epochs, 800 photos/epoch with Monet cycled. Retrain from scratch; old best.pt will not load."
 }

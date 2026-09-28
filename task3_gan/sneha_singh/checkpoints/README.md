@@ -6,4 +6,4 @@
 - **Drive link:** see root `README.md` → Google Drive → Individual links → Part 3 `best.pt`
 - **Smoke:** `best_smoke.pt` was a local MPS smoke run only; not kept on git
 
-Trained on Colab Tesla T4 (80 epochs). Metrics / `submission.csv` match this checkpoint.
+Trained 80 epochs on CUDA (AMP, ~4.3 h). `submission.csv` matches this checkpoint: A2B FID 89.99, MiFID 0.403.

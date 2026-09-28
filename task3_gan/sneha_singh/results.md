@@ -14,23 +14,27 @@ See `src/config.json`.
 Full-run budget:
 - batch_size=4
 - 40 constant + 40 decay epochs (not 200)
-- ~400 photos resampled each epoch; full photo set used for A2B inference
+- nearest upsample + stride-1 conv (no ConvTranspose)
+- label smoothing 0.9
+- ~800 photos resampled each epoch; the shorter Monet loader is cycled so that photo subset is used
+- full photo set used for A2B inference
 
 ## Hardware
-- Google Colab, **Tesla T4 (15.64 GB)**, AMP, `smoke=false`
+- CUDA GPU, AMP, `smoke=false`
 - 80 epochs, batch size 4
-- ~87 min (`train_time_sec` ≈ 5238); peak memory ~4820 MB
+- `train_time_sec` ≈ 15341 (~4.3 h); peak memory ~6568 MB
+- The saved log prints `device=cuda`. It does not record the GPU name.
 - Smoke run earlier on Mac (MPS)
 - Raw logs: `reproducibility/raw_logs/sneha_singh/task3_gan/train_smoke.log`, `train_full.log`
 
 ## Metrics (local — already run)
 
-From `evaluate_local.py` on Mac:
+From `evaluate_local.py` on Mac, on this retrain:
 
 | Direction | FID | KID | MiFID | LPIPS | content cos | cycle L1 |
 |---|---|---|---|---|---|---|
-| A2B (photo→Monet) | 95.13 | 0.021 | 0.411 | 0.436 | 0.576 | 0.117 |
-| B2A (Monet→photo) | 96.36 | 0.034 | 0.433 | 0.329 | 0.632 | 0.102 |
+| A2B (photo→Monet) | 89.99 | 0.018 | 0.403 | 0.452 | 0.532 | 0.112 |
+| B2A (Monet→photo) | 92.23 | 0.030 | 0.423 | 0.365 | 0.586 | 0.103 |
 
 Full A2B (7038) + full B2A (300 Monet). A2B is the Kaggle direction.
 
@@ -40,8 +44,8 @@ Same A2B FID/MiFID are in `submission.csv`.
 
 ## Kaggle
 
-- Team 5
-- Upload file: `submission.csv` (`fid,mifid` = 95.13, 0.411)
+- Kaggle team name: PairProgramming_Team_5
+- Upload file: `submission.csv` (`ID,FID,MiFID` = 1, 89.99, 0.403)
 - Public score: _fill after Kaggle shows it_
 - Private score: _fill after Kaggle shows it_
 - Rank: _fill after Kaggle shows it_

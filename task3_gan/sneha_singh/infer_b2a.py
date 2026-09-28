@@ -53,7 +53,9 @@ class ResnetGenerator(nn.Module):
             model += [ResnetBlock(n)]
         for _ in range(2):
             model += [
-                nn.ConvTranspose2d(n, n // 2, 3, 2, 1, output_padding=1, bias=False),
+                nn.Upsample(scale_factor=2, mode="nearest"),
+                nn.ReflectionPad2d(1),
+                nn.Conv2d(n, n // 2, 3, stride=1, padding=0, bias=False),
                 nn.InstanceNorm2d(n // 2, affine=False, track_running_stats=False),
                 nn.ReLU(True),
             ]

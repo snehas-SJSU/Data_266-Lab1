@@ -1,6 +1,6 @@
 # Part 3 — Failure / error analysis (Sneha Singh)
 
-I looked at the full-run outputs from Colab (Tesla T4, 80 epochs): loss curves,
+I looked at this 80-epoch retrain (nearest upsample, label smoothing 0.9, CUDA + AMP): loss curves,
 the sample grid, a bunch of `pred_A2B` images, and the numbers from
 `evaluate_local.py`. Ritika still needs to fill her half of the 30-sample sheet
 before we can write agreement (κ).
@@ -49,20 +49,19 @@ From `full_metrics_report.csv`:
 
 | | cycle L1 | LPIPS vs source | content cosine vs source | FID | MiFID |
 |---|---|---|---|---|---|
-| A2B | 0.117 | 0.436 | 0.576 | 95.13 | 0.411 |
-| B2A | 0.102 | 0.329 | 0.632 | 96.36 | 0.433 |
+| A2B | 0.112 | 0.452 | 0.532 | 89.99 | 0.403 |
+| B2A | 0.103 | 0.365 | 0.586 | 92.23 | 0.423 |
 
-Cycle L1 around 0.1 feels fine after training (cycle loss went from ~7 → ~2.2).
-A2B content cosine ~0.58 matches what I see: scene is there, not pixel-perfect.
-Full B2A (300) looks healthier than the old smoke numbers — LPIPS 0.33 and
-content cos 0.63, close to A2B.
+Cycle L1 around 0.11 feels fine after training (cycle loss went from ~5.9 → ~2.17).
+A2B content cosine ~0.53 matches what I see: scene is there, not pixel-perfect.
+Full B2A (300) is in the same range — LPIPS 0.37 and content cos 0.59.
 
 ## Training / loss curves
 
 Looking at `outputs/loss_curves/losses.png`:
 
 - G, cycle, and identity all go down smoothly. Training didn’t stall.
-- D stays really low the whole time (~0.2). Discriminator is winning a lot —
+- D stays really low and ends near 0.17. Discriminator is winning a lot —
   that might be why textures get noisy instead of clean brushstrokes.
 - Grad norms bounce around but don’t explode. `nan_count = 0`.
 - We only did 80 epochs (lab budget), not the paper’s 200, so leftover artifacts
@@ -70,7 +69,7 @@ Looking at `outputs/loss_curves/losses.png`:
 
 ## MiFID / memorization
 
-Local A2B: FID **95.13**, MiFID **0.411**.
+Local A2B: FID **89.99**, MiFID **0.403**. B2A: FID **92.23**, MiFID **0.423**.
 When I rated, images looked like stylized versions of that photo, not pasted
 Monet paintings. The main issue is shared grainy texture across many outputs.
 Ritika and I will confirm that on the joint sheet.

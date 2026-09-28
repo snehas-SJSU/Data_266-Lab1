@@ -94,15 +94,11 @@ def _probe_real_stats() -> None:
 
 
 def _write_submission(fid, mifid) -> None:
-    """Kaggle upload for this class competition: self-reported FID + MiFID only.
-
-    Column names follow the lab PDF (FID/MiFID). If sample_submission.csv differs,
-    rename columns to match that file exactly before upload.
-    """
+    """Kaggle upload: submission.csv with header ID,FID,MiFID and one data row."""
     with SUBMISSION_PATH.open("w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["fid", "mifid"])
+        w = csv.DictWriter(f, fieldnames=["ID", "FID", "MiFID"])
         w.writeheader()
-        w.writerow({"fid": fid, "mifid": mifid})
+        w.writerow({"ID": 1, "FID": fid, "MiFID": mifid})
     print("wrote", SUBMISSION_PATH.relative_to(REPO), "← upload this to Kaggle")
 
 

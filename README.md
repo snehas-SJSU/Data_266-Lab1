@@ -124,7 +124,7 @@ Notebook, config, metrics, and write-ups for her Part 2 run (her own 3 models).
 
 **How to run**
 
-- Train: Colab / GPU, `"smoke": false` (done on Tesla T4).
+- Train: CUDA GPU, `"smoke": false`, AMP (80 epochs, ~4.3 h, peak ~6568 MB).
 - Local metrics:
 
 ```bash
@@ -136,10 +136,10 @@ python task3_gan/sneha_singh/evaluate_local.py
 | Item | Value |
 |---|---|
 | Upload file | `task3_gan/sneha_singh/submission.csv` |
-| Local FID / MiFID | 95.13 / 0.411 |
+| Local FID / MiFID | 89.99 / 0.403 |
 | Public / private / rank | _fill after submit_ |
 
-**Status:** Train and full A2B/B2A local eval are done (A2B FID 95.13 / MiFID 0.411; B2A FID 96.36 / MiFID 0.433). Still need to put `best.pt` on Drive and submit `submission.csv` on Kaggle (then fill public/private/rank).
+**Status:** Retrain and full A2B/B2A local eval are done (A2B FID 89.99 / MiFID 0.403; B2A FID 92.23 / MiFID 0.423). Still need to put `best.pt` on Drive and submit `submission.csv` on Kaggle (then fill public/private/rank).
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 

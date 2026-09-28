@@ -59,22 +59,22 @@ unedited.
 
 ## Run — Part 3 CycleGAN (full)
 
-- Date: train 2026-09-24/25 (Colab); local eval 2026-09-25 (Mac, incl. full B2A)
+- Date: train and local eval 2026-09-28
 - Task: `task3_gan`
 - Smoke: false
-- Train: Google Colab **Tesla T4 (15.64 GB)**, CUDA + AMP, 80 epochs (40+40), batch_size=4
-- Train time: ~5238 s (~87 min); peak_memory_mb: ~4820
+- Train: CUDA + AMP, 80 epochs (40+40), batch_size=4, nearest upsample, label_smoothing 0.9, ~800 photos/epoch
+- Train time: 15341 s (~4.3 h); peak_memory_mb: 6568
+- GPU name: not printed in `train_full.log` (log line is `device=cuda` only)
 - Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` (**Drive** — GitHub 100 MB limit; link in root README)
 - Pred A2B: `outputs/pred_A2B` (7038 JPGs)
 - Pred B2A: `outputs/pred_B2A` (300 JPGs, full Monet set)
-- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full.log` (80 epoch lines; recovered from notebook Colab stdout into this path)
+- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full.log` (80 epoch lines)
 - Metrics CSV: `task3_gan/sneha_singh/full_metrics_report.csv`
-- Submission: `task3_gan/sneha_singh/submission.csv` (fid≈95.13, mifid≈0.411) — Kaggle upload pending
-- Local A2B: FID 95.13, MiFID 0.411 · Local B2A: FID 96.36, MiFID 0.433
+- Submission: `task3_gan/sneha_singh/submission.csv` (FID 89.99, MiFID 0.403) — Kaggle upload pending
+- Local A2B: FID 89.99, MiFID 0.403 · Local B2A: FID 92.23, MiFID 0.423
 - Results / failures: `results.md`, `failure_analysis.md`
 - Eval command: `python task3_gan/sneha_singh/evaluate_local.py` (Mac; fidelity backend CPU, LPIPS on MPS)
-- Train command: Colab Run All on `part3_cyclegan.ipynb` (smoke=false)
-- Exact GPU: Tesla T4 (`torch.cuda.get_device_name(0)`)
+- Train command: Run All on `part3_cyclegan.ipynb` (smoke=false)
 
 ## Run — Part 2 Sentiment (full)
 - Date: 2026-09-26 23:36
