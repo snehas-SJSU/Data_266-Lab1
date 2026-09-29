@@ -134,7 +134,7 @@ python task3_gan/sneha_singh/evaluate_local.py
 | Local FID / MiFID | 89.99 / 0.403 |
 | Public / private / rank | _fill after submit_ |
 
-**Status:** Retrain and full A2B/B2A local eval are done (A2B FID 89.99 / MiFID 0.403; B2A FID 92.23 / MiFID 0.423). `best.pt` and the Monet/photo folders are on Drive. Still need to submit `submission.csv` on Kaggle (then fill public/private/rank).
+**Status:** Retrain and full A2B/B2A local eval are done (A2B FID 89.99 / MiFID 0.403; B2A FID 92.23 / MiFID 0.423). `best.pt` and the Monet/photo folders are on Drive.
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 
@@ -154,11 +154,11 @@ Notebook, `evaluate_local.py`, `submission.csv`, metrics, and write-ups for her 
 
 Same Drive folder for the team (raw data only):
 
-| # | Dataset | Drive link |
+| # | Dataset | Link |
 |---|---|---|
-| 1 | TinyStories-train.txt (Part 1, 1.92 GB) | [Drive](https://drive.google.com/file/d/1K8wGXMKDaLaVdv7ISMNihMH33pGig-CN/view?usp=share_link) |
-| 2 | Monet paintings — `monet_jpg` (Part 3) | [Drive folder](https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link) |
-| 3 | Photos — `photo_jpg` (Part 3) | [same folder](https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link) |
+| 1 | TinyStories-train.txt (Part 1, 1.92 GB) | https://drive.google.com/file/d/1K8wGXMKDaLaVdv7ISMNihMH33pGig-CN/view?usp=share_link |
+| 2 | Monet paintings — `monet_jpg` (Part 3) | https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link |
+| 3 | Photos — `photo_jpg` (Part 3) | https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link |
 
 Optional (not one of the 3 datasets): `real_stats.npz` from Kaggle Data → Drive link _add_ if you download it.
 
@@ -167,18 +167,17 @@ Part 2 is not in this table on purpose. Yelp polarity is not a file we host. Eac
 ### 2. Individual links — Sneha / Ritika
 
 Part 1 `best.pt` (12 MB) and Part 2 checkpoints stay **on git**.  
-Part 3 `best.pt` is 113 MB → **Drive only** (GitHub 100 MB limit).  
-Part 1 `TinyStories-train.txt` (1.92 GB) is on Drive, not git: https://drive.google.com/file/d/1K8wGXMKDaLaVdv7ISMNihMH33pGig-CN/view?usp=share_link
+Part 3 `best.pt` is 113 MB, over GitHub’s 100 MB limit, so the checkpoint link is here. The datasets stay in the common table above.
 
 **Sneha Singh**
 
-| File | Drive link |
+| File | Link |
 |---|---|
-| Part 3 `best.pt` | [Drive](https://drive.google.com/file/d/1TVDCjIGkr5Xt5nrrOmkjhKA3G9ppj-2T/view?usp=share_link) |
+| Part 3 `best.pt` | https://drive.google.com/file/d/1TVDCjIGkr5Xt5nrrOmkjhKA3G9ppj-2T/view?usp=share_link |
 
 **Ritika Mukesh Neema**
 
-| File | Drive link |
+| File | Link |
 |---|---|
 | Part 3 `best.pt` | _add_ |
 
