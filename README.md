@@ -160,9 +160,7 @@ Same Drive folder for the team (raw data only):
 | 2 | Monet paintings — `monet_jpg` (Part 3) | https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link |
 | 3 | Photos — `photo_jpg` (Part 3) | https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link |
 
-Optional (not one of the 3 datasets): `real_stats.npz` from Kaggle Data → Drive link _add_ if you download it.
-
-Part 2 is not in this table on purpose. Yelp polarity is not a file we host. Each notebook downloads `fancyzhx/yelp_polarity` from Hugging Face at run time.
+Part 2 is not in this table. Yelp polarity is not a file we host. Each notebook downloads `fancyzhx/yelp_polarity` from Hugging Face at run time.
 
 ### 2. Individual links — Sneha / Ritika
 
