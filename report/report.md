@@ -219,8 +219,8 @@ The plots in this file are the png files already stored under each task folder. 
 
 ## Papers
 
-Vaswani et al., Attention Is All You Need (2017). The causal multi-head attention in Part 1 follows that design, written by hand.
+Vaswani et al., Attention Is All You Need (2017). https://arxiv.org/abs/1706.03762. The causal multi-head attention in Part 1 follows that design, written by hand.
 
-Eldan and Li, TinyStories (2023). Part 1 is trained on that dataset.
+Eldan and Li, TinyStories (2023). https://arxiv.org/abs/2305.07759. Part 1 is trained on that dataset.
 
-Zhu et al., Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks (2017). Part 3 is that CycleGAN setup: two generators, two discriminators, cycle loss, and identity loss.
+Zhu et al., Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks (2017). https://arxiv.org/abs/1703.10593. Part 3 is that CycleGAN setup: two generators, two discriminators, cycle loss, and identity loss.
