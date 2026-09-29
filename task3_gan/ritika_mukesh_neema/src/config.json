@@ -1,0 +1,15 @@
+{
+  "smoke": false,
+  "seed": 42,
+  "img_size": 256,
+  "n_blocks": 9,
+  "batch_size": 1,
+  "n_epochs": 40,
+  "n_epochs_decay": 40,
+  "lr": 0.0002,
+  "beta1": 0.5,
+  "lambda_cycle": 10.0,
+  "lambda_identity": 5.0,
+  "pool_size": 50,
+  "note": "epochs_trained=80 is confirmed (train_metrics.json). The 40/40 n_epochs/n_epochs_decay split is a best-effort reconstruction, not logged exactly in results.md or console_train.log -- update if your own notes say otherwise. seed=42 is the script default; not confirmed overridden."
+}

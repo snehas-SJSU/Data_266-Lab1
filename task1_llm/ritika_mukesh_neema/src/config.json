@@ -1,0 +1,17 @@
+{
+  "smoke": false,
+  "seed": 6638,
+  "n_layer": 4,
+  "n_head": 4,
+  "n_embd": 128,
+  "block_size": 256,
+  "dropout": 0.1,
+  "batch_size": 64,
+  "epochs": 12,
+  "lr": 0.0003,
+  "weight_decay": 0.01,
+  "warmup_frac": 0.05,
+  "grad_clip": 1.0,
+  "vocab_size": 221,
+  "note": "seed is personal (derived from student ID). Full run on Colab T4 GPU over the full TinyStoriesV2-GPT4 corpus (train chars: 1,824,825,663 / val chars: 22,493,387)."
+}
