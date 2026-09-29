@@ -5,7 +5,7 @@
 **Members:** Sneha Singh · Ritika Mukesh Neema  
 **Repo:** https://github.com/snehas-SJSU/Data_266-Lab1  
 
-This is the team report. I wrote my three parts from the runs on git. Ritika’s sections and the comparison write-ups stay open until her numbers are in. The Kaggle public score is still blank because I have not uploaded `submission.csv` yet.
+This file is not the finished team report yet. Only Sneha Singh’s results are filled in. Ritika Mukesh Neema’s sections are blank. Once she adds her models, metrics, plots, and failure notes, we will merge both into one combined report and export the PDF again. Until then, every number and every image below is from one person.
 
 Who built what: I trained my own model on every part and wrote only under `sneha_singh/`. Ritika trains her own models under `ritika_mukesh_neema/`. We do not share architecture or hyperparameters. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
 
