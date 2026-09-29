@@ -156,7 +156,7 @@ Same Drive folder for the team (raw data only):
 
 | # | Dataset | Drive link |
 |---|---|---|
-| 1 | TinyStories (Part 1) | _add_ |
+| 1 | TinyStories-train.txt (Part 1, 1.92 GB) | [Drive](https://drive.google.com/file/d/1K8wGXMKDaLaVdv7ISMNihMH33pGig-CN/view?usp=share_link) |
 | 2 | Monet paintings — `monet_jpg` (Part 3) | _add_ |
 | 3 | Photos — `photo_jpg` (Part 3) | _add_ |
 
@@ -168,7 +168,7 @@ Part 2 Yelp polarity is downloaded from Hugging Face in the notebook — no shar
 
 Part 1 `best.pt` (12 MB) and Part 2 checkpoints stay **on git**.  
 Part 3 `best.pt` is 113 MB → **Drive only** (GitHub 100 MB limit).  
-Part 1 `TinyStories-train.txt` (1.92 GB) is the Drive upload, not a git file.
+Part 1 `TinyStories-train.txt` (1.92 GB) is on Drive, not git: https://drive.google.com/file/d/1K8wGXMKDaLaVdv7ISMNihMH33pGig-CN/view?usp=share_link
 
 **Sneha Singh**
 

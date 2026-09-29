@@ -40,7 +40,7 @@ unedited.
 - Platform: Windows-10-10.0.26200-SP0
 - Train time: 457 s; peak_memory_mb: 349; nan_count: 0; params: 3254272
 - Command: Run All on `task1_llm/sneha_singh/src/part1_llm.ipynb` (`config.json` smoke=false)
-- Dataset file `TinyStories-train.txt` is not on git (Drive).
+- Dataset file `TinyStories-train.txt` is not on git. Drive: https://drive.google.com/file/d/1K8wGXMKDaLaVdv7ISMNihMH33pGig-CN/view?usp=share_link
 
 ---
 

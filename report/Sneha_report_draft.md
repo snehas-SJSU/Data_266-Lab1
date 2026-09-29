@@ -79,7 +79,7 @@ _Placeholder — Ritika fills architecture, hardware, metrics, samples, and 3 fa
 | | Sneha | Ritika |
 |---|---|---|
 | Layers / heads / emb | 4 / 4 / 256 | _add_ |
-| Val CE / PPL | _after full_ | _add_ |
+| Val CE / PPL | 0.857 / 2.36 | _add_ |
 | Notes | | |
 
 ---
