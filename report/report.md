@@ -5,7 +5,9 @@
 **Members:** Sneha Singh · Ritika Mukesh Neema  
 **Repo:** https://github.com/snehas-SJSU/Data_266-Lab1  
 
-This is the report source. My sections are filled from the runs that are already on git. Ritika’s sections and the comparison tables are left open on purpose. The Kaggle public score is still blank because I have not uploaded `submission.csv` yet. We will turn this file into a PDF after her parts and that score are in.
+This is the team report. I wrote my three parts from the runs on git. Ritika’s sections and the comparison write-ups stay open until her numbers are in. The Kaggle public score is still blank because I have not uploaded `submission.csv` yet.
+
+Who built what: I trained my own model on every part and wrote only under `sneha_singh/`. Ritika trains her own models under `ritika_mukesh_neema/`. We do not share architecture or hyperparameters. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
 
 ## How we split the work
 
@@ -32,13 +34,23 @@ The reported run is the full one, not the old 2-epoch smoke test. I took my own 
 
 I trained for 10 epochs on an NVIDIA GeForce RTX 5090 with mixed precision. Learning rate was 0.001, with 100 warmup steps and then cosine decay. Batch size was 32. The run took 457 seconds and peaked at about 349 MB. There were no NaN losses. The checkpoint `best.pt` is 12 MB, so it is on git.
 
+Checkpoint id: `task1_llm/sneha_singh/checkpoints/best.pt`. Log: `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log`.
+
 | Metric | Value |
 |---|---|
 | Train cross-entropy | 0.912 |
 | Val cross-entropy | 0.857 |
 | Perplexity | 2.36 |
-| Next-character accuracy | 0.729 |
+| Bits per character | 1.236 |
+| Generalization gap (val − train) | −0.055 |
+| Top-1 next-character accuracy | 0.729 |
+| Distinct-1 / 2 / 3 | 0.225 / 0.655 / 0.856 |
+| Repeated 4-gram rate | 0.120 |
+| Max gradient norm / NaN count | 5.42 / 0 |
 | Parameters | 3.25M |
+| Train tokens/sec | 280,325 |
+| Generation tokens/sec | 409 |
+| Peak memory / train time | 349 MB / 457 s |
 
 The loss falls smoothly and the validation curve stays close to the training curve. That is what I wanted from 10 epochs on this size of model.
 
@@ -58,9 +70,15 @@ _Fill this after Ritika’s Part 1 is in. Do not compare until both numbers are 
 
 | | Sneha | Ritika |
 |---|---|---|
-| Layers / heads / emb | 4 / 4 / 256 | |
-| Val CE / perplexity | 0.857 / 2.36 | |
-| What is different | | |
+| Architecture | 4 layers, 4 heads, emb 256, context 128, char tokenizer, causal mask | |
+| Hyperparameters | 10 epochs, batch 32, lr 0.001, warmup 100, seed 670, AdamW | |
+| Train / val CE | 0.912 / 0.857 | |
+| Perplexity / bits per char | 2.36 / 1.236 | |
+| Gen. gap / top-1 acc | −0.055 / 0.729 | |
+| Distinct-1/2/3 | 0.225 / 0.655 / 0.856 | |
+| Repeated 4-gram / NaNs | 0.120 / 0 | |
+| Params / time / peak MB | 3.25M / 457 s / 349 | |
+| Joint note | _Write this with Ritika: strengths, weaknesses, and what we would try next._ | |
 
 ---
 
@@ -69,6 +87,8 @@ _Fill this after Ritika’s Part 1 is in. Do not compare until both numbers are 
 ## 2.A Sneha Singh
 
 This is Yelp polarity, not IMDB. I learned the embeddings from scratch. I did not use a pretrained language model.
+
+The Yelp files are not on Drive and not in git. The notebook downloads `fancyzhx/yelp_polarity` from Hugging Face when the run starts, so there is nothing for me to upload.
 
 I wanted one simple model and two that can use word order, so a strong baseline would be obvious if the fancier models did not beat it.
 
@@ -98,7 +118,14 @@ Confusion matrices on the test set:
 
 ![TextCNN confusion matrix](../task2_sentiment/sneha_singh/outputs/experimental_b_cm_full.png)
 
-I read 20 baseline mistakes. The ones that show up most are tiny blurbs the model treats as positive (“food always good”), negation or mixed wording (“not restaurant closed”), and long reviews where the stars and the sentences pull apart. The full list is in `task2_sentiment/sneha_singh/failure_analysis.md`.
+I read 20 baseline mistakes. Five confident false positives, five confident false negatives, five near the decision threshold, and five long-review misses. The full list, with an error type and a testable fix on each row, is in `task2_sentiment/sneha_singh/failure_analysis.md`. Four of them:
+
+- Confident false positive, gold negative: “food always good”.
+- Confident false negative, gold positive: “not restaurant closed”.
+- Near the threshold: “disappointed went early morning … coffee warm not good”.
+- Long review, gold positive, predicted negative: a long airport note that mixes praise with complaints.
+
+The ones that show up most are tiny blurbs the model treats as positive, negation or mixed wording, and long reviews where the stars and the sentences pull apart.
 
 This is 100k reviews out of about 560k, not the whole Yelp train file. Cutting reviews at 128 tokens hurts the long ones. I kept negation words, and mixed reviews are still hard.
 
@@ -110,11 +137,20 @@ _Ritika: her three models, metrics, plots, and error notes from `task2_sentiment
 
 _Fill this after Ritika’s Part 2 is in._
 
-| | Sneha | Ritika |
-|---|---|---|
-| Best model | Baseline, macro-F1 0.923 | |
-| Acc / macro-F1 | 0.923 / 0.923 | |
-| Takeaway | Mean-pool still leads my two sequence models. McNemar does not separate them. | |
+| | Sneha baseline | Sneha BiLSTM | Sneha TextCNN | Ritika |
+|---|---|---|---|---|
+| Architecture | Mean-pool + linear | Bidirectional LSTM | CNN widths 3, 4, 5 | |
+| Hyperparameters | emb 100, max len 128, batch 64, 5 epochs, lr from config, Apple M4 MPS | same training setup | same training setup | |
+| Accuracy | 0.923 | 0.918 | 0.921 | |
+| F1 macro / micro / weighted | 0.923 / 0.923 / 0.923 | 0.918 / 0.918 / 0.918 | 0.921 / 0.921 / 0.921 | |
+| ROC-AUC / PR-AUC | 0.973 / 0.973 | 0.975 / 0.975 | 0.975 / 0.975 | |
+| MCC / Brier / ECE | 0.845 / 0.059 / 0.011 | 0.837 / 0.060 / 0.017 | 0.841 / 0.061 / 0.024 | |
+| Acc 95% CI | 0.917–0.928 | 0.912–0.923 | 0.915–0.926 | |
+| McNemar p vs baseline | — | 0.091 | 0.424 | |
+| Macro-F1 short / long | 0.925 / 0.917 | 0.922 / 0.912 | 0.924 / 0.915 | |
+| Params / time / peak MB | 4.76M / 114 s / 0.0 (MPS) | 4.85M / 1706 s / 0.0 | 4.84M / 108 s / 0.0 | |
+| Checkpoint | `checkpoints/baseline_full.pt` | `checkpoints/experimental_a_full.pt` | `checkpoints/experimental_b_full.pt` | |
+| Joint note | _Write this with Ritika._ My mean-pool baseline still leads. McNemar does not separate the other two on this test set. | | | |
 
 ---
 
@@ -155,12 +191,21 @@ _Ritika: her CycleGAN, hardware, FID and MiFID, a grid, and her column on the sa
 
 _Fill this after Ritika’s Part 3 is in. Kappa needs both of us on the same 30 files._
 
-| | Sneha | Ritika |
-|---|---|---|
-| A2B FID / MiFID | 89.99 / 0.403 | |
-| Local score (FID + MiFID) / 2 | 45.20 | |
-| Kaggle public / rank | not uploaded yet | |
-| Audit κ | | |
+| | Sneha A2B (photo → Monet) | Sneha B2A | Ritika |
+|---|---|---|---|
+| Architecture | ResNet-9, nearest upsample, PatchGAN, LSGAN, λ_cycle 10, identity 5, label smooth 0.9 | same model | |
+| Hyperparameters | 40 + 40 epochs, batch 4, ~800 photos/epoch, pool 50, CUDA AMP | same run | |
+| FID / KID / MiFID | 89.99 / 0.018 / 0.403 | 92.23 / 0.030 / 0.423 | |
+| Precision / recall | 0.540 / 0.293 | 0.660 / 0.089 | |
+| Cycle L1 / LPIPS / content cos | 0.112 / 0.452 / 0.532 | 0.103 / 0.365 / 0.586 | |
+| G / D / cycle / identity loss | 4.574 / 0.168 / 2.174 / 1.097 | same training losses | |
+| Grad norm / NaNs | 112.8 / 0 | same | |
+| Params / time / images/sec / peak MB | 28.3M / 15342 s / 8.34 / 6568 | same | |
+| Local (FID + MiFID) / 2 | 45.20 | 46.33 | |
+| Kaggle public / private / rank | not uploaded yet | | |
+| Human audit / κ | style 1.4, content 1.7, artifacts 1.4 (0–2, higher worse). κ pending | | |
+| Checkpoint | Drive `best.pt` (113 MB), not on git | | |
+| Joint note | _Write this with Ritika after she scores the same 30 images._ | | |
 
 ---
 
@@ -171,3 +216,11 @@ _Fill this after Ritika’s Part 3 is in. Kappa needs both of us on the same 30 
 3. This PDF is the current export. Regenerate it after Ritika’s sections and the Kaggle score are filled in.
 
 The plots in this file are the png files already stored under each task folder. They are not copied again into `report/`.
+
+## Papers
+
+Vaswani et al., Attention Is All You Need (2017). The causal multi-head attention in Part 1 follows that design, written by hand.
+
+Eldan and Li, TinyStories (2023). Part 1 is trained on that dataset.
+
+Zhu et al., Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks (2017). Part 3 is that CycleGAN setup: two generators, two discriminators, cycle loss, and identity loss.

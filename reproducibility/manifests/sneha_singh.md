@@ -97,6 +97,7 @@ unedited.
 - Train command: Run All on `part3_cyclegan.ipynb` (smoke=false)
 
 ## Run — Part 2 Sentiment (full)
+- Data: Hugging Face `fancyzhx/yelp_polarity`. Not on Drive and not in git. The notebook downloads it when the run starts.
 - Date: 2026-09-26 23:36
 - Task: task2_sentiment
 - Smoke: False

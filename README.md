@@ -33,7 +33,7 @@ Data_266-Lab1/
 │   ├── sneha_singh/
 │   └── ritika_mukesh_neema/
 ├── task2_sentiment/
-│   ├── data/                         # shared (optional cache)
+│   ├── data/                         # not on Drive; notebook downloads Yelp
 │   ├── sneha_singh/
 │   └── ritika_mukesh_neema/
 ├── task3_gan/
@@ -79,7 +79,7 @@ Notebook, config, metrics, and write-ups for her Part 1 run.
 
 ## Part 2 — Yelp polarity sentiment
 
-**Shared data:** Hugging Face `fancyzhx/yelp_polarity` (each notebook downloads).
+**Shared data:** not on Drive and not in git. The notebook downloads Hugging Face `fancyzhx/yelp_polarity` itself when it runs, so there is no Yelp zip to upload.
 
 ### Sneha Singh — `task2_sentiment/sneha_singh/`
 
@@ -162,7 +162,7 @@ Same Drive folder for the team (raw data only):
 
 Optional (not one of the 3 datasets): `real_stats.npz` from Kaggle Data → Drive link _add_ if you download it.
 
-Part 2 Yelp polarity is downloaded from Hugging Face in the notebook — no shared Drive zip required.
+Part 2 is not in this table on purpose. Yelp polarity is not a file we host. Each notebook downloads `fancyzhx/yelp_polarity` from Hugging Face at run time.
 
 ### 2. Individual links — Sneha / Ritika
 
@@ -197,7 +197,7 @@ Part 1 `TinyStories-train.txt` (1.92 GB) is on Drive, not git: https://drive.goo
 
 | Part | Sneha Singh | Ritika Mukesh Neema |
 |---|---|---|
-| 1 LLM | Smoke done; full GPU still needed | — |
-| 2 Yelp | Full run done (100k / 10k / 10k) | — |
-| 3 CycleGAN | Train + full A2B/B2A eval done; Kaggle + Drive open | — |
-| Report PDF | — | — |
+| 1 LLM | Full GPU run done (val CE 0.857) | — |
+| 2 Yelp | Full run done (100k / 10k / 10k). Data is downloaded in the notebook, not on Drive | — |
+| 3 CycleGAN | Train + local eval done. `best.pt` on Drive. Kaggle CSV not uploaded yet | — |
+| Report PDF | `report/DATA266_Lab1_Report_Team_5.pdf` (Sneha’s sections; Ritika still open) | — |

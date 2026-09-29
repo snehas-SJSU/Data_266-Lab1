@@ -1,6 +1,6 @@
 # Part 2 — Yelp polarity (Sneha Singh)
 
-Dataset: Yelp polarity (not IMDB). Embeddings learned from scratch. No pretrained LMs.
+Dataset: Yelp polarity (not IMDB). Embeddings learned from scratch. No pretrained LMs. The files are not on Drive and not in git. The notebook downloads `fancyzhx/yelp_polarity` from Hugging Face when the run starts.
 
 ## Models and why I chose them
 1. **Baseline** — mean pooling over learned embeddings + linear. Simple bag-of-embeddings control. If this is already strong, fancier models must beat it clearly.
