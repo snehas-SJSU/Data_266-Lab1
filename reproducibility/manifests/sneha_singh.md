@@ -85,7 +85,7 @@ unedited.
 - Train: CUDA + AMP, 80 epochs (40+40), batch_size=4, nearest upsample, label_smoothing 0.9, ~800 photos/epoch
 - Train time: 15341 s (~4.3 h); peak_memory_mb: 6568
 - GPU name: not printed in `train_full.log` (log line is `device=cuda` only)
-- Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` (**Drive** — GitHub 100 MB limit; link in root README)
+- Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` (Drive, over GitHub 100 MB: https://drive.google.com/file/d/1TVDCjIGkr5Xt5nrrOmkjhKA3G9ppj-2T/view?usp=share_link)
 - Pred A2B: `outputs/pred_A2B` (7038 JPGs)
 - Pred B2A: `outputs/pred_B2A` (300 JPGs, full Monet set)
 - Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full.log` (80 epoch lines)

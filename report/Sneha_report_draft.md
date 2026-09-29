@@ -221,8 +221,7 @@ _Placeholder — Ritika fills architecture, train hardware, metrics, `submission
 
 **Sneha — still open before PDF is final**
 1. Upload Kaggle CSV → paste public score here  
-2. Drive `best.pt` link in README  
-3. Merge Ritika’s write-ups + κ into one PDF with her  
+2. Merge Ritika’s write-ups + κ into one PDF with her  
 
 ---
 
