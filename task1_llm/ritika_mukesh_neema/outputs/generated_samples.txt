@@ -1,0 +1,84 @@
+
+===== GREEDY =====
+
+--- sample 0 ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his friends. One day, Tim went to the park with his mom. He saw a big box of the box. Tim was very happy and said, "Thank you, Tim! You are very happy. You are very happy."
+Tim and Sue were surprised. They played together and had lots of fun
+
+--- sample 1 ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his friends. One day, Tim went to the park with his mom. He saw a big box of the box. Tim was very happy and said, "Thank you, Tim! You are very happy. You are very happy."
+Tim and Sue were surprised. They played together and had lots of fun
+
+--- sample 2 ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his friends. One day, Tim went to the park with his mom. He saw a big box of the box. Tim was very happy and said, "Thank you, Tim! You are very happy. You are very happy."
+Tim and Sue were surprised. They played together and had lots of fun
+
+--- sample 3 ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his friends. One day, Tim went to the park with his mom. He saw a big box of the box. Tim was very happy and said, "Thank you, Tim! You are very happy. You are very happy."
+Tim and Sue were surprised. They played together and had lots of fun
+
+--- sample 4 ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his friends. One day, Tim went to the park with his mom. He saw a big box of the box. Tim was very happy and said, "Thank you, Tim! You are very happy. You are very happy."
+Tim and Sue were surprised. They played together and had lots of fun
+
+--- sample 5 ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his friends. One day, Tim went to the park with his mom. He saw a big box of the box. Tim was very happy and said, "Thank you, Tim! You are very happy. You are very happy."
+Tim and Sue were surprised. They played together and had lots of fun
+
+--- sample 6 ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his friends. One day, Tim went to the park with his mom. He saw a big box of the box. Tim was very happy and said, "Thank you, Tim! You are very happy. You are very happy."
+Tim and Sue were surprised. They played together and had lots of fun
+
+--- sample 7 ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his friends. One day, Tim went to the park with his mom. He saw a big box of the box. Tim was very happy and said, "Thank you, Tim! You are very happy. You are very happy."
+Tim and Sue were surprised. They played together and had lots of fun
+
+--- sample 8 ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his friends. One day, Tim went to the park with his mom. He saw a big box of the box. Tim was very happy and said, "Thank you, Tim! You are very happy. You are very happy."
+Tim and Sue were surprised. They played together and had lots of fun
+
+--- sample 9 ---
+Once upon a time, there was a little boy named Tim. Tim loved to play with his friends. One day, Tim went to the park with his mom. He saw a big box of the box. Tim was very happy and said, "Thank you, Tim! You are very happy. You are very happy."
+Tim and Sue were surprised. They played together and had lots of fun
+
+===== TEMPERATURE_SAMPLING =====
+
+--- sample 0 ---
+Once upon a time, there was a little bird named Sue. Sue was so happy to find her park. She turned to the bird and looked around and found it.
+Sue was fun to do of the bird. She thought it was gone. Sue saw the bird. Sue wanted to show her as her party again. She thought it was a big party. She said, "Thank you, Ti
+
+--- sample 1 ---
+Once upon a time, there was a little girl named Sue. Sue loved to play with her toys and climb. One day, Tim saw a little crub with a big hole. Tim wanted to help the circle.
+Tim felt sad because he wanted to go to her room. He wanted to play with her toy. He said to help the car again. Sue was very happy. Her mom 
+
+--- sample 2 ---
+Once upon a time, there was a red boy named Bobo. Bobo loved to sing and kind play with his toy cars and explore. One day, Bob saw a small boy named Tim went to the store with his mom. They walked by the box and took the car to a big lake. Bob was very hungry. He was happy to have a car and waited for the box to ge
+
+--- sample 3 ---
+Once upon a time, there was a little boy named Tim. Tim was not happy to listen. He wanted to help Tim. He did not catch it. He said, "Fin! I need to look at my friends. You were big and went back it."
+A big mist bird flew away. He smiled and said, "The mill noticed him so happy and showed it to him. It had a long 
+
+--- sample 4 ---
+Once upon a time, there was a firefrent tree. Every day, a little girl named Mia. She would reach the tree and the tree from the fruit with a very much. The flower was a pretty tree, making beautiful very strong and strong. Mia was scared, but she was not sad. She splashed and saw the flowers. Mia said, "Have you s
+
+--- sample 5 ---
+Once upon a time, there was a little boy named Tim. He lived in a small house with his friends. One day, Tim found a little boy in his hand. He did not know what to do.
+As he found a small box in the box. The box was designt. It flew down the box and started to talk! Tim asked his mom, "Why are you so happy that?" 
+
+--- sample 6 ---
+Once upon a time, there was a little bird. It was very dark. It was a good bird. It was a big box. It was so big, red ball. It looked at the bird. The bird. The bird liked it up and said, "Please what to do. I want to find your toy tower. Can you help me the bow and said, "I am going to be careful, Lily?" The bird 
+
+--- sample 7 ---
+Once upon a time there was a little boy named Tim. Tim loved to play with his toys and ball. One day, he saw a big tree in the tree. He wanted to play with his tree all day.
+Tim wanted to see the tree and said, "Let's catch out!" Tom was sad, but he could not fly to his time. He said, "Let's go to the tree for the 
+
+--- sample 8 ---
+Once upon a time, there was a big tree with many browns. The end.
+<|endoftext|>
+Once upon a time, in a small town, there was a small bird named Tim. Tim had a big hat shiny knot skip in the sky. Tim liked to play with his friends. One day, Tim saw a big, round near the tree.
+In the end, Tim saw a big tree with a ho
+
+--- sample 9 ---
+Once upon a time, in a small house, there was a fun day ball. The park had a party day long to the store and showed his hand. The park was foolish and started to comfort. He picked it up and how his friends. They felt sorry for the day.
+<|endoftext|>
+Once upon a time, there was a little boy named Tim. Tim liked to 

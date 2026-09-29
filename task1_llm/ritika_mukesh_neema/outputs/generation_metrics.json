@@ -1,0 +1,11 @@
+{
+  "distinct_1": 0.007753164556962025,
+  "distinct_2": 0.053492063492063494,
+  "distinct_3": 0.13694267515923567,
+  "repeated_4gram_rate": 0.20559105431309904,
+  "generation_tokens_per_sec": 238.61965406242086,
+  "n_samples_generated": 20,
+  "gen_len_chars": 300,
+  "temperature": 0.8,
+  "top_k": 40
+}
