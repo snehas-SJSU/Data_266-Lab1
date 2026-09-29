@@ -27,7 +27,7 @@ The loss curve is `outputs/loss_curves.png`. A short generation is `outputs/samp
 ## Hardware
 NVIDIA GeForce RTX 5090, CUDA, mixed precision. Peak memory was about 349 MB. The raw log is `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log`.
 
-`TinyStories-train.txt` is not in the repo. Drive: https://drive.google.com/file/d/1K8wGXMKDaLaVdv7ISMNihMH33pGig-CN/view?usp=share_link
+`TinyStories-train.txt` is not in the repo. The file is 1.79 GB, over GitHub’s 100 MB limit: https://drive.google.com/drive/folders/12MFVOo6T3QRW3X6THiDkh5svtNgL13W_?usp=share_link
 
 ## Why this size
 Four layers is small, but it is still a real stack of blocks, and it stays inside the “write it yourself” rule. Character tokens are what the lab asked for. The causal mask is what stops the model from peeking ahead while it trains and while it writes.

@@ -40,7 +40,7 @@ unedited.
 - Platform: Windows-10-10.0.26200-SP0
 - Train time: 457 s; peak_memory_mb: 349; nan_count: 0; params: 3254272
 - Command: Run All on `task1_llm/sneha_singh/src/part1_llm.ipynb` (`config.json` smoke=false)
-- Dataset file `TinyStories-train.txt` is not on git. Drive: https://drive.google.com/file/d/1K8wGXMKDaLaVdv7ISMNihMH33pGig-CN/view?usp=share_link
+- Dataset file `TinyStories-train.txt` is not on git. It is 1.79 GB, over GitHub’s 100 MB limit. https://drive.google.com/drive/folders/12MFVOo6T3QRW3X6THiDkh5svtNgL13W_?usp=share_link
 
 ---
 
@@ -85,7 +85,7 @@ unedited.
 - Train: CUDA + AMP, 80 epochs (40+40), batch_size=4, nearest upsample, label_smoothing 0.9, ~800 photos/epoch
 - Train time: 15341 s (~4.3 h); peak_memory_mb: 6568
 - GPU name: not printed in `train_full.log` (log line is `device=cuda` only)
-- Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` (Drive, over GitHub 100 MB: https://drive.google.com/file/d/1TVDCjIGkr5Xt5nrrOmkjhKA3G9ppj-2T/view?usp=share_link)
+- Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` is 107.9 MB, over GitHub’s 100 MB limit, so it is not in git. https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link
 - Pred A2B: `outputs/pred_A2B` (7038 JPGs)
 - Pred B2A: `outputs/pred_B2A` (300 JPGs, full Monet set)
 - Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full.log` (80 epoch lines)

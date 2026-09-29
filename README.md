@@ -156,7 +156,7 @@ Same Drive folder for the team (raw data only):
 
 | # | Dataset | Link |
 |---|---|---|
-| 1 | TinyStories-train.txt (Part 1, 1.92 GB) | https://drive.google.com/file/d/1K8wGXMKDaLaVdv7ISMNihMH33pGig-CN/view?usp=share_link |
+| 1 | TinyStories-train.txt (Part 1). On Drive because the file is 1.79 GB, over GitHub’s 100 MB limit. | https://drive.google.com/drive/folders/12MFVOo6T3QRW3X6THiDkh5svtNgL13W_?usp=share_link |
 | 2 | Monet paintings — `monet_jpg` (Part 3) | https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link |
 | 3 | Photos — `photo_jpg` (Part 3) | https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link |
 
@@ -167,13 +167,13 @@ Part 2 is not in this table on purpose. Yelp polarity is not a file we host. Eac
 ### 2. Individual links — Sneha / Ritika
 
 Part 1 `best.pt` (12 MB) and Part 2 checkpoints stay **on git**.  
-Part 3 `best.pt` is 113 MB, over GitHub’s 100 MB limit, so the checkpoint link is here. The datasets stay in the common table above.
+Part 3 `best.pt` is on Drive because the file is 107.9 MB, over GitHub’s 100 MB limit. The datasets stay in the common table above.
 
 **Sneha Singh**
 
 | File | Link |
 |---|---|
-| Part 3 `best.pt` | https://drive.google.com/file/d/1TVDCjIGkr5Xt5nrrOmkjhKA3G9ppj-2T/view?usp=share_link |
+| Part 3 `best.pt` (107.9 MB, over the 100 MB git limit) | https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link |
 
 **Ritika Mukesh Neema**
 

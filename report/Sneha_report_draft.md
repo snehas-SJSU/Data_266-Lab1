@@ -216,7 +216,7 @@ _Placeholder — Ritika fills architecture, train hardware, metrics, `submission
 # Closing (team)
 
 - Individual folders on git hold the real notebooks, CSVs, and plots.  
-- Part 1 `best.pt` (12 MB) and Part 2 checkpoints stay on git. Part 3 `best.pt` (113 MB) goes on Drive — link in root README.  
+- Part 1 `best.pt` (12 MB) and Part 2 checkpoints stay on git. Part 3 `best.pt` is 107.9 MB, over GitHub’s 100 MB limit — link in root README.  
 - This draft becomes `DATA266_Lab1_Report_Team_5.pdf` once Kaggle scores and Ritika’s sections are in.
 
 **Sneha — still open before PDF is final**
