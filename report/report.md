@@ -5,7 +5,7 @@
 <p class="names">Ritika Mukesh Neema</p>
 </div>
 
-Both of us did all three parts. Sneha Singh trained her own Part 1, Part 2, and Part 3. Ritika Mukesh Neema trained her own Part 1, Part 2, and Part 3. Nobody covered a part for the other person. The models are different on purpose: different architecture choices and different hyperparameters. Each of us commits only inside her own folder, `sneha_singh/` or `ritika_mukesh_neema/`. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
+Both of us did all three parts. Sneha Singh trained her own Part 1, Part 2, and Part 3. Ritika Mukesh Neema trained her own Part 1, Part 2, and Part 3. Nobody covered a part for the other person. Inside each part, section A is Sneha’s individual work and section B is Ritika’s individual work: her own model, her own metrics, her own failures, and her own hardware. Section C is the team comparison. The models differ on purpose. Each of us commits only inside her own folder, `sneha_singh/` or `ritika_mukesh_neema/`. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
 
 ## What each of us built
 
@@ -21,7 +21,7 @@ We share the raw data. The rows above are two separate runs of the same part, no
 
 # Part 1 — GPT from scratch
 
-## 1.A Sneha Singh
+## 1.A Sneha Singh — individual
 
 I trained a small character-level GPT on TinyStories. The attention code is mine. I did not use `nn.Transformer` or `nn.MultiheadAttention`.
 
@@ -57,7 +57,7 @@ The prompt I used for samples was “some changes. She added some nice colors”
 
 Greedy decoding writes a readable start, then gets stuck: “You are very happy. You are very happy.” It also doubles a word, “them them”. Temperature 0.8 does not loop as hard, but the story wanders from colors to a box, a door, and then a tree. I expected some of this. The model only sees 128 characters at a time, and it has no idea where a word ends. The three cases are written up in `task1_llm/sneha_singh/failure_analysis.md`.
 
-## 1.B Ritika Mukesh Neema
+## 1.B Ritika Mukesh Neema — individual
 
 Ritika also wrote the attention herself. She did not use `nn.Transformer` or `nn.MultiheadAttention`. Her model is smaller: 4 layers, 4 heads, embedding size 128, and a context of 256 characters. The tokenizer is character-level, built only from her training text, with a vocab of 221. She drew her own 100,000 / 10,000 windows from the full TinyStories train file, seed 6638. The checkpoint is `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt`.
 
@@ -84,7 +84,7 @@ Her three failure cases are in `task1_llm/ritika_mukesh_neema/failure_analysis.m
 
 Greedy decoding collapses. All 10 greedy samples are the same story, and it loops: “You are very happy. You are very happy.” Temperature sampling writes a word that is not English, “designt”, and the object drifts from a box to a red ball to a bird. A fourth issue is the script, not the model: generation does not stop at the story-boundary token, so a second story gets stuck on the end.
 
-## 1.C Comparison
+## 1.C Team comparison
 
 Ritika’s validation loss is lower. Sneha’s samples are more varied. Both greedy decoders fall into the same “You are very happy” loop.
 
@@ -107,7 +107,7 @@ Ritika’s strength is the lower validation loss, 0.778 against Sneha’s 0.857,
 
 # Part 2 — Yelp polarity
 
-## 2.A Sneha Singh
+## 2.A Sneha Singh — individual
 
 This is Yelp polarity, not IMDB. I learned the embeddings from scratch. I did not use a pretrained language model.
 
@@ -152,7 +152,7 @@ The ones that show up most are tiny blurbs the model treats as positive, negatio
 
 This is 100k reviews out of about 560k, not the whole Yelp train file. Cutting reviews at 128 tokens hurts the long ones. I kept negation words, and mixed reviews are still hard.
 
-## 2.B Ritika Mukesh Neema
+## 2.B Ritika Mukesh Neema — individual
 
 Ritika trained the same three families, with embeddings learned from scratch. Her baseline is a mean pool plus a linear layer. Her BiLSTM is there so negation can depend on word order. Her TextCNN uses filter widths 3, 4, and 5 with global max-pool. She lowercased, stripped punctuation and HTML, removed stopwords, and used Porter stemming instead of lemmatization. She trained on the full Yelp polarity set, about 560,000 reviews, on a Colab GPU. Checkpoints are `task2_sentiment/ritika_mukesh_neema/checkpoints/baseline.pt`, `bilstm.pt`, and `textcnn.pt`. She does not have confusion-matrix images in the repo. The numbers below are from her `metrics_report.csv`.
 
@@ -164,7 +164,7 @@ Ritika trained the same three families, with embeddings learned from scratch. He
 
 Her BiLSTM is the best of her three. McNemar against her baseline is p < 0.001 for the BiLSTM and p = 0.00022 for the TextCNN, so on her test set both sequence models beat the mean pool. She reviewed 20 TextCNN mistakes in `task2_sentiment/ritika_mukesh_neema/failure_analysis.md`. The ones that show up are sarcasm (“Is there REALLY even a Leonard…”), a French review the English stemmer cannot handle, and a positive review that opens with “Cox sucks” before it turns around.
 
-## 2.C Comparison
+## 2.C Team comparison
 
 Same three model families, not the same experiment. Ritika’s BiLSTM leads on the full 560k set. Sneha’s mean-pool baseline still leads on the 100k sample.
 
@@ -187,7 +187,7 @@ Ritika’s strength is that word order helps: her BiLSTM reaches 0.934 accuracy 
 
 # Part 3 — CycleGAN, photo to Monet
 
-## 3.A Sneha Singh
+## 3.A Sneha Singh — individual
 
 I trained an unpaired CycleGAN. The Kaggle direction is photo to Monet. The generators are mine. I did not use a pretrained model to make the images. Inception and the other nets in the eval script are only for measuring.
 
@@ -214,7 +214,7 @@ The grid is four photos, the Monet version of each, four real Monets, and the ph
 
 What I see in that grid, and in the 30 images I audited: the layout of the photo usually survives. Skies and water pick up a grainy, repeated dab texture. Some colors wash out. A few Monet-to-photo frames go soft or pick up a dark blob. I did not mark any of my 30 as a copied training Monet. My rough averages on the sheet were style 1.4, content 1.7, artifacts 1.4, on a 0–2 scale where higher means worse. The sheet is `task3_gan/sneha_singh/outputs/human_audit/audit_30.csv`. Agreement with Ritika is not computed yet, because she has not scored the same 30.
 
-## 3.B Ritika Mukesh Neema
+## 3.B Ritika Mukesh Neema — individual
 
 Ritika trained her own CycleGAN: two ResNet generators with 9 blocks, instance norm, and reflection padding, plus two 70×70 PatchGAN discriminators. She used least-squares adversarial loss, cycle L1 with λ = 10, identity loss with λ = 5, and an image pool of 50. Batch size was 1. She trained 40 epochs at a constant learning rate and 40 with decay, on an NVIDIA RTX 5090. The run took 1,660 seconds and peaked at 1,645 MB. There were no NaN losses. Her photo-to-Monet direction is the one she labels B2A. She did not compute MiFID. Cycle L1, LPIPS, and content cosine are on 100 images, not the full photo set. `ckpt_final.pt` is 107.9 MB, so it is not in git: https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view
 
@@ -229,7 +229,7 @@ Final generator loss was 4.84, discriminator loss 0.23, cycle loss 2.41, identit
 
 Her `submission.csv` is still only the header. Her human-audit folder is empty, so she has not scored the shared 30 images and there is no kappa yet.
 
-## 3.C Comparison
+## 3.C Team comparison
 
 On photo to Monet, Sneha’s FID is 89.99 and Ritika’s is 123.70. Lower is better, so Sneha’s set is the stronger local score. Ritika did not compute MiFID.
 
