@@ -7,7 +7,7 @@
 
 ## Abstract
 
-This report covers three tasks, each trained twice. Sneha Singh and Ritika Mukesh Neema each built a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. The models are not copies of each other. On Part 1, Ritika’s validation loss is lower and Sneha’s samples are more varied. On Part 2, both BiLSTMs lead. Sneha’s macro-F1 is 0.942. Ritika’s macro-F1 is 0.934. On Part 3, Sneha’s photo-to-Monet FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70, on a much shorter run. Kaggle scores are still open.
+This report is Team 5’s write-up for DATA266 Lab 1. Sneha Singh and Ritika Mukesh Neema each trained a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. Each person used their own architecture and their own hyperparameters. Each part below gives one person’s run, then the other person’s run, then a comparison of the two. Kaggle scores are still open.
 
 The repository is [https://github.com/snehas-SJSU/Data_266-Lab1](https://github.com/snehas-SJSU/Data_266-Lab1).
 
@@ -31,7 +31,7 @@ We share the raw data. The rows above are two separate runs of the same part, no
 
 ## 1.A Sneha Singh — individual
 
-I trained a small character-level GPT on TinyStories. The attention code is mine. I did not use `nn.Transformer` or `nn.MultiheadAttention`.
+I trained a character-level GPT on TinyStories. The attention code is mine. I did not use `nn.Transformer` or `nn.MultiheadAttention`.
 
 The tokenizer is a simple `char_to_idx` / `idx_to_char` map, not BPE. The model has 4 layers, 4 heads, embedding size 256, and a context of 128 characters. A causal mask stops each position from seeing the future. I tied the token weights the usual way and trained with AdamW. Bias and LayerNorm do not get weight decay.
 
@@ -99,7 +99,7 @@ I trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup and 
 - **Repetition.** All 10 greedy samples are the same story, and it loops: “You are very happy. You are very happy.”
 - **Broken word.** Temperature sampling writes “designt”, which is not English.
 - **Story drift.** The object moves from a box to a red ball to a bird.
-- **Script.** Generation does not stop at the story-boundary token, so a second story gets stuck on the end.
+- **Does not stop.** Generation does not stop at the story-boundary token, so a second story gets stuck on the end.
 
 Full cases: [task1_llm/ritika_mukesh_neema/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task1_llm/ritika_mukesh_neema/failure_analysis.md)
 
@@ -182,8 +182,6 @@ I read 20 BiLSTM mistakes: five confident false positives, five confident false 
 The ones that show up most are praise words inside a negative review, a complaint that later turns around, and long reviews where the stars and the sentences pull apart. The fix I wrote down for these cases is to balance review length or train longer, and to add negation handling.
 
 Full 20-row table: [task2_sentiment/sneha_singh/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task2_sentiment/sneha_singh/failure_analysis.md)
-
-This is the full Yelp train file, 549,953 / 10,000 / 38,000. Cutting reviews at 128 tokens still hurts the long ones. I kept negation words, and mixed reviews are still hard.
 
 ## 2.B Ritika Mukesh Neema — individual
 
