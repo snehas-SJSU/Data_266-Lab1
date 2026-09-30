@@ -7,7 +7,7 @@
 
 ## Abstract
 
-This report covers three tasks, each trained twice. Sneha Singh and Ritika Mukesh Neema each built a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. The models are not copies of each other. On Part 1, Ritika’s validation loss is lower and Sneha’s samples are more varied. On Part 2, Ritika’s BiLSTM leads on the full review set, while Sneha’s mean-pool baseline still leads her own 100k sample. On Part 3, Sneha’s photo-to-Monet FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70. Kaggle scores and the shared human-audit kappa are still open.
+This report covers three tasks, each trained twice. Sneha Singh and Ritika Mukesh Neema each built a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. The models are not copies of each other. On Part 1, Ritika’s validation loss is lower and Sneha’s samples are more varied. On Part 2, both BiLSTMs lead. Sneha’s macro-F1 is 0.942 on the full test set. Ritika’s accuracy is 0.934. On Part 3, Sneha’s photo-to-Monet FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70. Kaggle scores and the shared human-audit kappa are still open.
 
 The repository is [https://github.com/snehas-SJSU/Data_266-Lab1](https://github.com/snehas-SJSU/Data_266-Lab1).
 
@@ -19,9 +19,9 @@ Each part below has two individual write-ups and then one team comparison. Secti
 
 | Part | Sneha Singh (her own model) | Ritika Mukesh Neema (her own model) |
 |---|---|---|
-| 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab GPU |
-| 2 — Yelp polarity | Mean-pool, BiLSTM, TextCNN on a 100k sample, Mac MPS | Mean-pool, BiLSTM, TextCNN on the full 560k set, Colab GPU |
-| 3 — CycleGAN | Batch 4, nearest upsample, FID 89.99, MiFID 0.403 | Batch 1, FID 123.70 |
+| 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab Tesla T4 |
+| 2 — Yelp polarity | BiLSTM best, macro-F1 0.942, full train set, Colab Tesla T4 | BiLSTM best, accuracy 0.934, full 560k set, Colab Tesla T4 |
+| 3 — CycleGAN | Batch 4, nearest upsample, Colab Tesla T4, FID 89.99, MiFID 0.403 | Batch 1, RTX 5090, FID 123.70 |
 
 We share the raw data. The rows above are two separate runs of the same part, not a split of who had to do which part.
 
@@ -57,11 +57,13 @@ Checkpoint id: `task1_llm/sneha_singh/checkpoints/best.pt`. Log: `reproducibilit
 | Generation tokens/sec | 409 |
 | Peak memory / train time | 349 MB / 457 s |
 
-The loss falls smoothly and the validation curve stays close to the training curve. That is what I wanted from 10 epochs on this size of model.
+The result I care about on this model is that the samples stay varied while the loss stays stable. Distinct-1 is 0.225, distinct-2 is 0.655, and distinct-3 is 0.856. The repeated 4-gram rate is 0.120. Next-character top-1 accuracy is 0.729. Training had no NaNs, peaked at about 349 MB, and ran at about 280,000 tokens per second. The loss falls smoothly and the validation curve stays close to the training curve. That is what I wanted from 10 epochs on this size of model.
 
 ![Part 1 training and validation loss](../task1_llm/sneha_singh/outputs/loss_curves.png)
 
 The prompt I used for samples was “some changes. She added some nice colors”.
+
+### Failure cases
 
 - **Repetition.** Greedy decoding loops: “You are very happy. You are very happy.”
 - **Broken word.** The same decode prints “them them”. A character model does not know where a word ends.
@@ -71,9 +73,9 @@ Full cases: [task1_llm/sneha_singh/failure_analysis.md](https://github.com/sneha
 
 ## 1.B Ritika Mukesh Neema — individual
 
-I wrote the attention myself. I did not use `nn.Transformer` or `nn.MultiheadAttention`. My model is smaller: 4 layers, 4 heads, embedding size 128, and a context of 256 characters. The tokenizer is character-level, built only from my training text, with a vocab of 221. I drew my own 100,000 / 10,000 windows from the full TinyStories train file, seed 6638. The checkpoint is `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt`.
+I wrote the attention myself. I did not use `nn.Transformer` or `nn.MultiheadAttention`. My model has 4 layers, 4 heads, embedding size 128, and a context of 256 characters. The tokenizer is character-level, built only from my training text, with a vocab of 221. I drew my own 100,000 / 10,000 windows from the full TinyStories train file, seed 6638. The checkpoint is `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt`.
 
-I trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup and cosine decay. Weight decay was 0.01 and gradients were clipped at 1.0. The run was on a Colab GPU and took 1,727 seconds, peaking at 1,749 MB. There were no NaN losses.
+I trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup and cosine decay. Weight decay was 0.01 and gradients were clipped at 1.0. The run was on a Colab Tesla T4 and took 1,727 seconds, peaking at 1,749 MB. There were no NaN losses.
 
 | Metric | Train | Val |
 |---|---|---|
@@ -92,6 +94,8 @@ I trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup and 
 
 ![Part 1 training and validation loss](../task1_llm/ritika_mukesh_neema/outputs/loss_curve.png)
 
+### Failure cases
+
 - **Repetition.** All 10 greedy samples are the same story, and it loops: “You are very happy. You are very happy.”
 - **Broken word.** Temperature sampling writes “designt”, which is not English.
 - **Story drift.** The object moves from a box to a red ball to a bird.
@@ -100,8 +104,6 @@ I trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup and 
 Full cases: [task1_llm/ritika_mukesh_neema/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task1_llm/ritika_mukesh_neema/failure_analysis.md)
 
 ## 1.C Team comparison
-
-Ritika’s validation loss is lower. Sneha’s samples are more varied. Both greedy decoders fall into the same “You are very happy” loop.
 
 | | Sneha | Ritika |
 |---|---|---|
@@ -112,12 +114,19 @@ Ritika’s validation loss is lower. Sneha’s samples are more varied. Both gre
 | Gen. gap / top-1 acc | −0.055 / 0.729 | −0.082 / 0.755 |
 | Distinct-1/2/3 | 0.225 / 0.655 / 0.856 | 0.008 / 0.054 / 0.137 |
 | Repeated 4-gram / NaNs | 0.120 / 0 | 0.206 / 0 |
+| Max gradient norm | 5.42 | 4.99 |
 | Params / time / peak MB | 3.25M / 457 s / 349 | 0.88M / 1,727 s / 1,749 |
 | Train / gen tokens per sec | 280,325 / 409 | 177,917 / 239 |
 | Checkpoint | `task1_llm/sneha_singh/checkpoints/best.pt` | `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt` |
 | Log | `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log` | `reproducibility/raw_logs/ritika_mukesh_neema/task1_llm/train_full.log` |
 
-Ritika’s validation loss is lower, 0.778 against Sneha’s 0.857, on a smaller model. Sneha’s samples are more varied: distinct-1 is 0.225 against Ritika’s 0.008. Both greedy decoders loop on “You are very happy.” Embedding size, context length, and the machine differ, so the loss gap is not a pure architecture contest. Next we would add a repetition penalty at decode time, and stop generation when the story-boundary token appears.
+**Strength.** Ritika’s model has validation loss 0.778. Sneha’s model has validation loss 0.857, and her samples are more varied: distinct-1 is 0.225 against Ritika’s 0.008.
+
+**Weakness.** Both greedy decoders loop on “You are very happy.”
+
+**Limitation.** Embedding size, context length, and the machine differ, so the loss gap is not a pure architecture contest.
+
+**Next.** Add a repetition penalty at decode time, and stop generation when the story-boundary token appears.
 
 ---
 
@@ -137,15 +146,15 @@ I wanted one simple model and two that can use word order, so a strong baseline 
 2. **BiLSTM.** Reads the review in both directions, so negation and longer sentences have a chance.
 3. **TextCNN.** Filters of width 3, 4, and 5, meant to catch short phrases like “not good”.
 
-I lowercased, stripped punctuation, removed stopwords, and lemmatized. The vocabulary comes from the training text only. I sampled 100,000 training reviews. Eleven were empty after cleaning, so the split is 99,989 / 10,000 / 10,000. Five epochs, batch 64, embedding size 100, maximum length 128. All three models ran on my Mac: Apple M4, 16 GB unified memory, MPS. The CUDA peak-memory counter stays 0 on MPS, so I left that field at 0.0 instead of inventing a number.
+I lowercased, stripped punctuation, removed stopwords, and lemmatized. The vocabulary comes from the training text only. I held out 10,000 validation reviews from the 560,000-row train file, trained on 549,953 reviews, and tested on all 38,000 official test reviews. Five epochs, batch 64, embedding size 100, maximum length 128. All three models ran on a Colab Tesla T4.
 
 | Model | Acc | Macro-F1 | ROC-AUC | MCC | Brier | ECE | Time |
 |---|---|---|---|---|---|---|---|
-| Baseline | 0.923 | 0.923 | 0.973 | 0.845 | 0.059 | 0.011 | 114 s |
-| BiLSTM | 0.918 | 0.918 | 0.975 | 0.837 | 0.060 | 0.017 | 1706 s |
-| TextCNN | 0.921 | 0.921 | 0.975 | 0.841 | 0.061 | 0.024 | 108 s |
+| Baseline | 0.932 | 0.932 | 0.979 | 0.863 | 0.052 | 0.006 | 233 s |
+| BiLSTM | 0.942 | 0.942 | 0.986 | 0.883 | 0.044 | 0.012 | 794 s |
+| TextCNN | 0.937 | 0.937 | 0.984 | 0.875 | 0.047 | 0.008 | 3646 s |
 
-The baseline still has the best macro-F1. McNemar against the baseline is p = 0.091 for the BiLSTM and p = 0.424 for the TextCNN. On this 10k test set I cannot say the other two are clearly different. Short reviews are a bit easier than long ones for every model. Long-review macro-F1 is 0.917, 0.912, and 0.915 for baseline, BiLSTM, and TextCNN.
+The BiLSTM has the best macro-F1. McNemar against the baseline is p < 0.001 for both the BiLSTM and the TextCNN, so on this 38k test set both beat the mean pool. Short reviews are a bit easier than long ones. Long-review macro-F1 is 0.927, 0.934, and 0.933 for baseline, BiLSTM, and TextCNN.
 
 The length and class balance of the sample:
 
@@ -159,22 +168,24 @@ Confusion matrices on the test set:
 
 ![TextCNN confusion matrix](../task2_sentiment/sneha_singh/outputs/experimental_b_cm_full.png)
 
-I read 20 baseline mistakes: five confident false positives, five confident false negatives, five near the decision threshold, and five long-review misses.
+### Error review
 
-- **Confident false positive.** Gold negative, predicted positive: “food always good”.
-- **Confident false negative.** Gold positive, predicted negative: “not restaurant closed”.
-- **Near the threshold.** “coffee warm not good”.
-- **Long review.** A long airport note mixes praise with complaints.
+I read 20 BiLSTM mistakes: five confident false positives, five confident false negatives, five near the decision threshold, and five long-review misses.
 
-The ones that show up most are tiny blurbs the model treats as positive, negation or mixed wording, and long reviews where the stars and the sentences pull apart.
+- **Confident false positive.** Gold negative, predicted positive: “wow love place everything clean new”.
+- **Confident false negative.** Gold positive, predicted negative: “look know cox suck fact terrible business”.
+- **Near the threshold.** “wow seems like taco bell arizona”.
+- **Long review.** “given mixed review quite sure expect”.
+
+The ones that show up most are praise words inside a negative review, a complaint that later turns around, and long reviews where the stars and the sentences pull apart. The fix I wrote down for these cases is to balance review length or train longer, and to add negation handling.
 
 Full 20-row table: [task2_sentiment/sneha_singh/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task2_sentiment/sneha_singh/failure_analysis.md)
 
-This is 100k reviews out of about 560k, not the whole Yelp train file. Cutting reviews at 128 tokens hurts the long ones. I kept negation words, and mixed reviews are still hard.
+This is the full Yelp train file, 549,953 / 10,000 / 38,000. Cutting reviews at 128 tokens still hurts the long ones. I kept negation words, and mixed reviews are still hard.
 
 ## 2.B Ritika Mukesh Neema — individual
 
-I trained the same three families, with embeddings learned from scratch. My baseline is a mean pool plus a linear layer. My BiLSTM is there so negation can depend on word order. My TextCNN uses filter widths 3, 4, and 5 with global max-pool. I lowercased, stripped punctuation and HTML, removed stopwords, and used Porter stemming instead of lemmatization. I trained on the full Yelp polarity set, about 560,000 reviews, on a Colab GPU. Checkpoints are `task2_sentiment/ritika_mukesh_neema/checkpoints/baseline.pt`, `bilstm.pt`, and `textcnn.pt`. I do not have confusion-matrix images in the repo. The numbers below are from my `metrics_report.csv`.
+I trained the same three families, with embeddings learned from scratch. My baseline is a mean pool plus a linear layer. My BiLSTM is there so negation can depend on word order. My TextCNN uses filter widths 3, 4, and 5 with global max-pool. I lowercased, stripped punctuation and HTML, removed stopwords, and used Porter stemming instead of lemmatization. I trained on the full Yelp polarity set, about 560,000 reviews, on a Colab Tesla T4. Checkpoints are `task2_sentiment/ritika_mukesh_neema/checkpoints/baseline.pt`, `bilstm.pt`, and `textcnn.pt`. I do not have confusion-matrix images in the repo. The numbers below are from my `metrics_report.csv`.
 
 | Model | Acc | Macro-F1 | ROC-AUC | PR-AUC | MCC | Brier | ECE | Time | Peak MB |
 |---|---|---|---|---|---|---|---|---|---|
@@ -182,28 +193,34 @@ I trained the same three families, with embeddings learned from scratch. My base
 | BiLSTM | 0.934 | 0.934 | 0.982 | 0.982 | 0.868 | 0.051 | 0.025 | 798 s | 2,274 |
 | TextCNN | 0.926 | 0.926 | 0.979 | 0.979 | 0.852 | 0.055 | 0.021 | 267 s | 2,450 |
 
-My BiLSTM is the best of my three. McNemar against my baseline is p < 0.001 for the BiLSTM and p = 0.00022 for the TextCNN, so on my test set both sequence models beat the mean pool. I reviewed 20 TextCNN mistakes.
+My BiLSTM is the best of my three. McNemar against my baseline is p < 0.001 for the BiLSTM and p = 0.00022 for the TextCNN, so on my test set both sequence models beat the mean pool.
+
+### Error review
+
+I reviewed 20 TextCNN mistakes.
 
 - **Confident false positive.** Sarcasm, with no negative words: “Is there REALLY even a Leonard…” A French review in the same set also fails, because the stemmer is English-only.
 - **Confident false negative.** A positive review opens with “Cox sucks” before it turns around.
 - **Near the threshold.** “The employees at this Target seemed unusually friendly…”
 - **Long review.** “I used to love D&B… it has gone down hill.”
 
+The fixes I wrote down are a language filter for non-English reviews, more weight on the words after “however”, and treating a score near 0.5 as a calibration margin rather than a hard error.
+
 Full 20-case write-up: [task2_sentiment/ritika_mukesh_neema/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task2_sentiment/ritika_mukesh_neema/failure_analysis.md)
 
 ## 2.C Team comparison
 
-Same three model families. The tables use the same columns. Sneha trained on a 100k sample. Ritika trained on the full 560k set.
+Same three model families. The tables use the same columns. Both of us trained on the full Yelp train file. Sneha’s test set is the official 38,000 reviews. Ritika carved her own test split.
 
-**Sneha Singh.** 100k sample, lemmatize, max length 128, Apple M4 MPS. Checkpoints: `baseline_full.pt`, `experimental_a_full.pt`, `experimental_b_full.pt`.
+**Sneha Singh.** 549,953 / 10,000 / 38,000, lemmatize, max length 128, Colab Tesla T4. Checkpoints: `baseline_full.pt`, `experimental_a_full.pt`, `experimental_b_full.pt`.
 
 | Model | Acc | Macro-F1 | ROC-AUC | PR-AUC | MCC | Brier | ECE | McNemar p | Params | Time | Peak MB |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| Baseline | 0.923 | 0.923 | 0.973 | 0.973 | 0.845 | 0.059 | 0.011 | — | 4.76M | 114 s | 0.0 |
-| BiLSTM | 0.918 | 0.918 | 0.975 | 0.975 | 0.837 | 0.060 | 0.017 | 0.091 | 4.85M | 1706 s | 0.0 |
-| TextCNN | 0.921 | 0.921 | 0.975 | 0.975 | 0.841 | 0.061 | 0.024 | 0.424 | 4.84M | 108 s | 0.0 |
+| Baseline | 0.932 | 0.932 | 0.979 | 0.979 | 0.863 | 0.052 | 0.006 | — | 10.68M | 233 s | 228 |
+| BiLSTM | 0.942 | 0.942 | 0.986 | 0.986 | 0.883 | 0.044 | 0.012 | < 0.001 | 10.76M | 794 s | 344 |
+| TextCNN | 0.937 | 0.937 | 0.984 | 0.985 | 0.875 | 0.047 | 0.008 | < 0.001 | 10.75M | 3646 s | 1,656 |
 
-**Ritika Mukesh Neema.** Full 560k set, Porter stem, max length 200, Colab GPU. Checkpoints: `baseline.pt`, `bilstm.pt`, `textcnn.pt`.
+**Ritika Mukesh Neema.** Full 560k set, Porter stem, max length 200, Colab Tesla T4. Checkpoints: `baseline.pt`, `bilstm.pt`, `textcnn.pt`.
 
 | Model | Acc | Macro-F1 | ROC-AUC | PR-AUC | MCC | Brier | ECE | McNemar p | Params | Time | Peak MB |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -211,7 +228,30 @@ Same three model families. The tables use the same columns. Sneha trained on a 1
 | BiLSTM | 0.934 | 0.934 | 0.982 | 0.982 | 0.868 | 0.051 | 0.025 | < 0.001 | 3.24M | 798 s | 2,274 |
 | TextCNN | 0.926 | 0.926 | 0.979 | 0.979 | 0.852 | 0.055 | 0.021 | 0.00022 | 3.12M | 267 s | 2,450 |
 
-On Sneha’s 100k sample the mean-pool baseline still leads, macro-F1 0.923. On Ritika’s full set the BiLSTM leads, accuracy 0.934, and McNemar says that lead is real. Both of us miss sarcasm, mixed reviews, and negation. The training sets differ in size, so the two winners are not a pure architecture contest. Next we would train Sneha’s three models on the full file. Sneha’s peak-memory field is 0.0 because MPS does not fill the CUDA counter.
+Precision, recall, the other F1 scores, bootstrap intervals, examples per second, and slice scores are in the next table. Ritika’s metrics file has no short-review or long-review slice columns, so those cells are blank.
+
+| Metric | Sneha baseline | Sneha BiLSTM | Sneha TextCNN | Ritika baseline | Ritika BiLSTM | Ritika TextCNN |
+|---|---|---|---|---|---|---|
+| Precision macro | 0.932 | 0.942 | 0.937 | 0.922 | 0.934 | 0.926 |
+| Recall macro | 0.932 | 0.942 | 0.937 | 0.922 | 0.934 | 0.926 |
+| F1 micro | 0.932 | 0.942 | 0.937 | 0.922 | 0.934 | 0.926 |
+| F1 weighted | 0.932 | 0.942 | 0.937 | 0.922 | 0.934 | 0.926 |
+| Acc 95% CI | 0.929–0.934 | 0.939–0.944 | 0.935–0.940 | 0.919–0.925 | 0.931–0.936 | 0.924–0.928 |
+| Macro-F1 95% CI | 0.929–0.934 | 0.939–0.944 | 0.935–0.940 | 0.919–0.925 | 0.931–0.936 | 0.923–0.928 |
+| MCC 95% CI | 0.859–0.868 | 0.879–0.888 | 0.870–0.879 | 0.838–0.849 | 0.863–0.873 | 0.847–0.857 |
+| Examples/sec | 11,807 | 3,464 | 754 | 20,181 | 3,159 | 9,432 |
+| Short macro-F1 | 0.934 | 0.947 | 0.940 | | | |
+| Short error rate | 0.065 | 0.052 | 0.059 | | | |
+| Long macro-F1 | 0.927 | 0.934 | 0.933 | | | |
+| Long error rate | 0.072 | 0.065 | 0.066 | | | |
+
+**Strength.** Sneha’s BiLSTM has macro-F1 0.942. Ritika’s BiLSTM has accuracy 0.934. On both runs the BiLSTM beats that person’s baseline, and McNemar says the lead is real.
+
+**Weakness.** Both of us miss sarcasm, mixed reviews, and negation.
+
+**Limitation.** The test splits are not the same cut of the file. Sneha lemmatizes and cuts reviews at 128 tokens. Ritika stems and uses a maximum length of 200. Ritika’s metrics file has no short-review or long-review scores.
+
+**Next.** Keep negation words, and raise Sneha’s maximum length so long reviews are not cut at 128 tokens.
 
 ---
 
@@ -223,7 +263,7 @@ I trained an unpaired CycleGAN. The Kaggle direction is photo to Monet. The gene
 
 Each generator is a ResNet with 9 blocks at 256×256, reflection padding, instance norm, and a tanh output. Upsampling is nearest-neighbor times two, then a stride-1 convolution, not a transposed convolution. Each discriminator is a PatchGAN trained with least-squares loss. The losses are adversarial, cycle L1 with λ = 10, and identity at half of that. Real labels are smoothed to 0.9. An image pool of 50 feeds the discriminator. Batch size is 4. I trained 40 epochs at a constant learning rate and 40 more with decay, and each epoch resamples about 800 photos. The shorter Monet loader is cycled so those photos actually get used. Scoring uses all 7,038 photos in the photo-to-Monet direction and all 300 Monet paintings in the other direction.
 
-Training was on a CUDA GPU with mixed precision. It took about 4.3 hours and peaked near 6568 MB. The log records `device=cuda` and does not print the GPU name. `best.pt` is 107.9 MB, over GitHub’s 100 MB limit, so it is not in git: [https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link](https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link)
+Training was on a Colab Tesla T4 with mixed precision. It took about 4.3 hours and peaked near 6568 MB. The log line is `device=cuda`. `best.pt` is 107.9 MB, over GitHub’s 100 MB limit, so it is not in git: [https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link](https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link)
 
 The Monet and photo folders are in one Drive folder: [https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link](https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link)
 
@@ -241,6 +281,8 @@ Losses fell across the 80 epochs. The discriminator loss ended near 0.17, which 
 The grid is four photos, the Monet version of each, four real Monets, and the photo version of those.
 
 ![Photo, generated Monet, real Monet, generated photo](../task3_gan/sneha_singh/outputs/samples/grid.png)
+
+### Human audit
 
 What I see in that grid, and in the 30 images I audited:
 
@@ -272,6 +314,8 @@ Final generator loss was 4.84, discriminator loss 0.23, cycle loss 2.41, identit
 
 My `submission.csv` records photo-to-Monet FID 123.70.
 
+### Failure notes
+
 - **Cycle check.** Cycle L1, LPIPS, and content cosine are on 100 images, not the full photo set.
 - **Human audit.** My audit folder is empty, so I have not scored the shared 30 images and there is no kappa yet. I do not have a `failure_analysis.md` for this run.
 
@@ -293,8 +337,19 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | Time / images per sec | 15,342 s / 8.34 | same run | 1,660 s / 14.5 | same run |
 | Peak memory | 6,568 MB | same run | 1,645 MB | same run |
 | NaN count | 0 | same run | 0 | same run |
+| Generator loss | 4.574 | same run | 4.835 | same run |
+| Discriminator loss | 0.168 | same run | 0.227 | same run |
+| Cycle loss | 2.174 | same run | 2.412 | same run |
+| Identity loss | 1.097 | same run | 1.244 | same run |
+| Gradient norm | 112.82 | same run | 57.00 mean, 315 max | same run |
 
-Sneha’s photo-to-Monet FID is 89.99. Ritika’s is 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours. Sneha’s discriminator loss ended near 0.17, and the brush texture is grainy. Ritika’s cycle scores use 100 images, while Sneha’s use the full sets. Next we upload one `submission.csv`, and both of us score the same 30 images. Neither public score is in yet.
+**Strength.** Sneha’s photo-to-Monet FID is 89.99. Ritika’s FID is 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours.
+
+**Weakness.** Sneha’s discriminator loss ended near 0.17, and the brush texture is grainy.
+
+**Limitation.** Ritika’s cycle scores use 100 images, while Sneha’s use the full sets. Batch size and training time also differ.
+
+**Next.** Upload one `submission.csv`, and both of us score the same 30 images. Neither public score is in yet.
 
 ---
 
@@ -304,14 +359,23 @@ Sneha’s photo-to-Monet FID is 89.99. Ritika’s is 123.70. Ritika’s run is t
 |---|---|---|
 | 1 — validation loss | 4 layers, emb 256, context 128. 0.857 | 4 layers, emb 128, context 256. 0.778 |
 | 1 — distinct-1 | 4 layers, emb 256, context 128. 0.225 | 4 layers, emb 128, context 256. 0.008 |
-| 2 — best model | Mean-pool, 100k reviews. Macro-F1 0.923 | BiLSTM, 560k reviews. Accuracy 0.934 |
+| 2 — best model | BiLSTM, 550k train, 38k test. Macro-F1 0.942 | BiLSTM, full set. Accuracy 0.934 |
 
 ---
 
 # What is still open
 
-1. Upload Sneha’s `task3_gan/sneha_singh/submission.csv` to Kaggle for `PairProgramming_Team_5`, then paste the public score, private score, and rank here.
-2. Both of us score the same 30 images and add Cohen’s kappa. Ritika’s audit folder is still empty.
+Kaggle team `PairProgramming_Team_5`. One submission, from Sneha’s `task3_gan/sneha_singh/submission.csv`. The cells stay blank until the leaderboard numbers are pasted in.
+
+| | Public score | Private score | Rank |
+|---|---|---|---|
+| PairProgramming_Team_5 | | | |
+
+Cohen’s kappa on the shared 30 images. Ritika’s audit folder is still empty, so this cell stays blank.
+
+| | Cohen’s kappa |
+|---|---|
+| Shared 30 images | |
 
 The plots in this file are the png files already stored under each task folder. They are not copied again into `report/`.
 

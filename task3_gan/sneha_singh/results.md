@@ -20,10 +20,10 @@ Full-run budget:
 - full photo set used for A2B inference
 
 ## Hardware
-- CUDA GPU, AMP, `smoke=false`
+- Colab Tesla T4, AMP, `smoke=false`
 - 80 epochs, batch size 4
 - `train_time_sec` ≈ 15341 (~4.3 h); peak memory ~6568 MB
-- The saved log prints `device=cuda`. It does not record the GPU name.
+- The saved log prints `device=cuda`. The run was on a Colab Tesla T4.
 - Smoke run earlier on Mac (MPS)
 - Raw logs: `reproducibility/raw_logs/sneha_singh/task3_gan/train_smoke.log`, `train_full.log`
 

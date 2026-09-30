@@ -84,7 +84,7 @@ unedited.
 - Smoke: false
 - Train: CUDA + AMP, 80 epochs (40+40), batch_size=4, nearest upsample, label_smoothing 0.9, ~800 photos/epoch
 - Train time: 15341 s (~4.3 h); peak_memory_mb: 6568
-- GPU name: not printed in `train_full.log` (log line is `device=cuda` only)
+- Device: Colab Tesla T4. `train_full.log` only prints `device=cuda`.
 - Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` is 107.9 MB, over GitHub’s 100 MB limit, so it is not in git. https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link
 - Pred A2B: `outputs/pred_A2B` (7038 JPGs)
 - Pred B2A: `outputs/pred_B2A` (300 JPGs, full Monet set)
@@ -98,11 +98,11 @@ unedited.
 
 ## Run — Part 2 Sentiment (full)
 - Data: Hugging Face `fancyzhx/yelp_polarity`. Not on Drive and not in git. The notebook downloads it when the run starts.
-- Date: 2026-09-26 23:36
+- Date: 2026-09-30
 - Task: task2_sentiment
 - Smoke: False
-- Train/val/test: 99989 / 10000 / 10000 (100000 sampled; 11 empty reviews dropped)
-- Test macro-F1: baseline 0.9226, BiLSTM 0.9184, TextCNN 0.9207
+- Train/val/test: 549953 / 10000 / 38000 (550000 train cap from the 560000-row train file, 10000 val held out, official 38000 test; 47 empty training reviews dropped)
+- Test macro-F1: baseline 0.9316, BiLSTM 0.9416, TextCNN 0.9374
 - Epochs: 5
 - Checkpoint (baseline): task2_sentiment/sneha_singh/checkpoints/baseline_full.pt
 - Checkpoint (experimental_a): task2_sentiment/sneha_singh/checkpoints/experimental_a_full.pt
@@ -112,8 +112,5 @@ unedited.
 - Raw log (experimental_b): reproducibility/raw_logs/sneha_singh/task2_sentiment/experimental_b_full.log
 - Metrics CSV: task2_sentiment/sneha_singh/metrics_report.csv
 - Results: task2_sentiment/sneha_singh/results.md
-- Python: 3.12.13
-- PyTorch: 2.14.0
-- Device: Apple M4 (10 cores: 4 performance, 6 efficiency), 16 GB unified, MPS
-- Platform: macOS-26.2-arm64-arm-64bit
+- Device: Colab Tesla T4
 - Command: Run All on task2_sentiment/sneha_singh/src/part2_sentiment.ipynb (config.json smoke=false)

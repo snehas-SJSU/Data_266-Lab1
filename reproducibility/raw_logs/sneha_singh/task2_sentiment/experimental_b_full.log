@@ -1,6 +1,6 @@
-model=experimental_b smoke=False device=mps
-epoch 1 train_ce=0.3736 val_ce=0.2128
-epoch 2 train_ce=0.2462 val_ce=0.1823
-epoch 3 train_ce=0.2017 val_ce=0.1772
-epoch 4 train_ce=0.1692 val_ce=0.1806
-epoch 5 train_ce=0.1431 val_ce=0.1768
+model=experimental_b smoke=False device=cuda
+epoch 1 train_ce=0.2551 val_ce=0.1809
+epoch 2 train_ce=0.1857 val_ce=0.1714
+epoch 3 train_ce=0.1615 val_ce=0.1704
+epoch 4 train_ce=0.1423 val_ce=0.1737
+epoch 5 train_ce=0.1271 val_ce=0.1787

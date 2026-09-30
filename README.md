@@ -97,7 +97,7 @@ jupyter nbconvert --to notebook --execute --inplace \
   task2_sentiment/sneha_singh/src/part2_sentiment.ipynb
 ```
 
-**Status:** full run done (100k train sampled, 99,989 after empty-review drop / 10k val / 10k test, 5 epochs). Baseline macro-F1 0.923.
+**Status:** full run done (549,953 train / 10k val / 38k test, 5 epochs, Colab Tesla T4). Best model is the BiLSTM, macro-F1 0.942.
 
 ### Ritika Mukesh Neema — `task2_sentiment/ritika_mukesh_neema/`
 
