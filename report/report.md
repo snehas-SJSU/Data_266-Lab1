@@ -7,7 +7,7 @@
 
 ## Abstract
 
-This report covers three tasks, each trained twice. Sneha Singh and Ritika Mukesh Neema each built a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. The models are not copies of each other. On Part 1, Ritika’s validation loss is lower and Sneha’s samples are more varied. On Part 2, Ritika’s BiLSTM leads on the full review set, while Sneha’s mean-pool baseline still leads her own 100k sample. On Part 3, Sneha’s photo-to-Monet FID is 89.99 and Ritika’s is 123.70. Kaggle scores and the shared human-audit kappa are still open. The repository is https://github.com/snehas-SJSU/Data_266-Lab1.
+This report covers three tasks, each trained twice. Sneha Singh and Ritika Mukesh Neema each built a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. The models are not copies of each other. On Part 1, Ritika’s validation loss is lower and Sneha’s samples are more varied. On Part 2, Ritika’s BiLSTM leads on the full review set, while Sneha’s mean-pool baseline still leads her own 100k sample. On Part 3, Sneha’s photo-to-Monet FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70. Ritika’s eval script did not compute MiFID. Kaggle scores and the shared human-audit kappa are still open. The repository is https://github.com/snehas-SJSU/Data_266-Lab1.
 
 ## Introduction
 
@@ -19,7 +19,7 @@ Each part below has two individual write-ups and then one team comparison. Secti
 |---|---|---|
 | 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab GPU |
 | 2 — Yelp polarity | Mean-pool, BiLSTM, TextCNN on a 100k sample, Mac MPS | Mean-pool, BiLSTM, TextCNN on the full 560k set, Colab GPU |
-| 3 — CycleGAN | Batch 4, nearest upsample, local FID 89.99 | Batch 1, local FID 123.70, MiFID not computed |
+| 3 — CycleGAN | Batch 4, nearest upsample, FID 89.99, MiFID 0.403 | Batch 1, FID 123.70. Her MiFID was not computed |
 
 We share the raw data. The rows above are two separate runs of the same part, not a split of who had to do which part.
 
@@ -237,7 +237,7 @@ Her `submission.csv` is still only the header. Her human-audit folder is empty, 
 
 ## 3.C Team comparison
 
-On photo to Monet, Sneha’s FID is 89.99 and Ritika’s is 123.70. Lower is better, so Sneha’s set is the stronger local score. Ritika did not compute MiFID.
+On photo to Monet, Sneha’s FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70. Lower is better, so Sneha’s set is the stronger local score. Only Ritika’s MiFID is missing. Sneha’s is in `submission.csv`.
 
 | | Sneha photo → Monet | Sneha Monet → photo | Ritika photo → Monet | Ritika Monet → photo |
 |---|---|---|---|---|
@@ -249,7 +249,7 @@ On photo to Monet, Sneha’s FID is 89.99 and Ritika’s is 123.70. Lower is bet
 | G / D / cycle / identity | 4.574 / 0.168 / 2.174 / 1.097 | same training run | 4.835 / 0.227 / 2.412 / 1.244 | same training run |
 | Grad norm / NaNs | 112.8 / 0 | same | mean 57, max 315 / 0 | same |
 | Params / time / images/sec / peak MB | 28.3M / 15,342 s / 8.34 / 6,568 | same | 28.3M / 1,660 s / 14.5 / 1,645 | same |
-| Local (FID + MiFID) / 2 | 45.20 | 46.33 | MiFID missing | MiFID missing |
+| Local (FID + MiFID) / 2 | 45.20 | 46.33 | Ritika did not compute MiFID | Ritika did not compute MiFID |
 | Kaggle public / private / rank | not uploaded yet | | not uploaded yet | |
 | Human audit / κ | style 1.4, content 1.7, artifacts 1.4. κ not computed | | audit folder empty | |
 | Checkpoint | https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link | | https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view | |
