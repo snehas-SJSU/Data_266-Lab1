@@ -187,14 +187,3 @@ Part 3 `best.pt` is on Drive because the file is 107.9 MB, over GitHub’s 100 M
 |---|---|---|
 | Sneha Singh | `reproducibility/manifests/sneha_singh.md` | `reproducibility/raw_logs/sneha_singh/` |
 | Ritika Mukesh Neema | `reproducibility/manifests/ritika_mukesh_neema.md` | `reproducibility/raw_logs/ritika_mukesh_neema/` |
-
----
-
-## Team status
-
-| Part | Sneha Singh | Ritika Mukesh Neema |
-|---|---|---|
-| 1 LLM | Full GPU run done (val CE 0.857) | — |
-| 2 Yelp | Full run done (100k / 10k / 10k). Data is downloaded in the notebook, not on Drive | — |
-| 3 CycleGAN | Train + local eval done. `best.pt` on Drive. Kaggle CSV not uploaded yet | — |
-| Report PDF | `report/DATA266_Lab1_Report_Team_5.pdf` (Sneha’s sections; Ritika still open) | — |
