@@ -61,7 +61,11 @@ The loss falls smoothly and the validation curve stays close to the training cur
 
 The prompt I used for samples was “some changes. She added some nice colors”.
 
-Greedy decoding writes a readable start, then gets stuck: “You are very happy. You are very happy.” It also doubles a word, “them them”. Temperature 0.8 does not loop as hard, but the story wanders from colors to a box, a door, and then a tree. I expected some of this. The model only sees 128 characters at a time, and it has no idea where a word ends. The three cases are written up in `task1_llm/sneha_singh/failure_analysis.md`.
+- **Repetition.** Greedy decoding loops: “You are very happy. You are very happy.”
+- **Broken word.** The same decode prints “them them”. A character model does not know where a word ends.
+- **Story drift.** Temperature 0.8 moves from colors to a box, a door, and a tree. The model only sees 128 characters at a time.
+
+Full cases: [task1_llm/sneha_singh/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task1_llm/sneha_singh/failure_analysis.md)
 
 ## 1.B Ritika Mukesh Neema — individual
 
@@ -86,9 +90,12 @@ I trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup and 
 
 ![Part 1 training and validation loss](../task1_llm/ritika_mukesh_neema/outputs/loss_curve.png)
 
-My three failure cases are in `task1_llm/ritika_mukesh_neema/failure_analysis.md`.
+- **Repetition.** All 10 greedy samples are the same story, and it loops: “You are very happy. You are very happy.”
+- **Broken word.** Temperature sampling writes “designt”, which is not English.
+- **Story drift.** The object moves from a box to a red ball to a bird.
+- **Script.** Generation does not stop at the story-boundary token, so a second story gets stuck on the end.
 
-Greedy decoding collapses. All 10 greedy samples are the same story, and it loops: “You are very happy. You are very happy.” Temperature sampling writes a word that is not English, “designt”, and the object drifts from a box to a red ball to a bird. A fourth issue is the script, not the model: generation does not stop at the story-boundary token, so a second story gets stuck on the end.
+Full cases: [task1_llm/ritika_mukesh_neema/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task1_llm/ritika_mukesh_neema/failure_analysis.md)
 
 ## 1.C Team comparison
 
@@ -147,14 +154,16 @@ Confusion matrices on the test set:
 
 ![TextCNN confusion matrix](../task2_sentiment/sneha_singh/outputs/experimental_b_cm_full.png)
 
-I read 20 baseline mistakes. Five confident false positives, five confident false negatives, five near the decision threshold, and five long-review misses. The full list, with an error type and a testable fix on each row, is in `task2_sentiment/sneha_singh/failure_analysis.md`. Four of them:
+I read 20 baseline mistakes: five confident false positives, five confident false negatives, five near the decision threshold, and five long-review misses.
 
-- Confident false positive, gold negative: “food always good”.
-- Confident false negative, gold positive: “not restaurant closed”.
-- Near the threshold: “disappointed went early morning … coffee warm not good”.
-- Long review, gold positive, predicted negative: a long airport note that mixes praise with complaints.
+- **Confident false positive.** Gold negative, predicted positive: “food always good”.
+- **Confident false negative.** Gold positive, predicted negative: “not restaurant closed”.
+- **Near the threshold.** “coffee warm not good”.
+- **Long review.** A long airport note mixes praise with complaints.
 
 The ones that show up most are tiny blurbs the model treats as positive, negation or mixed wording, and long reviews where the stars and the sentences pull apart.
+
+Full 20-row table: [task2_sentiment/sneha_singh/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task2_sentiment/sneha_singh/failure_analysis.md)
 
 This is 100k reviews out of about 560k, not the whole Yelp train file. Cutting reviews at 128 tokens hurts the long ones. I kept negation words, and mixed reviews are still hard.
 
@@ -168,7 +177,14 @@ I trained the same three families, with embeddings learned from scratch. My base
 | BiLSTM | 0.934 | 0.934 | 0.982 | 0.982 | 0.868 | 0.051 | 0.025 | 798 s | 2,274 |
 | TextCNN | 0.926 | 0.926 | 0.979 | 0.979 | 0.852 | 0.055 | 0.021 | 267 s | 2,450 |
 
-My BiLSTM is the best of my three. McNemar against my baseline is p < 0.001 for the BiLSTM and p = 0.00022 for the TextCNN, so on my test set both sequence models beat the mean pool. I reviewed 20 TextCNN mistakes in `task2_sentiment/ritika_mukesh_neema/failure_analysis.md`. The ones that show up are sarcasm (“Is there REALLY even a Leonard…”), a French review the English stemmer cannot handle, and a positive review that opens with “Cox sucks” before it turns around.
+My BiLSTM is the best of my three. McNemar against my baseline is p < 0.001 for the BiLSTM and p = 0.00022 for the TextCNN, so on my test set both sequence models beat the mean pool. I reviewed 20 TextCNN mistakes.
+
+- **Confident false positive.** Sarcasm, with no negative words: “Is there REALLY even a Leonard…” A French review in the same set also fails, because the stemmer is English-only.
+- **Confident false negative.** A positive review opens with “Cox sucks” before it turns around.
+- **Near the threshold.** “The employees at this Target seemed unusually friendly…”
+- **Long review.** “I used to love D&B… it has gone down hill.”
+
+Full 20-case write-up: [task2_sentiment/ritika_mukesh_neema/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task2_sentiment/ritika_mukesh_neema/failure_analysis.md)
 
 ## 2.C Team comparison
 
@@ -218,7 +234,20 @@ The grid is four photos, the Monet version of each, four real Monets, and the ph
 
 ![Photo, generated Monet, real Monet, generated photo](../task3_gan/sneha_singh/outputs/samples/grid.png)
 
-What I see in that grid, and in the 30 images I audited: the layout of the photo usually survives. Skies and water pick up a grainy, repeated dab texture. Some colors wash out. A few Monet-to-photo frames go soft or pick up a dark blob. I did not mark any of my 30 as a copied training Monet. My rough averages on the sheet were style 1.4, content 1.7, artifacts 1.4, on a 0–2 scale where higher means worse. The sheet is `task3_gan/sneha_singh/outputs/human_audit/audit_30.csv`. Agreement with Ritika is not computed yet, because she has not scored the same 30.
+What I see in that grid, and in the 30 images I audited:
+
+- **Grain.** Skies and water pick up a repeated dab texture.
+- **Color wash.** Some skies go flat, and sunsets brown out at the edges.
+- **Soft reverse.** A few Monet-to-photo frames go soft or pick up a dark blob.
+- **Content.** The layout of the photo usually survives. I did not mark any of my 30 as a copied training Monet.
+
+My averages on the 0–2 sheet, where higher means worse, were style 1.4, content 1.7, artifacts 1.4.
+
+Full notes: [task3_gan/sneha_singh/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task3_gan/sneha_singh/failure_analysis.md)
+
+Audit sheet: [task3_gan/sneha_singh/outputs/human_audit/audit_30.csv](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task3_gan/sneha_singh/outputs/human_audit/audit_30.csv)
+
+Agreement with Ritika is not in yet, because she has not scored the same 30.
 
 ## 3.B Ritika Mukesh Neema — individual
 
@@ -233,7 +262,10 @@ Final generator loss was 4.84, discriminator loss 0.23, cycle loss 2.41, identit
 
 ![CycleGAN losses](../task3_gan/ritika_mukesh_neema/outputs/loss_curves.png)
 
-My `submission.csv` records photo-to-Monet FID 123.70. My human-audit folder is empty, so I have not scored the shared 30 images and there is no kappa yet.
+My `submission.csv` records photo-to-Monet FID 123.70.
+
+- **Cycle check.** Cycle L1, LPIPS, and content cosine are on 100 images, not the full photo set.
+- **Human audit.** My audit folder is empty, so I have not scored the shared 30 images and there is no kappa yet. I do not have a `failure_analysis.md` for this run.
 
 ## 3.C Team comparison
 
