@@ -5,7 +5,13 @@
 <p class="names">Ritika Mukesh Neema</p>
 </div>
 
-Both of us did all three parts. Sneha Singh trained her own Part 1, Part 2, and Part 3. Ritika Mukesh Neema trained her own Part 1, Part 2, and Part 3. Nobody covered a part for the other person. Inside each part, section A is Sneha’s individual work and section B is Ritika’s individual work: her own model, her own metrics, her own failures, and her own hardware. Section C is the team comparison. The models differ on purpose. Each of us commits only inside her own folder, `sneha_singh/` or `ritika_mukesh_neema/`. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
+## Abstract
+
+This report covers three tasks, each trained twice. Sneha Singh and Ritika Mukesh Neema each built a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. The models are not copies of each other. On Part 1, Ritika’s validation loss is lower and Sneha’s samples are more varied. On Part 2, Ritika’s BiLSTM leads on the full review set, while Sneha’s mean-pool baseline still leads her own 100k sample. On Part 3, Sneha’s photo-to-Monet FID is 89.99 and Ritika’s is 123.70. Kaggle scores and the shared human-audit kappa are still open. The repository is https://github.com/snehas-SJSU/Data_266-Lab1.
+
+## Introduction
+
+Each part below has two individual write-ups and then one team comparison. Section A is Sneha’s model, metrics, failures, and hardware. Section B is Ritika’s. Section C puts the two runs side by side. Code for Sneha lives under `sneha_singh/`. Code for Ritika lives under `ritika_mukesh_neema/`. Raw TinyStories and the Monet and photo folders are linked from the README because they are too large for git. Yelp is downloaded by the notebook from Hugging Face.
 
 ## What each of us built
 
