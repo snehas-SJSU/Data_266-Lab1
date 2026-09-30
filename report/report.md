@@ -113,10 +113,11 @@ Ritika’s validation loss is lower. Sneha’s samples are more varied. Both gre
 | Distinct-1/2/3 | 0.225 / 0.655 / 0.856 | 0.008 / 0.054 / 0.137 |
 | Repeated 4-gram / NaNs | 0.120 / 0 | 0.206 / 0 |
 | Params / time / peak MB | 3.25M / 457 s / 349 | 0.88M / 1,727 s / 1,749 |
+| Train / gen tokens per sec | 280,325 / 409 | 177,917 / 239 |
 | Checkpoint | `task1_llm/sneha_singh/checkpoints/best.pt` | `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt` |
-| Log | `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log` | her raw log under `reproducibility/raw_logs/ritika_mukesh_neema/` |
+| Log | `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log` | `reproducibility/raw_logs/ritika_mukesh_neema/task1_llm/train_full.log` |
 
-Ritika’s strength is the lower validation loss, 0.778 against Sneha’s 0.857, on a smaller model. Sneha’s strength is variety: distinct-1 is 0.225 against Ritika’s 0.008. The shared weakness is greedy decoding. Both of us loop on “You are very happy.” The limitation is that the runs are not the same model: embedding size, context length, and the machine all differ, so the loss gap is not a pure architecture contest. Next we would add a repetition penalty at decode time, and stop generation when the story-boundary token appears.
+Ritika’s validation loss is lower, 0.778 against Sneha’s 0.857, on a smaller model. Sneha’s samples are more varied: distinct-1 is 0.225 against Ritika’s 0.008. Both greedy decoders loop on “You are very happy.” Embedding size, context length, and the machine differ, so the loss gap is not a pure architecture contest. Next we would add a repetition penalty at decode time, and stop generation when the story-boundary token appears.
 
 ---
 
@@ -192,22 +193,25 @@ Full 20-case write-up: [task2_sentiment/ritika_mukesh_neema/failure_analysis.md]
 
 ## 2.C Team comparison
 
-Same three model families, not the same experiment. Ritika’s BiLSTM leads on the full 560k set. Sneha’s mean-pool baseline still leads on the 100k sample.
+Same three model families. The tables use the same columns. Sneha trained on a 100k sample. Ritika trained on the full 560k set.
 
-| | Sneha baseline | Sneha BiLSTM | Sneha TextCNN | Ritika baseline | Ritika BiLSTM | Ritika TextCNN |
-|---|---|---|---|---|---|---|
-| Architecture | Mean-pool + linear | BiLSTM | CNN widths 3, 4, 5 | Mean-pool + linear | BiLSTM | CNN widths 3, 4, 5 |
-| Data / prep | 100k sample, lemmatize, max len 128 | same | same | full 560k, Porter stem, max len 200 | same | same |
-| Hardware | Apple M4 MPS | same | same | Colab GPU | same | same |
-| Accuracy | 0.923 | 0.918 | 0.921 | 0.922 | 0.934 | 0.926 |
-| Macro-F1 | 0.923 | 0.918 | 0.921 | 0.922 | 0.934 | 0.926 |
-| ROC-AUC / PR-AUC | 0.973 / 0.973 | 0.975 / 0.975 | 0.975 / 0.975 | 0.974 / 0.973 | 0.982 / 0.982 | 0.979 / 0.979 |
-| MCC / Brier / ECE | 0.845 / 0.059 / 0.011 | 0.837 / 0.060 / 0.017 | 0.841 / 0.061 / 0.024 | 0.843 / 0.059 / 0.007 | 0.868 / 0.051 / 0.025 | 0.852 / 0.055 / 0.021 |
-| McNemar p vs own baseline | — | 0.091 | 0.424 | — | < 0.001 | 0.00022 |
-| Params / time / peak MB | 4.76M / 114 s / 0.0 | 4.85M / 1706 s / 0.0 | 4.84M / 108 s / 0.0 | 3.00M / 125 s / 2,123 | 3.24M / 798 s / 2,274 | 3.12M / 267 s / 2,450 |
-| Checkpoint | `baseline_full.pt` | `experimental_a_full.pt` | `experimental_b_full.pt` | `baseline.pt` | `bilstm.pt` | `textcnn.pt` |
+**Sneha Singh.** 100k sample, lemmatize, max length 128, Apple M4 MPS. Checkpoints: `baseline_full.pt`, `experimental_a_full.pt`, `experimental_b_full.pt`.
 
-Ritika’s strength is that word order helps: her BiLSTM reaches 0.934 accuracy on the full 560k set, and McNemar says that is not chance. Sneha’s strength is a fast baseline that still leads her own two sequence models on the 100k sample. The shared weakness is sarcasm, mixed reviews, and negation. The limitation is the data size. Sneha used 100k reviews and Ritika used about 560k, so her BiLSTM win is not yet an architecture result. Next we would rerun Sneha’s three models on the full training file. Sneha’s peak-memory field stays 0.0 because MPS does not fill the CUDA counter.
+| Model | Acc | Macro-F1 | ROC-AUC | PR-AUC | MCC | Brier | ECE | McNemar p | Params | Time | Peak MB |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Baseline | 0.923 | 0.923 | 0.973 | 0.973 | 0.845 | 0.059 | 0.011 | — | 4.76M | 114 s | 0.0 |
+| BiLSTM | 0.918 | 0.918 | 0.975 | 0.975 | 0.837 | 0.060 | 0.017 | 0.091 | 4.85M | 1706 s | 0.0 |
+| TextCNN | 0.921 | 0.921 | 0.975 | 0.975 | 0.841 | 0.061 | 0.024 | 0.424 | 4.84M | 108 s | 0.0 |
+
+**Ritika Mukesh Neema.** Full 560k set, Porter stem, max length 200, Colab GPU. Checkpoints: `baseline.pt`, `bilstm.pt`, `textcnn.pt`.
+
+| Model | Acc | Macro-F1 | ROC-AUC | PR-AUC | MCC | Brier | ECE | McNemar p | Params | Time | Peak MB |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Baseline | 0.922 | 0.922 | 0.974 | 0.973 | 0.843 | 0.059 | 0.007 | — | 3.00M | 125 s | 2,123 |
+| BiLSTM | 0.934 | 0.934 | 0.982 | 0.982 | 0.868 | 0.051 | 0.025 | < 0.001 | 3.24M | 798 s | 2,274 |
+| TextCNN | 0.926 | 0.926 | 0.979 | 0.979 | 0.852 | 0.055 | 0.021 | 0.00022 | 3.12M | 267 s | 2,450 |
+
+On Sneha’s 100k sample the mean-pool baseline still leads, macro-F1 0.923. On Ritika’s full set the BiLSTM leads, accuracy 0.934, and McNemar says that lead is real. Both of us miss sarcasm, mixed reviews, and negation. The training sets differ in size, so the two winners are not a pure architecture contest. Next we would train Sneha’s three models on the full file. Sneha’s peak-memory field is 0.0 because MPS does not fill the CUDA counter.
 
 ---
 
@@ -273,24 +277,24 @@ My `submission.csv` records photo-to-Monet FID 123.70.
 
 ## 3.C Team comparison
 
-On photo to Monet, Sneha’s FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70. Lower is better, so Sneha’s set is the stronger local score.
+Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower FID is better. Checkpoint links are in sections 3.A and 3.B.
 
 | | Sneha photo → Monet | Sneha Monet → photo | Ritika photo → Monet | Ritika Monet → photo |
 |---|---|---|---|---|
-| Architecture | ResNet-9, nearest upsample, PatchGAN, LSGAN, λ_cycle 10, identity 5, labels 0.9 | same model | ResNet-9, PatchGAN, LSGAN, λ_cycle 10, identity 5, batch 1 | same model |
-| Hyperparameters | 40 + 40 epochs, batch 4, ~800 photos/epoch, pool 50 | same run | 40 + 40 epochs, batch 1, pool 50, lr 0.0002 | same run |
-| FID / KID / MiFID | 89.99 / 0.018 / 0.403 | 92.23 / 0.030 / 0.423 | 123.70 / 0.027 | 120.72 / 0.040 |
-| Precision / recall | 0.540 / 0.293 | 0.660 / 0.089 | 0.327 / 0.570 | 0.613 / 0.207 |
-| Cycle L1 / LPIPS / content cos | 0.112 / 0.452 / 0.532 (full set) | 0.103 / 0.365 / 0.586 | 0.126 / 0.337 / 0.775 (100 images) | 0.109 / 0.405 / 0.873 |
-| G / D / cycle / identity | 4.574 / 0.168 / 2.174 / 1.097 | same training run | 4.835 / 0.227 / 2.412 / 1.244 | same training run |
-| Grad norm / NaNs | 112.8 / 0 | same | mean 57, max 315 / 0 | same |
-| Params / time / images/sec / peak MB | 28.3M / 15,342 s / 8.34 / 6,568 | same | 28.3M / 1,660 s / 14.5 / 1,645 | same |
-| Local (FID + MiFID) / 2 | 45.20 | 46.33 | | |
-| Kaggle public / private / rank | not uploaded yet | | not uploaded yet | |
-| Human audit / κ | style 1.4, content 1.7, artifacts 1.4. κ not computed | | audit folder empty | |
-| Checkpoint | [https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link](https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link) | | [https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view](https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view) | |
+| Epochs / batch | 40 + 40, batch 4 | same run | 40 + 40, batch 1 | same run |
+| FID | 89.99 | 92.23 | 123.70 | 120.72 |
+| KID | 0.018 | 0.030 | 0.027 | 0.040 |
+| Precision | 0.540 | 0.660 | 0.327 | 0.613 |
+| Recall | 0.293 | 0.089 | 0.570 | 0.207 |
+| Cycle L1 | 0.112 | 0.103 | 0.126 | 0.109 |
+| LPIPS | 0.452 | 0.365 | 0.337 | 0.405 |
+| Content cosine | 0.532 | 0.586 | 0.775 | 0.873 |
+| Params | 28.3M | same run | 28.3M | same run |
+| Time / images per sec | 15,342 s / 8.34 | same run | 1,660 s / 14.5 | same run |
+| Peak memory | 6,568 MB | same run | 1,645 MB | same run |
+| NaN count | 0 | same run | 0 | same run |
 
-Sneha’s strength on the Kaggle direction is the lower FID, 89.99 against Ritika’s 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours, at batch size 1. The weakness on Sneha’s side is a discriminator loss that ended near 0.17, which shows up as grain in the brush texture. The limitation is that her cycle scores use 100 images while Sneha’s use the full sets. Next we upload Sneha’s `submission.csv`, and both of us score the same 30 images so kappa can be filled in. Neither public score is in yet.
+Sneha’s photo-to-Monet FID is 89.99. Ritika’s is 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours. Sneha’s discriminator loss ended near 0.17, and the brush texture is grainy. Ritika’s cycle scores use 100 images, while Sneha’s use the full sets. Next we upload one `submission.csv`, and both of us score the same 30 images. Neither public score is in yet.
 
 ---
 
@@ -313,8 +317,8 @@ The plots in this file are the png files already stored under each task folder. 
 
 ## Papers
 
-Vaswani et al., Attention Is All You Need (2017). [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762). The causal multi-head attention in Part 1 follows that design, written by hand.
+1. Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention Is All You Need. 2017. [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762). The causal multi-head attention in Part 1 follows that design, written by hand.
 
-Eldan and Li, TinyStories (2023). [https://arxiv.org/abs/2305.07759](https://arxiv.org/abs/2305.07759). Part 1 is trained on that dataset.
+2. Ronen Eldan and Yuanzhi Li. TinyStories: How Small Can Language Models Be and Still Speak Coherent English? 2023. [https://arxiv.org/abs/2305.07759](https://arxiv.org/abs/2305.07759). Part 1 is trained on that dataset.
 
-Zhu et al., Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks (2017). [https://arxiv.org/abs/1703.10593](https://arxiv.org/abs/1703.10593). Part 3 is that CycleGAN setup: two generators, two discriminators, cycle loss, and identity loss.
+3. Jun-Yan Zhu, Taesung Park, Phillip Isola, and Alexei A. Efros. Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks. 2017. [https://arxiv.org/abs/1703.10593](https://arxiv.org/abs/1703.10593). Part 3 is that CycleGAN setup: two generators, two discriminators, cycle loss, and identity loss.
