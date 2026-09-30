@@ -65,9 +65,9 @@ Greedy decoding writes a readable start, then gets stuck: “You are very happy.
 
 ## 1.B Ritika Mukesh Neema — individual
 
-Ritika also wrote the attention herself. She did not use `nn.Transformer` or `nn.MultiheadAttention`. Her model is smaller: 4 layers, 4 heads, embedding size 128, and a context of 256 characters. The tokenizer is character-level, built only from her training text, with a vocab of 221. She drew her own 100,000 / 10,000 windows from the full TinyStories train file, seed 6638. The checkpoint is `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt`.
+I wrote the attention myself. I did not use `nn.Transformer` or `nn.MultiheadAttention`. My model is smaller: 4 layers, 4 heads, embedding size 128, and a context of 256 characters. The tokenizer is character-level, built only from my training text, with a vocab of 221. I drew my own 100,000 / 10,000 windows from the full TinyStories train file, seed 6638. The checkpoint is `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt`.
 
-She trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup and cosine decay. Weight decay was 0.01 and gradients were clipped at 1.0. The run was on a Colab GPU and took 1,727 seconds, peaking at 1,749 MB. There were no NaN losses.
+I trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup and cosine decay. Weight decay was 0.01 and gradients were clipped at 1.0. The run was on a Colab GPU and took 1,727 seconds, peaking at 1,749 MB. There were no NaN losses.
 
 | Metric | Train | Val |
 |---|---|---|
@@ -84,9 +84,9 @@ She trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup an
 | Generation tokens/sec | | 239 |
 | Peak memory / train time | | 1,749 MB / 1,727 s |
 
-![Ritika Part 1 loss](../task1_llm/ritika_mukesh_neema/outputs/loss_curve.png)
+![Part 1 training and validation loss](../task1_llm/ritika_mukesh_neema/outputs/loss_curve.png)
 
-Her three failure cases are in `task1_llm/ritika_mukesh_neema/failure_analysis.md`.
+My three failure cases are in `task1_llm/ritika_mukesh_neema/failure_analysis.md`.
 
 Greedy decoding collapses. All 10 greedy samples are the same story, and it loops: “You are very happy. You are very happy.” Temperature sampling writes a word that is not English, “designt”, and the object drifts from a box to a red ball to a bird. A fourth issue is the script, not the model: generation does not stop at the story-boundary token, so a second story gets stuck on the end.
 
@@ -160,7 +160,7 @@ This is 100k reviews out of about 560k, not the whole Yelp train file. Cutting r
 
 ## 2.B Ritika Mukesh Neema — individual
 
-Ritika trained the same three families, with embeddings learned from scratch. Her baseline is a mean pool plus a linear layer. Her BiLSTM is there so negation can depend on word order. Her TextCNN uses filter widths 3, 4, and 5 with global max-pool. She lowercased, stripped punctuation and HTML, removed stopwords, and used Porter stemming instead of lemmatization. She trained on the full Yelp polarity set, about 560,000 reviews, on a Colab GPU. Checkpoints are `task2_sentiment/ritika_mukesh_neema/checkpoints/baseline.pt`, `bilstm.pt`, and `textcnn.pt`. She does not have confusion-matrix images in the repo. The numbers below are from her `metrics_report.csv`.
+I trained the same three families, with embeddings learned from scratch. My baseline is a mean pool plus a linear layer. My BiLSTM is there so negation can depend on word order. My TextCNN uses filter widths 3, 4, and 5 with global max-pool. I lowercased, stripped punctuation and HTML, removed stopwords, and used Porter stemming instead of lemmatization. I trained on the full Yelp polarity set, about 560,000 reviews, on a Colab GPU. Checkpoints are `task2_sentiment/ritika_mukesh_neema/checkpoints/baseline.pt`, `bilstm.pt`, and `textcnn.pt`. I do not have confusion-matrix images in the repo. The numbers below are from my `metrics_report.csv`.
 
 | Model | Acc | Macro-F1 | ROC-AUC | PR-AUC | MCC | Brier | ECE | Time | Peak MB |
 |---|---|---|---|---|---|---|---|---|---|
@@ -168,7 +168,7 @@ Ritika trained the same three families, with embeddings learned from scratch. He
 | BiLSTM | 0.934 | 0.934 | 0.982 | 0.982 | 0.868 | 0.051 | 0.025 | 798 s | 2,274 |
 | TextCNN | 0.926 | 0.926 | 0.979 | 0.979 | 0.852 | 0.055 | 0.021 | 267 s | 2,450 |
 
-Her BiLSTM is the best of her three. McNemar against her baseline is p < 0.001 for the BiLSTM and p = 0.00022 for the TextCNN, so on her test set both sequence models beat the mean pool. She reviewed 20 TextCNN mistakes in `task2_sentiment/ritika_mukesh_neema/failure_analysis.md`. The ones that show up are sarcasm (“Is there REALLY even a Leonard…”), a French review the English stemmer cannot handle, and a positive review that opens with “Cox sucks” before it turns around.
+My BiLSTM is the best of my three. McNemar against my baseline is p < 0.001 for the BiLSTM and p = 0.00022 for the TextCNN, so on my test set both sequence models beat the mean pool. I reviewed 20 TextCNN mistakes in `task2_sentiment/ritika_mukesh_neema/failure_analysis.md`. The ones that show up are sarcasm (“Is there REALLY even a Leonard…”), a French review the English stemmer cannot handle, and a positive review that opens with “Cox sucks” before it turns around.
 
 ## 2.C Team comparison
 
@@ -222,18 +222,18 @@ What I see in that grid, and in the 30 images I audited: the layout of the photo
 
 ## 3.B Ritika Mukesh Neema — individual
 
-Ritika trained her own CycleGAN: two ResNet generators with 9 blocks, instance norm, and reflection padding, plus two 70×70 PatchGAN discriminators. She used least-squares adversarial loss, cycle L1 with λ = 10, identity loss with λ = 5, and an image pool of 50. Batch size was 1. She trained 40 epochs at a constant learning rate and 40 with decay, on an NVIDIA RTX 5090. The run took 1,660 seconds and peaked at 1,645 MB. There were no NaN losses. Her photo-to-Monet direction is the one she labels B2A. Her photo-to-Monet FID is 123.70. Cycle L1, LPIPS, and content cosine are on 100 images, not the full photo set. `ckpt_final.pt` is 107.9 MB, so it is not in git: https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view
+I trained my own CycleGAN: two ResNet generators with 9 blocks, instance norm, and reflection padding, plus two 70×70 PatchGAN discriminators. I used least-squares adversarial loss, cycle L1 with λ = 10, identity loss with λ = 5, and an image pool of 50. Batch size was 1. I trained 40 epochs at a constant learning rate and 40 with decay, on an NVIDIA RTX 5090. The run took 1,660 seconds and peaked at 1,645 MB. There were no NaN losses. My photo-to-Monet direction is the one I label B2A. My photo-to-Monet FID is 123.70. Cycle L1, LPIPS, and content cosine are on 100 images, not the full photo set. `ckpt_final.pt` is 107.9 MB, so it is not in git: https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view
 
 | Direction | FID | KID | Precision | Recall | Cycle L1 | LPIPS | Content cosine |
 |---|---|---|---|---|---|---|---|
-| Photo → Monet (her B2A) | 123.70 | 0.027 | 0.327 | 0.570 | 0.126 | 0.337 | 0.775 |
-| Monet → photo (her A2B) | 120.72 | 0.040 | 0.613 | 0.207 | 0.109 | 0.405 | 0.873 |
+| Photo → Monet (my B2A) | 123.70 | 0.027 | 0.327 | 0.570 | 0.126 | 0.337 | 0.775 |
+| Monet → photo (my A2B) | 120.72 | 0.040 | 0.613 | 0.207 | 0.109 | 0.405 | 0.873 |
 
 Final generator loss was 4.84, discriminator loss 0.23, cycle loss 2.41, identity loss 1.24. Mean gradient norm was 57, max 315, NaN count 0. About 28.3 million parameters, 14.5 images/sec.
 
-![Ritika CycleGAN losses](../task3_gan/ritika_mukesh_neema/outputs/loss_curves.png)
+![CycleGAN losses](../task3_gan/ritika_mukesh_neema/outputs/loss_curves.png)
 
-Her `submission.csv` records photo-to-Monet FID 123.70. Her human-audit folder is empty, so she has not scored the shared 30 images and there is no kappa yet.
+My `submission.csv` records photo-to-Monet FID 123.70. My human-audit folder is empty, so I have not scored the shared 30 images and there is no kappa yet.
 
 ## 3.C Team comparison
 
