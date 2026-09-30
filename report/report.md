@@ -21,7 +21,7 @@ Each part below has two individual write-ups and then one team comparison. Secti
 |---|---|---|
 | 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab Tesla T4 |
 | 2 — Yelp polarity | BiLSTM best, macro-F1 0.942, full train set, Colab Tesla T4 | BiLSTM best, macro-F1 0.934, full 560k set, Colab Tesla T4 |
-| 3 — CycleGAN | Batch 4, nearest upsample, Colab Tesla T4, FID 89.99, MiFID 0.403 | Batch 1, RTX 5090, FID 123.70 |
+| 3 — CycleGAN | Batch 4, Colab Tesla T4, about 4.3 h, FID 89.99 | Batch 1, RTX 5090, about 28 min, FID 123.70 |
 
 We share the raw data. The rows above are two separate runs of the same part, not a split of who had to do which part.
 
@@ -212,7 +212,7 @@ Full 20-case write-up: [task2_sentiment/ritika_mukesh_neema/failure_analysis.md]
 
 ## 2.C Team comparison
 
-Same three model families. The tables use the same columns. Both of us trained on the full Yelp train file. Sneha’s test set is the official 38,000 reviews. Ritika carved her own test split.
+Same three model families. The tables use the same columns. Both of us trained on the full Yelp train file. Sneha tested on the official 38,000 reviews. Ritika tested on her own split of that file.
 
 **Sneha Singh.** 549,953 / 10,000 / 38,000, lemmatize, max length 128, Colab Tesla T4. Checkpoints: `baseline_full.pt`, `experimental_a_full.pt`, `experimental_b_full.pt`.
 
@@ -297,7 +297,7 @@ What I see in that grid, and in the 30 images I audited:
 - **Soft reverse.** A few Monet-to-photo frames go soft or pick up a dark blob.
 - **Content.** The layout of the photo usually survives. I did not mark any of my 30 as a copied training Monet.
 
-My averages on the 0–2 sheet, where higher means worse, were style 1.4, content 1.7, artifacts 1.4.
+On the 0–2 sheet my averages were style 1.4 and content 1.7, where higher is better, and artifacts 1.4, where higher is worse.
 
 Full notes: [task3_gan/sneha_singh/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task3_gan/sneha_singh/failure_analysis.md)
 
@@ -347,7 +347,14 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | Cycle loss | 2.174 | same run | 2.412 | same run |
 | Identity loss | 1.097 | same run | 1.244 | same run |
 | Gradient norm | 112.82 | same run | 57.00 mean, 315 max | same run |
-| Human audit, 30 images (style / content / artifacts, 0–2, higher is worse) | 1.4 / 1.7 / 1.4 | | | |
+
+Human audit score on the 30 photo → Monet images. Style and content are 0–2, higher is better. Artifacts are 0–2, higher is worse. Cohen’s kappa is the inter-rater agreement for both of us on the same 30 images. That column stays empty until Ritika scores them.
+
+| | Sneha | Ritika | Cohen's kappa |
+|---|---|---|---|
+| Style | 1.4 | | |
+| Content | 1.7 | | |
+| Artifacts | 1.4 | | |
 
 <div class="joint">
 
@@ -370,6 +377,7 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | 1 — validation loss | 4 layers, emb 256, context 128. 0.857 | 4 layers, emb 128, context 256. 0.778 |
 | 1 — distinct-1 | 4 layers, emb 256, context 128. 0.225 | 4 layers, emb 128, context 256. 0.008 |
 | 2 — best model | BiLSTM, 550k train, 38k test. Macro-F1 0.942 | BiLSTM, full set. Macro-F1 0.934 |
+| 3 — photo → Monet FID | Batch 4, Colab Tesla T4, about 4.3 h. 89.99 | Batch 1, RTX 5090, about 28 min. 123.70 |
 
 ---
 
