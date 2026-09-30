@@ -302,9 +302,9 @@ Sneha’s photo-to-Monet FID is 89.99. Ritika’s is 123.70. Ritika’s run is t
 
 | Part | Sneha Singh | Ritika Mukesh Neema |
 |---|---|---|
-| 1 — validation loss | 0.857 | 0.778 |
-| 1 — distinct-1 (sample variety) | 0.225 | 0.008 |
-| 2 — best model | Mean-pool baseline, macro-F1 0.923, on 100k reviews | BiLSTM, accuracy 0.934, on the full 560k set |
+| 1 — validation loss | 4 layers, emb 256, context 128. 0.857 | 4 layers, emb 128, context 256. 0.778 |
+| 1 — distinct-1 | 4 layers, emb 256, context 128. 0.225 | 4 layers, emb 128, context 256. 0.008 |
+| 2 — best model | Mean-pool, 100k reviews. Macro-F1 0.923 | BiLSTM, 560k reviews. Accuracy 0.934 |
 
 ---
 
