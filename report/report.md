@@ -5,18 +5,16 @@
 **Members:** Sneha Singh · Ritika Mukesh Neema  
 **Repo:** https://github.com/snehas-SJSU/Data_266-Lab1  
 
-This file is not the finished team report yet. Only Sneha Singh’s results are filled in. Ritika Mukesh Neema’s sections are blank. Once she adds her models, metrics, plots, and failure notes, we will merge both into one combined report and export the PDF again. Until then, every number and every image below is from one person.
-
-Who built what: I trained my own model on every part and wrote only under `sneha_singh/`. Ritika trains her own models under `ritika_mukesh_neema/`. We do not share architecture or hyperparameters. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
+This is the combined team report. Sneha Singh and Ritika Mukesh Neema each trained their own models for all three parts, under `sneha_singh/` and `ritika_mukesh_neema/`. The architectures and hyperparameters are different on purpose. Shared raw data stays off git: TinyStories and the Monet/photo folders are linked below, and Yelp is downloaded by the notebook from Hugging Face. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
 
 ## How we split the work
 
 | Part | Sneha Singh | Ritika Mukesh Neema |
 |---|---|---|
-| 1 — GPT (TinyStories) | My model, full GPU run | Her model |
-| 2 — Yelp polarity | My three models, 100k run | Her three models |
-| 3 — CycleGAN | My train, local FID, my audit column | Her train and her audit column |
-| Report / Drive / Kaggle | My half | Her half |
+| 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab GPU |
+| 2 — Yelp polarity | Mean-pool, BiLSTM, TextCNN on a 100k sample, Mac MPS | Same three families on the full 560k set, Colab GPU |
+| 3 — CycleGAN | Batch 4, nearest upsample, local FID 89.99 | Batch 1, local FID 123.70, MiFID not computed |
+| Report / Drive / Kaggle | This write-up, Drive links, `submission.csv` ready | Her write-ups and her Drive checkpoint. Kaggle scores still empty for both |
 
 We share the raw data. I only write under `sneha_singh/`. She only writes under `ritika_mukesh_neema/`.
 
@@ -62,23 +60,47 @@ Greedy decoding writes a readable start, then gets stuck: “You are very happy.
 
 ## 1.B Ritika Mukesh Neema
 
-_Ritika: architecture, hardware, metrics, a loss plot, a sample, and three failure cases from `task1_llm/ritika_mukesh_neema/`._
+Ritika also wrote the attention herself. She did not use `nn.Transformer` or `nn.MultiheadAttention`. Her model is smaller: 4 layers, 4 heads, embedding size 128, and a context of 256 characters. The tokenizer is character-level, built only from her training text, with a vocab of 221. She drew her own 100,000 / 10,000 windows from the full TinyStories train file, seed 6638. The checkpoint is `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt`.
+
+She trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup and cosine decay. Weight decay was 0.01 and gradients were clipped at 1.0. The run was on a Colab GPU and took 1,727 seconds, peaking at 1,749 MB. There were no NaN losses.
+
+| Metric | Train | Val |
+|---|---|---|
+| Cross-entropy | 0.860 | 0.778 |
+| Perplexity | 2.36 | 2.18 |
+| Bits per character | 1.240 | 1.122 |
+| Generalization gap | | −0.082 |
+| Top-1 next-character accuracy | | 0.755 |
+| Distinct-1 / 2 / 3 | | 0.008 / 0.054 / 0.137 |
+| Repeated 4-gram rate | | 0.206 |
+| Max gradient norm / NaN count | | 4.99 / 0 |
+| Parameters | | 0.88M |
+| Train tokens/sec | | 177,917 |
+| Generation tokens/sec | | 239 |
+| Peak memory / train time | | 1,749 MB / 1,727 s |
+
+![Ritika Part 1 loss](../task1_llm/ritika_mukesh_neema/outputs/loss_curve.png)
+
+Her three failure cases are in `task1_llm/ritika_mukesh_neema/failure_analysis.md`.
+
+Greedy decoding collapses. All 10 greedy samples are the same story, and it loops: “You are very happy. You are very happy.” Temperature sampling writes a word that is not English, “designt”, and the object drifts from a box to a red ball to a bird. A fourth issue is the script, not the model: generation does not stop at the story-boundary token, so a second story gets stuck on the end.
 
 ## 1.C Comparison
 
-_Fill this after Ritika’s Part 1 is in. Do not compare until both numbers are real._
-
 | | Sneha | Ritika |
 |---|---|---|
-| Architecture | 4 layers, 4 heads, emb 256, context 128, char tokenizer, causal mask | |
-| Hyperparameters | 10 epochs, batch 32, lr 0.001, warmup 100, seed 670, AdamW | |
-| Train / val CE | 0.912 / 0.857 | |
-| Perplexity / bits per char | 2.36 / 1.236 | |
-| Gen. gap / top-1 acc | −0.055 / 0.729 | |
-| Distinct-1/2/3 | 0.225 / 0.655 / 0.856 | |
-| Repeated 4-gram / NaNs | 0.120 / 0 | |
-| Params / time / peak MB | 3.25M / 457 s / 349 | |
-| Joint note | _Write this with Ritika: strengths, weaknesses, and what we would try next._ | |
+| Architecture | 4 layers, 4 heads, emb 256, context 128, char tokenizer, causal mask | 4 layers, 4 heads, emb 128, context 256, char tokenizer, causal mask |
+| Hyperparameters | 10 epochs, batch 32, lr 0.001, warmup 100, seed 670, AdamW | 12 epochs, batch 64, lr 0.0003, warmup + cosine, seed 6638, clip 1.0 |
+| Train / val CE | 0.912 / 0.857 | 0.860 / 0.778 |
+| Perplexity / bits per char | 2.36 / 1.236 | 2.18 / 1.122 |
+| Gen. gap / top-1 acc | −0.055 / 0.729 | −0.082 / 0.755 |
+| Distinct-1/2/3 | 0.225 / 0.655 / 0.856 | 0.008 / 0.054 / 0.137 |
+| Repeated 4-gram / NaNs | 0.120 / 0 | 0.206 / 0 |
+| Params / time / peak MB | 3.25M / 457 s / 349 | 0.88M / 1,727 s / 1,749 |
+| Checkpoint | `task1_llm/sneha_singh/checkpoints/best.pt` | `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt` |
+| Log | `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log` | her raw log under `reproducibility/raw_logs/ritika_mukesh_neema/` |
+
+Ritika’s validation loss is lower, and her next-character accuracy is a bit higher, on a smaller model with a longer context. Sneha’s temperature samples are more varied: distinct-1 is 0.225 against Ritika’s 0.008, and Ritika’s greedy output is the same paragraph every time. Both models repeat “You are very happy”, which is the greedy loop we both saw. A next step is a repetition penalty at decode time, and stopping generation when the story-boundary token appears. The two runs used different widths and different machines, so the loss gap is not a pure architecture contest.
 
 ---
 
@@ -131,26 +153,32 @@ This is 100k reviews out of about 560k, not the whole Yelp train file. Cutting r
 
 ## 2.B Ritika Mukesh Neema
 
-_Ritika: her three models, metrics, plots, and error notes from `task2_sentiment/ritika_mukesh_neema/`._
+Ritika trained the same three families, with embeddings learned from scratch. Her baseline is a mean pool plus a linear layer. Her BiLSTM is there so negation can depend on word order. Her TextCNN uses filter widths 3, 4, and 5 with global max-pool. She lowercased, stripped punctuation and HTML, removed stopwords, and used Porter stemming instead of lemmatization. She trained on the full Yelp polarity set, about 560,000 reviews, on a Colab GPU. Checkpoints are `task2_sentiment/ritika_mukesh_neema/checkpoints/baseline.pt`, `bilstm.pt`, and `textcnn.pt`. She does not have confusion-matrix images in the repo. The numbers below are from her `metrics_report.csv`.
+
+| Model | Acc | Macro-F1 | ROC-AUC | PR-AUC | MCC | Brier | ECE | Time | Peak MB |
+|---|---|---|---|---|---|---|---|---|---|
+| Baseline | 0.922 | 0.922 | 0.974 | 0.973 | 0.843 | 0.059 | 0.007 | 125 s | 2,123 |
+| BiLSTM | 0.934 | 0.934 | 0.982 | 0.982 | 0.868 | 0.051 | 0.025 | 798 s | 2,274 |
+| TextCNN | 0.926 | 0.926 | 0.979 | 0.979 | 0.852 | 0.055 | 0.021 | 267 s | 2,450 |
+
+Her BiLSTM is the best of her three. McNemar against her baseline is p < 0.001 for the BiLSTM and p = 0.00022 for the TextCNN, so on her test set both sequence models beat the mean pool. She reviewed 20 TextCNN mistakes in `task2_sentiment/ritika_mukesh_neema/failure_analysis.md`. The ones that show up are sarcasm (“Is there REALLY even a Leonard…”), a French review the English stemmer cannot handle, and a positive review that opens with “Cox sucks” before it turns around.
 
 ## 2.C Comparison
 
-_Fill this after Ritika’s Part 2 is in._
+| | Sneha baseline | Sneha BiLSTM | Sneha TextCNN | Ritika baseline | Ritika BiLSTM | Ritika TextCNN |
+|---|---|---|---|---|---|---|
+| Architecture | Mean-pool + linear | BiLSTM | CNN widths 3, 4, 5 | Mean-pool + linear | BiLSTM | CNN widths 3, 4, 5 |
+| Data / prep | 100k sample, lemmatize, max len 128 | same | same | full 560k, Porter stem, max len 200 | same | same |
+| Hardware | Apple M4 MPS | same | same | Colab GPU | same | same |
+| Accuracy | 0.923 | 0.918 | 0.921 | 0.922 | 0.934 | 0.926 |
+| Macro-F1 | 0.923 | 0.918 | 0.921 | 0.922 | 0.934 | 0.926 |
+| ROC-AUC / PR-AUC | 0.973 / 0.973 | 0.975 / 0.975 | 0.975 / 0.975 | 0.974 / 0.973 | 0.982 / 0.982 | 0.979 / 0.979 |
+| MCC / Brier / ECE | 0.845 / 0.059 / 0.011 | 0.837 / 0.060 / 0.017 | 0.841 / 0.061 / 0.024 | 0.843 / 0.059 / 0.007 | 0.868 / 0.051 / 0.025 | 0.852 / 0.055 / 0.021 |
+| McNemar p vs own baseline | — | 0.091 | 0.424 | — | < 0.001 | 0.00022 |
+| Params / time / peak MB | 4.76M / 114 s / 0.0 | 4.85M / 1706 s / 0.0 | 4.84M / 108 s / 0.0 | 3.00M / 125 s / 2,123 | 3.24M / 798 s / 2,274 | 3.12M / 267 s / 2,450 |
+| Checkpoint | `baseline_full.pt` | `experimental_a_full.pt` | `experimental_b_full.pt` | `baseline.pt` | `bilstm.pt` | `textcnn.pt` |
 
-| | Sneha baseline | Sneha BiLSTM | Sneha TextCNN | Ritika |
-|---|---|---|---|---|
-| Architecture | Mean-pool + linear | Bidirectional LSTM | CNN widths 3, 4, 5 | |
-| Hyperparameters | emb 100, max len 128, batch 64, 5 epochs, lr from config, Apple M4 MPS | same training setup | same training setup | |
-| Accuracy | 0.923 | 0.918 | 0.921 | |
-| F1 macro / micro / weighted | 0.923 / 0.923 / 0.923 | 0.918 / 0.918 / 0.918 | 0.921 / 0.921 / 0.921 | |
-| ROC-AUC / PR-AUC | 0.973 / 0.973 | 0.975 / 0.975 | 0.975 / 0.975 | |
-| MCC / Brier / ECE | 0.845 / 0.059 / 0.011 | 0.837 / 0.060 / 0.017 | 0.841 / 0.061 / 0.024 | |
-| Acc 95% CI | 0.917–0.928 | 0.912–0.923 | 0.915–0.926 | |
-| McNemar p vs baseline | — | 0.091 | 0.424 | |
-| Macro-F1 short / long | 0.925 / 0.917 | 0.922 / 0.912 | 0.924 / 0.915 | |
-| Params / time / peak MB | 4.76M / 114 s / 0.0 (MPS) | 4.85M / 1706 s / 0.0 | 4.84M / 108 s / 0.0 | |
-| Checkpoint | `checkpoints/baseline_full.pt` | `checkpoints/experimental_a_full.pt` | `checkpoints/experimental_b_full.pt` | |
-| Joint note | _Write this with Ritika._ My mean-pool baseline still leads. McNemar does not separate the other two on this test set. | | | |
+The two lineups are the same idea and not the same experiment. Sneha trained on 100k reviews and her mean-pool baseline still leads; McNemar does not separate her BiLSTM or TextCNN from that baseline. Ritika trained on the full 560k set and her BiLSTM does pull ahead, by about 1.2 points of accuracy, at roughly six times the baseline’s training time. Both of us miss sarcasm, mixed reviews, and negation. A fair next step is to rerun Sneha’s three models on the full training file before treating Ritika’s BiLSTM win as an architecture result. Sneha’s peak-memory field stays 0.0 because MPS does not fill the CUDA counter.
 
 ---
 
@@ -185,35 +213,44 @@ What I see in that grid, and in the 30 images I audited: the layout of the photo
 
 ## 3.B Ritika Mukesh Neema
 
-_Ritika: her CycleGAN, hardware, FID and MiFID, a grid, and her column on the same 30 images. Folder: `task3_gan/ritika_mukesh_neema/`._
+Ritika trained her own CycleGAN: two ResNet generators with 9 blocks, instance norm, and reflection padding, plus two 70×70 PatchGAN discriminators. She used least-squares adversarial loss, cycle L1 with λ = 10, identity loss with λ = 5, and an image pool of 50. Batch size was 1. She trained 40 epochs at a constant learning rate and 40 with decay, on an NVIDIA RTX 5090. The run took 1,660 seconds and peaked at 1,645 MB. There were no NaN losses. Her photo-to-Monet direction is the one she labels B2A. She did not compute MiFID. Cycle L1, LPIPS, and content cosine are on 100 images, not the full photo set. `ckpt_final.pt` is 107.9 MB, so it is not in git: https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view
+
+| Direction | FID | KID | Precision | Recall | Cycle L1 | LPIPS | Content cosine |
+|---|---|---|---|---|---|---|---|
+| Photo → Monet (her B2A) | 123.70 | 0.027 | 0.327 | 0.570 | 0.126 | 0.337 | 0.775 |
+| Monet → photo (her A2B) | 120.72 | 0.040 | 0.613 | 0.207 | 0.109 | 0.405 | 0.873 |
+
+Final generator loss was 4.84, discriminator loss 0.23, cycle loss 2.41, identity loss 1.24. Mean gradient norm was 57, max 315, NaN count 0. About 28.3 million parameters, 14.5 images/sec.
+
+![Ritika CycleGAN losses](../task3_gan/ritika_mukesh_neema/outputs/loss_curves.png)
+
+Her `submission.csv` is still only the header. Her human-audit folder is empty, so she has not scored the shared 30 images and there is no kappa yet.
 
 ## 3.C Comparison
 
-_Fill this after Ritika’s Part 3 is in. Kappa needs both of us on the same 30 files._
+| | Sneha photo → Monet | Sneha Monet → photo | Ritika photo → Monet | Ritika Monet → photo |
+|---|---|---|---|---|
+| Architecture | ResNet-9, nearest upsample, PatchGAN, LSGAN, λ_cycle 10, identity 5, labels 0.9 | same model | ResNet-9, PatchGAN, LSGAN, λ_cycle 10, identity 5, batch 1 | same model |
+| Hyperparameters | 40 + 40 epochs, batch 4, ~800 photos/epoch, pool 50 | same run | 40 + 40 epochs, batch 1, pool 50, lr 0.0002 | same run |
+| FID / KID / MiFID | 89.99 / 0.018 / 0.403 | 92.23 / 0.030 / 0.423 | 123.70 / 0.027 / not computed | 120.72 / 0.040 / not computed |
+| Precision / recall | 0.540 / 0.293 | 0.660 / 0.089 | 0.327 / 0.570 | 0.613 / 0.207 |
+| Cycle L1 / LPIPS / content cos | 0.112 / 0.452 / 0.532 (full set) | 0.103 / 0.365 / 0.586 | 0.126 / 0.337 / 0.775 (100 images) | 0.109 / 0.405 / 0.873 |
+| G / D / cycle / identity | 4.574 / 0.168 / 2.174 / 1.097 | same training run | 4.835 / 0.227 / 2.412 / 1.244 | same training run |
+| Grad norm / NaNs | 112.8 / 0 | same | mean 57, max 315 / 0 | same |
+| Params / time / images/sec / peak MB | 28.3M / 15,342 s / 8.34 / 6,568 | same | 28.3M / 1,660 s / 14.5 / 1,645 | same |
+| Local (FID + MiFID) / 2 | 45.20 | 46.33 | MiFID missing | MiFID missing |
+| Kaggle public / private / rank | not uploaded yet | | not uploaded yet | |
+| Human audit / κ | style 1.4, content 1.7, artifacts 1.4. κ not computed | | audit folder empty | |
+| Checkpoint | https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link | | https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view | |
 
-| | Sneha A2B (photo → Monet) | Sneha B2A | Ritika |
-|---|---|---|---|
-| Architecture | ResNet-9, nearest upsample, PatchGAN, LSGAN, λ_cycle 10, identity 5, label smooth 0.9 | same model | |
-| Hyperparameters | 40 + 40 epochs, batch 4, ~800 photos/epoch, pool 50, CUDA AMP | same run | |
-| FID / KID / MiFID | 89.99 / 0.018 / 0.403 | 92.23 / 0.030 / 0.423 | |
-| Precision / recall | 0.540 / 0.293 | 0.660 / 0.089 | |
-| Cycle L1 / LPIPS / content cos | 0.112 / 0.452 / 0.532 | 0.103 / 0.365 / 0.586 | |
-| G / D / cycle / identity loss | 4.574 / 0.168 / 2.174 / 1.097 | same training losses | |
-| Grad norm / NaNs | 112.8 / 0 | same | |
-| Params / time / images/sec / peak MB | 28.3M / 15342 s / 8.34 / 6568 | same | |
-| Local (FID + MiFID) / 2 | 45.20 | 46.33 | |
-| Kaggle public / private / rank | not uploaded yet | | |
-| Human audit / κ | style 1.4, content 1.7, artifacts 1.4 (0–2, higher worse). κ pending | | |
-| Checkpoint | `best.pt` is 107.9 MB, over the 100 MB git limit: https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link | | |
-| Joint note | _Write this with Ritika after she scores the same 30 images._ | | |
+On the Kaggle direction, Sneha’s FID is 89.99 and Ritika’s is 123.70. Lower is better, so Sneha’s photo-to-Monet set is the stronger local score. The runs are not copies of each other: batch 4 with nearest upsampling versus batch 1, and Ritika’s cycle scores are on 100 images while Sneha’s are on the full sets. Neither of us has a Kaggle public score yet. Kappa is still open, because the audit needs both of us on the same 30 files and Ritika’s sheet is empty. The team upload should be Sneha’s `submission.csv` unless a later rescore beats 89.99.
 
 ---
 
 # What is still open
 
-1. Upload my `submission.csv` to Kaggle for `PairProgramming_Team_5`, then paste the public score, private score, and rank into this file.
-2. Ritika’s three sections, and the three comparison tables above.
-3. This PDF is the current export. Regenerate it after Ritika’s sections and the Kaggle score are filled in.
+1. Upload Sneha’s `task3_gan/sneha_singh/submission.csv` to Kaggle for `PairProgramming_Team_5`, then paste the public score, private score, and rank here.
+2. Both of us score the same 30 images and add Cohen’s kappa. Ritika’s audit folder is still empty.
 
 The plots in this file are the png files already stored under each task folder. They are not copied again into `report/`.
 
