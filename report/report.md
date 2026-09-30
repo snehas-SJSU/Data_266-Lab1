@@ -389,7 +389,7 @@ Kaggle team `PairProgramming_Team_5`. One submission, from Sneha’s `task3_gan/
 
 The plots in this file are the png files already stored under each task folder. They are not copied again into `report/`.
 
-## Papers
+## Citation
 
 1. Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention Is All You Need. 2017. [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762). The causal multi-head attention in Part 1 follows that design, written by hand.
 
