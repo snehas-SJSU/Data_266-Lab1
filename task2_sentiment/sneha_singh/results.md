@@ -46,7 +46,7 @@ The rest of the required metrics (precision/recall/F1 macro, micro, and weighted
 - Calibration metrics (Brier, ECE) and McNemar are reported, not only accuracy.
 
 ## Weaknesses / limitations
-- This uses the full Yelp train file (549,953 / 10,000 / 38,000), not the earlier 100k sample.
+- Train/val/test after cleaning is 549,953 / 10,000 / 38,000.
 - max_len=128 truncates long reviews.
 - Stopword removal can drop useful words like "not" if cleaning is too aggressive (I already keep short tokens carefully, but negation is still hard).
 - The error review is 20 BiLSTM mistakes. Mixed reviews and negation are still the cases it misses.
