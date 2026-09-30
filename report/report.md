@@ -7,7 +7,7 @@
 
 ## Abstract
 
-This report is Team 5’s write-up for DATA266 Lab 1. Sneha Singh and Ritika Mukesh Neema each trained a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. Each person used their own architecture and their own hyperparameters. Each part below gives one person’s run, then the other person’s run, then a comparison of the two. Kaggle scores are still open.
+This report is Team 5’s write-up for DATA266 Lab 1. Sneha Singh and Ritika Mukesh Neema each trained a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. Each person used their own architecture and their own hyperparameters. Each part below gives one person’s run, then the other person’s run, then a comparison of the two. Kaggle FID scores are reported per member in Part 3.
 
 The repository is [https://github.com/snehas-SJSU/Data_266-Lab1](https://github.com/snehas-SJSU/Data_266-Lab1).
 
