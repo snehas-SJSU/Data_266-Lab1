@@ -1,11 +1,18 @@
-# DATA266 Lab 1 — Team 5
+<div class="cover">
+<h1>DATA266 Lab 1</h1>
+<p class="team">Team 5</p>
+<p class="names">Sneha Singh</p>
+<p class="names">Ritika Mukesh Neema</p>
+</div>
 
-**Course:** DATA266  
-**Team:** 5  
-**Members:** Sneha Singh · Ritika Mukesh Neema  
-**Repo:** https://github.com/snehas-SJSU/Data_266-Lab1  
+## Contents
 
-This is the combined team report. Sneha Singh and Ritika Mukesh Neema each trained their own models for all three parts, under `sneha_singh/` and `ritika_mukesh_neema/`. The architectures and hyperparameters are different on purpose. Shared raw data stays off git: TinyStories and the Monet/photo folders are linked below, and Yelp is downloaded by the notebook from Hugging Face. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
+1. Part 1 — GPT from scratch
+2. Part 2 — Yelp polarity
+3. Part 3 — CycleGAN, photo to Monet
+4. Papers
+
+Sneha Singh and Ritika Mukesh Neema each trained their own models for all three parts, under `sneha_singh/` and `ritika_mukesh_neema/`. The architectures and hyperparameters are different on purpose. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
 
 ## How we split the work
 
@@ -87,6 +94,8 @@ Greedy decoding collapses. All 10 greedy samples are the same story, and it loop
 
 ## 1.C Comparison
 
+Ritika’s validation loss is lower. Sneha’s samples are more varied. Both greedy decoders fall into the same “You are very happy” loop.
+
 | | Sneha | Ritika |
 |---|---|---|
 | Architecture | 4 layers, 4 heads, emb 256, context 128, char tokenizer, causal mask | 4 layers, 4 heads, emb 128, context 256, char tokenizer, causal mask |
@@ -165,6 +174,8 @@ Her BiLSTM is the best of her three. McNemar against her baseline is p < 0.001 f
 
 ## 2.C Comparison
 
+Same three model families, not the same experiment. Ritika’s BiLSTM leads on the full 560k set. Sneha’s mean-pool baseline still leads on the 100k sample.
+
 | | Sneha baseline | Sneha BiLSTM | Sneha TextCNN | Ritika baseline | Ritika BiLSTM | Ritika TextCNN |
 |---|---|---|---|---|---|---|
 | Architecture | Mean-pool + linear | BiLSTM | CNN widths 3, 4, 5 | Mean-pool + linear | BiLSTM | CNN widths 3, 4, 5 |
@@ -227,6 +238,8 @@ Final generator loss was 4.84, discriminator loss 0.23, cycle loss 2.41, identit
 Her `submission.csv` is still only the header. Her human-audit folder is empty, so she has not scored the shared 30 images and there is no kappa yet.
 
 ## 3.C Comparison
+
+On photo to Monet, Sneha’s FID is 89.99 and Ritika’s is 123.70. Lower is better, so Sneha’s set is the stronger local score. Ritika did not compute MiFID.
 
 | | Sneha photo → Monet | Sneha Monet → photo | Ritika photo → Monet | Ritika Monet → photo |
 |---|---|---|---|---|
