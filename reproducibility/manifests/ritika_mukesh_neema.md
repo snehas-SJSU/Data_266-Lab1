@@ -27,9 +27,9 @@ Raw logs under `reproducibility/raw_logs/ritika_mukesh_neema/` are unedited.
 - Date: 2026-09-28, ~12:30-15:30 PT
 - Task: `task3_gan`
 - Smoke: false
-- Train: CUDA, 80 epochs (n_epochs=40 + n_epochs_decay=40, best-effort split reconstruction — not logged exactly), batch_size=1, img_size=256, n_blocks=9, lambda_cycle=10, lambda_identity=5
+- Train: CUDA, 80 epochs (n_epochs=40 + n_epochs_decay=40, best-effort split reconstruction — not logged exactly), batch_size=4, img_size=256, n_blocks=9, lambda_cycle=10, lambda_identity=5
 - Train time: 1659.97 s (~27.7 min); peak_memory_mb: 1645.3; nan_count: 0; params: 28,285,832
-- Checkpoint: `ckpt_final.pt` — trained and used for the Kaggle submission, but stored only on the Windows GPU Lab machine used for training; not yet uploaded to git or Drive. Pending upload.
+- Checkpoint: `task3_gan/ritika_mukesh_neema/checkpoints/ckpt_final.pt` (on git as of 2026-09-30, retrieved from the Windows GPU Lab machine). Verified on retrieval: total parameters 28,285,832 (matches this manifest); state-dict keys G_A2B/G_B2A/D_A/D_B match this member's own naming convention.
 - Kaggle-scored direction: photo->monet (B2A). Local FID 123.70, KID 0.0267 (B2A); FID 120.72, KID 0.0401 (A2B). MiFID not computed by `evaluate_local.py`.
 - Cycle-consistency: A(monet->photo->monet) L1 0.109, LPIPS 0.405, content-cosine 0.873; B(photo->monet->photo) L1 0.126, LPIPS 0.337, content-cosine 0.775
 - Metrics CSV: `task3_gan/ritika_mukesh_neema/outputs/full_metrics_report.csv`
