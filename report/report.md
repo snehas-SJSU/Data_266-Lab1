@@ -258,6 +258,21 @@ Sneha’s strength on the Kaggle direction is the lower FID, 89.99 against Ritik
 
 ---
 
+# Final comparison
+
+| Part | Sneha Singh | Ritika Mukesh Neema |
+|---|---|---|
+| 1 — validation loss | 0.857 | 0.778 |
+| 1 — distinct-1 (sample variety) | 0.225 | 0.008 |
+| 2 — best model | Mean-pool baseline, macro-F1 0.923, on 100k reviews | BiLSTM, accuracy 0.934, on the full 560k set |
+| 3 — photo to Monet FID | 89.99 | 123.70 |
+| 3 — photo to Monet MiFID | 0.403 | Not computed in her eval |
+| 3 — local score (FID + MiFID) / 2 | 45.20 | Cannot be computed without her MiFID |
+
+Lower FID and lower validation loss are better. Sneha’s MiFID is 0.403. The blank MiFID is Ritika’s only.
+
+---
+
 # What is still open
 
 1. Upload Sneha’s `task3_gan/sneha_singh/submission.csv` to Kaggle for `PairProgramming_Team_5`, then paste the public score, private score, and rank here.
