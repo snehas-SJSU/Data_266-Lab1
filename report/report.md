@@ -146,7 +146,9 @@ I wanted one simple model and two that can use word order, so a strong baseline 
 2. **BiLSTM.** Reads the review in both directions, so negation and longer sentences have a chance.
 3. **TextCNN.** Filters of width 3, 4, and 5, meant to catch short phrases like “not good”.
 
-I lowercased, stripped punctuation, removed stopwords, and lemmatized. The vocabulary comes from the training text only. I held out 10,000 validation reviews from the 560,000-row train file, trained on 549,953 reviews, and tested on all 38,000 official test reviews. Five epochs, batch 64, embedding size 100, maximum length 128. All three models ran on a Colab Tesla T4.
+I lowercased, stripped punctuation, removed stopwords, and lemmatized. The vocabulary comes from the training text only. I held out 10,000 validation reviews from the 560,000-row train file, trained on 549,953 reviews, and tested on all 38,000 official test reviews. Five epochs, batch 64, embedding size 100, maximum length 128. All three models ran on a Colab Tesla T4. Peak memory was 228 MB, 344 MB, and 1,656 MB.
+
+Checkpoints: `task2_sentiment/sneha_singh/checkpoints/baseline_full.pt`, `experimental_a_full.pt`, and `experimental_b_full.pt`. Logs: `reproducibility/raw_logs/sneha_singh/task2_sentiment/baseline_full.log`, `experimental_a_full.log`, and `experimental_b_full.log`.
 
 | Model | Acc | Macro-F1 | ROC-AUC | MCC | Brier | ECE | Time |
 |---|---|---|---|---|---|---|---|
@@ -156,7 +158,7 @@ I lowercased, stripped punctuation, removed stopwords, and lemmatized. The vocab
 
 The BiLSTM has the best macro-F1. McNemar against the baseline is p < 0.001 for both the BiLSTM and the TextCNN, so on this 38k test set both beat the mean pool. Short reviews are a bit easier than long ones. Long-review macro-F1 is 0.927, 0.934, and 0.933 for baseline, BiLSTM, and TextCNN.
 
-The length and class balance of the sample:
+The length and class balance of this run:
 
 ![Yelp length and class balance](../task2_sentiment/sneha_singh/outputs/eda.png)
 
