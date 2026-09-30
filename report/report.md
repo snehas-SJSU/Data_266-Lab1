@@ -5,18 +5,17 @@
 <p class="names">Ritika Mukesh Neema</p>
 </div>
 
-Sneha Singh and Ritika Mukesh Neema each trained their own models for all three parts, under `sneha_singh/` and `ritika_mukesh_neema/`. The architectures and hyperparameters are different on purpose. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
+Both of us did all three parts. Sneha Singh trained her own Part 1, Part 2, and Part 3. Ritika Mukesh Neema trained her own Part 1, Part 2, and Part 3. Nobody covered a part for the other person. The models are different on purpose: different architecture choices and different hyperparameters. Each of us commits only inside her own folder, `sneha_singh/` or `ritika_mukesh_neema/`. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
 
-## How we split the work
+## What each of us built
 
-| Part | Sneha Singh | Ritika Mukesh Neema |
+| Part | Sneha Singh (her own model) | Ritika Mukesh Neema (her own model) |
 |---|---|---|
 | 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab GPU |
-| 2 — Yelp polarity | Mean-pool, BiLSTM, TextCNN on a 100k sample, Mac MPS | Same three families on the full 560k set, Colab GPU |
+| 2 — Yelp polarity | Mean-pool, BiLSTM, TextCNN on a 100k sample, Mac MPS | Mean-pool, BiLSTM, TextCNN on the full 560k set, Colab GPU |
 | 3 — CycleGAN | Batch 4, nearest upsample, local FID 89.99 | Batch 1, local FID 123.70, MiFID not computed |
-| Report / Drive / Kaggle | This write-up, Drive links, `submission.csv` ready | Her write-ups and her Drive checkpoint. Kaggle scores still empty for both |
 
-We share the raw data. I only write under `sneha_singh/`. She only writes under `ritika_mukesh_neema/`.
+We share the raw data. The rows above are two separate runs of the same part, not a split of who had to do which part.
 
 ---
 
