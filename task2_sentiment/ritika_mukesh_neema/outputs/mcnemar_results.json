@@ -1,0 +1,16 @@
+{
+  "baseline_vs_bilstm": {
+    "b": 817,
+    "c": 1275,
+    "statistic": 99.83221797323135,
+    "p_value": 0.0,
+    "method": "chi2_continuity_corrected"
+  },
+  "baseline_vs_textcnn": {
+    "b": 903,
+    "c": 1068,
+    "statistic": 13.645865043125317,
+    "p_value": 0.00022072687364604882,
+    "method": "chi2_continuity_corrected"
+  }
+}

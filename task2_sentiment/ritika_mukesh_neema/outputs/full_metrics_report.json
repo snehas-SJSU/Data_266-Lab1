@@ -1,0 +1,218 @@
+{
+  "per_model": {
+    "baseline": {
+      "accuracy": 0.9216780272126747,
+      "precision_macro": 0.9216835258976155,
+      "recall_macro": 0.9216778854278931,
+      "f1_macro": 0.9216777537467529,
+      "precision_micro": 0.9216780272126747,
+      "recall_micro": 0.9216780272126747,
+      "f1_micro": 0.9216780272126747,
+      "precision_weighted": 0.9216834072209621,
+      "recall_weighted": 0.9216780272126747,
+      "f1_weighted": 0.9216777653016509,
+      "confusion_matrix": [
+        [
+          17475,
+          1522
+        ],
+        [
+          1454,
+          17546
+        ]
+      ],
+      "roc_auc": 0.9741014827826,
+      "pr_auc": 0.9726264422484219,
+      "mcc": 0.8433614113066465,
+      "brier_score": 0.058648484565828315,
+      "ece": 0.006691655138654099,
+      "bootstrap_cis": {
+        "accuracy_95ci": {
+          "point": 0.9216780272126747,
+          "ci_lower": 0.9189396531305103,
+          "ci_upper": 0.9245466747374793
+        },
+        "macro_f1_95ci": {
+          "point": 0.9216777537467529,
+          "ci_lower": 0.9189387515381916,
+          "ci_upper": 0.9245465556443613
+        },
+        "mcc_95ci": {
+          "point": 0.8433614113066465,
+          "ci_lower": 0.8378785683546194,
+          "ci_upper": 0.8491010843892918
+        }
+      },
+      "slice_metrics_by_length": {
+        "long": {
+          "n": 13715,
+          "macro_f1": 0.9221309710560504,
+          "error_rate": 0.07633977397010572
+        },
+        "medium": {
+          "n": 17067,
+          "macro_f1": 0.9237299322314265,
+          "error_rate": 0.07617038729712311
+        },
+        "short": {
+          "n": 7215,
+          "macro_f1": 0.9095299591137656,
+          "error_rate": 0.08717948717948718
+        }
+      },
+      "training_time_sec": 124.85448026657104,
+      "examples_per_sec": 20181.294212432356,
+      "peak_memory_mb": 2123.09765625,
+      "parameter_count": 3000101,
+      "device": "cuda"
+    },
+    "bilstm": {
+      "accuracy": 0.933731610390294,
+      "precision_macro": 0.9337493099256157,
+      "recall_macro": 0.9337318634798293,
+      "f1_macro": 0.9337309604013317,
+      "precision_micro": 0.933731610390294,
+      "recall_micro": 0.933731610390294,
+      "f1_micro": 0.933731610390294,
+      "precision_weighted": 0.9337495302517813,
+      "recall_weighted": 0.933731610390294,
+      "f1_weighted": 0.9337309440150554,
+      "confusion_matrix": [
+        [
+          17799,
+          1198
+        ],
+        [
+          1320,
+          17680
+        ]
+      ],
+      "roc_auc": 0.981786330528643,
+      "pr_auc": 0.9821408858073455,
+      "mcc": 0.8674811732300068,
+      "brier_score": 0.05129483289782718,
+      "ece": 0.02529538951105921,
+      "bootstrap_cis": {
+        "accuracy_95ci": {
+          "point": 0.933731610390294,
+          "ci_lower": 0.9313103666078901,
+          "ci_upper": 0.9362844435086981
+        },
+        "macro_f1_95ci": {
+          "point": 0.9337309604013317,
+          "ci_lower": 0.9313097931538744,
+          "ci_upper": 0.9362801028452048
+        },
+        "mcc_95ci": {
+          "point": 0.8674811732300068,
+          "ci_lower": 0.8626539238351665,
+          "ci_upper": 0.8725733408468695
+        }
+      },
+      "slice_metrics_by_length": {
+        "long": {
+          "n": 13715,
+          "macro_f1": 0.9330343977128867,
+          "error_rate": 0.06562158220925994
+        },
+        "medium": {
+          "n": 17067,
+          "macro_f1": 0.9372500991397916,
+          "error_rate": 0.06269408800609363
+        },
+        "short": {
+          "n": 7215,
+          "macro_f1": 0.9214373994078725,
+          "error_rate": 0.07595287595287595
+        }
+      },
+      "training_time_sec": 797.513632774353,
+      "examples_per_sec": 3159.4757712598575,
+      "peak_memory_mb": 2274.08984375,
+      "parameter_count": 3235777,
+      "device": "cuda"
+    },
+    "textcnn": {
+      "accuracy": 0.9260204753006817,
+      "precision_macro": 0.9262990027455023,
+      "recall_macro": 0.9260194670626665,
+      "f1_macro": 0.9260082706823092,
+      "precision_micro": 0.9260204753006817,
+      "recall_micro": 0.9260204753006817,
+      "f1_micro": 0.9260204753006817,
+      "precision_weighted": 0.926298143976402,
+      "recall_weighted": 0.9260204753006817,
+      "f1_weighted": 0.9260083457107008,
+      "confusion_matrix": [
+        [
+          17349,
+          1648
+        ],
+        [
+          1163,
+          17837
+        ]
+      ],
+      "roc_auc": 0.9790808534865616,
+      "pr_auc": 0.97937811939815,
+      "mcc": 0.8523184239683782,
+      "brier_score": 0.055259577885907116,
+      "ece": 0.021369791569701323,
+      "bootstrap_cis": {
+        "accuracy_95ci": {
+          "point": 0.9260204753006817,
+          "ci_lower": 0.9235196199699977,
+          "ci_upper": 0.9284950127641656
+        },
+        "macro_f1_95ci": {
+          "point": 0.9260082706823092,
+          "ci_lower": 0.9234966860739048,
+          "ci_upper": 0.9284838825918715
+        },
+        "mcc_95ci": {
+          "point": 0.8523184239683782,
+          "ci_lower": 0.84733598252129,
+          "ci_upper": 0.8572007520911074
+        }
+      },
+      "slice_metrics_by_length": {
+        "long": {
+          "n": 13715,
+          "macro_f1": 0.9206574999329431,
+          "error_rate": 0.07823550856726212
+        },
+        "medium": {
+          "n": 17067,
+          "macro_f1": 0.930557205187547,
+          "error_rate": 0.06931505244038202
+        },
+        "short": {
+          "n": 7215,
+          "macro_f1": 0.9201734933356756,
+          "error_rate": 0.07692307692307693
+        }
+      },
+      "training_time_sec": 267.15903639793396,
+      "examples_per_sec": 9431.554455252879,
+      "peak_memory_mb": 2450.36328125,
+      "parameter_count": 3120601,
+      "device": "cuda"
+    }
+  },
+  "mcnemar_baseline_vs_experimental": {
+    "baseline_vs_bilstm": {
+      "b": 817,
+      "c": 1275,
+      "statistic": 99.83221797323135,
+      "p_value": 0.0,
+      "method": "chi2_continuity_corrected"
+    },
+    "baseline_vs_textcnn": {
+      "b": 903,
+      "c": 1068,
+      "statistic": 13.645865043125317,
+      "p_value": 0.00022072687364604882,
+      "method": "chi2_continuity_corrected"
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "worst_slice": "long",
+  "cases": [
+    {
+      "error_type": "confident_false_positive",
+      "index": 33169,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.9999552965164185,
+      "review_length_tokens": 23,
+      "text": "By far, the least impressive Cirque du Soleil show I have seen.  The performers are all amazing, but for some reason, it was not showcased or directed well.\\n\\nWe spent over $130 on each ticket, and we had excellent seats, which were very comfortable, But the show seem to drag on.  The sand artist was really cool and different.",
+      "suggested_hint": "sarcasm / negation not captured; strong positive surface words despite a negative review"
+    },
+    {
+      "error_type": "confident_false_positive",
+      "index": 5469,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.9999551773071289,
+      "review_length_tokens": 36,
+      "text": "Leonard. Leonard. Leonard.  Is there REALLY even a Leonard that works there?  Leonard goes to work and then takes an 8 hour break.  I called Staples to follow up on a print order and he told me he was going to have to call me back because it was time for his break.  I then went to the store and ole Leonard was too busy on his cell phone to help me.  The only upside to this place is the nice female that works in the copy/print center.",
+      "suggested_hint": "sarcasm / negation not captured; strong positive surface words despite a negative review"
+    },
+    {
+      "error_type": "confident_false_positive",
+      "index": 19511,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.9999172687530518,
+      "review_length_tokens": 200,
+      "text": "Je suis une grande gourmande et amante de plusieurs restaurants Italiens. De BONS restaurants Italiens. En vantant \\u00e0 un coll\\u00e8gue de travail 2 de mes adresses ador\\u00e9es de la P'tite Italie, ce dernier m'a vivement recommend\\u00e9 d'essayer le Caf\\u00e9 Epoca que je n'avais jamais os\\u00e9 tester. \\nChaque fois que je suis pass\\u00e9e devant cet \\u00e9tablissement, il \\u00e9tait vide ou compl\\u00e8tement vide. Je me suis oblig\\u00e9e \\u00e0 visiter donc Epoca par respect pour mon coll",
+      "suggested_hint": "sarcasm / negation not captured; strong positive surface words despite a negative review"
+    },
+    {
+      "error_type": "confident_false_positive",
+      "index": 19341,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.9998099207878113,
+      "review_length_tokens": 33,
+      "text": "Good prices, good-quality produce and a wide variety of Middle-Eastern and Latin American groceries, if you are looking for meats you'll have to go somewhere else. The Middle- Eastern guys who run the business could learn a bit of Western politeness (they are in the West, after all) and quit that aggressive attitude, more than once I have felt as I am picking groceries from a food bank rather than a place where I am paying for them.",
+      "suggested_hint": "sarcasm / negation not captured; strong positive surface words despite a negative review"
+    },
+    {
+      "error_type": "confident_false_positive",
+      "index": 25813,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.999784529209137,
+      "review_length_tokens": 54,
+      "text": "Attended the @SpaFitFinder launch party, with @spacephx.\\n\\nI can't say much about the place, other than, even taking into consideration the number of people present, it felt cramped.\\n\\nThe TrimTini (?) I had was really delicious; vodkatini with lemon zest.\\n\\nA very nice gentleman, who works at Urban 7, was very gracious in making sure to stop by every time he brought out a new platter of hors d'oeuvres. Everything he brought was delicious, including the ceviche, which I'm not particularly fon",
+      "suggested_hint": "sarcasm / negation not captured; strong positive surface words despite a negative review"
+    },
+    {
+      "error_type": "confident_false_negative",
+      "index": 30955,
+      "true_label": 1,
+      "pred_label": 0,
+      "pred_prob_positive": 2.7558135116123594e-06,
+      "review_length_tokens": 177,
+      "text": "Look, we all know Cox sucks. In fact they are a terrible business and their practices are laughable. However they are a necessary evil if you want Internet that isn't garbage that can handle streaming/gaming. The way they handle issues over the phone is worse than Comcast, and for all my east coast brothers/sisters you know what a serious accusation that is. It all started with shitty TV Service. My household went through 4 dvr boxes. 4. That all broke. All of them. 100's of hours of TV. Lost. E",
+      "suggested_hint": "negative surface words used inside an overall positive review (e.g. 'not bad at all', comparative complaints followed by praise)"
+    },
+    {
+      "error_type": "confident_false_negative",
+      "index": 21803,
+      "true_label": 1,
+      "pred_label": 0,
+      "pred_prob_positive": 8.667951078678016e-06,
+      "review_length_tokens": 44,
+      "text": "No problems at check-in.  The suite was nice on the 31st floor.  The bedroom  was well equipped with 3 sinks in the bathroom  hot tub, a shower for 2 or 4. The bathroom was sealed off wirh a glass door. It had a living room.with a bathroom by the entrance of the door. \\n\\n The only complaint was the sinks drained to slow which turned out to overflow.  We had to call housekeeping to straighten out.  The plummet stated they made these sinks more for beauty than use. \\n\\nThey transferred us to anot",
+      "suggested_hint": "negative surface words used inside an overall positive review (e.g. 'not bad at all', comparative complaints followed by praise)"
+    },
+    {
+      "error_type": "confident_false_negative",
+      "index": 12754,
+      "true_label": 1,
+      "pred_label": 0,
+      "pred_prob_positive": 3.5623925214167684e-05,
+      "review_length_tokens": 38,
+      "text": "Not a club. A swanky bar straight out of Austin Powers.  Free entrance and drinks for ladies when we came on Saturday night. Can't hate on that. Music was good.  People from all walks of life started dancing.  And dancing with all of their might.\\n\\nI think staffers caught sight of  the hideous dancing, so they cut the music to almost inaudible. Booo.  \\n\\nNo dancing, just \\\"\"lounging' allowed.",
+      "suggested_hint": "negative surface words used inside an overall positive review (e.g. 'not bad at all', comparative complaints followed by praise)"
+    },
+    {
+      "error_type": "confident_false_negative",
+      "index": 26636,
+      "true_label": 1,
+      "pred_label": 0,
+      "pred_prob_positive": 7.300420838873833e-05,
+      "review_length_tokens": 12,
+      "text": "They are CLOSED due to A/C emergency.  The sign said CLOSED FOR GOOD!  \\nNeed a refund on our $20 voucher and do not want anyone else to be also inconvenienced.",
+      "suggested_hint": "negative surface words used inside an overall positive review (e.g. 'not bad at all', comparative complaints followed by praise)"
+    },
+    {
+      "error_type": "confident_false_negative",
+      "index": 21213,
+      "true_label": 1,
+      "pred_label": 0,
+      "pred_prob_positive": 0.00010413474956294522,
+      "review_length_tokens": 71,
+      "text": "Last night several parents came in with over 15 children to celebrate their 9 year olds 4th grade graduation at 9:15 pm. The bartender expressed that it was not a place to have children running around as it is against the law and a liability issue if anything were to happen to them on their premise. The children were running in and out of the bar while the parents continued to drink upstairs claiming to watch them in the open park way. After their third round of drinks the bartender told them th",
+      "suggested_hint": "negative surface words used inside an overall positive review (e.g. 'not bad at all', comparative complaints followed by praise)"
+    },
+    {
+      "error_type": "near_threshold",
+      "index": 17406,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.5000463128089905,
+      "review_length_tokens": 124,
+      "text": "OK, I am not a shopper...by no means! But, as part of the activities for a small family get together in Vegas, I agreed to go along. I had no idea what to expect but had heard that there was this great new mall in vegas.\\n\\nLet me preface this slam of a review by saying it was the end of June in Vegas which means it was hot, but not yet Vegas (read: Africa) Hot yet. I think it was about 100-102.\\n\\nSo, the backers of this project must have picked their architect from a pool of guys passing aroun",
+      "suggested_hint": "genuinely mixed / ambivalent review, or short review with too little signal"
+    },
+    {
+      "error_type": "near_threshold",
+      "index": 16146,
+      "true_label": 1,
+      "pred_label": 0,
+      "pred_prob_positive": 0.4998931586742401,
+      "review_length_tokens": 62,
+      "text": "The employees at this Target seemed unusually friendly during my last visit. Two of them asked if they could help me find anything, the cashier was perky and personable, and the security guard offered to put my shopping cart back for me as I was walking out with my bags. Maybe I've gotten too used to poor customer service, no smiles, no eye contact, and mumbling from employees when shopping. But, yesterday's visit was refreshing. I wasn't the only one who seemed to enjoy this Target. There was a",
+      "suggested_hint": "genuinely mixed / ambivalent review, or short review with too little signal"
+    },
+    {
+      "error_type": "near_threshold",
+      "index": 17830,
+      "true_label": 1,
+      "pred_label": 0,
+      "pred_prob_positive": 0.49983149766921997,
+      "review_length_tokens": 33,
+      "text": "We met some long lost friends here last night.  Fast and efficient service.  The only issue was that music was to start at 9:00pm...we left at 10:30 and the music still had not begun.  At least we were able to chat with our friends but we were a bit disappointed as the sound check sounded great.  The fish sliders were super!  Potatoes skins needed salt.  I'd certainly go back.",
+      "suggested_hint": "genuinely mixed / ambivalent review, or short review with too little signal"
+    },
+    {
+      "error_type": "near_threshold",
+      "index": 18125,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.5002030730247498,
+      "review_length_tokens": 200,
+      "text": "I've been here twice. The first time, my husband and I were using a restaurant.com gift so we splurged. Their spring rolls are awesome and fresh. The dishes were full of flavor and you could really taste the herbs which were great. We enjoyed the thai tea and desserts. It was a first for both of us to try the bean desserts, super yummy.\\n\\nThe second time I went with my friends. We had an order of spring rolls and soup. Two of us got pho and the other friend had the spicy noodle soup. When my fr",
+      "suggested_hint": "genuinely mixed / ambivalent review, or short review with too little signal"
+    },
+    {
+      "error_type": "near_threshold",
+      "index": 14261,
+      "true_label": 1,
+      "pred_label": 0,
+      "pred_prob_positive": 0.49975597858428955,
+      "review_length_tokens": 48,
+      "text": "DELISH!  \\nIt's hard to find 'good Italian' west of NY.....\\nThis place meets the craving for sure!\\nThe 'complimentary cheesy bread' offers a warm welcome upon sitting down.\\nThe food is reasonably priced and the serving sizes are great - not too big / not too small.\\nThey always offer a little post-meal Sambuca.\\nThey make you feel at home.\\nThe place is small - but cozy and warm.  You truly feel like you are at an italian restuarant.\\nWouldnt call it kid friendly due to the size.\\nLove the me",
+      "suggested_hint": "genuinely mixed / ambivalent review, or short review with too little signal"
+    },
+    {
+      "error_type": "slice_specific",
+      "index": 8,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.549027144908905,
+      "review_length_tokens": 64,
+      "text": "I used to love D&B when it first opened in the Waterfront, but it has gone down hill over the years. The games are not as fun and do not give you as many tickets and the prizes have gotten cheaper in quality. It takes a whole heck of a lot of tickets for you to even get a pencil! The atmosphere is okay but it used to be so much better with the funnest games and diverse groups of people! Now, it is run down and many of the games are app related games (Fruit Ninja) and 3D Experience rides. With su",
+      "suggested_hint": "systematic weakness on this length bucket -- e.g. very short reviews give the model too few tokens to disambiguate"
+    },
+    {
+      "error_type": "slice_specific",
+      "index": 25,
+      "true_label": 1,
+      "pred_label": 0,
+      "pred_prob_positive": 0.2593425214290619,
+      "review_length_tokens": 157,
+      "text": "As a chinese american college student from NYC who got stuck in Pittsburgh with its useless public transportation (circa 1998), I desperately missed home-style Chinese food for the better part of my first two years here. Things turned around for me once I got a car (or made friends with cars), but I was seriously hurting for a while.\\n\\nTasty was one of the places we found. Back in the day, it was owned and ran by a typical restaurant-owning Chinese family. They had the works - pushy lao ban nia",
+      "suggested_hint": "systematic weakness on this length bucket -- e.g. very short reviews give the model too few tokens to disambiguate"
+    },
+    {
+      "error_type": "slice_specific",
+      "index": 81,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.8100011348724365,
+      "review_length_tokens": 154,
+      "text": "Being born and raised into an all Italian family, I'm pretty darn picky about my pastas and gravy (tomato sauce for the unknowing). My great grandmother's sauce was the first I remember, she never opened a can to make her sauces, always using tomatoes she canned herself in mason jars. She simmered her sauces until every seed melted away. My mother's sauce was a bit more thicker, using puree and paste as a base, later adding whole peeled tomatoes, garlic and fresh basil. Her sauce cooks down to a",
+      "suggested_hint": "systematic weakness on this length bucket -- e.g. very short reviews give the model too few tokens to disambiguate"
+    },
+    {
+      "error_type": "slice_specific",
+      "index": 86,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.5184575319290161,
+      "review_length_tokens": 200,
+      "text": "Hotel restaurant/bars are usually not known for being the best in town.  So when I had the opportunity to eat and drink at SoHo recently, I can not say I was surprised that I found the cuisine to be on the uninspiring side.  Is it terrible?  No,  but you know that better is out there.  \\n\\nThe blackened chicken wrap was boring.  The flavor was missing and the entire meal was just bland.  Also, white tortillas just do not do it for me.  Why does it seem that Pittsburgh wants to thrive on fatty, f",
+      "suggested_hint": "systematic weakness on this length bucket -- e.g. very short reviews give the model too few tokens to disambiguate"
+    },
+    {
+      "error_type": "slice_specific",
+      "index": 110,
+      "true_label": 0,
+      "pred_label": 1,
+      "pred_prob_positive": 0.6278092265129089,
+      "review_length_tokens": 99,
+      "text": "Last weekend my mother and I headed down to the strip to get some weekly goods - lunch meat and cheese from Penn Mac - veggies at Stans - needed some new spices from Penzeys for a chili I was going to make that day....we were both a little hungry and knew we wanted to have a snack before shopping.\\n\\nWe parked in front of Roland's and see the sign: Famous for Lobster Rolls and Bloody Mary's!\\n\\nPerfect. \\n\\nMy mother got the Lobster Roll, which she said was 'good'. The bread, from Mancini's, was",
+      "suggested_hint": "systematic weakness on this length bucket -- e.g. very short reviews give the model too few tokens to disambiguate"
+    }
+  ]
+}

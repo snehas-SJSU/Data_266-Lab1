@@ -1,1 +1,14 @@
-{ "member": "ritika_mukesh_neema", "smoke": true, "notes": "Placeholder — Ritika sets her own 3 models (different from Sneha)." }
+{
+  "smoke": false,
+  "seed": 42,
+  "epochs": 5,
+  "batch_size": 64,
+  "lr": 0.001,
+  "embed_dim": 100,
+  "n_boot": 1000,
+  "val_frac": 0.1,
+  "min_freq": 2,
+  "max_vocab": 30000,
+  "max_len": 200,
+  "note": "Data: Hugging Face fancyzhx/yelp_polarity, downloaded at runtime (not hosted in this repo). Full run: 503,945 train / 55,993 val / 37,997 test rows after the val split."
+}

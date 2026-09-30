@@ -41,6 +41,22 @@ Raw logs under `reproducibility/raw_logs/ritika_mukesh_neema/` are unedited.
 - Note: `outputs/pred_A2B/`, `pred_B2A/`, `human_audit/` sample-image subfolders not yet populated in this repo (images excluded per `.gitignore` on the source machine)
 
 ---
-## Run — Part 2 Sentiment
+## Run — Part 2 Sentiment (full)
 
-- Status: not yet run — planned for 2026-09-29. Blocked twice today by Colab free-tier GPU quota exhaustion during the smoke/full run attempt.
+- Date: 2026-09-29
+- Task: `task2_sentiment`
+- Smoke: false
+- Seed: 42
+- Data: Hugging Face `fancyzhx/yelp_polarity` (560,000 train / 38,000 test rows), downloaded at runtime, not hosted in this repo. Split: 503,945 train / 55,993 val / 37,997 test.
+- Preprocessing: lowercasing, HTML/URL stripping, punctuation removal, stopword removal (sklearn ENGLISH_STOP_WORDS), Porter stemming. Vocab size 30,000 (min_freq=2, train split only), max_len=200.
+- Models: BaselineMeanEmbed, BiLSTMClassifier, TextCNNClassifier (Kim 2014, kernels 3/4/5) — all from-scratch embeddings, no pretrained word2vec/GloVe/transformer.
+- Epochs: 5, batch_size=64, lr=1e-3, embed_dim=100, n_boot=1000 (bootstrap CIs)
+- Checkpoints: `task2_sentiment/ritika_mukesh_neema/checkpoints/{baseline,bilstm,textcnn}.pt` (on git)
+- Metrics CSV: `task2_sentiment/ritika_mukesh_neema/metrics_report.csv`
+- Test accuracy / macro-F1 / ROC-AUC: baseline 0.9217 / 0.9217 / 0.9741; bilstm 0.9337 / 0.9337 / 0.9818; textcnn 0.9260 / 0.9260 / 0.9791
+- Train time: baseline 124.9s, bilstm 797.5s, textcnn 267.2s; peak_memory_mb: 2123 / 2274 / 2450; params: 3,000,101 / 3,235,777 / 3,120,601
+- McNemar (baseline vs. each): vs. bilstm b=817, c=1275, stat=99.832, p<0.001; vs. textcnn b=903, c=1068, stat=13.646, p=0.00022
+- Results / failures: `task2_sentiment/ritika_mukesh_neema/results.md`, `failure_analysis.md`
+- Raw log: `reproducibility/raw_logs/ritika_mukesh_neema/task2_sentiment/console_run_all_full.log`
+- Device: CUDA (Google Colab, Tesla T4)
+- Command: `cd src && python run_all.py --train_csv <yelp train parquet> --test_csv <yelp test parquet>` (`config.json` smoke=false)

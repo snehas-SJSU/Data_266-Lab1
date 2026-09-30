@@ -1,0 +1,52 @@
+$ /usr/bin/python3 preprocess.py --train_csv /content/train.parquet --test_csv /content/test.parquet
+
+Loading...
+Handling missing/malformed rows...
+  dropped 0 missing/malformed/duplicate rows (560000 -> 560000)
+  dropped 0 missing/malformed/duplicate rows (38000 -> 38000)
+Running EDA (pre-cleaning, on raw text)...
+  train: {'n_rows': 560000, 'class_counts': {'0': 280000, '1': 280000}, 'class_balance_ratio': 1.0, 'length_words_mean': 133.0288732142857, 'length_words_median': 97.0, 'length_words_p95': 372.0, 'length_chars_mean': 726.4979232142857}
+  test: {'n_rows': 38000, 'class_counts': {'0': 19000, '1': 19000}, 'class_balance_ratio': 1.0, 'length_words_mean': 132.55863157894737, 'length_words_median': 97.0, 'length_words_p95': 367.0, 'length_chars_mean': 723.8446578947369}
+Cleaning text (lowercase, punctuation strip, stopword removal, Porter stemming)...
+Carving out validation split from train...
+  train=503945  val=55993  test=37997
+Building vocab from train split only...
+  vocab size = 30000
+Done. {'vocab_size': 30000, 'max_len': 200, 'n_train': 503945, 'n_val': 55993, 'n_test': 37997, 'min_freq': 2, 'seed': 42}
+
+$ /usr/bin/python3 train.py
+
+Device: cuda
+
+=== Training baseline ===
+  [baseline] epoch 0: loss=0.2796
+  [baseline] epoch 1: loss=0.2232
+  [baseline] epoch 2: loss=0.2141
+  [baseline] epoch 3: loss=0.2083
+  [baseline] epoch 4: loss=0.2049
+  test accuracy=0.9217 macro-F1=0.9217 ROC-AUC=0.9741
+
+=== Training bilstm ===
+  [bilstm] epoch 0: loss=0.2380
+  [bilstm] epoch 1: loss=0.1708
+  [bilstm] epoch 2: loss=0.1438
+  [bilstm] epoch 3: loss=0.1193
+  [bilstm] epoch 4: loss=0.0971
+  test accuracy=0.9337 macro-F1=0.9337 ROC-AUC=0.9818
+
+=== Training textcnn ===
+  [textcnn] epoch 0: loss=0.2637
+  [textcnn] epoch 1: loss=0.2026
+  [textcnn] epoch 2: loss=0.1778
+  [textcnn] epoch 3: loss=0.1591
+  [textcnn] epoch 4: loss=0.1416
+  test accuracy=0.9260 macro-F1=0.9260 ROC-AUC=0.9791
+
+Done. See outputs/metrics_report.csv, outputs/full_metrics_report.json, outputs/mcnemar_results.json, and outputs/<model>_test_predictions.npz
+
+$ /usr/bin/python3 error_analysis.py --model_name textcnn
+
+Wrote ../outputs/error_analysis_textcnn.json and ../failure_analysis.md
+Worst slice: long
+
+All done. See ../outputs and ../checkpoints.
