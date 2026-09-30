@@ -138,7 +138,7 @@ Full cases: [task1_llm/ritika_mukesh_neema/failure_analysis.md](https://github.c
 
 This is Yelp polarity, not IMDB. I learned the embeddings from scratch. I did not use a pretrained language model.
 
-The Yelp files are not on Drive and not in git. The notebook downloads `fancyzhx/yelp_polarity` from Hugging Face when the run starts, so there is nothing for me to upload.
+The notebook downloads `fancyzhx/yelp_polarity` from Hugging Face when the run starts.
 
 I wanted one simple model and two that can use word order, so a strong baseline would be obvious if the fancier models did not beat it.
 
@@ -386,8 +386,6 @@ Team `PairProgramming_Team_5`. The photo-to-Monet FID for each member is in Part
 | | Public score | Private score | Rank |
 |---|---|---|---|
 | PairProgramming_Team_5 | | | |
-
-The plots in this file are the png files already stored under each task folder. They are not copied again into `report/`.
 
 ## Citation
 
