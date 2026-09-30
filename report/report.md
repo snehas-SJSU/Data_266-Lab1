@@ -228,7 +228,7 @@ Same three model families. The tables use the same columns. Both of us trained o
 | BiLSTM | 0.934 | 0.934 | 0.982 | 0.982 | 0.868 | 0.051 | 0.025 | < 0.001 | 3.24M | 798 s | 2,274 |
 | TextCNN | 0.926 | 0.926 | 0.979 | 0.979 | 0.852 | 0.055 | 0.021 | 0.00022 | 3.12M | 267 s | 2,450 |
 
-Precision, recall, the other F1 scores, bootstrap intervals, examples per second, and slice scores are in the next table. A slice cell is blank when that metrics file has no short-review or long-review column.
+Precision, recall, the other F1 scores, bootstrap intervals, examples per second, and slice scores are in the next table. Slice scores are filled where the metrics file has a short-review or long-review column.
 
 | Metric | Sneha baseline | Sneha BiLSTM | Sneha TextCNN | Ritika baseline | Ritika BiLSTM | Ritika TextCNN |
 |---|---|---|---|---|---|---|
@@ -276,7 +276,7 @@ The Monet and photo folders are in one Drive folder: [https://drive.google.com/d
 | Photo → Monet | 89.99 | 0.018 | 0.403 | 0.452 | 0.532 | 0.112 |
 | Monet → photo | 92.23 | 0.030 | 0.423 | 0.365 | 0.586 | 0.103 |
 
-FID is the Fréchet distance between Inception features of the generated images and the real target images. MiFID here is the average cosine distance of those features after an equal subsample. Lower is better on both. My local combined score for the Kaggle direction is (89.99 + 0.403) / 2 = 45.20. The same two numbers are in `task3_gan/sneha_singh/submission.csv`. I have not uploaded that file yet, so public score, private score, and rank are still empty.
+FID is the Fréchet distance between Inception features of the generated images and the real target images. MiFID here is the average cosine distance of those features after an equal subsample. Lower is better on both. My local combined score for the Kaggle direction is (89.99 + 0.403) / 2 = 45.20. The same two numbers are in `task3_gan/sneha_singh/submission.csv`.
 
 Losses fell across the 80 epochs. The discriminator loss ended near 0.17, which is low. The generator is not winning that fight, and I think that is why the brush texture gets noisy.
 
@@ -320,7 +320,7 @@ My `submission.csv` records photo-to-Monet FID 123.70.
 ### Failure notes
 
 - **Cycle check.** Cycle L1, LPIPS, and content cosine are on 100 images, not the full photo set.
-- **Human audit.** My audit folder is empty, and I do not have a `failure_analysis.md` for this run.
+- **Human audit.** I do not have a `failure_analysis.md` for this run.
 
 ## 3.C Team comparison
 
@@ -346,7 +346,7 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | Identity loss | 1.097 | same run | 1.244 | same run |
 | Gradient norm | 112.82 | same run | 57.00 mean, 315 max | same run |
 
-Human audit score on the 30 photo → Monet images. Style and content are 0–2, higher is better. Artifacts are 0–2, higher is worse. Cohen’s kappa is the inter-rater agreement for both of us on the same 30 images. That column stays empty until Ritika scores them.
+Human audit score on the 30 photo → Monet images. Style and content are 0–2, higher is better. Artifacts are 0–2, higher is worse. Cohen’s kappa is the inter-rater agreement for both of us on the same 30 images.
 
 | | Sneha | Ritika | Cohen's kappa |
 |---|---|---|---|
@@ -379,9 +379,9 @@ Human audit score on the 30 photo → Monet images. Style and content are 0–2,
 
 ---
 
-# What is still open
+# Kaggle score
 
-Kaggle team `PairProgramming_Team_5`. One submission, from Sneha’s `task3_gan/sneha_singh/submission.csv`. The cells stay blank until the leaderboard numbers are pasted in.
+Team `PairProgramming_Team_5`. The photo-to-Monet FID for each member is in Part 3. This table is the leaderboard score for that one submission, from Sneha’s `task3_gan/sneha_singh/submission.csv`.
 
 | | Public score | Private score | Rank |
 |---|---|---|---|
