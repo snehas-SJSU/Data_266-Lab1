@@ -5,13 +5,6 @@
 <p class="names">Ritika Mukesh Neema</p>
 </div>
 
-## Contents
-
-1. Part 1 — GPT from scratch
-2. Part 2 — Yelp polarity
-3. Part 3 — CycleGAN, photo to Monet
-4. Papers
-
 Sneha Singh and Ritika Mukesh Neema each trained their own models for all three parts, under `sneha_singh/` and `ritika_mukesh_neema/`. The architectures and hyperparameters are different on purpose. The repo is https://github.com/snehas-SJSU/Data_266-Lab1.
 
 ## How we split the work
@@ -109,7 +102,7 @@ Ritika’s validation loss is lower. Sneha’s samples are more varied. Both gre
 | Checkpoint | `task1_llm/sneha_singh/checkpoints/best.pt` | `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt` |
 | Log | `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log` | her raw log under `reproducibility/raw_logs/ritika_mukesh_neema/` |
 
-Ritika’s validation loss is lower, and her next-character accuracy is a bit higher, on a smaller model with a longer context. Sneha’s temperature samples are more varied: distinct-1 is 0.225 against Ritika’s 0.008, and Ritika’s greedy output is the same paragraph every time. Both models repeat “You are very happy”, which is the greedy loop we both saw. A next step is a repetition penalty at decode time, and stopping generation when the story-boundary token appears. The two runs used different widths and different machines, so the loss gap is not a pure architecture contest.
+Ritika’s strength is the lower validation loss, 0.778 against Sneha’s 0.857, on a smaller model. Sneha’s strength is variety: distinct-1 is 0.225 against Ritika’s 0.008. The shared weakness is greedy decoding. Both of us loop on “You are very happy.” The limitation is that the runs are not the same model: embedding size, context length, and the machine all differ, so the loss gap is not a pure architecture contest. Next we would add a repetition penalty at decode time, and stop generation when the story-boundary token appears.
 
 ---
 
@@ -189,7 +182,7 @@ Same three model families, not the same experiment. Ritika’s BiLSTM leads on t
 | Params / time / peak MB | 4.76M / 114 s / 0.0 | 4.85M / 1706 s / 0.0 | 4.84M / 108 s / 0.0 | 3.00M / 125 s / 2,123 | 3.24M / 798 s / 2,274 | 3.12M / 267 s / 2,450 |
 | Checkpoint | `baseline_full.pt` | `experimental_a_full.pt` | `experimental_b_full.pt` | `baseline.pt` | `bilstm.pt` | `textcnn.pt` |
 
-The two lineups are the same idea and not the same experiment. Sneha trained on 100k reviews and her mean-pool baseline still leads; McNemar does not separate her BiLSTM or TextCNN from that baseline. Ritika trained on the full 560k set and her BiLSTM does pull ahead, by about 1.2 points of accuracy, at roughly six times the baseline’s training time. Both of us miss sarcasm, mixed reviews, and negation. A fair next step is to rerun Sneha’s three models on the full training file before treating Ritika’s BiLSTM win as an architecture result. Sneha’s peak-memory field stays 0.0 because MPS does not fill the CUDA counter.
+Ritika’s strength is that word order helps: her BiLSTM reaches 0.934 accuracy on the full 560k set, and McNemar says that is not chance. Sneha’s strength is a fast baseline that still leads her own two sequence models on the 100k sample. The shared weakness is sarcasm, mixed reviews, and negation. The limitation is the data size. Sneha used 100k reviews and Ritika used about 560k, so her BiLSTM win is not yet an architecture result. Next we would rerun Sneha’s three models on the full training file. Sneha’s peak-memory field stays 0.0 because MPS does not fill the CUDA counter.
 
 ---
 
@@ -256,7 +249,7 @@ On photo to Monet, Sneha’s FID is 89.99 and Ritika’s is 123.70. Lower is bet
 | Human audit / κ | style 1.4, content 1.7, artifacts 1.4. κ not computed | | audit folder empty | |
 | Checkpoint | https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link | | https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view | |
 
-On the Kaggle direction, Sneha’s FID is 89.99 and Ritika’s is 123.70. Lower is better, so Sneha’s photo-to-Monet set is the stronger local score. The runs are not copies of each other: batch 4 with nearest upsampling versus batch 1, and Ritika’s cycle scores are on 100 images while Sneha’s are on the full sets. Neither of us has a Kaggle public score yet. Kappa is still open, because the audit needs both of us on the same 30 files and Ritika’s sheet is empty. The team upload should be Sneha’s `submission.csv` unless a later rescore beats 89.99.
+Sneha’s strength on the Kaggle direction is the lower FID, 89.99 against Ritika’s 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours, at batch size 1. The weakness on Sneha’s side is a discriminator loss that ended near 0.17, which shows up as grain in the brush texture. The limitation is that the two evals are not identical: Ritika did not compute MiFID, and her cycle scores use 100 images while Sneha’s use the full sets. Next we upload Sneha’s `submission.csv`, and both of us score the same 30 images so kappa can be filled in. Neither public score is in yet.
 
 ---
 
