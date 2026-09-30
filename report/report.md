@@ -387,10 +387,14 @@ Team `PairProgramming_Team_5`. The photo-to-Monet FID for each member is in Part
 |---|---|---|---|
 | PairProgramming_Team_5 | | | |
 
+<div class="cite">
+
 ## Citation
 
-1. Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention Is All You Need. 2017. [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762). The causal multi-head attention in Part 1 follows that design, written by hand.
+1. Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention Is All You Need. 2017. [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762)
 
-2. Ronen Eldan and Yuanzhi Li. TinyStories: How Small Can Language Models Be and Still Speak Coherent English? 2023. [https://arxiv.org/abs/2305.07759](https://arxiv.org/abs/2305.07759). Part 1 is trained on that dataset.
+2. Ronen Eldan and Yuanzhi Li. TinyStories: How Small Can Language Models Be and Still Speak Coherent English? 2023. [https://arxiv.org/abs/2305.07759](https://arxiv.org/abs/2305.07759)
 
-3. Jun-Yan Zhu, Taesung Park, Phillip Isola, and Alexei A. Efros. Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks. 2017. [https://arxiv.org/abs/1703.10593](https://arxiv.org/abs/1703.10593). Part 3 is that CycleGAN setup: two generators, two discriminators, cycle loss, and identity loss.
+3. Jun-Yan Zhu, Taesung Park, Phillip Isola, and Alexei A. Efros. Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks. 2017. [https://arxiv.org/abs/1703.10593](https://arxiv.org/abs/1703.10593)
+
+</div>
