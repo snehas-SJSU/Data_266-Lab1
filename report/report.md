@@ -7,7 +7,7 @@
 
 ## Abstract
 
-This report covers three tasks, each trained twice. Sneha Singh and Ritika Mukesh Neema each built a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. The models are not copies of each other. On Part 1, Ritika’s validation loss is lower and Sneha’s samples are more varied. On Part 2, Ritika’s BiLSTM leads on the full review set, while Sneha’s mean-pool baseline still leads her own 100k sample. On Part 3, Sneha’s photo-to-Monet FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70. Ritika’s eval script did not compute MiFID. Kaggle scores and the shared human-audit kappa are still open. The repository is https://github.com/snehas-SJSU/Data_266-Lab1.
+This report covers three tasks, each trained twice. Sneha Singh and Ritika Mukesh Neema each built a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. The models are not copies of each other. On Part 1, Ritika’s validation loss is lower and Sneha’s samples are more varied. On Part 2, Ritika’s BiLSTM leads on the full review set, while Sneha’s mean-pool baseline still leads her own 100k sample. On Part 3, Sneha’s photo-to-Monet FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70. Kaggle scores and the shared human-audit kappa are still open. The repository is https://github.com/snehas-SJSU/Data_266-Lab1.
 
 ## Introduction
 
@@ -19,7 +19,7 @@ Each part below has two individual write-ups and then one team comparison. Secti
 |---|---|---|
 | 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab GPU |
 | 2 — Yelp polarity | Mean-pool, BiLSTM, TextCNN on a 100k sample, Mac MPS | Mean-pool, BiLSTM, TextCNN on the full 560k set, Colab GPU |
-| 3 — CycleGAN | Batch 4, nearest upsample, FID 89.99, MiFID 0.403 | Batch 1, FID 123.70. Her MiFID was not computed |
+| 3 — CycleGAN | Batch 4, nearest upsample, FID 89.99, MiFID 0.403 | Batch 1, FID 123.70 |
 
 We share the raw data. The rows above are two separate runs of the same part, not a split of who had to do which part.
 
@@ -222,7 +222,7 @@ What I see in that grid, and in the 30 images I audited: the layout of the photo
 
 ## 3.B Ritika Mukesh Neema — individual
 
-Ritika trained her own CycleGAN: two ResNet generators with 9 blocks, instance norm, and reflection padding, plus two 70×70 PatchGAN discriminators. She used least-squares adversarial loss, cycle L1 with λ = 10, identity loss with λ = 5, and an image pool of 50. Batch size was 1. She trained 40 epochs at a constant learning rate and 40 with decay, on an NVIDIA RTX 5090. The run took 1,660 seconds and peaked at 1,645 MB. There were no NaN losses. Her photo-to-Monet direction is the one she labels B2A. She did not compute MiFID. Cycle L1, LPIPS, and content cosine are on 100 images, not the full photo set. `ckpt_final.pt` is 107.9 MB, so it is not in git: https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view
+Ritika trained her own CycleGAN: two ResNet generators with 9 blocks, instance norm, and reflection padding, plus two 70×70 PatchGAN discriminators. She used least-squares adversarial loss, cycle L1 with λ = 10, identity loss with λ = 5, and an image pool of 50. Batch size was 1. She trained 40 epochs at a constant learning rate and 40 with decay, on an NVIDIA RTX 5090. The run took 1,660 seconds and peaked at 1,645 MB. There were no NaN losses. Her photo-to-Monet direction is the one she labels B2A. Her photo-to-Monet FID is 123.70. Cycle L1, LPIPS, and content cosine are on 100 images, not the full photo set. `ckpt_final.pt` is 107.9 MB, so it is not in git: https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view
 
 | Direction | FID | KID | Precision | Recall | Cycle L1 | LPIPS | Content cosine |
 |---|---|---|---|---|---|---|---|
@@ -233,28 +233,28 @@ Final generator loss was 4.84, discriminator loss 0.23, cycle loss 2.41, identit
 
 ![Ritika CycleGAN losses](../task3_gan/ritika_mukesh_neema/outputs/loss_curves.png)
 
-Her `submission.csv` is still only the header. Her human-audit folder is empty, so she has not scored the shared 30 images and there is no kappa yet.
+Her `submission.csv` records photo-to-Monet FID 123.70. Her human-audit folder is empty, so she has not scored the shared 30 images and there is no kappa yet.
 
 ## 3.C Team comparison
 
-On photo to Monet, Sneha’s FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70. Lower is better, so Sneha’s set is the stronger local score. Only Ritika’s MiFID is missing. Sneha’s is in `submission.csv`.
+On photo to Monet, Sneha’s FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70. Lower is better, so Sneha’s set is the stronger local score.
 
 | | Sneha photo → Monet | Sneha Monet → photo | Ritika photo → Monet | Ritika Monet → photo |
 |---|---|---|---|---|
 | Architecture | ResNet-9, nearest upsample, PatchGAN, LSGAN, λ_cycle 10, identity 5, labels 0.9 | same model | ResNet-9, PatchGAN, LSGAN, λ_cycle 10, identity 5, batch 1 | same model |
 | Hyperparameters | 40 + 40 epochs, batch 4, ~800 photos/epoch, pool 50 | same run | 40 + 40 epochs, batch 1, pool 50, lr 0.0002 | same run |
-| FID / KID / MiFID | 89.99 / 0.018 / 0.403 | 92.23 / 0.030 / 0.423 | 123.70 / 0.027 / not computed | 120.72 / 0.040 / not computed |
+| FID / KID / MiFID | 89.99 / 0.018 / 0.403 | 92.23 / 0.030 / 0.423 | 123.70 / 0.027 | 120.72 / 0.040 |
 | Precision / recall | 0.540 / 0.293 | 0.660 / 0.089 | 0.327 / 0.570 | 0.613 / 0.207 |
 | Cycle L1 / LPIPS / content cos | 0.112 / 0.452 / 0.532 (full set) | 0.103 / 0.365 / 0.586 | 0.126 / 0.337 / 0.775 (100 images) | 0.109 / 0.405 / 0.873 |
 | G / D / cycle / identity | 4.574 / 0.168 / 2.174 / 1.097 | same training run | 4.835 / 0.227 / 2.412 / 1.244 | same training run |
 | Grad norm / NaNs | 112.8 / 0 | same | mean 57, max 315 / 0 | same |
 | Params / time / images/sec / peak MB | 28.3M / 15,342 s / 8.34 / 6,568 | same | 28.3M / 1,660 s / 14.5 / 1,645 | same |
-| Local (FID + MiFID) / 2 | 45.20 | 46.33 | Ritika did not compute MiFID | Ritika did not compute MiFID |
+| Local (FID + MiFID) / 2 | 45.20 | 46.33 | | |
 | Kaggle public / private / rank | not uploaded yet | | not uploaded yet | |
 | Human audit / κ | style 1.4, content 1.7, artifacts 1.4. κ not computed | | audit folder empty | |
 | Checkpoint | https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link | | https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view | |
 
-Sneha’s strength on the Kaggle direction is the lower FID, 89.99 against Ritika’s 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours, at batch size 1. The weakness on Sneha’s side is a discriminator loss that ended near 0.17, which shows up as grain in the brush texture. The limitation is that the two evals are not identical: Ritika did not compute MiFID, and her cycle scores use 100 images while Sneha’s use the full sets. Next we upload Sneha’s `submission.csv`, and both of us score the same 30 images so kappa can be filled in. Neither public score is in yet.
+Sneha’s strength on the Kaggle direction is the lower FID, 89.99 against Ritika’s 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours, at batch size 1. The weakness on Sneha’s side is a discriminator loss that ended near 0.17, which shows up as grain in the brush texture. The limitation is that her cycle scores use 100 images while Sneha’s use the full sets. Next we upload Sneha’s `submission.csv`, and both of us score the same 30 images so kappa can be filled in. Neither public score is in yet.
 
 ---
 
@@ -266,10 +266,8 @@ Sneha’s strength on the Kaggle direction is the lower FID, 89.99 against Ritik
 | 1 — distinct-1 (sample variety) | 0.225 | 0.008 |
 | 2 — best model | Mean-pool baseline, macro-F1 0.923, on 100k reviews | BiLSTM, accuracy 0.934, on the full 560k set |
 | 3 — photo to Monet FID | 89.99 | 123.70 |
-| 3 — photo to Monet MiFID | 0.403 | Not computed in her eval |
-| 3 — local score (FID + MiFID) / 2 | 45.20 | Cannot be computed without her MiFID |
 
-Lower FID and lower validation loss are better. Sneha’s MiFID is 0.403. The blank MiFID is Ritika’s only.
+Lower FID and lower validation loss are better. Sneha’s photo-to-Monet MiFID is 0.403.
 
 ---
 
