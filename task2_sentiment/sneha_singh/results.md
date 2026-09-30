@@ -21,12 +21,15 @@ Dataset: Yelp polarity (not IMDB). Embeddings learned from scratch. No pretraine
 - Train/val/test sizes: 99989 / 10000 / 10000
 - Epochs: 5  |  batch: 64  |  emb_dim: 100  |  max_len: 128
 
-## Test metrics (summary)
-- **baseline**: acc=0.9226  macro-F1=0.9226  ROC-AUC=0.9729  MCC=0.8452  Brier=0.0595  ECE=0.0115  time=114.1s  params=4763702
-- **experimental_a**: acc=0.9184  macro-F1=0.9184  ROC-AUC=0.9752  MCC=0.8370  Brier=0.0602  ECE=0.0169  time=1705.7s  params=4848750
-- **experimental_b**: acc=0.9207  macro-F1=0.9207  ROC-AUC=0.9747  MCC=0.8414  Brier=0.0607  ECE=0.0241  time=108.1s  params=4840878
+## Test metrics
 
-Full table: `metrics_report.csv` (includes P/R/F1 macro/micro/weighted, PR-AUC, bootstrap CIs, McNemar, length slices).
+| Model | Acc | Macro-F1 | ROC-AUC | MCC | Brier | ECE | Time | Params |
+|---|---|---|---|---|---|---|---|---|
+| Baseline (mean pool) | 0.9226 | 0.9226 | 0.9729 | 0.8452 | 0.0595 | 0.0115 | 114 s | 4.76M |
+| BiLSTM | 0.9184 | 0.9184 | 0.9752 | 0.8370 | 0.0602 | 0.0169 | 1706 s | 4.85M |
+| TextCNN | 0.9207 | 0.9207 | 0.9747 | 0.8414 | 0.0607 | 0.0241 | 108 s | 4.84M |
+
+The rest of the required metrics (precision/recall/F1 macro, micro, and weighted, PR-AUC, bootstrap intervals, McNemar, short vs long slices) are in `metrics_report.csv`.
 
 ## Comparison (my three models)
 - Best macro-F1: **baseline** (0.9226). TextCNN is 0.9207. BiLSTM is 0.9184.
