@@ -120,6 +120,8 @@ Ritika’s strength is the lower validation loss, 0.778 against Sneha’s 0.857,
 
 ---
 
+<div class="page-break"></div>
+
 # Part 2 — Yelp polarity
 
 ## 2.A Sneha Singh — individual
@@ -299,9 +301,6 @@ Sneha’s strength on the Kaggle direction is the lower FID, 89.99 against Ritik
 | 1 — validation loss | 0.857 | 0.778 |
 | 1 — distinct-1 (sample variety) | 0.225 | 0.008 |
 | 2 — best model | Mean-pool baseline, macro-F1 0.923, on 100k reviews | BiLSTM, accuracy 0.934, on the full 560k set |
-| 3 — photo to Monet FID | 89.99 | 123.70 |
-
-Lower FID and lower validation loss are better. Sneha’s photo-to-Monet MiFID is 0.403.
 
 ---
 
