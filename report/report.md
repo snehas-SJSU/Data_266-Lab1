@@ -7,7 +7,7 @@
 
 ## Abstract
 
-This report covers three tasks, each trained twice. Sneha Singh and Ritika Mukesh Neema each built a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. The models are not copies of each other. On Part 1, Ritika’s validation loss is lower and Sneha’s samples are more varied. On Part 2, both BiLSTMs lead. Sneha’s macro-F1 is 0.942 on the full test set. Ritika’s accuracy is 0.934. On Part 3, Sneha’s photo-to-Monet FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70. Kaggle scores and the shared human-audit kappa are still open.
+This report covers three tasks, each trained twice. Sneha Singh and Ritika Mukesh Neema each built a character-level GPT on TinyStories, three Yelp polarity classifiers, and a CycleGAN for photo-to-Monet transfer. The models are not copies of each other. On Part 1, Ritika’s validation loss is lower and Sneha’s samples are more varied. On Part 2, both BiLSTMs lead. Sneha’s macro-F1 is 0.942. Ritika’s macro-F1 is 0.934. On Part 3, Sneha’s photo-to-Monet FID is 89.99 and her MiFID is 0.403. Ritika’s FID is 123.70, on a much shorter run. Kaggle scores are still open.
 
 The repository is [https://github.com/snehas-SJSU/Data_266-Lab1](https://github.com/snehas-SJSU/Data_266-Lab1).
 
@@ -20,7 +20,7 @@ Each part below has two individual write-ups and then one team comparison. Secti
 | Part | Sneha Singh (her own model) | Ritika Mukesh Neema (her own model) |
 |---|---|---|
 | 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab Tesla T4 |
-| 2 — Yelp polarity | BiLSTM best, macro-F1 0.942, full train set, Colab Tesla T4 | BiLSTM best, accuracy 0.934, full 560k set, Colab Tesla T4 |
+| 2 — Yelp polarity | BiLSTM best, macro-F1 0.942, full train set, Colab Tesla T4 | BiLSTM best, macro-F1 0.934, full 560k set, Colab Tesla T4 |
 | 3 — CycleGAN | Batch 4, nearest upsample, Colab Tesla T4, FID 89.99, MiFID 0.403 | Batch 1, RTX 5090, FID 123.70 |
 
 We share the raw data. The rows above are two separate runs of the same part, not a split of who had to do which part.
@@ -117,20 +117,20 @@ Full cases: [task1_llm/ritika_mukesh_neema/failure_analysis.md](https://github.c
 | Max gradient norm | 5.42 | 4.99 |
 | Params / time / peak MB | 3.25M / 457 s / 349 | 0.88M / 1,727 s / 1,749 |
 | Train / gen tokens per sec | 280,325 / 409 | 177,917 / 239 |
-| Checkpoint | `task1_llm/sneha_singh/checkpoints/best.pt` | `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt` |
-| Log | `reproducibility/raw_logs/sneha_singh/task1_llm/train_full.log` | `reproducibility/raw_logs/ritika_mukesh_neema/task1_llm/train_full.log` |
+| Checkpoint | `best.pt` | `ckpt_final.pt` |
+| Log | `train_full.log` | `train_full.log` |
 
-**Strength.** Ritika’s model has validation loss 0.778. Sneha’s model has validation loss 0.857, and her samples are more varied: distinct-1 is 0.225 against Ritika’s 0.008.
+<div class="joint">
+
+**Strength.** Ritika’s validation loss is 0.778, and Sneha’s is 0.857. Sneha’s distinct-1 is 0.225, and Ritika’s is 0.008. Each run leads on a different metric.
 
 **Weakness.** Both greedy decoders loop on “You are very happy.”
 
 **Limitation.** Embedding size, context length, and the machine differ, so the loss gap is not a pure architecture contest.
 
-**Next.** Add a repetition penalty at decode time, and stop generation when the story-boundary token appears.
+**Next.** Both of us would add a repetition penalty at decode time, and stop generation when the story-boundary token appears.
 
----
-
-<div class="page-break"></div>
+</div>
 
 # Part 2 — Yelp polarity
 
@@ -230,7 +230,7 @@ Same three model families. The tables use the same columns. Both of us trained o
 | BiLSTM | 0.934 | 0.934 | 0.982 | 0.982 | 0.868 | 0.051 | 0.025 | < 0.001 | 3.24M | 798 s | 2,274 |
 | TextCNN | 0.926 | 0.926 | 0.979 | 0.979 | 0.852 | 0.055 | 0.021 | 0.00022 | 3.12M | 267 s | 2,450 |
 
-Precision, recall, the other F1 scores, bootstrap intervals, examples per second, and slice scores are in the next table. Ritika’s metrics file has no short-review or long-review slice columns, so those cells are blank.
+Precision, recall, the other F1 scores, bootstrap intervals, examples per second, and slice scores are in the next table. A slice cell is blank when that metrics file has no short-review or long-review column.
 
 | Metric | Sneha baseline | Sneha BiLSTM | Sneha TextCNN | Ritika baseline | Ritika BiLSTM | Ritika TextCNN |
 |---|---|---|---|---|---|---|
@@ -247,13 +247,17 @@ Precision, recall, the other F1 scores, bootstrap intervals, examples per second
 | Long macro-F1 | 0.927 | 0.934 | 0.933 | | | |
 | Long error rate | 0.072 | 0.065 | 0.066 | | | |
 
-**Strength.** Sneha’s BiLSTM has macro-F1 0.942. Ritika’s BiLSTM has accuracy 0.934. On both runs the BiLSTM beats that person’s baseline, and McNemar says the lead is real.
+<div class="joint">
+
+**Strength.** Sneha’s BiLSTM macro-F1 is 0.942. Ritika’s BiLSTM macro-F1 is 0.934. On both runs the BiLSTM beats that person’s baseline, and McNemar says the lead is real.
 
 **Weakness.** Both of us miss sarcasm, mixed reviews, and negation.
 
-**Limitation.** The test splits are not the same cut of the file. Sneha lemmatizes and cuts reviews at 128 tokens. Ritika stems and uses a maximum length of 200. Ritika’s metrics file has no short-review or long-review scores.
+**Limitation.** The test splits are not the same cut of the file. Sneha lemmatizes and uses a maximum length of 128. Ritika stems and uses a maximum length of 200. The scores are not one shared test.
 
-**Next.** Keep negation words, and raise Sneha’s maximum length so long reviews are not cut at 128 tokens.
+**Next.** Both of us would use the same maximum review length, so long reviews are scored the same way.
+
+</div>
 
 ---
 
@@ -299,7 +303,6 @@ Full notes: [task3_gan/sneha_singh/failure_analysis.md](https://github.com/sneha
 
 Audit sheet: [task3_gan/sneha_singh/outputs/human_audit/audit_30.csv](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task3_gan/sneha_singh/outputs/human_audit/audit_30.csv)
 
-Agreement with Ritika is not in yet, because she has not scored the same 30.
 
 ## 3.B Ritika Mukesh Neema — individual
 
@@ -319,7 +322,7 @@ My `submission.csv` records photo-to-Monet FID 123.70.
 ### Failure notes
 
 - **Cycle check.** Cycle L1, LPIPS, and content cosine are on 100 images, not the full photo set.
-- **Human audit.** My audit folder is empty, so I have not scored the shared 30 images and there is no kappa yet. I do not have a `failure_analysis.md` for this run.
+- **Human audit.** My audit folder is empty, and I do not have a `failure_analysis.md` for this run.
 
 ## 3.C Team comparison
 
@@ -344,14 +347,19 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | Cycle loss | 2.174 | same run | 2.412 | same run |
 | Identity loss | 1.097 | same run | 1.244 | same run |
 | Gradient norm | 112.82 | same run | 57.00 mean, 315 max | same run |
+| Human audit, 30 images (style / content / artifacts, 0–2, higher is worse) | 1.4 / 1.7 / 1.4 | | | |
+
+<div class="joint">
 
 **Strength.** Sneha’s photo-to-Monet FID is 89.99. Ritika’s FID is 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours.
 
-**Weakness.** Sneha’s discriminator loss ended near 0.17, and the brush texture is grainy.
+**Weakness.** Both discriminator losses ended low, 0.17 for Sneha and 0.23 for Ritika. On Sneha’s images the brush texture is grainy.
 
-**Limitation.** Ritika’s cycle scores use 100 images, while Sneha’s use the full sets. Batch size and training time also differ.
+**Limitation.** Batch size, training time, and the number of images in the cycle scores differ, so the two FID numbers are not a pure architecture contest.
 
-**Next.** Upload one `submission.csv`, and both of us score the same 30 images. Neither public score is in yet.
+**Next.** Both of us would train past 80 epochs, since the paper uses 200, and then upload one photo-to-Monet `submission.csv`.
+
+</div>
 
 ---
 
@@ -361,7 +369,7 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 |---|---|---|
 | 1 — validation loss | 4 layers, emb 256, context 128. 0.857 | 4 layers, emb 128, context 256. 0.778 |
 | 1 — distinct-1 | 4 layers, emb 256, context 128. 0.225 | 4 layers, emb 128, context 256. 0.008 |
-| 2 — best model | BiLSTM, 550k train, 38k test. Macro-F1 0.942 | BiLSTM, full set. Accuracy 0.934 |
+| 2 — best model | BiLSTM, 550k train, 38k test. Macro-F1 0.942 | BiLSTM, full set. Macro-F1 0.934 |
 
 ---
 
@@ -372,12 +380,6 @@ Kaggle team `PairProgramming_Team_5`. One submission, from Sneha’s `task3_gan/
 | | Public score | Private score | Rank |
 |---|---|---|---|
 | PairProgramming_Team_5 | | | |
-
-Cohen’s kappa on the shared 30 images. Ritika’s audit folder is still empty, so this cell stays blank.
-
-| | Cohen’s kappa |
-|---|---|
-| Shared 30 images | |
 
 The plots in this file are the png files already stored under each task folder. They are not copied again into `report/`.
 
