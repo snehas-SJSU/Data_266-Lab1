@@ -132,7 +132,8 @@ python task3_gan/sneha_singh/evaluate_local.py
 |---|---|
 | Upload file | `task3_gan/sneha_singh/submission.csv` |
 | Local FID / MiFID | 89.99 / 0.403 |
-| Public / private / rank | _fill after submit_ |
+| Public score | −45.1953 |
+| Rank | 2 |
 
 **Status:** Retrain and full A2B/B2A local eval are done (A2B FID 89.99 / MiFID 0.403; B2A FID 92.23 / MiFID 0.423). `best.pt` and the Monet/photo folders are on Drive.
 
@@ -143,8 +144,8 @@ Notebook, `evaluate_local.py`, `submission.csv`, metrics, and write-ups for her 
 | Item | Value |
 |---|---|
 | Upload file | `task3_gan/ritika_mukesh_neema/submission.csv` |
-| Local FID / MiFID | _add_ |
-| Public / private / rank | _fill after submit_ |
+| Local FID / MiFID | 123.70 / blank in her `submission.csv` |
+| Public score / rank | her file is not on the team board; the score above is Sneha’s upload |
 
 ---
 
@@ -177,7 +178,7 @@ Part 3 `best.pt` is on Drive because the file is 107.9 MB, over GitHub’s 100 M
 
 | File | Link |
 |---|---|
-| Part 3 `best.pt` | _add_ |
+| Part 3 `best.pt` | https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view |
 
 ---
 
