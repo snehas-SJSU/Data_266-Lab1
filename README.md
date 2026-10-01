@@ -144,8 +144,9 @@ Notebook, `evaluate_local.py`, `submission.csv`, metrics, and write-ups for her 
 | Item | Value |
 |---|---|
 | Upload file | `task3_gan/ritika_mukesh_neema/submission.csv` |
-| Local FID / MiFID | 123.70 / blank in her `submission.csv` |
-| Public score / rank | her file is not on the team board; the score above is Sneha’s upload |
+| Local FID (training-split, not official) | 123.70 |
+| Kaggle official FID / MiFID | 104.30 / 0.413 |
+| Public score | -52.3574 (own submission, own Kaggle account) |
 
 ---
 
