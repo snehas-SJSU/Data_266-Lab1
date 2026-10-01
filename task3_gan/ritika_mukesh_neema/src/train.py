@@ -49,6 +49,7 @@ def main():
     ap.add_argument("--log_every", type=int, default=20)
     ap.add_argument("--save_every_epoch", type=int, default=1)
     ap.add_argument("--max_steps", type=int, default=None, help="optional hard cap for smoke tests")
+    ap.add_argument("--resume_from", default=None, help="path to a ckpt_epoch*.pt to resume from (reloads G/D weights, continues epoch count + LR schedule; optimizer momentum is NOT restored, so expect one noisy epoch right after resuming)")
     args = ap.parse_args()
 
     torch.manual_seed(args.seed)
@@ -92,8 +93,21 @@ def main():
     pool_fake_A = ImagePool(args.pool_size)  # fake "monet" (domain A style)
     pool_fake_B = ImagePool(args.pool_size)  # fake "photo" (domain B style)
 
+    start_epoch = 0
+    if args.resume_from:
+        ckpt = torch.load(args.resume_from, map_location=device)
+        G_A2B.load_state_dict(ckpt["G_A2B"])
+        G_B2A.load_state_dict(ckpt["G_B2A"])
+        D_A.load_state_dict(ckpt["D_A"])
+        D_B.load_state_dict(ckpt["D_B"])
+        start_epoch = ckpt["epoch"] + 1
+        for _ in range(start_epoch):
+            sched_G.step()
+            sched_D.step()
+        print(f"Resumed from {args.resume_from}: continuing at epoch {start_epoch} (optimizer state is fresh, not restored)")
+
     log_path = os.path.join(args.out_dir, "train_log.jsonl")
-    log_f = open(log_path, "w")  # raw, unedited log -- evidence trail
+    log_f = open(log_path, "a" if args.resume_from else "w")  # raw, unedited log -- evidence trail
 
     history = {"loss_G": [], "loss_D": [], "loss_cycle": [], "loss_identity": [], "loss_gan": []}
     grad_norms, nan_events = [], 0
@@ -101,7 +115,7 @@ def main():
     t_start = time.time()
     step = 0
 
-    for epoch in range(total_epochs):
+    for epoch in range(start_epoch, total_epochs):
         epoch_losses = {k: 0.0 for k in history}
         n_batches = 0
         t_epoch = time.time()
