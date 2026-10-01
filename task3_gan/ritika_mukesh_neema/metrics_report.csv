@@ -1,0 +1,34 @@
+metric,value,notes
+fid_photo_to_monet_B2A_local,123.70142207719508,FID vs local data_dir_a/monet_jpg split (not official Kaggle real_stats)
+fid_monet_to_photo_A2B_local,120.72189135388714,FID vs local data_dir_b/photo_jpg split
+kid_photo_to_monet_B2A,0.02674577198922634,bootstrapped over 50 subsets
+kid_photo_to_monet_B2A_std,0.0028846028726547956,
+kid_monet_to_photo_A2B,0.040115561336278915,bootstrapped over 50 subsets
+kid_monet_to_photo_A2B_std,0.003394568106159568,
+precision_photo_to_monet_B2A,0.32666666666666666,improved precision/recall (Kynkaanniemi et al. 2019) k=3
+recall_photo_to_monet_B2A,0.57,
+precision_monet_to_photo_A2B,0.6133333333333333,
+recall_monet_to_photo_A2B,0.20666666666666667,
+cycle_A_l1_mean,0.10935583457350731,monet->photo->monet reconstruction L1 100 images
+cycle_A_lpips_mean,0.40471330359578134,
+cycle_A_content_cosine_mean,0.8733191460371017,
+cycle_B_l1_mean,0.12576062157750129,photo->monet->photo reconstruction L1 100 images
+cycle_B_lpips_mean,0.3373443901538849,
+cycle_B_content_cosine_mean,0.7753308209776878,
+device,cuda,NVIDIA RTX 5090 (GPU Lab machine)
+total_parameter_count,28285832,G_A2B+G_B2A+D_A+D_B
+epochs_trained,80,n_epochs=40 + n_epochs_decay=40
+batch_size,4,confirmed from ckpt_final.pt saved config
+final_loss_G,4.835439472198487,
+final_loss_D,0.2270275154709816,
+final_loss_cycle,2.4121022844314575,
+final_loss_identity,1.2444477923711141,
+mean_grad_norm,57.003259728868805,
+max_grad_norm,315.31370544433594,
+nan_or_inf_events,0,
+total_training_time_sec,1659.969865322113,~27.7 min
+avg_images_per_sec,14.458093789156141,
+peak_memory_mb,1645.3046875,
+kaggle_fid_official,104.30206134844458,FID vs official real_stats.npz (class-provided), computed via kaggle_score.py
+kaggle_mifid_official,0.4127500057220459,MiFID vs official real_stats.npz feats_real (300 images), computed via kaggle_score.py
+kaggle_public_score,-52.3574,DATA 266 Fall 2026 GAN Image Style Transfer competition; submitted 2026-10-01 from kaggle_submission.csv
