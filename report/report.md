@@ -346,7 +346,7 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | Identity loss | 1.097 | same run | 1.244 | same run |
 | Gradient norm | 112.82 | same run | 57.00 mean, 315 max | same run |
 
-Human audit score on the 30 photo → Monet images. Style and content are 0–2, higher is better. Artifacts are 0–2, higher is worse. Cohen’s kappa is the inter-rater agreement for both of us on the same 30 images.
+**Human audit score** on the 30 photo → Monet images. Style and content are 0–2, higher is better. Artifacts are 0–2, higher is worse. Cohen’s kappa is the inter-rater agreement for both of us on the same 30 images.
 
 | | Sneha | Ritika | Cohen's kappa |
 |---|---|---|---|
