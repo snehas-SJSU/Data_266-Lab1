@@ -381,7 +381,7 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 
 # Kaggle score
 
-Team `PairProgramming_Team_05`. The photo-to-Monet FID for each member is in Part 3. This table is the public leaderboard score for Sneha’s `task3_gan/sneha_singh/submission.csv`.
+Team `PairProgramming_Team_05`. The photo-to-Monet FID for each member is in Part 3.
 
 | Team | Public score | Rank |
 |---|---|---|
