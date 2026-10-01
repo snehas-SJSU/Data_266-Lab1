@@ -1,7 +1,7 @@
 # Part 3 — Failure / error analysis (Sneha Singh)
 
 I looked at this 80-epoch retrain (nearest upsample, label smoothing 0.9, CUDA + AMP): loss curves,
-the sample grid, a bunch of `pred_A2B` images, and the numbers from
+the sample grid, the photo→Monet images in `pred_B2A`, and the numbers from
 `evaluate_local.py`. Ritika still needs to fill her half of the 30-sample sheet
 before we can write agreement (κ).
 
@@ -49,12 +49,12 @@ From `full_metrics_report.csv`:
 
 | | cycle L1 | LPIPS vs source | content cosine vs source | FID | MiFID |
 |---|---|---|---|---|---|
-| A2B | 0.112 | 0.452 | 0.532 | 89.99 | 0.403 |
-| B2A | 0.103 | 0.365 | 0.586 | 92.23 | 0.423 |
+| A2B (Monet→photo) | 0.103 | 0.365 | 0.586 | 113.58 | 0.428 |
+| B2A (photo→Monet) | 0.112 | 0.452 | 0.532 | 105.88 | 0.407 |
 
 Cycle L1 around 0.11 feels fine after training (cycle loss went from ~5.9 → ~2.17).
-A2B content cosine ~0.53 matches what I see: scene is there, not pixel-perfect.
-Full B2A (300) is in the same range — LPIPS 0.37 and content cos 0.59.
+B2A content cosine ~0.53 matches what I see on photo→Monet: scene is there, not pixel-perfect.
+A2B (300 Monet→photo images) is in the same range — LPIPS 0.37 and content cos 0.59.
 
 ## Training / loss curves
 
@@ -69,16 +69,15 @@ Looking at `outputs/loss_curves/losses.png`:
 
 ## MiFID / memorization
 
-Local A2B: FID **89.99**, MiFID **0.403**. B2A: FID **92.23**, MiFID **0.423**.
+Professor script, both directions: A2B FID **113.58**, MiFID **0.428**. B2A FID **105.88**, MiFID **0.407**.
+`submission.csv` is the average: FID **109.73**, MiFID **0.418**.
 When I rated, images looked like stylized versions of that photo, not pasted
 Monet paintings. The main issue is shared grainy texture across many outputs.
 Ritika and I will confirm that on the joint sheet.
 
-Scores came from our local `evaluate_local.py`. We still need the course
-`real_stats.npz` / eval script before treating them as final leaderboard numbers.
+Scores came from `evaluate_local.py`, which follows the professor notebook (Inception-v3, first 300 sorted images, mean cosine distance).
 
 ## Next steps if we retrain
 
-1. More epochs or slightly higher identity loss.
-2. Change upsampling to reduce checkerboard.
-3. Finish joint 30 ratings and record agreement here.
+1. Train on all 7,038 photos each epoch. That setting is already in `src/config.json` (10 + 6 epochs) and has not been run.
+2. Finish joint 30 ratings and record agreement here.

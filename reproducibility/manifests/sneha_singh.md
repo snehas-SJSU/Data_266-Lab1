@@ -86,12 +86,12 @@ unedited.
 - Train time: 15341 s (~4.3 h); peak_memory_mb: 6568
 - Device: Colab Tesla T4. `train_full.log` only prints `device=cuda`.
 - Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` is 107.9 MB, over GitHub’s 100 MB limit, so it is not in git. https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link
-- Pred A2B: `outputs/pred_A2B` (7038 JPGs)
-- Pred B2A: `outputs/pred_B2A` (300 JPGs, full Monet set)
+- Pred A2B: `outputs/pred_A2B` (300 JPGs, Monet→photo)
+- Pred B2A: `outputs/pred_B2A` (7038 JPGs, photo→Monet)
 - Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full.log` (80 epoch lines)
 - Metrics CSV: `task3_gan/sneha_singh/full_metrics_report.csv`
-- Submission: `task3_gan/sneha_singh/submission.csv` (FID 89.99, MiFID 0.403) — Kaggle upload pending
-- Local A2B: FID 89.99, MiFID 0.403 · Local B2A: FID 92.23, MiFID 0.423
+- Submission: `task3_gan/sneha_singh/submission.csv` (professor average FID 109.73, MiFID 0.418)
+- Local A2B (Monet→photo): FID 113.58, MiFID 0.428 · Local B2A (photo→Monet): FID 105.88, MiFID 0.407
 - Results / failures: `results.md`, `failure_analysis.md`
 - Eval command: `python task3_gan/sneha_singh/evaluate_local.py` (Mac; fidelity backend CPU, LPIPS on MPS)
 - Train command: Run All on `part3_cyclegan.ipynb` (smoke=false)

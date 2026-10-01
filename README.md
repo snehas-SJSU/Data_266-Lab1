@@ -131,11 +131,11 @@ python task3_gan/sneha_singh/evaluate_local.py
 | Item | Value |
 |---|---|
 | Upload file | `task3_gan/sneha_singh/submission.csv` |
-| Local FID / MiFID | 89.99 / 0.403 |
-| Public score | −45.1953 |
-| Rank | 2 |
+| Local FID / MiFID | 109.73 / 0.418 (average of both directions) |
+| Public score | ≈55.07 = (FID 109.73 + MiFID 0.418) / 2 (new evaluation script; _fill exact Kaggle value_) |
+| Rank | _fill from Kaggle_ |
 
-**Status:** Retrain and full A2B/B2A local eval are done (A2B FID 89.99 / MiFID 0.403; B2A FID 92.23 / MiFID 0.423). `best.pt` and the Monet/photo folders are on Drive.
+**Status:** Professor eval is in `submission.csv` (FID 109.73, MiFID 0.418). A2B Monet→photo FID 113.58. B2A photo→Monet FID 105.88. `best.pt` is the 80-epoch checkpoint. `config.json` is set for a later full-photo run that has not been trained.
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 

@@ -1,4 +1,7 @@
-"""Full Monet→photo (B2A) inference from best.pt. Does not touch pred_A2B."""
+"""Full Monet→photo inference from best.pt.
+
+The professor evaluator stores that direction in pred_A2B. Does not touch pred_B2A.
+"""
 from pathlib import Path
 
 import numpy as np
@@ -10,7 +13,7 @@ from torchvision import transforms
 ROOT = Path(__file__).resolve().parents[2]
 MEMBER = Path(__file__).resolve().parent
 MONET_DIR = ROOT / "task3_gan" / "data" / "monet_jpg"
-PRED_B2A = MEMBER / "outputs" / "pred_B2A"
+PRED_A2B = MEMBER / "outputs" / "pred_A2B"
 CKPT = MEMBER / "checkpoints" / "best.pt"
 IMG = 256
 
@@ -107,20 +110,20 @@ def main():
     G_BA.load_state_dict(state["G_BA"])
     G_BA.eval()
 
-    PRED_B2A.mkdir(parents=True, exist_ok=True)
-    for p in PRED_B2A.glob("*"):
-        if p.is_file() and p.name != ".gitkeep":
+    PRED_A2B.mkdir(parents=True, exist_ok=True)
+    for p in PRED_A2B.glob("*"):
+        if p.is_file() and p.name != ".gitkeep" and p.name != "README.md":
             p.unlink()
 
-    print(f"writing {len(paths)} B2A preds → {PRED_B2A}")
+    print(f"writing {len(paths)} Monet→photo preds → {PRED_A2B}")
     with torch.no_grad():
         for i, path in enumerate(paths):
             x = tf(Image.open(path).convert("RGB")).unsqueeze(0).to(device)
             y = G_BA(x)[0]
-            tensor_to_pil(y).save(PRED_B2A / f"{i:05d}.jpg", quality=95)
+            tensor_to_pil(y).save(PRED_A2B / f"{i:05d}.jpg", quality=95)
             if (i + 1) % 50 == 0 or i + 1 == len(paths):
                 print(f"  {i + 1}/{len(paths)}", flush=True)
-    print("done. pred_B2A count:", len(list_images(PRED_B2A)))
+    print("done. pred_A2B count:", len(list_images(PRED_A2B)))
 
 
 if __name__ == "__main__":

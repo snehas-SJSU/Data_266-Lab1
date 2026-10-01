@@ -3,18 +3,17 @@
 Run after training + inference (from member folder or repo root):
   python task3_gan/sneha_singh/evaluate_local.py
 
-Computes FID / KID / precision-recall (torch-fidelity), LPIPS, content-cosine,
-and a local MiFID estimate (Inception cosine distance vs target domain).
-Writes:
-  - full_metrics_report.csv  (report metrics)
-  - submission.csv           (Kaggle upload: FID + MiFID from A2B / photo→Monet)
+FID and MiFID follow the course notebook: Inception-v3, at most 300 sorted
+images, then cosine distance paired by index.
+submission.csv is the average of both directions:
+  FID = (photo→Monet FID + Monet→photo FID) / 2
+  MiFID = (photo→Monet MiFID + Monet→photo MiFID) / 2
+Folders match that notebook:
+  pred_A2B = Monet → photo (generated photos)
+  pred_B2A = photo → Monet (generated Monet)
+full_metrics_report.csv still keeps both directions plus the other lab metrics.
 
-Class competition upload is submission.csv (self-reported scores), NOT images.zip.
-
-Prefer the course evaluation script + task3_gan/data/real_stats.npz when available;
-this file is a local stand-in until those match exactly.
-
-Integrity note: Inception/VGG here are for *measurement only*, not image generation.
+Integrity note: Inception/VGG here are for measurement only, not image generation.
 """
 
 from __future__ import annotations
@@ -25,9 +24,12 @@ import random
 from pathlib import Path
 
 import numpy as np
+import scipy.linalg
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
 from PIL import Image
+from scipy.spatial.distance import cosine
 from torchvision import models, transforms
 
 MEMBER = Path(__file__).resolve().parent
@@ -39,6 +41,8 @@ CSV_PATH = MEMBER / "full_metrics_report.csv"
 SUBMISSION_PATH = MEMBER / "submission.csv"
 REAL_STATS = DATA / "real_stats.npz"
 CFG_PATH = MEMBER / "src" / "config.json"
+N_EVAL = 300
+FID_BATCH = 32
 
 FIELDS = [
     "direction",
@@ -152,59 +156,95 @@ def _fidelity_metrics(
     return out
 
 
+def _take_n(paths: list[Path], n: int | None) -> list[Path]:
+    """Course script: sorted paths, then the first n."""
+    if n is None:
+        return paths
+    return paths[: min(n, len(paths))]
+
+
+def _frechet_distance(mu1, sigma1, mu2, sigma2, eps=1e-6) -> float:
+    product = sigma1.dot(sigma2)
+    try:
+        covmean = scipy.linalg.sqrtm(product, disp=False)[0]
+    except TypeError:
+        covmean = scipy.linalg.sqrtm(product)
+    if not np.isfinite(covmean).all():
+        offset = np.eye(sigma1.shape[0]) * eps
+        product = (sigma1 + offset).dot(sigma2 + offset)
+        try:
+            covmean = scipy.linalg.sqrtm(product, disp=False)[0]
+        except TypeError:
+            covmean = scipy.linalg.sqrtm(product)
+    if np.iscomplexobj(covmean):
+        covmean = covmean.real
+    diff = mu1 - mu2
+    return float(diff.dot(diff) + np.trace(sigma1 + sigma2 - 2 * covmean))
+
+
+def _inception(device: torch.device) -> nn.Module:
+    model = models.inception_v3(
+        weights=models.Inception_V3_Weights.IMAGENET1K_V1,
+        transform_input=False,
+    )
+    model.fc = nn.Identity()
+    model.to(device)
+    model.eval()
+    return model
+
+
+_INCEPTION_TF = transforms.Compose(
+    [
+        transforms.Resize(299),
+        transforms.CenterCrop(299),
+        transforms.ToTensor(),
+        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+    ]
+)
+
+
+@torch.no_grad()
+def _activations(model: nn.Module, paths: list[Path], device: torch.device) -> np.ndarray:
+    feats = []
+    for i in range(0, len(paths), FID_BATCH):
+        batch = []
+        for p in paths[i : i + FID_BATCH]:
+            batch.append(_INCEPTION_TF(Image.open(p).convert("RGB")))
+        x = torch.stack(batch, dim=0).to(device)
+        y = model(x)
+        if isinstance(y, tuple):
+            y = y[0]
+        feats.append(y.detach().cpu().numpy())
+    return np.concatenate(feats, axis=0)
+
+
+def calculate_fid_mifid(
+    real_paths: list[Path], gen_paths: list[Path], device: torch.device
+) -> tuple[float | str, float | str]:
+    """Same FID and MiFID as the course notebook."""
+    real_paths = sorted(real_paths)
+    gen_paths = sorted(gen_paths)
+    if len(real_paths) < 2 or len(gen_paths) < 2:
+        return "", ""
+    n = min(len(real_paths), len(gen_paths))
+    real_paths, gen_paths = real_paths[:n], gen_paths[:n]
+    print(f"  FID/MiFID: {n} real vs {n} generated", flush=True)
+    model = _inception(device)
+    real_act = _activations(model, real_paths, device)
+    gen_act = _activations(model, gen_paths, device)
+    mu_r, sig_r = real_act.mean(axis=0), np.cov(real_act, rowvar=False)
+    mu_g, sig_g = gen_act.mean(axis=0), np.cov(gen_act, rowvar=False)
+    fid = _frechet_distance(mu_r, sig_r, mu_g, sig_g)
+    m = min(len(real_act), len(gen_act))
+    mifid = float(np.mean([cosine(real_act[i], gen_act[i]) for i in range(m)]))
+    return fid, mifid
+
+
 def _pair_paths(fake_dir: Path, real_dir: Path, limit: int) -> list[tuple[Path, Path]]:
     fakes = _list_images(fake_dir)
     reals = _list_images(real_dir)
     n = min(len(fakes), len(reals), limit)
     return list(zip(fakes[:n], reals[:n]))
-
-
-@torch.no_grad()
-def _mifid(
-    fake_dir: Path, real_dir: Path, device: torch.device, n_sample: int = 200
-) -> float | str:
-    """Local MiFID estimate: avg cosine *distance* of Inception-v3 features.
-
-    Compares generated images to real *target-domain* images (not source photos).
-    Pairing after equal-size subsample approximates the course description.
-    """
-    fakes = _list_images(fake_dir)
-    reals = _list_images(real_dir)
-    if len(fakes) < 2 or len(reals) < 2:
-        return ""
-    n = min(len(fakes), len(reals), n_sample)
-    rng = random.Random(670)
-    fakes = rng.sample(fakes, n)
-    reals = rng.sample(reals, n)
-
-    try:
-        inc = models.inception_v3(weights=models.Inception_V3_Weights.DEFAULT)
-    except Exception:
-        inc = models.inception_v3(weights=models.Inception_V3_Weights.IMAGENET1K_V1)
-    inc.fc = torch.nn.Identity()
-    inc = inc.to(device).eval()
-
-    tf = transforms.Compose(
-        [
-            transforms.Resize((299, 299)),
-            transforms.ToTensor(),
-            transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
-        ]
-    )
-
-    def feats(paths: list[Path]) -> torch.Tensor:
-        out = []
-        for p in paths:
-            x = tf(Image.open(p).convert("RGB")).unsqueeze(0).to(device)
-            y = inc(x)
-            if isinstance(y, tuple):
-                y = y[0]
-            out.append(y.squeeze(0))
-        return torch.stack(out)
-
-    f_fake, f_real = feats(fakes), feats(reals)
-    cos = F.cosine_similarity(f_fake, f_real, dim=1)
-    return float((1.0 - cos).mean().item())
 
 
 @torch.no_grad()
@@ -268,69 +308,96 @@ def main() -> None:
 
     print("member:", MEMBER.name)
     print("device:", device, "| fidelity backend:", dev_str)
-    print("pred_A2B:", len(_list_images(pred_a2b)), "| monet:", len(_list_images(monet)))
-    print("pred_B2A:", len(_list_images(pred_b2a)), "| photo:", len(_list_images(photo)))
-    _probe_real_stats()
+    n_a2b = len(_list_images(pred_a2b))
+    n_b2a = len(_list_images(pred_b2a))
+    print("pred_A2B:", n_a2b, "| pred_B2A:", n_b2a)
+    print("real photo:", len(_list_images(photo)), "| real Monet:", len(_list_images(monet)))
+    # Professor folders: pred_A2B = Monet→photo, pred_B2A = photo→Monet.
+    # An older notebook wrote those two sets the other way around (7038 in pred_A2B).
+    old_layout = n_a2b > n_b2a and n_a2b >= 1000
+    if old_layout:
+        print("older folder layout: pred_A2B is photo→Monet, pred_B2A is Monet→photo")
+        gen_photo_dir, gen_monet_dir = pred_b2a, pred_a2b
+    else:
+        gen_photo_dir, gen_monet_dir = pred_a2b, pred_b2a
 
     existing = _load_existing()
     limit = 64
-    mifid_n = 200
+    n_eval = N_EVAL
     if CFG_PATH.exists():
         cfg = json.loads(CFG_PATH.read_text())
         if cfg.get("smoke"):
             limit = 16
-            mifid_n = 16
+            n_eval = 16
 
     def _row(direction, fid_block, mifid, lp, cos):
         base = {k: "" for k in FIELDS}
         base.update(existing.get(direction, {}))
         base["direction"] = direction
-        base.update(fid_block)
-        base["mifid"] = mifid
-        base["lpips"] = lp
-        base["content_cosine"] = cos
+        for key, value in fid_block.items():
+            if value != "":
+                base[key] = value
+        if mifid != "":
+            base["mifid"] = mifid
+        if lp != "":
+            base["lpips"] = lp
+        if cos != "":
+            base["content_cosine"] = cos
         try:
             base["leaderboard_proxy"] = (float(base["fid"]) + float(mifid)) / 2.0
         except (TypeError, ValueError):
             base["leaderboard_proxy"] = ""
         return base
 
-    # --- A2B = Kaggle direction (photo→Monet); save as soon as ready ---
-    print("computing A2B FID/KID/PR ...", flush=True)
-    a2b_fid = _fidelity_metrics(pred_a2b, monet, dev_str)
-    print("computing A2B MiFID (generated Monet vs real Monet) ...", flush=True)
-    a2b_mifid = _mifid(pred_a2b, monet, device, n_sample=mifid_n)
-    a2b_pairs = _pair_paths(pred_a2b, photo, limit)
-    print("computing A2B LPIPS/content on", len(a2b_pairs), "pairs ...", flush=True)
-    a2b_lpips, a2b_cos = _lpips_and_content(a2b_pairs, device, max_n=limit)
-
-    a2b_row = _row("A2B", a2b_fid, a2b_mifid, a2b_lpips, a2b_cos)
-    _write_submission(a2b_row.get("fid", ""), a2b_row.get("mifid", ""))
-    print(
-        "A2B ready →",
-        "fid=", a2b_row["fid"],
-        "mifid=", a2b_row["mifid"],
-        "proxy=", a2b_row["leaderboard_proxy"],
-        flush=True,
-    )
-
-    # --- B2A report-only; skip heavy FID if only smoke preds (was hanging vs 7k photos) ---
-    n_b2a = len(_list_images(pred_b2a))
-    if n_b2a < 50:
-        print(
-            f"skipping B2A FID/KID/PR (only {n_b2a} preds; need full Monet→photo set)",
-            flush=True,
-        )
-        b2a_fid = {"fid": "", "kid": "", "precision": "", "recall": ""}
-    else:
-        print("computing B2A FID/KID/PR ...", flush=True)
-        b2a_fid = _fidelity_metrics(pred_b2a, photo, dev_str, min_fake=50)
-    print("computing B2A MiFID (generated photo vs real photo) ...", flush=True)
-    b2a_mifid = _mifid(pred_b2a, photo, device, n_sample=min(mifid_n, max(2, n_b2a)))
-    b2a_pairs = _pair_paths(pred_b2a, monet, limit)
+    # A2B: generated photos vs real photos. B2A: generated Monet vs real Monet.
+    real_monet = _take_n(_list_images(monet), n_eval)
+    real_photo = _take_n(_list_images(photo), n_eval)
+    gen_photo = _take_n(_list_images(gen_photo_dir), n_eval)
+    gen_monet = _take_n(_list_images(gen_monet_dir), n_eval)
+    print("\nEvaluating Photo -> Monet (B2A)", flush=True)
+    fid_b2a, mifid_b2a = calculate_fid_mifid(real_monet, gen_monet, device)
+    print(f"[Photo->Monet] FID={fid_b2a}  MiFID={mifid_b2a}", flush=True)
+    print("computing B2A KID/PR ...", flush=True)
+    b2a_fid = _fidelity_metrics(gen_monet_dir, monet, dev_str)
+    b2a_fid["fid"] = fid_b2a
+    b2a_mifid = mifid_b2a
+    b2a_pairs = _pair_paths(gen_monet_dir, photo, limit)
     print("computing B2A LPIPS/content on", len(b2a_pairs), "pairs ...", flush=True)
     b2a_lpips, b2a_cos = _lpips_and_content(b2a_pairs, device, max_n=limit)
     b2a_row = _row("B2A", b2a_fid, b2a_mifid, b2a_lpips, b2a_cos)
+
+    print("\nEvaluating Monet -> Photo (A2B)", flush=True)
+    fid_a2b, mifid_a2b = calculate_fid_mifid(real_photo, gen_photo, device)
+    print(f"[Monet->Photo] FID={fid_a2b}  MiFID={mifid_a2b}", flush=True)
+    n_gen_photo = len(_list_images(gen_photo_dir))
+    if n_gen_photo < 50:
+        print(
+            f"skipping A2B KID/PR (only {n_gen_photo} preds)",
+            flush=True,
+        )
+        a2b_fid = {"fid": "", "kid": "", "precision": "", "recall": ""}
+    else:
+        print("computing A2B KID/PR ...", flush=True)
+        a2b_fid = _fidelity_metrics(gen_photo_dir, photo, dev_str, min_fake=50)
+    a2b_fid["fid"] = fid_a2b
+    a2b_mifid = mifid_a2b
+    a2b_pairs = _pair_paths(gen_photo_dir, monet, limit)
+    print("computing A2B LPIPS/content on", len(a2b_pairs), "pairs ...", flush=True)
+    a2b_lpips, a2b_cos = _lpips_and_content(a2b_pairs, device, max_n=limit)
+    a2b_row = _row("A2B", a2b_fid, a2b_mifid, a2b_lpips, a2b_cos)
+
+    try:
+        sub_fid = (float(fid_a2b) + float(fid_b2a)) / 2.0
+        sub_mifid = (float(mifid_a2b) + float(mifid_b2a)) / 2.0
+    except (TypeError, ValueError):
+        sub_fid, sub_mifid = "", ""
+    _write_submission(sub_fid, sub_mifid)
+    print(
+        "submission average of both directions →",
+        "fid=", sub_fid,
+        "mifid=", sub_mifid,
+        flush=True,
+    )
 
     rows = [a2b_row, b2a_row]
     with CSV_PATH.open("w", newline="") as f:
@@ -351,8 +418,7 @@ def main() -> None:
             flush=True,
         )
     print(
-        "Note: numbers are local estimates until you run the course evaluation "
-        "script (and real_stats.npz). Match sample_submission.csv column names if different.",
+        "submission.csv is the average of both directions, matching the course script.",
         flush=True,
     )
 

@@ -1,7 +1,5 @@
-# pred_A2B — photo → Monet (Kaggle direction)
+# pred_A2B — Monet → photo
 
-Full set is **~7038 JPGs** — **not** committed (repo size / GitHub limits).
+Generated photos. The course evaluation script calls this direction A2B.
 
-- **Local:** regenerate with `best.pt` + `part3_cyclegan.ipynb` inference (or keep your local copy)
-- **On git instead:** sample grid `../samples/grid.png`, 30 audit images under `../human_audit/`
-- **Kaggle submit:** `../../submission.csv` (FID/MiFID), not these images
+Full set is **300 JPGs** — not committed (repo size / GitHub limits).

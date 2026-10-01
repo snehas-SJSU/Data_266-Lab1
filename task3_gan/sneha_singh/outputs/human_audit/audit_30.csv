@@ -1,5 +1,5 @@
-# Human audit sheet — Part 3 A2B (photo→Monet)
-# Fixed 30 indices into outputs/pred_A2B/%05d.jpg
+# Human audit sheet — Part 3 photo→Monet (professor folder pred_B2A)
+# Fixed 30 indices into outputs/pred_B2A/%05d.jpg (photo→Monet)
 # Scores: style 0-2 (higher=better Monet feel), content 0-2 (higher=keeps photo layout),
 # artifacts 0-2 (higher=worse grid/noise), mem Y/N (looks copied from real Monet?)
 # Sneha columns filled (solo pass 2026-09-25). Ritika columns left blank for her pass.

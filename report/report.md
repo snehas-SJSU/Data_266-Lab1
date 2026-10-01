@@ -21,7 +21,7 @@ Each part below has two individual write-ups and then one team comparison. Secti
 |---|---|---|
 | 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab Tesla T4 |
 | 2 — Yelp polarity | BiLSTM best, macro-F1 0.942, full train set, Colab Tesla T4 | BiLSTM best, macro-F1 0.934, full 560k set, Colab Tesla T4 |
-| 3 — CycleGAN | Batch 4, Colab Tesla T4, about 4.3 h, FID 89.99 | Batch 1, RTX 5090, about 28 min, FID 123.70 |
+| 3 — CycleGAN | Batch 4, Colab Tesla T4, about 4.3 h, photo→Monet FID 105.88 | Batch 1, RTX 5090, about 28 min, FID 123.70 |
 
 We share the raw data. The rows above are two separate runs of the same part, not a split of who had to do which part.
 
@@ -265,7 +265,7 @@ Precision, recall, the other F1 scores, bootstrap intervals, examples per second
 
 I trained an unpaired CycleGAN. The Kaggle direction is photo to Monet. The generators are mine. I did not use a pretrained model to make the images. Inception and the other nets in the eval script are only for measuring.
 
-Each generator is a ResNet with 9 blocks at 256×256, reflection padding, instance norm, and a tanh output. Upsampling is nearest-neighbor times two, then a stride-1 convolution, not a transposed convolution. Each discriminator is a PatchGAN trained with least-squares loss. The losses are adversarial, cycle L1 with λ = 10, and identity at half of that. Real labels are smoothed to 0.9. An image pool of 50 feeds the discriminator. Batch size is 4. I trained 40 epochs at a constant learning rate and 40 more with decay, and each epoch resamples about 800 photos. The shorter Monet loader is cycled so those photos actually get used. Scoring uses all 7,038 photos in the photo-to-Monet direction and all 300 Monet paintings in the other direction.
+Each generator is a ResNet with 9 blocks at 256×256, reflection padding, instance norm, and a tanh output. Upsampling is nearest-neighbor times two, then a stride-1 convolution, not a transposed convolution. Each discriminator is a PatchGAN trained with least-squares loss. The losses are adversarial, cycle L1 with λ = 10, and identity at half of that. Real labels are smoothed to 0.9. An image pool of 50 feeds the discriminator. Batch size is 4. I trained 40 epochs at a constant learning rate and 40 more with decay, and each epoch resamples about 800 photos. The shorter Monet loader is cycled so those photos actually get used. `pred_B2A` is photo→Monet (7,038 images). `pred_A2B` is Monet→photo (300 images). Those are the professor folder names.
 
 Training was on a Colab Tesla T4 with mixed precision. It took about 4.3 hours and peaked near 6568 MB. The log line is `device=cuda`. `best.pt` is 107.9 MB, over GitHub’s 100 MB limit, so it is not in git: [https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link](https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link)
 
@@ -273,10 +273,10 @@ The Monet and photo folders are in one Drive folder: [https://drive.google.com/d
 
 | Direction | FID | KID | MiFID | LPIPS | Content cosine | Cycle L1 |
 |---|---|---|---|---|---|---|
-| Photo → Monet | 89.99 | 0.018 | 0.403 | 0.452 | 0.532 | 0.112 |
-| Monet → photo | 92.23 | 0.030 | 0.423 | 0.365 | 0.586 | 0.103 |
+| Photo → Monet (`pred_B2A`) | 105.88 | 0.018 | 0.407 | 0.452 | 0.532 | 0.112 |
+| Monet → photo (`pred_A2B`) | 113.58 | 0.030 | 0.428 | 0.365 | 0.586 | 0.103 |
 
-FID is the Fréchet distance between Inception features of the generated images and the real target images. MiFID here is the average cosine distance of those features after an equal subsample. Lower is better on both. My local combined score for the Kaggle direction is (89.99 + 0.403) / 2 = 45.20. The same two numbers are in `task3_gan/sneha_singh/submission.csv`.
+FID is the Fréchet distance between Inception features of the generated images and the real target images. MiFID is the average cosine distance of those features on the first 300 sorted images, which is the professor script. Lower is better on both. `submission.csv` is the average of both directions: FID 109.73, MiFID 0.418.
 
 Losses fell across the 80 epochs. The discriminator loss ended near 0.17, which is low. The generator is not winning that fight, and I think that is why the brush texture gets noisy.
 
@@ -329,7 +329,7 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | | Sneha photo → Monet | Sneha Monet → photo | Ritika photo → Monet | Ritika Monet → photo |
 |---|---|---|---|---|
 | Epochs / batch | 40 + 40, batch 4 | same run | 40 + 40, batch 1 | same run |
-| FID | 89.99 | 92.23 | 123.70 | 120.72 |
+| FID | 105.88 | 113.58 | 123.70 | 120.72 |
 | KID | 0.018 | 0.030 | 0.027 | 0.040 |
 | Precision | 0.540 | 0.660 | 0.327 | 0.613 |
 | Recall | 0.293 | 0.089 | 0.570 | 0.207 |
@@ -356,13 +356,13 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 
 <div class="joint">
 
-**Strength.** Sneha’s photo-to-Monet FID is 89.99. Ritika’s FID is 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours.
+**Strength.** Sneha’s photo-to-Monet FID is 105.88. Ritika’s FID is 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours.
 
 **Weakness.** Both discriminator losses ended low, 0.17 for Sneha and 0.23 for Ritika. On Sneha’s images the brush texture is grainy.
 
 **Limitation.** Batch size, training time, and the number of images in the cycle scores differ, so the two FID numbers are not a pure architecture contest.
 
-**Next.** Both of us would train past 80 epochs, since the paper uses 200, and then upload one photo-to-Monet `submission.csv`.
+**Next.** Sneha’s next run uses all 7,038 photos each epoch. The class upload is `submission.csv` with the average FID and MiFID of both directions.
 
 </div>
 
@@ -375,17 +375,17 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | 1 — validation loss | 4 layers, emb 256, context 128. 0.857 | 4 layers, emb 128, context 256. 0.778 |
 | 1 — distinct-1 | 4 layers, emb 256, context 128. 0.225 | 4 layers, emb 128, context 256. 0.008 |
 | 2 — best model | BiLSTM (lemmatize), 550k train, 38k test. Macro-F1 0.942 | BiLSTM (Porter stem), full set. Macro-F1 0.934 |
-| 3 — photo → Monet FID | Batch 4, about 4.3 h. 89.99 | Batch 1, about 28 min. 123.70 |
+| 3 — photo → Monet FID | Batch 4, about 4.3 h. 105.88 (submission average FID 109.73) | Batch 1, about 28 min. 123.70 |
 
 ---
 
 # Kaggle score
 
-Team `PairProgramming_Team_05`. The photo-to-Monet FID for each member is in Part 3.
+Team `PairProgramming_Team_05`. Score uses the new professor evaluation script: (FID + MiFID) / 2, each averaged over both directions. Current `submission.csv`: FID 109.73, MiFID 0.418.
 
 | Team | Public score | Rank |
 |---|---|---|
-| PairProgramming_Team_05 | −45.1953 | 2 |
+| PairProgramming_Team_05 | ≈55.07 (_fill exact Kaggle value_) | _fill from Kaggle_ |
 
 <div class="cite">
 
