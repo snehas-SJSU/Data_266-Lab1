@@ -383,7 +383,7 @@ Human audit score on the 30 photo → Monet images. Style and content are 0–2,
 
 Team `PairProgramming_Team_05`. The photo-to-Monet FID for each member is in Part 3. This table is the public leaderboard score for Sneha’s `task3_gan/sneha_singh/submission.csv`.
 
-| | Public score | Rank |
+| Team | Public score | Rank |
 |---|---|---|
 | PairProgramming_Team_05 | −45.1953 | 2 |
 
