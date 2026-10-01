@@ -374,8 +374,8 @@ Human audit score on the 30 photo → Monet images. Style and content are 0–2,
 |---|---|---|
 | 1 — validation loss | 4 layers, emb 256, context 128. 0.857 | 4 layers, emb 128, context 256. 0.778 |
 | 1 — distinct-1 | 4 layers, emb 256, context 128. 0.225 | 4 layers, emb 128, context 256. 0.008 |
-| 2 — best model | BiLSTM, 550k train, 38k test. Macro-F1 0.942 | BiLSTM, full set. Macro-F1 0.934 |
-| 3 — photo → Monet FID | Batch 4, Colab Tesla T4, about 4.3 h. 89.99 | Batch 1, RTX 5090, about 28 min. 123.70 |
+| 2 — best model | BiLSTM (lemmatize), 550k train, 38k test. Macro-F1 0.942 | BiLSTM (Porter stem), full set. Macro-F1 0.934 |
+| 3 — photo → Monet FID | Batch 4, about 4.3 h. 89.99 | Batch 1, about 28 min. 123.70 |
 
 ---
 
