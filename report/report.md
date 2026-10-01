@@ -381,11 +381,11 @@ Human audit score on the 30 photo → Monet images. Style and content are 0–2,
 
 # Kaggle score
 
-Team `PairProgramming_Team_5`. The photo-to-Monet FID for each member is in Part 3. This table is the leaderboard score for that one submission, from Sneha’s `task3_gan/sneha_singh/submission.csv`.
+Team `PairProgramming_Team_05`. The photo-to-Monet FID for each member is in Part 3. This table is the public leaderboard score for Sneha’s `task3_gan/sneha_singh/submission.csv`.
 
-| | Public score | Private score | Rank |
-|---|---|---|---|
-| PairProgramming_Team_5 | | | |
+| | Public score | Rank |
+|---|---|---|
+| PairProgramming_Team_05 | −45.1953 | 2 |
 
 <div class="cite">
 
