@@ -276,7 +276,7 @@ The Monet and photo folders are in one Drive folder: [https://drive.google.com/d
 | Photo → Monet (`pred_B2A`) | 105.06 | 0.018 | 0.405 | 0.452 | 0.532 | 0.112 |
 | Monet → photo (`pred_A2B`) | 109.33 | 0.030 | 0.425 | 0.365 | 0.586 | 0.103 |
 
-FID is the Fréchet distance between Inception features of the generated images and the real target images. MiFID is the average cosine distance of those features on the first 300 sorted images, which is the professor script. Lower is better on both. `submission.csv` is the average of both directions, recalculated from `part3_done.zip`: FID 107.20, MiFID 0.415. Later Colab runs scored 110.18, 117.49, and 119.69.
+FID is the Fréchet distance between Inception features of the generated images and the real target images. MiFID is the average cosine distance of those features on the first 300 sorted images, which is the professor script. Lower is better on both. `submission.csv` is the average of both directions: FID 107.20, MiFID 0.415.
 
 Losses fell across the 80 epochs. The discriminator loss ended near 0.17, which is low. The generator is not winning that fight, and I think that is why the brush texture gets noisy.
 
@@ -362,7 +362,7 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 
 **Limitation.** Batch size, training time, and the number of images in the cycle scores differ, so the two FID numbers are not a pure architecture contest.
 
-**Next.** The class upload is `submission.csv` with the average FID and MiFID of both directions. Later full-photo runs did not beat FID 107.20.
+**Next.** Later full-photo retrains scored worse, so the class upload stays this checkpoint: `submission.csv` with the average FID and MiFID of both directions.
 
 </div>
 
@@ -381,7 +381,7 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 
 # Kaggle score
 
-Team `PairProgramming_Team_05`. Score uses the new professor evaluation script: (FID + MiFID) / 2, each averaged over both directions. Current `submission.csv` from `part3_done.zip`: FID 107.20, MiFID 0.415.
+Team `PairProgramming_Team_05`. Score uses the new professor evaluation script: (FID + MiFID) / 2, each averaged over both directions. Current `submission.csv`: FID 107.20, MiFID 0.415.
 
 | Team | Public score | Rank |
 |---|---|---|

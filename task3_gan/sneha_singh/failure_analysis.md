@@ -69,8 +69,8 @@ Looking at `outputs/loss_curves/losses.png`:
 
 ## MiFID / memorization
 
-Professor script on `part3_done.zip`: A2B FID **109.33**, MiFID **0.425**. B2A FID **105.06**, MiFID **0.405**.
-`submission.csv` is the average: FID **107.20**, MiFID **0.415**. Later runs scored 110.18, 117.49, and 119.69.
+Professor script, both directions: A2B FID **109.33**, MiFID **0.425**. B2A FID **105.06**, MiFID **0.405**.
+`submission.csv` is the average: FID **107.20**, MiFID **0.415**.
 When I rated, images looked like stylized versions of that photo, not pasted
 Monet paintings. The main issue is shared grainy texture across many outputs.
 Ritika and I will confirm that on the joint sheet.
@@ -79,5 +79,5 @@ Scores came from `evaluate_local.py`, which follows the professor notebook (Ince
 
 ## Next steps if we retrain
 
-1. Later full-photo and batch-1 runs did not beat FID 107.20. The submission stays this checkpoint.
+1. Later full-photo retrains scored worse than this checkpoint, so `submission.csv` stays on this 80-epoch run.
 2. Finish joint 30 ratings and record agreement here.

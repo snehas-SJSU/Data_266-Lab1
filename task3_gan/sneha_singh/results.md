@@ -11,7 +11,7 @@ Dataset: unpaired Monet paintings + photos (Kaggle). Own CycleGAN only — no pr
 - Checkpoint: last epoch
 
 ## This checkpoint
-The numbers below are the 80-epoch Colab run in `Downloads/part3_done.zip` (40 constant + 40 decay), batch 4, about 800 photos resampled each epoch. That is the best professor score. Later Colab runs did not beat it.
+The numbers below are the 80-epoch Colab run (40 constant + 40 decay), batch 4, about 800 photos resampled each epoch. This checkpoint is the one in `submission.csv`. Later retrains scored worse and are not the upload.
 
 ## Hardware
 - Colab Tesla T4, AMP, `smoke=false`
@@ -33,14 +33,14 @@ From `evaluate_local.py`, using the professor script: Inception-v3, first 300 so
 | A2B (Monet→photo) | 109.33 | 0.030 | 0.425 | 0.365 | 0.586 | 0.103 |
 | B2A (photo→Monet) | 105.06 | 0.018 | 0.405 | 0.452 | 0.532 | 0.112 |
 
-`submission.csv` is the average of both directions: FID **107.20**, MiFID **0.415**. These numbers were recalculated from `part3_done.zip` with the professor script. Later Colab runs scored 110.18, 117.49, and 119.69, all worse, so they are not the submission.
+`submission.csv` is the average of both directions: FID **107.20**, MiFID **0.415**.
 
 Also in `full_metrics_report.csv`: precision/recall, G/D/cycle/identity losses, grad norm, nan_count=0, params, train time, peak memory.
 
 ## Kaggle
 - Team: PairProgramming_Team_5
 - Upload file: `submission.csv` (`ID,FID,MiFID` = 1, 107.1960865081875, 0.41492947936058044)
-- Score = (FID + MiFID) / 2 = (107.196 + 0.415) / 2 ≈ 53.81
+- Score = (FID + MiFID) / 2 under the new evaluation script = (107.20 + 0.415) / 2 ≈ 53.81
 - Public score: ≈53.81 (_fill exact Kaggle value_)
 - Private score: _fill after Kaggle shows it_
 - Rank: _fill after Kaggle shows it_

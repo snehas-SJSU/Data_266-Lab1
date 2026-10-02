@@ -131,11 +131,11 @@ python task3_gan/sneha_singh/evaluate_local.py
 | Item | Value |
 |---|---|
 | Upload file | `task3_gan/sneha_singh/submission.csv` |
-| Local FID / MiFID | 107.20 / 0.415 (average of both directions, from part3_done.zip) |
-| Public score | ≈53.81 = (FID 107.20 + MiFID 0.415) / 2 |
+| Local FID / MiFID | 107.20 / 0.415 (average of both directions) |
+| Public score | ≈53.81 = (FID 107.20 + MiFID 0.415) / 2 (new evaluation script; _fill exact Kaggle value_) |
 | Rank | _fill from Kaggle_ |
 
-**Status:** Professor eval is in `submission.csv` (FID 107.20, MiFID 0.415), recalculated from `part3_done.zip`. Monet→photo FID 109.33. Photo→Monet FID 105.06. Later Colab runs scored 110.18, 117.49, and 119.69.
+**Status:** Professor eval is in `submission.csv` (FID 107.20, MiFID 0.415). A2B Monet→photo FID 109.33. B2A photo→Monet FID 105.06. `best.pt` is the 80-epoch checkpoint. Later retrains scored worse and are not the upload.
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 

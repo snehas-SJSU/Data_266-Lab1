@@ -90,7 +90,7 @@ unedited.
 - Pred B2A: `outputs/pred_B2A` (7038 JPGs, photo→Monet)
 - Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full.log` (80 epoch lines)
 - Metrics CSV: `task3_gan/sneha_singh/full_metrics_report.csv`
-- Submission: `task3_gan/sneha_singh/submission.csv` (professor average FID 107.20, MiFID 0.415, from part3_done.zip)
+- Submission: `task3_gan/sneha_singh/submission.csv` (professor average FID 107.20, MiFID 0.415)
 - Local A2B (Monet→photo): FID 109.33, MiFID 0.425 · Local B2A (photo→Monet): FID 105.06, MiFID 0.405
 - Results / failures: `results.md`, `failure_analysis.md`
 - Eval command: `python task3_gan/sneha_singh/evaluate_local.py` (Mac; fidelity backend CPU, LPIPS on MPS)
