@@ -21,7 +21,7 @@ Each part below has two individual write-ups and then one team comparison. Secti
 |---|---|---|
 | 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab Tesla T4 |
 | 2 — Yelp polarity | BiLSTM best, macro-F1 0.942, full train set, Colab Tesla T4 | BiLSTM best, macro-F1 0.934, full 560k set, Colab Tesla T4 |
-| 3 — CycleGAN | Batch 4, Colab Tesla T4, about 4.3 h, photo→Monet FID 105.88 | Batch 4, RTX 5090, about 28 min, FID 123.70 |
+| 3 — CycleGAN | Batch 4, Colab Tesla T4, about 4.3 h, photo→Monet FID 105.06 | Batch 4, RTX 5090, about 28 min, FID 123.70 |
 
 We share the raw data. The rows above are two separate runs of the same part, not a split of who had to do which part.
 
@@ -273,10 +273,10 @@ The Monet and photo folders are in one Drive folder: [https://drive.google.com/d
 
 | Direction | FID | KID | MiFID | LPIPS | Content cosine | Cycle L1 |
 |---|---|---|---|---|---|---|
-| Photo → Monet (`pred_B2A`) | 105.88 | 0.018 | 0.407 | 0.452 | 0.532 | 0.112 |
-| Monet → photo (`pred_A2B`) | 113.58 | 0.030 | 0.428 | 0.365 | 0.586 | 0.103 |
+| Photo → Monet (`pred_B2A`) | 105.06 | 0.018 | 0.405 | 0.452 | 0.532 | 0.112 |
+| Monet → photo (`pred_A2B`) | 109.33 | 0.030 | 0.425 | 0.365 | 0.586 | 0.103 |
 
-FID is the Fréchet distance between Inception features of the generated images and the real target images. MiFID is the average cosine distance of those features on the first 300 sorted images, which is the professor script. Lower is better on both. `submission.csv` is the average of both directions: FID 109.73, MiFID 0.418.
+FID is the Fréchet distance between Inception features of the generated images and the real target images. MiFID is the average cosine distance of those features on the first 300 sorted images, which is the professor script. Lower is better on both. `submission.csv` is the average of both directions, recalculated from `part3_done.zip`: FID 107.20, MiFID 0.415. Later Colab runs scored 110.18, 117.49, and 119.69.
 
 Losses fell across the 80 epochs. The discriminator loss ended near 0.17, which is low. The generator is not winning that fight, and I think that is why the brush texture gets noisy.
 
@@ -329,7 +329,7 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | | Sneha photo → Monet | Sneha Monet → photo | Ritika photo → Monet | Ritika Monet → photo |
 |---|---|---|---|---|
 | Epochs / batch | 40 + 40, batch 4 | same run | 40 + 40, batch 4 | same run |
-| FID | 105.88 | 113.58 | 123.70 | 120.72 |
+| FID | 105.06 | 109.33 | 123.70 | 120.72 |
 | KID | 0.018 | 0.030 | 0.027 | 0.040 |
 | Precision | 0.540 | 0.660 | 0.327 | 0.613 |
 | Recall | 0.293 | 0.089 | 0.570 | 0.207 |
@@ -356,13 +356,13 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 
 <div class="joint">
 
-**Strength.** Sneha’s photo-to-Monet FID is 105.88. Ritika’s FID is 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours.
+**Strength.** Sneha’s photo-to-Monet FID is 105.06. Ritika’s FID is 123.70. Ritika’s run is the faster one, about 28 minutes against about 4.3 hours.
 
 **Weakness.** Both discriminator losses ended low, 0.17 for Sneha and 0.23 for Ritika. On Sneha’s images the brush texture is grainy.
 
 **Limitation.** Batch size, training time, and the number of images in the cycle scores differ, so the two FID numbers are not a pure architecture contest.
 
-**Next.** Sneha’s next run uses all 7,038 photos each epoch. The class upload is `submission.csv` with the average FID and MiFID of both directions.
+**Next.** The class upload is `submission.csv` with the average FID and MiFID of both directions. Later full-photo runs did not beat FID 107.20.
 
 </div>
 
@@ -375,17 +375,17 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | 1 — validation loss | 4 layers, emb 256, context 128. 0.857 | 4 layers, emb 128, context 256. 0.778 |
 | 1 — distinct-1 | 4 layers, emb 256, context 128. 0.225 | 4 layers, emb 128, context 256. 0.008 |
 | 2 — best model | BiLSTM (lemmatize), 550k train, 38k test. Macro-F1 0.942 | BiLSTM (Porter stem), full set. Macro-F1 0.934 |
-| 3 — photo → Monet FID | Batch 4, about 4.3 h. 105.88 (submission average FID 109.73) | Batch 4, about 28 min. 123.70 |
+| 3 — photo → Monet FID | Batch 4, about 4.3 h. 105.06 (submission average FID 107.20) | Batch 4, about 28 min. 123.70 |
 
 ---
 
 # Kaggle score
 
-Team `PairProgramming_Team_05`. Score uses the new professor evaluation script: (FID + MiFID) / 2, each averaged over both directions. Current `submission.csv`: FID 109.73, MiFID 0.418.
+Team `PairProgramming_Team_05`. Score uses the new professor evaluation script: (FID + MiFID) / 2, each averaged over both directions. Current `submission.csv` from `part3_done.zip`: FID 107.20, MiFID 0.415.
 
 | Team | Public score | Rank |
 |---|---|---|
-| PairProgramming_Team_05 | ≈55.07 (_fill exact Kaggle value_) | _fill from Kaggle_ |
+| PairProgramming_Team_05 | ≈53.81 (_fill exact Kaggle value_) | _fill from Kaggle_ |
 
 <div class="cite">
 

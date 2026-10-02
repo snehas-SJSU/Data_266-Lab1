@@ -6,4 +6,4 @@
 - **Link:** https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link
 - **Smoke:** `best_smoke.pt` was a local MPS smoke run only; not kept on git
 
-Trained 80 epochs on CUDA (AMP, ~4.3 h), about 800 photos per epoch. `submission.csv` is the professor average for this checkpoint: FID 109.73, MiFID 0.418.
+Trained 80 epochs on CUDA (AMP, ~4.3 h), about 800 photos per epoch. `submission.csv` is the professor average for this checkpoint, recalculated from `part3_done.zip`: FID 107.20, MiFID 0.415.

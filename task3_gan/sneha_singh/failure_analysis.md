@@ -49,8 +49,8 @@ From `full_metrics_report.csv`:
 
 | | cycle L1 | LPIPS vs source | content cosine vs source | FID | MiFID |
 |---|---|---|---|---|---|
-| A2B (Monet→photo) | 0.103 | 0.365 | 0.586 | 113.58 | 0.428 |
-| B2A (photo→Monet) | 0.112 | 0.452 | 0.532 | 105.88 | 0.407 |
+| A2B (Monet→photo) | 0.103 | 0.365 | 0.586 | 109.33 | 0.425 |
+| B2A (photo→Monet) | 0.112 | 0.452 | 0.532 | 105.06 | 0.405 |
 
 Cycle L1 around 0.11 feels fine after training (cycle loss went from ~5.9 → ~2.17).
 B2A content cosine ~0.53 matches what I see on photo→Monet: scene is there, not pixel-perfect.
@@ -69,8 +69,8 @@ Looking at `outputs/loss_curves/losses.png`:
 
 ## MiFID / memorization
 
-Professor script, both directions: A2B FID **113.58**, MiFID **0.428**. B2A FID **105.88**, MiFID **0.407**.
-`submission.csv` is the average: FID **109.73**, MiFID **0.418**.
+Professor script on `part3_done.zip`: A2B FID **109.33**, MiFID **0.425**. B2A FID **105.06**, MiFID **0.405**.
+`submission.csv` is the average: FID **107.20**, MiFID **0.415**. Later runs scored 110.18, 117.49, and 119.69.
 When I rated, images looked like stylized versions of that photo, not pasted
 Monet paintings. The main issue is shared grainy texture across many outputs.
 Ritika and I will confirm that on the joint sheet.
@@ -79,5 +79,5 @@ Scores came from `evaluate_local.py`, which follows the professor notebook (Ince
 
 ## Next steps if we retrain
 
-1. Train on all 7,038 photos each epoch. That setting is already in `src/config.json` (10 + 6 epochs) and has not been run.
+1. Later full-photo and batch-1 runs did not beat FID 107.20. The submission stays this checkpoint.
 2. Finish joint 30 ratings and record agreement here.
