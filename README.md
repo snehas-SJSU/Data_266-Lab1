@@ -132,8 +132,6 @@ python task3_gan/sneha_singh/evaluate_local.py
 |---|---|
 | Upload file | `task3_gan/sneha_singh/submission.csv` |
 | Local FID / MiFID | 107.20 / 0.415 (average of both directions) |
-| Public score | ≈53.81 = (FID 107.20 + MiFID 0.415) / 2 (new evaluation script; _fill exact Kaggle value_) |
-| Rank | _fill from Kaggle_ |
 
 **Status:** Professor eval is in `submission.csv` (FID 107.20, MiFID 0.415). A2B Monet→photo FID 109.33. B2A photo→Monet FID 105.06. `best.pt` is the 80-epoch checkpoint. Later retrains scored worse and are not the upload.
 
