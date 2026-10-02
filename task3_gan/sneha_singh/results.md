@@ -40,7 +40,3 @@ Also in `full_metrics_report.csv`: precision/recall, G/D/cycle/identity losses, 
 ## Kaggle
 - Team: PairProgramming_Team_5
 - Upload file: `submission.csv` (`ID,FID,MiFID` = 1, 107.1960865081875, 0.41492947936058044)
-- Score = (FID + MiFID) / 2 under the new evaluation script = (107.20 + 0.415) / 2 ≈ 53.81
-- Public score: ≈53.81 (_fill exact Kaggle value_)
-- Private score: _fill after Kaggle shows it_
-- Rank: _fill after Kaggle shows it_
