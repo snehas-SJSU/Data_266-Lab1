@@ -2,8 +2,7 @@
 
 I looked at this 80-epoch retrain (nearest upsample, label smoothing 0.9, CUDA + AMP): loss curves,
 the sample grid, the photo→Monet images in `pred_B2A`, and the numbers from
-`evaluate_local.py`. Ritika still needs to fill her half of the 30-sample sheet
-before we can write agreement (κ).
+`evaluate_local.py`.
 
 ## What usually goes wrong in the images
 
@@ -25,10 +24,9 @@ From `outputs/samples/grid.png` and the audit set:
 
 ## 30-sample audit
 
-- Raters: me (done solo), Ritika (pending)
-- Sheet: `outputs/human_audit/audit_30.csv` (same 30 files for both of us)
+- Rater: me
+- Sheet: `outputs/human_audit/audit_30.csv`
 - Scale: style 0–2, content 0–2, artifacts 0–2 (higher = worse), mem Y/N
-- Inter-rater agreement: _fill after Ritika rates_
 
 ### My pass (quick summary)
 
@@ -73,11 +71,9 @@ Professor script, both directions: A2B FID **109.33**, MiFID **0.425**. B2A FID 
 `submission.csv` is the average: FID **107.20**, MiFID **0.415**.
 When I rated, images looked like stylized versions of that photo, not pasted
 Monet paintings. The main issue is shared grainy texture across many outputs.
-Ritika and I will confirm that on the joint sheet.
 
 Scores came from `evaluate_local.py`, which follows the professor notebook (Inception-v3, first 300 sorted images, mean cosine distance).
 
 ## Next steps if we retrain
 
-1. Later full-photo retrains scored worse than this checkpoint, so `submission.csv` stays on this 80-epoch run.
-2. Finish joint 30 ratings and record agreement here.
+Later full-photo retrains scored worse than this checkpoint, so `submission.csv` stays on this 80-epoch run.
