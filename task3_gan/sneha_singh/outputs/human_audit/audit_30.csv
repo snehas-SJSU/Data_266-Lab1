@@ -1,8 +1,9 @@
 # Human audit sheet — Part 3 photo→Monet (professor folder pred_B2A)
 # Fixed 30 indices into outputs/pred_B2A/%05d.jpg (photo→Monet)
+# The a2b_*.jpg files in this folder are those epoch-80 images.
 # Scores: style 0-2 (higher=better Monet feel), content 0-2 (higher=keeps photo layout),
 # artifacts 0-2 (higher=worse grid/noise), mem Y/N (looks copied from real Monet?)
-# Sneha columns filled (solo pass 2026-09-25). Ritika columns left blank for her pass.
+# Sneha columns filled (solo pass 2026-09-25) on these same 30 indices. Ritika columns left blank for her pass.
 index,file,rater_sneha_style,rater_sneha_content,rater_sneha_artifacts,rater_sneha_mem,rater_ritika_style,rater_ritika_content,rater_ritika_artifacts,rater_ritika_mem,notes
 0,00000.jpg,1,2,2,N,,,,,sky has grid/grain; sun blown out; field layout ok
 242,00242.jpg,2,2,1,N,,,,,autumn trees + graves readable; mild grain
