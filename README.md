@@ -39,9 +39,9 @@ Run every command from the repo root after Setup. Each `config.json` is set to t
 | Part | Member | Command | Data |
 |---|---|---|---|
 | 1 — LLM | Sneha | `jupyter nbconvert --to notebook --execute --inplace task1_llm/sneha_singh/src/part1_llm.ipynb` | Notebook downloads TinyStories |
-| 1 — LLM | Ritika | `cd task1_llm/ritika_mukesh_neema/src && python run_all.py --train_txt <train.txt> --val_txt <val.txt>` | Her 100K / 10K TinyStories split |
+| 1 — LLM | Ritika | `cd task1_llm/ritika_mukesh_neema/src && python run_all.py --train_txt <TinyStoriesV2-GPT4-train.txt> --val_txt <TinyStoriesV2-GPT4-valid.txt>` | TinyStoriesV2-GPT4 train / valid text files (Hugging Face) |
 | 2 — Sentiment | Sneha | `jupyter nbconvert --to notebook --execute --inplace task2_sentiment/sneha_singh/src/part2_sentiment.ipynb` | Notebook downloads Yelp polarity |
-| 2 — Sentiment | Ritika | `cd task2_sentiment/ritika_mukesh_neema/src && python run_all.py --train_csv <train.csv> --test_csv <test.csv>` | Her Yelp train / test CSVs |
+| 2 — Sentiment | Ritika | `cd task2_sentiment/ritika_mukesh_neema/src && python run_all.py --train_csv <train.parquet> --test_csv <test.parquet>` | Yelp polarity train / test parquet files (Hugging Face `fancyzhx/yelp_polarity`) |
 | 3 — CycleGAN | Sneha | `jupyter nbconvert --to notebook --execute --inplace task3_gan/sneha_singh/src/part3_cyclegan.ipynb` | `monet_jpg/`, `photo_jpg/` from Drive into `task3_gan/data/` |
 | 3 — CycleGAN | Ritika | `cd task3_gan/ritika_mukesh_neema/src && python run_all.py` | Same as above |
 
@@ -107,7 +107,15 @@ jupyter nbconvert --to notebook --execute --inplace \
 
 ### Ritika Mukesh Neema — `task1_llm/ritika_mukesh_neema/`
 
-Notebook, config, metrics, and write-ups for her Part 1 run.
+- `src/part1_llm.ipynb`, `src/config.json`, scripts `data.py`, `model.py`, `train.py`, `generate.py`, `metrics.py`, `run_all.py`
+- `metrics_report.csv`, `results.md`, `failure_analysis.md`
+- `checkpoints/ckpt_epoch0.pt` … `ckpt_epoch11.pt`, `ckpt_final.pt`
+- Loss curve, generated samples, generation metrics under `outputs/`
+- Raw log: `reproducibility/raw_logs/ritika_mukesh_neema/task1_llm/train_full.log`
+
+**Model:** 4 layers, 4 heads, embedding 128, block size 256, 882,688 parameters. 12 epochs, batch 64, lr 3e-4 with warmup + cosine decay, seed 6638.
+
+**Status:** full run done (Colab Tesla T4, about 28.8 min). Val CE 0.778, perplexity 2.18, top-1 next-char accuracy 0.755.
 
 ---
 
@@ -126,7 +134,7 @@ Notebook, config, metrics, and write-ups for her Part 1 run.
 **How to run**
 
 ```bash
-# "smoke": false in her config.json
+# "smoke": false in config.json
 jupyter nbconvert --to notebook --execute --inplace \
   task2_sentiment/sneha_singh/src/part2_sentiment.ipynb
 ```
@@ -135,7 +143,14 @@ jupyter nbconvert --to notebook --execute --inplace \
 
 ### Ritika Mukesh Neema — `task2_sentiment/ritika_mukesh_neema/`
 
-Notebook, config, metrics, and write-ups for her Part 2 run (her own 3 models).
+- `src/part2_sentiment.ipynb`, `src/config.json`, scripts `preprocess.py`, `models.py`, `train.py`, `metrics.py`, `error_analysis.py`, `run_all.py`
+- 3 models: baseline (mean pool), BiLSTM, TextCNN
+- `metrics_report.csv`, `results.md`, `failure_analysis.md` (20 errors)
+- Checkpoints: `checkpoints/baseline.pt`, `bilstm.pt`, `textcnn.pt`
+- Full metrics, McNemar results, test predictions under `outputs/`
+- Raw log: `reproducibility/raw_logs/ritika_mukesh_neema/task2_sentiment/console_run_all_full.log`
+
+**Status:** full run done (503,945 train / 55,993 val / 37,997 test, 5 epochs, Colab Tesla T4). Best model is the BiLSTM, macro-F1 0.934.
 
 ---
 
@@ -166,18 +181,27 @@ python task3_gan/sneha_singh/evaluate_local.py
 |---|---|
 | Upload file | `task3_gan/sneha_singh/submission.csv` |
 | Local FID / MiFID | 107.20 / 0.415 (average of both directions) |
+| Leaderboard rank | 6 |
 
 **Status:** Professor eval is in `submission.csv` (FID 107.20, MiFID 0.415). A2B Monet→photo FID 109.33. B2A photo→Monet FID 105.06. `best.pt` is the 80-epoch checkpoint. Later retrains scored worse and are not the upload.
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 
-Notebook, `evaluate_local.py`, `submission.csv`, metrics, and write-ups for her Part 3 run. Kaggle upload from her own `submission.csv`.
+- `src/part3_cyclegan.ipynb`, `src/config.json`, scripts `dataset.py`, `models.py`, `train.py`, `generate.py`, `evaluate_local.py`, `kaggle_score.py`, `human_audit.py`, `run_all.py`
+- `submission.csv`, `metrics_report.csv`, `outputs/full_metrics_report.csv`, `results.md`, `failure_analysis.md`
+- Loss curves, train logs, generation manifest under `outputs/`
+- `best.pt` on Drive (link below)
+- Raw logs: `reproducibility/raw_logs/ritika_mukesh_neema/task3_gan/`
+
+**Model:** ResNet generators (9 blocks), PatchGAN discriminators, batch 1, 80 epochs (40 + 40 decay), lr 2e-4, cycle λ 10. 28,285,832 parameters. NVIDIA RTX 5090, about 27.7 min.
+
+**Status:** photo→Monet (B2A) FID 123.70, Monet→photo (A2B) FID 120.72 (her `evaluate_local.py`, 300 images).
 
 | Item | Value |
 |---|---|
 | Upload file | `task3_gan/ritika_mukesh_neema/submission.csv` |
 | Local FID (training-split, not official) | 123.70 |
-| Kaggle official FID / MiFID | 104.30 / 0.413 |
+| Kaggle FID / MiFID | 104.30 / 0.413 (her `kaggle_score.py`: all 7,038 photo→Monet images vs `real_stats.npz`) |
 | Public score | -52.3574 (own submission, own Kaggle account) |
 
 ---
@@ -192,7 +216,7 @@ Same Drive folder for the team (raw data only):
 |---|---|---|
 | 1 | TinyStories-train.txt (Part 1). On Drive because the file is 1.79 GB, over GitHub’s 100 MB limit. | https://drive.google.com/drive/folders/12MFVOo6T3QRW3X6THiDkh5svtNgL13W_?usp=share_link |
 | 2 | Monet paintings — `monet_jpg` (Part 3) | https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link |
-| 3 | Photos — `photo_jpg` (Part 3) | https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link |
+| 3 | Photos — `photo_jpg` (Part 3, same Drive folder as Monet) | https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link |
 
 Part 2 is not in this table. Yelp polarity is not a file we host. Each notebook downloads `fancyzhx/yelp_polarity` from Hugging Face at run time.
 

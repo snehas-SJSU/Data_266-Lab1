@@ -385,7 +385,7 @@ Team `PairProgramming_Team_05`. Score uses the new professor evaluation script: 
 
 | Team | Public score | Rank |
 |---|---|---|
-| PairProgramming_Team_05 | ≈53.81 (_fill exact Kaggle value_) | _fill from Kaggle_ |
+| PairProgramming_Team_05 | ≈53.81 (_fill exact Kaggle value_) | 6 |
 
 <div class="cite">
 
