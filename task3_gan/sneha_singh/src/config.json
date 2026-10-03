@@ -14,16 +14,16 @@
   "n_monet_full": -1,
   "n_photo_full": -1,
   "photos_per_epoch_smoke": 8,
-  "photos_per_epoch_full": 1200,
+  "photos_per_epoch_full": 3200,
   "n_res_blocks": 9,
-  "ngf": 64,
+  "ngf": 32,
   "ndf": 64,
   "learning_rate": 0.0002,
   "d_learning_rate": 0.0002,
   "beta1": 0.5,
   "lambda_cycle": 10.0,
-  "lambda_identity": 5.0,
-  "steps_per_epoch": 300,
+  "lambda_identity": 0.5,
+  "steps_per_epoch": 800,
   "use_amp": true,
   "pool_size": 50,
   "label_smoothing": 0.9,
@@ -32,5 +32,6 @@
   "n_sample_grid": 4,
   "n_submit_smoke": 16,
   "n_submit_full": 7038,
-  "notes": "Submitted run: 100 epochs (50 constant + 50 linear decay), 300 steps per epoch (1200 photos resampled each epoch), batch 4, AMP, nearest upsampling, Colab NVIDIA L4. Identity loss weight = lambda_identity x lambda_cycle = 50. Checkpoint: checkpoints/best.pt (epoch 100)."
+  "notes": "Submitted run: generator 9 residual blocks with 32 base filters, DiffAugment (color, translation, cutout) on both discriminators, identity weight 5 (lambda_identity 0.5 x lambda_cycle 10), 100 epochs x 800 steps (50 constant + 50 linear decay), batch 4, AMP, nearest upsampling, Colab NVIDIA L4. Submitted checkpoint: epoch 93 (checkpoints/best.pt).",
+  "diffaugment": "color,translation,cutout"
 }

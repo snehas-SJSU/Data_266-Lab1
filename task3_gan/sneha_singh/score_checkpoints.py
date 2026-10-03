@@ -7,10 +7,10 @@ notebook does (evaluate_local.calculate_fid_mifid). Score = (mean FID + mean MiF
 Usage (from the repo root):
   python task3_gan/sneha_singh/score_checkpoints.py \
       --ckpts path/best_epoch_80.pt path/best_epoch_90.pt \
-      --upsample nearest \
+      --upsample nearest --ngf 64 \
       --out task3_gan/sneha_singh/outputs/checkpoint_scores.csv
 
---upsample must match the run that produced the checkpoints (the weights load either way,
+--upsample and --ngf must match the run that produced the checkpoints (the weights load either way,
 but the wrong mode gives wrong images and a much worse score).
 """
 
@@ -121,6 +121,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ckpts", nargs="+", required=True)
     ap.add_argument("--upsample", choices=["nearest", "bilinear"], required=True)
+    ap.add_argument("--ngf", type=int, default=64, help="generator base width (config ngf)")
     ap.add_argument("--run_id", default="")
     ap.add_argument("--out", default=str(MEMBER / "outputs" / "checkpoint_scores.csv"))
     args = ap.parse_args()
@@ -131,8 +132,8 @@ def main():
     assert monet and photo, "missing task3_gan/data/monet_jpg or photo_jpg"
     print("device:", device, "| monet:", len(monet), "| photo:", len(photo), "| upsample:", args.upsample)
 
-    G_AB = ResnetGenerator(args.upsample).to(device).eval()  # photo -> Monet
-    G_BA = ResnetGenerator(args.upsample).to(device).eval()  # Monet -> photo
+    G_AB = ResnetGenerator(args.upsample, ngf=args.ngf).to(device).eval()  # photo -> Monet
+    G_BA = ResnetGenerator(args.upsample, ngf=args.ngf).to(device).eval()  # Monet -> photo
     rows = []
     for ck in args.ckpts:
         st = torch.load(ck, map_location=device, weights_only=True)
@@ -150,6 +151,7 @@ def main():
             "checkpoint": Path(ck).name,
             "epoch": st.get("epoch", ""),
             "upsample": args.upsample,
+            "ngf": args.ngf,
             "fid_b2a": round(fid_b2a, 4), "mifid_b2a": round(mifid_b2a, 4),
             "fid_a2b": round(fid_a2b, 4), "mifid_a2b": round(mifid_a2b, 4),
             "submission_fid": round(fid, 4), "submission_mifid": round(mifid, 4),

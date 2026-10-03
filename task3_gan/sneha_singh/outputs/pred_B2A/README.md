@@ -1,8 +1,5 @@
 # pred_B2A — photo → Monet
 
-Generated Monet. The course evaluation script calls this direction B2A. This direction is FID 105.06, MiFID 0.405. Kaggle gets the average of both directions in `submission.csv`: FID 107.20, MiFID 0.415.
+Generated Monet paintings (7,038), from `checkpoints/best.pt` (epoch 93), single pass. Professor evaluation: FID 98.29, MiFID 0.406.
 
-Full set is **~7038 JPGs** — not committed (repo size / GitHub limits).
-
-- On git instead: sample grid `../samples/grid.png`, 30 audit images under `../human_audit/`
-- Kaggle submit: `../../submission.csv` (average of both directions' FID and MiFID), not these images
+Not committed (repo size). Rebuild with `python task3_gan/sneha_singh/make_submission.py`. Kaggle gets `../../submission.csv` (average of both directions), not these images.

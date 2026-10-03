@@ -1,0 +1,16 @@
+run_id,checkpoint,epoch,upsample,ngf,fid_b2a,mifid_b2a,fid_a2b,mifid_a2b,submission_fid,submission_mifid,score
+run_submitted,best_epoch_093.pt,93,nearest,32,98.2911,0.406,105.2309,0.4155,101.761,0.4107,51.0859
+run_submitted,best_epoch_091.pt,91,nearest,32,99.2848,0.4064,104.4357,0.4187,101.8602,0.4126,51.1364
+run_submitted,best_epoch_096.pt,96,nearest,32,98.4065,0.4095,105.7143,0.4163,102.0604,0.4129,51.2366
+run_submitted,best_epoch_095.pt,95,nearest,32,99.102,0.4082,105.3977,0.4162,102.2499,0.4122,51.331
+run_submitted,best_epoch_087.pt,87,nearest,32,99.6574,0.407,105.9433,0.4185,102.8004,0.4127,51.6066
+run_submitted,best_epoch_100.pt,100,nearest,32,99.7912,0.4104,105.9999,0.4176,102.8955,0.414,51.6548
+run_submitted,best_epoch_088.pt,88,nearest,32,99.032,0.4054,106.9457,0.4175,102.9888,0.4115,51.7001
+run_submitted,best_epoch_098.pt,98,nearest,32,99.7686,0.4098,106.2365,0.4182,103.0025,0.414,51.7083
+run_submitted,best_epoch_097.pt,97,nearest,32,98.8845,0.4092,107.1326,0.4183,103.0086,0.4137,51.7111
+run_submitted,best_epoch_089.pt,89,nearest,32,101.478,0.4052,104.635,0.415,103.0565,0.4101,51.7333
+run_submitted,best_epoch_086.pt,86,nearest,32,97.611,0.4064,108.5162,0.4203,103.0636,0.4134,51.7385
+run_submitted,best_epoch_094.pt,94,nearest,32,101.0296,0.411,105.1183,0.4146,103.074,0.4128,51.7434
+run_submitted,best_epoch_092.pt,92,nearest,32,100.4143,0.406,106.6552,0.4178,103.5348,0.4119,51.9734
+run_submitted,best_epoch_099.pt,99,nearest,32,100.8597,0.4104,106.5271,0.4183,103.6934,0.4143,52.0539
+run_submitted,best_epoch_090.pt,90,nearest,32,100.6902,0.4033,106.9053,0.4167,103.7978,0.41,52.1039

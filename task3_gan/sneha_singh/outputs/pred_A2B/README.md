@@ -1,5 +1,5 @@
 # pred_A2B — Monet → photo
 
-Generated photos. The course evaluation script calls this direction A2B. This direction is FID 109.33, MiFID 0.425. `submission.csv` averages both directions: FID 107.20, MiFID 0.415.
+Generated photos (300), from `checkpoints/best.pt` (epoch 93); each output is averaged over 6 flipped/shifted views. Professor evaluation: FID 101.39, MiFID 0.418.
 
-Full set is **300 JPGs** — not committed (repo size / GitHub limits).
+Not committed (repo size). Rebuild with `python task3_gan/sneha_singh/make_submission.py`.

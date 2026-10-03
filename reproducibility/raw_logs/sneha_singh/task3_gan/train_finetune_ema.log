@@ -1,0 +1,22 @@
+member=sneha_singh run=finetune_ema start=epoch93 device=cuda config={'epochs': 20, 'steps_per_epoch': 800, 'batch': 4, 'lr': 5e-05, 'beta1': 0.5, 'lambda_cycle': 10.0, 'lambda_identity': 0.5, 'label_smoothing': 0.9, 'pool': 50, 'ema_decay': 0.999, 'diffaugment': 'color,translation,cutout', 'ngf': 32, 'ndf': 64, 'n_res_blocks': 9, 'load': 286, 'img': 256, 'num_workers': 4, 'score_last': 8, 'seed': 670}
+epoch 1 g=3.9893 d=0.1165 cycle=1.6662 id=0.7469 lr=4.75e-05 nan=0 min=3.0
+epoch 2 g=3.9969 d=0.1147 cycle=1.6761 id=0.7491 lr=4.50e-05 nan=0 min=6.1
+epoch 3 g=3.9914 d=0.1142 cycle=1.6639 id=0.7477 lr=4.25e-05 nan=0 min=9.1
+epoch 4 g=3.9695 d=0.1115 cycle=1.6590 id=0.7414 lr=4.00e-05 nan=0 min=12.1
+epoch 5 g=3.9748 d=0.1109 cycle=1.6498 id=0.7403 lr=3.75e-05 nan=0 min=15.1
+epoch 6 g=3.9899 d=0.1121 cycle=1.6579 id=0.7440 lr=3.50e-05 nan=0 min=18.1
+epoch 7 g=3.9555 d=0.1102 cycle=1.6406 id=0.7338 lr=3.25e-05 nan=0 min=21.2
+epoch 8 g=3.9603 d=0.1088 cycle=1.6356 id=0.7354 lr=3.00e-05 nan=0 min=24.2
+epoch 9 g=3.9478 d=0.1082 cycle=1.6270 id=0.7297 lr=2.75e-05 nan=0 min=27.2
+epoch 10 g=3.9394 d=0.1062 cycle=1.6187 id=0.7268 lr=2.50e-05 nan=0 min=30.2
+epoch 11 g=3.9474 d=0.1076 cycle=1.6272 id=0.7296 lr=2.25e-05 nan=0 min=33.2
+epoch 12 g=3.9283 d=0.1045 cycle=1.6078 id=0.7228 lr=2.00e-05 nan=0 min=36.2
+epoch 13 g=3.9182 d=0.1045 cycle=1.6057 id=0.7206 lr=1.75e-05 nan=0 min=39.3
+epoch 14 g=3.9409 d=0.1036 cycle=1.6056 id=0.7255 lr=1.50e-05 nan=0 min=42.3
+epoch 15 g=3.9299 d=0.1028 cycle=1.5966 id=0.7189 lr=1.25e-05 nan=0 min=45.3
+epoch 16 g=3.9266 d=0.1017 cycle=1.5924 id=0.7205 lr=1.00e-05 nan=0 min=48.3
+epoch 17 g=3.9133 d=0.1012 cycle=1.5778 id=0.7127 lr=7.50e-06 nan=0 min=51.3
+epoch 18 g=3.9067 d=0.0993 cycle=1.5761 id=0.7138 lr=5.00e-06 nan=0 min=54.4
+epoch 19 g=3.8986 d=0.0972 cycle=1.5673 id=0.7085 lr=2.50e-06 nan=0 min=57.4
+epoch 20 g=3.9110 d=0.0977 cycle=1.5793 id=0.7161 lr=0.00e+00 nan=0 min=60.4
+train_time_sec=3625.0 peak_memory_mb=3384.8

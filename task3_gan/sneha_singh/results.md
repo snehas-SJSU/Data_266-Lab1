@@ -1,50 +1,42 @@
 # Part 3 — CycleGAN photo ↔ Monet (Sneha Singh)
 
-Dataset: unpaired Monet paintings + photos (Kaggle). Own CycleGAN only — no pretrained image models on outputs.
+Dataset: unpaired Monet paintings (300) and photos (7,038), Kaggle. Own CycleGAN only — no pretrained image models on outputs.
 
 ## Architecture
-- Generators: ResNet (reflection pad, instance norm, 9 residual blocks @256), tanh output
-- Discriminators: PatchGAN (LSGAN / MSE)
-- Losses: adversarial + cycle-consistency (λ=10) + identity (`lambda_identity` 5.0 × λ = weight 50)
-- Image buffer (pool of 50) for discriminator updates; real labels smoothed to 0.9
-- Upsample: nearest-neighbor ×2, then a stride-1 conv
-- Checkpoint: last epoch (epoch 100)
+- Generators: ResNet, 9 residual blocks at 256×256, 32 base filters, reflection pad, instance norm, tanh output; upsampling is nearest-neighbour ×2 then a stride-1 conv
+- Discriminators: 70×70 PatchGAN (LSGAN / MSE), real labels smoothed to 0.9
+- DiffAugment (colour, translation, cutout) on every image the discriminators see, real and fake
+- Losses: adversarial + cycle-consistency (λ = 10) + identity (weight 5)
+- Image pool of 50; Adam (β1 = 0.5), learning rate 2e-4 for G and D
+- 11.2M parameters (all four networks)
 
-## This checkpoint
-The numbers below are the 100-epoch Colab run (50 constant + 50 linear decay), batch 4, 300 steps per epoch with 1,200 photos resampled each epoch. `checkpoints/best.pt` (epoch 100) is the checkpoint in `submission.csv`.
+## Training
+- 100 epochs: 50 at constant learning rate, 50 with linear decay to 0
+- 800 steps per epoch, batch 4 (3,200 photos resampled each epoch, all 300 Monet cycled)
+- Colab NVIDIA L4, mixed precision, 19,483 s (~5.4 h), peak GPU memory 3,361 MB
+- Notebook with outputs: `src/part3_cyclegan.ipynb`; config: `src/config.json`
+- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full_light.log`
 
-## Hardware
-- Colab NVIDIA L4, AMP, `smoke=false`
-- 100 epochs, batch size 4
-- `train_time_sec` 14,349 (~4.0 h); peak GPU memory 6,570 MB (`torch.cuda.max_memory_allocated()` read in the same Colab session after the run)
-- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full_100ep.log`. The earlier 80-epoch run's log stays in `train_full.log`.
-
-## Folders
-Professor names:
-
-- `outputs/pred_A2B` — Monet → photo (300 images), scored against real photos
-- `outputs/pred_B2A` — photo → Monet (7,038 images), scored against real Monet
+## Checkpoint and inference
+- The last 15 epochs were scored with the professor evaluation (`outputs/checkpoint_scores_epochs86_100.csv`). Epoch 93 scored best and is `checkpoints/best.pt`.
+- Monet→photo (`pred_A2B`): output averaged over 6 views (original, horizontal flip, four 4-pixel shifts). Photo→Monet (`pred_B2A`): single pass.
+- `make_submission.py` regenerates both folders and `outputs/samples/grid.png` from `best.pt`; `evaluate_local.py` then writes `submission.csv` and `full_metrics_report.csv`.
 
 ## Metrics
-FID and MiFID come from the unchanged professor evaluation script, run on Colab (L4) inside the notebook: Inception-v3, first 300 sorted images, MiFID = mean cosine distance. KID, precision/recall, LPIPS, and content cosine come from `evaluate_local.py` on `outputs/pred_*` (Apple MPS). Cycle L1 is from the notebook's cycle check.
+FID and MiFID: unchanged professor evaluation script (Inception-v3, first 300 sorted images, MiFID = mean cosine distance), run on Colab L4.
 
 | Direction | FID | KID | MiFID | Precision | Recall | LPIPS | content cos | cycle L1 |
 |---|---|---|---|---|---|---|---|---|
-| A2B (Monet→photo) | 108.12 | 0.026 | 0.422 | 0.610 | 0.113 | 0.274 | 0.688 | 0.089 |
-| B2A (photo→Monet) | 105.91 | 0.021 | 0.412 | 0.392 | 0.410 | 0.279 | 0.717 | 0.076 |
+| A2B (Monet→photo) | 101.39 | 0.019 | 0.418 | 0.747 | 0.078 | 0.360 | 0.636 | 0.083 |
+| B2A (photo→Monet) | 98.29 | 0.012 | 0.406 | 0.679 | 0.120 | 0.396 | 0.595 | 0.083 |
 
-`submission.csv` is the average of both directions: FID **107.01**, MiFID **0.417**, score (FID + MiFID) / 2 = **53.72**.
+`submission.csv`: FID **99.84**, MiFID **0.412**, score (FID + MiFID) / 2 = **50.13**.
 
-Rerunning the same checkpoint through the professor script on Apple MPS gives 54.31: GPU and MPS floating-point results differ slightly, and FID on 300 images amplifies that.
-
-Also in `full_metrics_report.csv`: G/D/cycle/identity losses at epoch 100, grad norm, nan_count=0, params, train time, images/sec, peak memory. `metrics_report.csv` has the same numbers in long format, plus per-epoch losses and every scored checkpoint.
-
-## Checkpoint choice
-`score_checkpoints.py` scored the decay-phase checkpoints with the professor method (`outputs/checkpoint_scores_100ep.csv`, Apple MPS): epoch 53 → 58.10, 70 → 56.43, 80 → 55.41, 90 → 54.33, 95 → 54.13, 100 → 54.31. The score improves through the decay and flattens from epoch 90. The submission uses the final epoch (100).
+Losses at epoch 93: G 3.96, D 0.112, cycle 1.645, identity 0.739, NaN count 0. All values are in `full_metrics_report.csv`; `metrics_report.csv` has the same in long format plus per-epoch losses and every scored checkpoint.
 
 ## Human audit
-New 30-image sheet for this checkpoint: `outputs/human_audit/audit_30.csv` (same 30 indices as before, two raters). `audit_agreement.py` prints the mean scores and Cohen's kappa once both columns are filled. The earlier audit of the 80-epoch images is kept in `outputs/human_audit/epoch80_archive/`.
+`outputs/human_audit/audit_30.csv`: 30 fixed photo→Monet images (`b2a_*.jpg`), two raters. `audit_agreement.py` prints the mean scores and Cohen's kappa once both columns are filled.
 
 ## Kaggle
-- Team: PairProgramming_Team_5
-- Upload file: `submission.csv` (`ID,FID,MiFID` = 1, 107.01382976154575, 0.4169285297393799)
+- Team: PairProgramming_Team_05
+- Upload file: `submission.csv` (`ID,FID,MiFID` = 1, 99.8386168442841, 0.41217851638793945)

@@ -30,7 +30,6 @@ pip install -r requirements.txt
 | TinyStoriesV2-GPT4 train / valid (Ritika, Part 1) | Hugging Face `roneneldan/TinyStories` | any folder; pass the paths to `run_all.py` |
 | Yelp polarity (Part 2) | Sneha's notebook downloads it. Ritika: Hugging Face `fancyzhx/yelp_polarity` parquet files | Ritika: pass the paths to `run_all.py` |
 | `monet_jpg/` (300 JPGs), `photo_jpg/` (7,038 JPGs) | Drive links 2 and 3 below | `task3_gan/data/monet_jpg/`, `task3_gan/data/photo_jpg/` (no extra parent folder) |
-| Sneha Part 3 `best.pt` | Sneha's Drive link below | `task3_gan/sneha_singh/checkpoints/best.pt` |
 | Ritika Part 3 checkpoint | Ritika's Drive link below | `task3_gan/ritika_mukesh_neema/checkpoints/ckpt_final.pt` |
 
 **Viewing results without retraining:** each notebook is saved with its outputs, so open it to see them. Running all cells starts a new full training run (Part 3 takes hours on a GPU). Metrics, samples, and plots are also in each member's `results.md`, metrics CSV, and `outputs/`.
@@ -60,9 +59,10 @@ Run every command from the repo root after Setup. Each `config.json` is set to t
 | 3 — CycleGAN | Sneha | `jupyter nbconvert --to notebook --execute --inplace task3_gan/sneha_singh/src/part3_cyclegan.ipynb` | `monet_jpg/`, `photo_jpg/` from Drive into `task3_gan/data/` |
 | 3 — CycleGAN | Ritika | `cd task3_gan/ritika_mukesh_neema/src && python run_all.py` | Same as above |
 
-Part 3 — evaluation script (both directions averaged, writes `submission.csv`):
+Part 3 — rebuild the submitted outputs from `best.pt`, then the evaluation script (both directions averaged, writes `submission.csv`):
 
 ```bash
+python task3_gan/sneha_singh/make_submission.py
 python task3_gan/sneha_singh/evaluate_local.py
 ```
 
@@ -76,7 +76,7 @@ Part 3 trains on a CUDA GPU. Parts 1 and 2 also run on CPU or Apple MPS, only sl
 | 1 | Ritika | `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt` (12 epochs) | Val CE 0.778, perplexity 2.18 |
 | 2 | Sneha | `task2_sentiment/sneha_singh/checkpoints/baseline_full.pt`, `experimental_a_full.pt` (BiLSTM), `experimental_b_full.pt` (TextCNN) | Best: BiLSTM, macro-F1 0.942 |
 | 2 | Ritika | `task2_sentiment/ritika_mukesh_neema/checkpoints/baseline.pt`, `bilstm.pt`, `textcnn.pt` | Best: BiLSTM, macro-F1 0.934 |
-| 3 | Sneha | `task3_gan/sneha_singh/checkpoints/best.pt` (Drive, epoch 100) | `submission.csv`: FID 107.01, MiFID 0.417 (score 53.72) |
+| 3 | Sneha | `task3_gan/sneha_singh/checkpoints/best.pt` (epoch 93) | `submission.csv`: FID 99.84, MiFID 0.412 (score 50.13) |
 | 3 | Ritika | `task3_gan/ritika_mukesh_neema/checkpoints/ckpt_final.pt` (Drive, epoch 80) | Photo→Monet FID 123.70, Monet→photo FID 120.72 |
 
 ---
@@ -186,18 +186,19 @@ jupyter nbconvert --to notebook --execute --inplace \
 
 ### Sneha Singh — `task3_gan/sneha_singh/`
 
-- `src/part3_cyclegan.ipynb` (Colab run with outputs), `src/config.json`, `evaluate_local.py`, `infer_b2a.py`, `score_checkpoints.py`, `audit_agreement.py`
+- `src/part3_cyclegan.ipynb` (Colab run with outputs), `src/config.json`, `make_submission.py`, `evaluate_local.py`, `score_checkpoints.py`, `audit_agreement.py`
 - `submission.csv` (FID + MiFID for Kaggle)
 - `full_metrics_report.csv`, `metrics_report.csv` (long format: final metrics, human audit, per-epoch losses, scored checkpoints), `results.md`, `failure_analysis.md`
-- Sample grid + loss curves; checkpoint scores `outputs/checkpoint_scores_100ep.csv`; 30-image audit under `outputs/human_audit/`
-- `checkpoints/` on git is empty of weights; **`best.pt` on Drive** (GitHub 100 MB limit)
+- Sample grid + loss curves; checkpoint scores `outputs/checkpoint_scores_epochs86_100.csv`; 30-image audit under `outputs/human_audit/`
+- `checkpoints/best.pt` (43 MB, in git): epoch 93
 
 **How to run**
 
-- Train: CUDA GPU, `"smoke": false`, AMP (100 epochs, ~4.0 h on a Colab L4, peak ~6570 MB).
-- Local metrics:
+- Train: CUDA GPU, `"smoke": false`, AMP (100 epochs, ~5.4 h on a Colab L4, peak ~3361 MB).
+- Submission from `best.pt`, then metrics:
 
 ```bash
+python task3_gan/sneha_singh/make_submission.py
 python task3_gan/sneha_singh/evaluate_local.py
 ```
 
@@ -206,11 +207,11 @@ python task3_gan/sneha_singh/evaluate_local.py
 | Item | Value |
 |---|---|
 | Upload file | `task3_gan/sneha_singh/submission.csv` |
-| FID / MiFID | 107.01 / 0.417 (average of both directions, professor script on Colab L4) |
-| Score | 53.72 |
+| FID / MiFID | 99.84 / 0.412 (average of both directions, professor script on Colab L4) |
+| Score | 50.13 |
 | Leaderboard rank | to be recorded after the Kaggle upload |
 
-**Status:** `best.pt` is epoch 100 of the 100-epoch run. Professor eval is in `submission.csv` (FID 107.01, MiFID 0.417). A2B Monet→photo FID 108.12. B2A photo→Monet FID 105.91. The same checkpoint scores 54.31 on Apple MPS (floating-point differences).
+**Status:** `best.pt` is epoch 93 of the 100-epoch run, selected by professor-script score among epochs 86–100. Professor eval is in `submission.csv` (FID 99.84, MiFID 0.412). A2B Monet→photo FID 101.39 (6-view averaging). B2A photo→Monet FID 98.29.
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 
@@ -249,14 +250,13 @@ Part 2 is not in this table. Yelp polarity is not a file we host. Each notebook 
 
 ### 2. Individual links — Sneha / Ritika
 
-Part 1 `best.pt` (12 MB) and Part 2 checkpoints stay **on git**.  
-Part 3 `best.pt` is on Drive because the file is 107.9 MB, over GitHub’s 100 MB limit. The datasets stay in the common table above.
+Part 1 `best.pt` (12 MB), Part 2 checkpoints, and Sneha's Part 3 `best.pt` (43 MB) are **on git**. The datasets stay in the common table above.
 
 **Sneha Singh**
 
 | File | Link |
 |---|---|
-| Part 3 `best.pt` (107.9 MB, over the 100 MB git limit) | https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link |
+| Part 3 `best.pt` (backup copy; also in git) | https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link |
 
 **Ritika Mukesh Neema**
 

@@ -1,5 +1,5 @@
-# Human audit sheet: Part 3 photo->Monet, submitted checkpoint (epoch 100)
-# Same 30 fixed indices as the epoch-80 audit. Images: b2a_<index>.jpg in this folder (copies of outputs/pred_B2A).
+# Human audit sheet: Part 3 photo->Monet, submitted checkpoint (epoch 93)
+# 30 fixed indices. Images: b2a_<index>.jpg in this folder (copies of outputs/pred_B2A).
 # Scores: style 0-2 (higher = more Monet), content 0-2 (higher = keeps photo layout),
 # artifacts 0-2 (higher = worse grid/noise), mem Y/N (looks copied from a real Monet?)
 # Rate independently; do not look at the other rater's columns first.
