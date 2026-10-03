@@ -22,11 +22,22 @@ pip install -r requirements.txt
 
 ---
 
+## Smoke test (one command)
+
+```bash
+bash run_smoke.sh
+```
+
+Runs Sneha's Part 1 GPT with `smoke: true` (TinyStories-valid, 256 train / 64 val, 2 epochs, about 1 minute on CPU). The notebook downloads the small TinyStories-valid file itself. The script works in a temporary copy of the repo, so committed results, raw logs, and manifests are not touched. It prints the output folder when it finishes.
+
+---
+
 ## Repo layout
 
 ```
 Data_266-Lab1/
 ├── README.md
+├── run_smoke.sh                      # one-command smoke test
 ├── requirements.txt
 ├── task1_llm/
 │   ├── data/                         # shared TinyStories
