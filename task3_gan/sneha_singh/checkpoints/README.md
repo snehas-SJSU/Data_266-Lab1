@@ -5,4 +5,3 @@ It holds both generators and both discriminators. Generator: 9 residual blocks, 
 
 - Regenerate the submitted outputs: `python task3_gan/sneha_singh/make_submission.py`, then `python task3_gan/sneha_singh/evaluate_local.py`
 - `submission.csv` for this checkpoint: FID 99.84, MiFID 0.412 (score 50.13)
-- Backup copy: https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link
