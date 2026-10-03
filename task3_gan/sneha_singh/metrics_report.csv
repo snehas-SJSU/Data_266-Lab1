@@ -1,0 +1,568 @@
+run_id,checkpoint,direction,metric,value,source
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,fid,109.33262147943925,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,kid,0.03049034595489502,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,mifid,0.42484867572784424,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,precision,0.6600000262260437,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,recall,0.08894572407007217,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,cycle_l1,0.1029527336359024,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,lpips,0.36512913717888296,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,content_cosine,0.5861876346170902,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,g_loss,4.573910263776779,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,d_loss,0.16787805154919624,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,cycle_loss,2.1742589992284773,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,identity_loss,1.0974113202095033,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,grad_norm,112.8206666899845,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,nan_count,0,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,param_count,28273544,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,train_time_sec,15341.460052013397,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,images_per_sec,8.34340405450532,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),A2B,peak_memory_mb,6568.2431640625,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,fid,105.05954986755154,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,kid,0.01765800952911377,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,mifid,0.40501031279563904,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,precision,0.5397840142250061,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,recall,0.2933333218097687,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,cycle_l1,0.11230991128832102,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,lpips,0.45154353184625506,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,content_cosine,0.5320109468884766,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,g_loss,4.573910263776779,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,d_loss,0.16787805154919624,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,cycle_loss,2.1742589992284773,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,identity_loss,1.0974113202095033,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,grad_norm,112.8206666899845,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,nan_count,0,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,param_count,28273544,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,train_time_sec,15341.460052013397,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,images_per_sec,8.34340405450532,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,peak_memory_mb,6568.2431640625,full_metrics_report.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),average_A2B_B2A,submission_FID,107.1960865081875,submission.csv (professor script)
+run_80ep_submitted,checkpoints/best.pt (epoch 80),average_A2B_B2A,submission_MiFID,0.41492947936058044,submission.csv (professor script)
+run_80ep_submitted,checkpoints/best.pt (epoch 80),average_A2B_B2A,score_(FID+MiFID)/2,53.8055,computed from submission.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,human_audit_style_mean_0to2_rater_sneha,1.4,outputs/human_audit/audit_30.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,human_audit_content_mean_0to2_rater_sneha,1.6667,outputs/human_audit/audit_30.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,human_audit_artifacts_mean_0to2_rater_sneha,1.4333,outputs/human_audit/audit_30.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,human_audit_memorized_count_rater_sneha,0,outputs/human_audit/audit_30.csv
+run_80ep_submitted,checkpoints/best.pt (epoch 80),B2A,human_audit_n_images,30,outputs/human_audit/audit_30.csv
+run_80ep_submitted,epoch 1,training,g_loss,9.5142,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 1,training,d_loss,0.4678,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 1,training,cycle_loss,5.9246,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 1,training,identity_loss,2.7195,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 1,training,grad_norm_sum,inf,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 1,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 2,training,g_loss,8.5420,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 2,training,d_loss,0.3452,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 2,training,cycle_loss,5.2082,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 2,training,identity_loss,2.3447,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 2,training,grad_norm_sum,157.9179,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 2,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 3,training,g_loss,8.0217,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 3,training,d_loss,0.2694,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 3,training,cycle_loss,4.7397,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 3,training,identity_loss,2.1797,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 3,training,grad_norm_sum,146.0785,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 3,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 4,training,g_loss,7.6496,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 4,training,d_loss,0.2470,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 4,training,cycle_loss,4.5141,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 4,training,identity_loss,2.0770,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 4,training,grad_norm_sum,144.2256,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 4,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 5,training,g_loss,7.5285,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 5,training,d_loss,0.2610,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 5,training,cycle_loss,4.4700,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 5,training,identity_loss,2.0622,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 5,training,grad_norm_sum,inf,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 5,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 6,training,g_loss,7.4136,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 6,training,d_loss,0.2525,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 6,training,cycle_loss,4.3588,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 6,training,identity_loss,2.0093,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 6,training,grad_norm_sum,140.5022,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 6,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 7,training,g_loss,7.1798,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 7,training,d_loss,0.3016,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 7,training,cycle_loss,4.2206,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 7,training,identity_loss,1.9554,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 7,training,grad_norm_sum,134.8354,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 7,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 8,training,g_loss,7.1188,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 8,training,d_loss,0.2584,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 8,training,cycle_loss,4.1965,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 8,training,identity_loss,1.9302,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 8,training,grad_norm_sum,133.9745,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 8,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 9,training,g_loss,6.9776,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 9,training,d_loss,0.2608,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 9,training,cycle_loss,4.0706,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 9,training,identity_loss,1.8918,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 9,training,grad_norm_sum,inf,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 9,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 10,training,g_loss,6.7484,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 10,training,d_loss,0.2883,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 10,training,cycle_loss,3.9459,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 10,training,identity_loss,1.8229,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 10,training,grad_norm_sum,125.6371,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 10,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 11,training,g_loss,6.6044,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 11,training,d_loss,0.2586,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 11,training,cycle_loss,3.8610,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 11,training,identity_loss,1.7773,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 11,training,grad_norm_sum,129.5964,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 11,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 12,training,g_loss,6.5212,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 12,training,d_loss,0.2728,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 12,training,cycle_loss,3.8049,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 12,training,identity_loss,1.7402,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 12,training,grad_norm_sum,128.6246,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 12,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 13,training,g_loss,6.5539,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 13,training,d_loss,0.2574,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 13,training,cycle_loss,3.7914,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 13,training,identity_loss,1.7446,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 13,training,grad_norm_sum,131.0048,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 13,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 14,training,g_loss,6.5203,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 14,training,d_loss,0.2598,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 14,training,cycle_loss,3.7860,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 14,training,identity_loss,1.7320,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 14,training,grad_norm_sum,131.1734,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 14,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 15,training,g_loss,6.3367,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 15,training,d_loss,0.2601,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 15,training,cycle_loss,3.6467,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 15,training,identity_loss,1.6835,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 15,training,grad_norm_sum,125.4768,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 15,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 16,training,g_loss,6.5989,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 16,training,d_loss,0.2495,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 16,training,cycle_loss,3.7681,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 16,training,identity_loss,1.7357,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 16,training,grad_norm_sum,132.7583,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 16,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 17,training,g_loss,6.3949,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 17,training,d_loss,0.2647,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 17,training,cycle_loss,3.6682,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 17,training,identity_loss,1.6761,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 17,training,grad_norm_sum,130.3435,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 17,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 18,training,g_loss,6.2920,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 18,training,d_loss,0.2578,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 18,training,cycle_loss,3.6195,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 18,training,identity_loss,1.6590,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 18,training,grad_norm_sum,126.1406,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 18,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 19,training,g_loss,6.2845,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 19,training,d_loss,0.2536,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 19,training,cycle_loss,3.5922,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 19,training,identity_loss,1.6566,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 19,training,grad_norm_sum,129.8671,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 19,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 20,training,g_loss,6.2701,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 20,training,d_loss,0.3735,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 20,training,cycle_loss,3.5568,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 20,training,identity_loss,1.6495,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 20,training,grad_norm_sum,122.4195,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 20,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 21,training,g_loss,5.8092,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 21,training,d_loss,0.2711,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 21,training,cycle_loss,3.3196,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 21,training,identity_loss,1.5521,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 21,training,grad_norm_sum,112.2924,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 21,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 22,training,g_loss,6.0317,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 22,training,d_loss,0.2446,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 22,training,cycle_loss,3.4352,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 22,training,identity_loss,1.5908,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 22,training,grad_norm_sum,118.7365,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 22,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 23,training,g_loss,6.0460,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 23,training,d_loss,0.2426,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 23,training,cycle_loss,3.4245,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 23,training,identity_loss,1.5829,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 23,training,grad_norm_sum,123.1343,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 23,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 24,training,g_loss,6.1936,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 24,training,d_loss,0.2324,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 24,training,cycle_loss,3.4963,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 24,training,identity_loss,1.5998,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 24,training,grad_norm_sum,nan,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 24,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 25,training,g_loss,6.1718,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 25,training,d_loss,0.2331,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 25,training,cycle_loss,3.4770,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 25,training,identity_loss,1.6188,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 25,training,grad_norm_sum,123.8659,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 25,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 26,training,g_loss,6.1148,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 26,training,d_loss,0.2363,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 26,training,cycle_loss,3.4402,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 26,training,identity_loss,1.5912,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 26,training,grad_norm_sum,inf,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 26,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 27,training,g_loss,5.8275,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 27,training,d_loss,0.3720,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 27,training,cycle_loss,3.2584,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 27,training,identity_loss,1.5185,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 27,training,grad_norm_sum,112.2709,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 27,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 28,training,g_loss,5.6971,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 28,training,d_loss,0.2968,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 28,training,cycle_loss,3.2863,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 28,training,identity_loss,1.5121,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 28,training,grad_norm_sum,113.5250,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 28,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 29,training,g_loss,5.7331,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 29,training,d_loss,0.2783,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 29,training,cycle_loss,3.2623,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 29,training,identity_loss,1.5245,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 29,training,grad_norm_sum,114.1805,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 29,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 30,training,g_loss,5.7346,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 30,training,d_loss,0.2474,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 30,training,cycle_loss,3.2283,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 30,training,identity_loss,1.5191,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 30,training,grad_norm_sum,112.0448,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 30,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 31,training,g_loss,5.9560,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 31,training,d_loss,0.2262,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 31,training,cycle_loss,3.3184,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 31,training,identity_loss,1.5542,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 31,training,grad_norm_sum,116.1509,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 31,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 32,training,g_loss,6.0084,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 32,training,d_loss,0.2284,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 32,training,cycle_loss,3.3428,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 32,training,identity_loss,1.5551,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 32,training,grad_norm_sum,118.8150,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 32,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 33,training,g_loss,5.9711,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 33,training,d_loss,0.2238,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 33,training,cycle_loss,3.3108,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 33,training,identity_loss,1.5382,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 33,training,grad_norm_sum,115.3883,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 33,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 34,training,g_loss,5.7044,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 34,training,d_loss,0.2418,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 34,training,cycle_loss,3.1260,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 34,training,identity_loss,1.4812,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 34,training,grad_norm_sum,109.2488,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 34,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 35,training,g_loss,5.9139,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 35,training,d_loss,0.2220,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 35,training,cycle_loss,3.2714,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 35,training,identity_loss,1.5233,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 35,training,grad_norm_sum,116.3837,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 35,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 36,training,g_loss,5.7317,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 36,training,d_loss,0.2582,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 36,training,cycle_loss,3.1760,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 36,training,identity_loss,1.4926,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 36,training,grad_norm_sum,112.9012,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 36,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 37,training,g_loss,5.6469,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 37,training,d_loss,0.2300,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 37,training,cycle_loss,3.0895,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 37,training,identity_loss,1.4634,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 37,training,grad_norm_sum,110.9565,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 37,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 38,training,g_loss,5.6549,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 38,training,d_loss,0.2311,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 38,training,cycle_loss,3.1098,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 38,training,identity_loss,1.4631,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 38,training,grad_norm_sum,109.9826,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 38,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 39,training,g_loss,5.6864,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 39,training,d_loss,0.2321,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 39,training,cycle_loss,3.1288,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 39,training,identity_loss,1.4625,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 39,training,grad_norm_sum,113.5631,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 39,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 40,training,g_loss,5.6113,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 40,training,d_loss,0.4254,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 40,training,cycle_loss,3.0637,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 40,training,identity_loss,1.4443,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 40,training,grad_norm_sum,106.2262,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 40,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 41,training,g_loss,5.3178,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 41,training,d_loss,0.2860,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 41,training,cycle_loss,2.9704,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 41,training,identity_loss,1.4177,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 41,training,grad_norm_sum,102.0484,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 41,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 42,training,g_loss,5.3769,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 42,training,d_loss,0.2662,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 42,training,cycle_loss,2.9954,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 42,training,identity_loss,1.4203,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 42,training,grad_norm_sum,106.7447,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 42,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 43,training,g_loss,5.5127,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 43,training,d_loss,0.2414,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 43,training,cycle_loss,3.0442,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 43,training,identity_loss,1.4513,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 43,training,grad_norm_sum,105.6953,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 43,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 44,training,g_loss,5.5939,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 44,training,d_loss,0.2140,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 44,training,cycle_loss,3.0413,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 44,training,identity_loss,1.4420,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 44,training,grad_norm_sum,110.5157,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 44,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 45,training,g_loss,5.6084,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 45,training,d_loss,0.2098,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 45,training,cycle_loss,3.0321,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 45,training,identity_loss,1.4295,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 45,training,grad_norm_sum,114.0941,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 45,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 46,training,g_loss,5.6529,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 46,training,d_loss,0.2079,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 46,training,cycle_loss,3.0644,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 46,training,identity_loss,1.4507,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 46,training,grad_norm_sum,117.4694,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 46,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 47,training,g_loss,5.5245,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 47,training,d_loss,0.2129,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 47,training,cycle_loss,2.9646,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 47,training,identity_loss,1.4146,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 47,training,grad_norm_sum,110.0724,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 47,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 48,training,g_loss,5.5135,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 48,training,d_loss,0.2256,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 48,training,cycle_loss,2.9960,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 48,training,identity_loss,1.4164,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 48,training,grad_norm_sum,inf,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 48,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 49,training,g_loss,5.4541,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 49,training,d_loss,0.2206,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 49,training,cycle_loss,2.9482,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 49,training,identity_loss,1.4008,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 49,training,grad_norm_sum,119.7703,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 49,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 50,training,g_loss,5.4730,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 50,training,d_loss,0.2225,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 50,training,cycle_loss,2.9577,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 50,training,identity_loss,1.4002,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 50,training,grad_norm_sum,113.0446,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 50,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 51,training,g_loss,5.4321,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 51,training,d_loss,0.2216,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 51,training,cycle_loss,2.9379,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 51,training,identity_loss,1.3842,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 51,training,grad_norm_sum,114.1423,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 51,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 52,training,g_loss,5.2963,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 52,training,d_loss,0.2198,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 52,training,cycle_loss,2.8567,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 52,training,identity_loss,1.3664,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 52,training,grad_norm_sum,109.0483,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 52,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 53,training,g_loss,5.1444,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 53,training,d_loss,0.2207,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 53,training,cycle_loss,2.7364,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 53,training,identity_loss,1.3254,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 53,training,grad_norm_sum,104.7214,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 53,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 54,training,g_loss,5.1936,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 54,training,d_loss,0.2191,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 54,training,cycle_loss,2.7785,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 54,training,identity_loss,1.3314,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 54,training,grad_norm_sum,109.7594,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 54,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 55,training,g_loss,5.0959,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 55,training,d_loss,0.2184,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 55,training,cycle_loss,2.6876,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 55,training,identity_loss,1.3096,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 55,training,grad_norm_sum,103.9956,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 55,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 56,training,g_loss,5.0837,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 56,training,d_loss,0.2185,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 56,training,cycle_loss,2.6912,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 56,training,identity_loss,1.3018,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 56,training,grad_norm_sum,108.2830,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 56,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 57,training,g_loss,5.1005,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 57,training,d_loss,0.2171,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 57,training,cycle_loss,2.6862,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 57,training,identity_loss,1.3103,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 57,training,grad_norm_sum,107.4674,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 57,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 58,training,g_loss,5.0759,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 58,training,d_loss,0.2164,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 58,training,cycle_loss,2.6645,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 58,training,identity_loss,1.2971,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 58,training,grad_norm_sum,inf,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 58,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 59,training,g_loss,4.9916,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 59,training,d_loss,0.2071,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 59,training,cycle_loss,2.6145,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 59,training,identity_loss,1.2699,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 59,training,grad_norm_sum,104.4327,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 59,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 60,training,g_loss,5.0930,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 60,training,d_loss,0.2020,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 60,training,cycle_loss,2.6677,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 60,training,identity_loss,1.2862,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 60,training,grad_norm_sum,110.8442,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 60,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 61,training,g_loss,4.9938,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 61,training,d_loss,0.1975,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 61,training,cycle_loss,2.5960,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 61,training,identity_loss,1.2647,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 61,training,grad_norm_sum,113.1168,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 61,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 62,training,g_loss,4.9978,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 62,training,d_loss,0.1957,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 62,training,cycle_loss,2.5702,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 62,training,identity_loss,1.2580,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 62,training,grad_norm_sum,113.1947,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 62,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 63,training,g_loss,4.9049,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 63,training,d_loss,0.1962,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 63,training,cycle_loss,2.5232,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 63,training,identity_loss,1.2283,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 63,training,grad_norm_sum,110.0987,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 63,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 64,training,g_loss,4.8881,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 64,training,d_loss,0.1956,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 64,training,cycle_loss,2.5116,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 64,training,identity_loss,1.2268,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 64,training,grad_norm_sum,110.0868,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 64,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 65,training,g_loss,4.8848,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 65,training,d_loss,0.1898,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 65,training,cycle_loss,2.4876,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 65,training,identity_loss,1.2182,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 65,training,grad_norm_sum,111.7710,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 65,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 66,training,g_loss,4.9089,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 66,training,d_loss,0.1961,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 66,training,cycle_loss,2.5012,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 66,training,identity_loss,1.2312,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 66,training,grad_norm_sum,114.2073,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 66,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 67,training,g_loss,4.8746,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 67,training,d_loss,0.1867,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 67,training,cycle_loss,2.4833,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 67,training,identity_loss,1.2167,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 67,training,grad_norm_sum,115.6027,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 67,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 68,training,g_loss,4.8222,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 68,training,d_loss,0.1832,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 68,training,cycle_loss,2.4340,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 68,training,identity_loss,1.1888,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 68,training,grad_norm_sum,112.9313,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 68,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 69,training,g_loss,4.8144,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 69,training,d_loss,0.1805,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 69,training,cycle_loss,2.4119,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 69,training,identity_loss,1.1993,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 69,training,grad_norm_sum,112.8558,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 69,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 70,training,g_loss,4.7412,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 70,training,d_loss,0.1765,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 70,training,cycle_loss,2.3785,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 70,training,identity_loss,1.1682,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 70,training,grad_norm_sum,117.0396,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 70,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 71,training,g_loss,4.6910,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 71,training,d_loss,0.1851,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 71,training,cycle_loss,2.3395,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 71,training,identity_loss,1.1594,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 71,training,grad_norm_sum,112.2101,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 71,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 72,training,g_loss,4.7167,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 72,training,d_loss,0.1747,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 72,training,cycle_loss,2.3433,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 72,training,identity_loss,1.1559,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 72,training,grad_norm_sum,115.5104,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 72,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 73,training,g_loss,4.7672,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 73,training,d_loss,0.1748,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 73,training,cycle_loss,2.3593,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 73,training,identity_loss,1.1705,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 73,training,grad_norm_sum,121.4844,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 73,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 74,training,g_loss,4.6978,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 74,training,d_loss,0.1785,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 74,training,cycle_loss,2.3047,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 74,training,identity_loss,1.1620,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 74,training,grad_norm_sum,119.4714,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 74,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 75,training,g_loss,4.7070,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 75,training,d_loss,0.1737,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 75,training,cycle_loss,2.3085,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 75,training,identity_loss,1.1620,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 75,training,grad_norm_sum,117.6609,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 75,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 76,training,g_loss,4.6080,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 76,training,d_loss,0.1773,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 76,training,cycle_loss,2.2370,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 76,training,identity_loss,1.1285,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 76,training,grad_norm_sum,112.7165,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 76,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 77,training,g_loss,4.6421,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 77,training,d_loss,0.1695,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 77,training,cycle_loss,2.2299,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 77,training,identity_loss,1.1356,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 77,training,grad_norm_sum,inf,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 77,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 78,training,g_loss,4.5914,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 78,training,d_loss,0.1645,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 78,training,cycle_loss,2.1809,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 78,training,identity_loss,1.1060,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 78,training,grad_norm_sum,115.8506,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 78,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 79,training,g_loss,4.6507,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 79,training,d_loss,0.1618,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 79,training,cycle_loss,2.2168,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 79,training,identity_loss,1.1251,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 79,training,grad_norm_sum,114.3394,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 79,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 80,training,g_loss,4.5739,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 80,training,d_loss,0.1679,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 80,training,cycle_loss,2.1743,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 80,training,identity_loss,1.0974,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 80,training,grad_norm_sum,112.8207,raw_logs/sneha_singh/task3_gan/train_full.log
+run_80ep_submitted,epoch 80,training,nan_count_cum,0,raw_logs/sneha_singh/task3_gan/train_full.log
+retrain_16ep_bilinear,"best_epoch_08.pt (Drive, not submitted)",B2A,fid,115.87,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_08.pt (Drive, not submitted)",B2A,mifid,0.4021,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_08.pt (Drive, not submitted)",A2B,fid,123.87,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_08.pt (Drive, not submitted)",A2B,mifid,0.4185,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_08.pt (Drive, not submitted)",average_A2B_B2A,score_(FID+MiFID)/2,60.1402,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_09.pt (Drive, not submitted)",B2A,fid,111.96,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_09.pt (Drive, not submitted)",B2A,mifid,0.4054,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_09.pt (Drive, not submitted)",A2B,fid,143.57,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_09.pt (Drive, not submitted)",A2B,mifid,0.4332,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_09.pt (Drive, not submitted)",average_A2B_B2A,score_(FID+MiFID)/2,64.0921,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_10.pt (Drive, not submitted)",B2A,fid,112.97,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_10.pt (Drive, not submitted)",B2A,mifid,0.3997,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_10.pt (Drive, not submitted)",A2B,fid,130.72,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_10.pt (Drive, not submitted)",A2B,mifid,0.4247,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_10.pt (Drive, not submitted)",average_A2B_B2A,score_(FID+MiFID)/2,61.1286,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_11.pt (Drive, not submitted)",B2A,fid,113.25,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_11.pt (Drive, not submitted)",B2A,mifid,0.4003,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_11.pt (Drive, not submitted)",A2B,fid,134.14,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_11.pt (Drive, not submitted)",A2B,mifid,0.4281,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_11.pt (Drive, not submitted)",average_A2B_B2A,score_(FID+MiFID)/2,62.0546,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_12.pt (Drive, not submitted)",B2A,fid,113.53,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_12.pt (Drive, not submitted)",B2A,mifid,0.4022,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_12.pt (Drive, not submitted)",A2B,fid,128.47,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_12.pt (Drive, not submitted)",A2B,mifid,0.4315,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_12.pt (Drive, not submitted)",average_A2B_B2A,score_(FID+MiFID)/2,60.7084,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_13.pt (Drive, not submitted)",B2A,fid,107.07,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_13.pt (Drive, not submitted)",B2A,mifid,0.4011,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_13.pt (Drive, not submitted)",A2B,fid,127.62,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_13.pt (Drive, not submitted)",A2B,mifid,0.4286,"professor script, 300 vs 300, scored locally"
+retrain_16ep_bilinear,"best_epoch_13.pt (Drive, not submitted)",average_A2B_B2A,score_(FID+MiFID)/2,58.8799,"professor script, 300 vs 300, scored locally"
+retrain_resumed_full_lr,"best_epoch_25.pt (Drive, not submitted)",B2A,fid,114.62,"professor script, 300 vs 300, scored locally"
+retrain_resumed_full_lr,"best_epoch_25.pt (Drive, not submitted)",B2A,mifid,0.4068,"professor script, 300 vs 300, scored locally"
+retrain_resumed_full_lr,"best_epoch_25.pt (Drive, not submitted)",A2B,fid,120.65,"professor script, 300 vs 300, scored locally"
+retrain_resumed_full_lr,"best_epoch_25.pt (Drive, not submitted)",A2B,mifid,0.4293,"professor script, 300 vs 300, scored locally"
+retrain_resumed_full_lr,"best_epoch_25.pt (Drive, not submitted)",average_A2B_B2A,score_(FID+MiFID)/2,59.0265,"professor script, 300 vs 300, scored locally"
+retrain_20ep,"best_epoch_16.pt (Drive, not submitted)",B2A,fid,105.19,"professor script, 300 vs 300, scored locally"
+retrain_20ep,"best_epoch_16.pt (Drive, not submitted)",B2A,mifid,0.4032,"professor script, 300 vs 300, scored locally"
+retrain_20ep,"best_epoch_16.pt (Drive, not submitted)",A2B,fid,112.78,"professor script, 300 vs 300, scored locally"
+retrain_20ep,"best_epoch_16.pt (Drive, not submitted)",A2B,mifid,0.4232,"professor script, 300 vs 300, scored locally"
+retrain_20ep,"best_epoch_16.pt (Drive, not submitted)",average_A2B_B2A,score_(FID+MiFID)/2,54.6991,"professor script, 300 vs 300, scored locally"
+retrain_resumed_full_lr,"best_epoch_31.pt (Drive, not submitted)",average_A2B_B2A,submission_FID,117.4916,notebook evaluate_local.py output
+retrain_resumed_full_lr,"best_epoch_31.pt (Drive, not submitted)",average_A2B_B2A,submission_MiFID,0.4139,notebook evaluate_local.py output
+retrain_resumed_full_lr,"best_epoch_31.pt (Drive, not submitted)",average_A2B_B2A,score_(FID+MiFID)/2,58.9528,notebook evaluate_local.py output

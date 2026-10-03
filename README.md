@@ -32,6 +32,29 @@ Runs Sneha's Part 1 GPT with `smoke: true` (TinyStories-valid, 256 train / 64 va
 
 ---
 
+## How to run — all members
+
+Run every command from the repo root after Setup. Each `config.json` is set to the full run (`"smoke": false`). Set `"smoke": true` for a short run.
+
+| Part | Member | Command | Data |
+|---|---|---|---|
+| 1 — LLM | Sneha | `jupyter nbconvert --to notebook --execute --inplace task1_llm/sneha_singh/src/part1_llm.ipynb` | Notebook downloads TinyStories |
+| 1 — LLM | Ritika | `cd task1_llm/ritika_mukesh_neema/src && python run_all.py --train_txt <train.txt> --val_txt <val.txt>` | Her 100K / 10K TinyStories split |
+| 2 — Sentiment | Sneha | `jupyter nbconvert --to notebook --execute --inplace task2_sentiment/sneha_singh/src/part2_sentiment.ipynb` | Notebook downloads Yelp polarity |
+| 2 — Sentiment | Ritika | `cd task2_sentiment/ritika_mukesh_neema/src && python run_all.py --train_csv <train.csv> --test_csv <test.csv>` | Her Yelp train / test CSVs |
+| 3 — CycleGAN | Sneha | `jupyter nbconvert --to notebook --execute --inplace task3_gan/sneha_singh/src/part3_cyclegan.ipynb` | `monet_jpg/`, `photo_jpg/` from Drive into `task3_gan/data/` |
+| 3 — CycleGAN | Ritika | `cd task3_gan/ritika_mukesh_neema/src && python run_all.py` | Same as above |
+
+Part 3 scoring (professor evaluation script, both directions averaged, writes `submission.csv`):
+
+```bash
+python task3_gan/sneha_singh/evaluate_local.py
+```
+
+Part 3 trains on a CUDA GPU. Parts 1 and 2 also run on CPU or Apple MPS, only slower. Ritika's `run_all.py` scripts also accept `--smoke_test`.
+
+---
+
 ## Repo layout
 
 ```
@@ -124,7 +147,7 @@ Notebook, config, metrics, and write-ups for her Part 2 run (her own 3 models).
 
 - `src/part3_cyclegan.ipynb`, `src/config.json`, `evaluate_local.py`, `infer_b2a.py`
 - `submission.csv` (FID + MiFID for Kaggle)
-- `full_metrics_report.csv`, `results.md`, `failure_analysis.md`
+- `full_metrics_report.csv`, `metrics_report.csv` (long format: final metrics, human audit, per-epoch losses, scored checkpoints), `results.md`, `failure_analysis.md`
 - Sample grid + loss curves; 30-image audit under `outputs/human_audit/`
 - `checkpoints/` on git is empty of weights; **`best.pt` on Drive** (GitHub 100 MB limit)
 
