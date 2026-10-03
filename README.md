@@ -28,7 +28,7 @@ pip install -r requirements.txt
 bash run_smoke.sh
 ```
 
-Runs Sneha's/Ritika Part 1 GPT with `smoke: true` (TinyStories-valid, 256 train / 64 val, 2 epochs, about 1 minute on CPU). The notebook downloads the small TinyStories-valid file itself. The script works in a temporary copy of the repo, so committed results, raw logs, and manifests are not touched. It prints the output folder when it finishes.
+Team smoke test (Sneha Singh, Ritika Mukesh Neema). Runs the Part 1 GPT with `smoke: true` (TinyStories-valid, 256 train / 64 val, 2 epochs, about 1 minute on CPU). The notebook downloads the small TinyStories-valid file itself. The script works in a temporary copy of the repo, so committed results, raw logs, and manifests are not touched. It prints the output folder when it finishes.
 
 ---
 
@@ -45,7 +45,7 @@ Run every command from the repo root after Setup. Each `config.json` is set to t
 | 3 — CycleGAN | Sneha | `jupyter nbconvert --to notebook --execute --inplace task3_gan/sneha_singh/src/part3_cyclegan.ipynb` | `monet_jpg/`, `photo_jpg/` from Drive into `task3_gan/data/` |
 | 3 — CycleGAN | Ritika | `cd task3_gan/ritika_mukesh_neema/src && python run_all.py` | Same as above |
 
-Part 3 scoring (professor evaluation script, both directions averaged, writes `submission.csv`):
+Part 3 — evaluation script (both directions averaged, writes `submission.csv`):
 
 ```bash
 python task3_gan/sneha_singh/evaluate_local.py
