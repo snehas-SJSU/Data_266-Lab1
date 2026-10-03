@@ -1,8 +1,8 @@
 # Part 3 — Failure / error analysis (Sneha Singh)
 
-I looked at this 80-epoch retrain (nearest upsample, label smoothing 0.9, CUDA + AMP): loss curves,
-the sample grid, the photo→Monet images in `pred_B2A`, and the numbers from
-`evaluate_local.py`.
+Submitted checkpoint: the 100-epoch run (50 + 50 decay, nearest upsample, label smoothing 0.9, identity weight 50, Colab L4 + AMP).
+The image observations below are from my audit of the earlier 80-epoch run (same architecture and upsampling);
+the 30-image audit of the epoch-100 images is in `outputs/human_audit/audit_30.csv`. Numbers are for the epoch-100 checkpoint.
 
 ## What usually goes wrong in the images
 
@@ -17,15 +17,16 @@ From `outputs/samples/grid.png` and the audit set:
 4. **Same brush texture over and over** — not full mode collapse (scenes still
    look different), but a lot of outputs share the same grainy “dab” look instead
    of varied Monet strokes.
-5. **Still looks like a photo** — less common after 80 epochs. More often it’s
+5. **Still looks like a photo** — less common after 80 epochs (earlier run). More often it’s
    *too* noisy than not stylized enough.
 6. **Watermarks / text** — a few preds show smeared white blobs where the photo
    probably had text on it.
 
 ## 30-sample audit
 
-- Rater: me
-- Sheet: `outputs/human_audit/audit_30.csv`
+- Rater: me (earlier 80-epoch images)
+- Sheet: `outputs/human_audit/epoch80_archive/audit_30_epoch80.csv`
+- Epoch-100 sheet (two raters): `outputs/human_audit/audit_30.csv`
 - Scale: style 0–2, content 0–2, artifacts 0–2 (higher = worse), mem Y/N
 
 ### My pass (quick summary)
@@ -47,28 +48,27 @@ From `full_metrics_report.csv`:
 
 | | cycle L1 | LPIPS vs source | content cosine vs source | FID | MiFID |
 |---|---|---|---|---|---|
-| A2B (Monet→photo) | 0.103 | 0.365 | 0.586 | 109.33 | 0.425 |
-| B2A (photo→Monet) | 0.112 | 0.452 | 0.532 | 105.06 | 0.405 |
+| A2B (Monet→photo) | 0.089 | 0.274 | 0.688 | 108.12 | 0.422 |
+| B2A (photo→Monet) | 0.076 | 0.279 | 0.717 | 105.91 | 0.412 |
 
-Cycle L1 around 0.11 feels fine after training (cycle loss went from ~5.9 → ~2.17).
-B2A content cosine ~0.53 matches what I see on photo→Monet: scene is there, not pixel-perfect.
-A2B (300 Monet→photo images) is in the same range — LPIPS 0.37 and content cos 0.59.
+Cycle L1 is 0.08–0.09 at epoch 100 (cycle loss went from ~5.5 → ~1.68).
+B2A content cosine is 0.72 and A2B 0.69 (LPIPS 0.28 and 0.27).
 
 ## Training / loss curves
 
 Looking at `outputs/loss_curves/losses.png`:
 
 - G, cycle, and identity all go down smoothly. Training didn’t stall.
-- D stays really low and ends near 0.17. Discriminator is winning a lot —
+- D stays really low and ends near 0.094 at epoch 100 (0.17 in the 80-epoch run). Discriminator is winning a lot —
   that might be why textures get noisy instead of clean brushstrokes.
 - Grad norms bounce around but don’t explode. `nan_count = 0`.
-- We only did 80 epochs (lab budget), not the paper’s 200, so leftover artifacts
+- We did 100 epochs (lab budget), not the paper’s 200, so leftover artifacts
   aren’t shocking.
 
 ## MiFID / memorization
 
-Professor script, both directions: A2B FID **109.33**, MiFID **0.425**. B2A FID **105.06**, MiFID **0.405**.
-`submission.csv` is the average: FID **107.20**, MiFID **0.415**.
+Professor script (Colab L4), both directions: A2B FID **108.12**, MiFID **0.422**. B2A FID **105.91**, MiFID **0.412**.
+`submission.csv` is the average: FID **107.01**, MiFID **0.417** (score 53.72).
 When I rated, images looked like stylized versions of that photo, not pasted
 Monet paintings. The main issue is shared grainy texture across many outputs.
 
@@ -76,4 +76,4 @@ Scores came from `evaluate_local.py`, which follows the professor notebook (Ince
 
 ## Next steps if we retrain
 
-Later full-photo retrains scored worse than this checkpoint, so `submission.csv` stays on this 80-epoch run.
+`outputs/checkpoint_scores_100ep.csv` scores epochs 53–100 of this run: the score improves through the LR decay and flattens from epoch 90 (54.1–54.3 on Apple MPS). Weight averaging (epochs 90/95/100) and flip test-time augmentation moved it by less than 0.3, so `submission.csv` uses the plain final epoch.

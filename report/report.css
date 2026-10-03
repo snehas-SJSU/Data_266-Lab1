@@ -1,0 +1,22 @@
+@page { size: Letter; margin: 0.8in 0.85in; }
+body { font-family: Palatino, "Palatino Linotype", "Book Antiqua", serif; font-size: 11pt; line-height: 1.45; color: #111; max-width: none; margin: 0; }
+h1, h2, h3 { font-family: Palatino, serif; font-weight: bold; line-height: 1.2; }
+h1 { font-size: 20pt; margin: 0 0 0.6em; page-break-before: always; }
+h2 { font-size: 15pt; margin: 1.3em 0 0.5em; }
+h3 { font-size: 12.5pt; margin: 1.1em 0 0.4em; }
+.cover { text-align: center; padding-top: 1.8in; page-break-after: always; }
+.cover h1 { font-size: 28pt; page-break-before: avoid; margin-bottom: 0.4em; }
+.cover .team { font-size: 14pt; margin: 0.3em 0 1em; }
+.cover .names { font-size: 12pt; margin: 0.2em 0; }
+table { border-collapse: collapse; width: 100%; margin: 0.8em 0 1em; font-size: 9pt; page-break-inside: avoid; }
+th, td { border: 1px solid #c8c8c8; padding: 4px 6px; text-align: left; vertical-align: top; }
+th { background: #eeeeee; font-weight: bold; }
+img { max-width: 100%; display: block; margin: 0.6em auto 0.2em; page-break-inside: avoid; }
+figure { margin: 0.8em 0; page-break-inside: avoid; }
+figcaption { font-size: 10pt; text-align: left; margin-top: 0.3em; }
+code { font-family: Menlo, monospace; font-size: 0.86em; }
+pre { font-family: Menlo, monospace; font-size: 8.5pt; background: #f6f6f6; padding: 8px; white-space: pre-wrap; }
+a { color: #1a4fa0; }
+.joint { border-left: 3px solid #999; background: #f7f7f7; padding: 0.4em 1em; margin: 1em 0; }
+.cite { font-size: 10pt; }
+hr { border: none; border-top: 1px solid #ddd; margin: 1.5em 0; }

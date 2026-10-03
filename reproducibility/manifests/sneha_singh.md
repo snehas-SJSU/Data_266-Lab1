@@ -77,7 +77,7 @@ unedited.
 
 ---
 
-## Run — Part 3 CycleGAN (full)
+## Run — Part 3 CycleGAN (full, 80 epochs — earlier run, not the submission)
 
 - Date: train and local eval 2026-09-28
 - Task: `task3_gan`
@@ -85,16 +85,32 @@ unedited.
 - Train: CUDA + AMP, 80 epochs (40+40), batch_size=4, nearest upsample, label_smoothing 0.9, ~800 photos/epoch
 - Train time: 15341 s (~4.3 h); peak_memory_mb: 6568
 - Device: Colab Tesla T4. `train_full.log` only prints `device=cuda`.
-- Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` is 107.9 MB, over GitHub’s 100 MB limit, so it is not in git. https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link
-- Pred A2B: `outputs/pred_A2B` (300 JPGs, Monet→photo)
-- Pred B2A: `outputs/pred_B2A` (7038 JPGs, photo→Monet)
+- Checkpoint: replaced on Drive by the 100-epoch run below.
 - Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full.log` (80 epoch lines)
-- Metrics CSV: `task3_gan/sneha_singh/full_metrics_report.csv`
-- Submission: `task3_gan/sneha_singh/submission.csv` (professor average FID 107.20, MiFID 0.415)
-- Local A2B (Monet→photo): FID 109.33, MiFID 0.425 · Local B2A (photo→Monet): FID 105.06, MiFID 0.405
+- Professor script on this checkpoint (Apple MPS): A2B FID 113.58, B2A FID 105.88, average FID 109.73, MiFID 0.418, score 55.07
+- Audit (Sneha, 30 images): `task3_gan/sneha_singh/outputs/human_audit/epoch80_archive/`
 - Results / failures: `results.md`, `failure_analysis.md`
 - Eval command: `python task3_gan/sneha_singh/evaluate_local.py` (Mac; fidelity backend CPU, LPIPS on MPS)
 - Train command: Run All on `part3_cyclegan.ipynb` (smoke=false)
+
+
+## Run — Part 3 CycleGAN (full, 100 epochs — submitted)
+
+- Date: train 2026-10-02 (Colab), local metrics 2026-10-03
+- Task: `task3_gan`
+- Smoke: false
+- Config: `task3_gan/sneha_singh/src/config.json` — 50 + 50 epochs (linear decay), 300 steps/epoch, 1,200 photos resampled per epoch, batch_size=4, nearest upsample, label_smoothing 0.9, lambda_identity 5.0 (identity weight 50), lr 2e-4, AMP
+- Device: Colab NVIDIA L4 (CUDA)
+- Train time: 14,348.8 s (~4.0 h); peak_memory_mb: 6570 (`torch.cuda.max_memory_allocated()` in the same session)
+- Notebook with outputs: `task3_gan/sneha_singh/src/part3_cyclegan.ipynb`
+- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full_100ep.log` (100 epoch lines)
+- Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` (epoch 100, 113 MB, not in git) — https://drive.google.com/drive/folders/12AgM95RbZAQUyouH7sukM9nu_rVTD3C9?usp=share_link
+- Submission: `task3_gan/sneha_singh/submission.csv` — FID 107.01, MiFID 0.417, score 53.72 (professor script, Colab L4)
+- Per direction (Colab L4): A2B FID 108.12, MiFID 0.422 · B2A FID 105.91, MiFID 0.412
+- Same checkpoint on Apple MPS: score 54.31
+- Pred A2B / B2A: `outputs/pred_A2B` (300), `outputs/pred_B2A` (7,038), regenerated locally from `best.pt`
+- Metrics: `full_metrics_report.csv`, `metrics_report.csv`; checkpoint scores: `outputs/checkpoint_scores_100ep.csv` (`score_checkpoints.py`)
+- Eval command: `python task3_gan/sneha_singh/evaluate_local.py`
 
 ## Run — Part 2 Sentiment (full)
 - Data: Hugging Face `fancyzhx/yelp_polarity`. Not on Drive and not in git. The notebook downloads it when the run starts.

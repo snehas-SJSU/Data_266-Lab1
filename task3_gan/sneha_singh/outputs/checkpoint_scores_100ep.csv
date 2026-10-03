@@ -1,0 +1,10 @@
+run_id,checkpoint,epoch,upsample,fid_b2a,mifid_b2a,fid_a2b,mifid_a2b,submission_fid,submission_mifid,score
+run_100ep_nearest,best_epoch_95.pt,95,nearest,107.6081,0.4136,108.0688,0.4212,107.8384,0.4174,54.1279
+run_100ep_nearest,best_epoch_100.pt,100,nearest,107.6099,0.4135,108.8128,0.421,108.2113,0.4172,54.3143
+run_100ep_nearest,best_epoch_90.pt,90,nearest,107.6379,0.4128,108.8468,0.4221,108.2424,0.4174,54.3299
+run_100ep_nearest,best_epoch_85.pt,85,nearest,108.2839,0.4157,111.8373,0.424,110.0606,0.4199,55.2402
+run_100ep_nearest,best_epoch_80.pt,80,nearest,109.3359,0.4138,111.4701,0.4238,110.403,0.4188,55.4109
+run_100ep_nearest,best_epoch_75.pt,75,nearest,110.4611,0.4104,113.9616,0.4249,112.2114,0.4177,56.3145
+run_100ep_nearest,best_epoch_70.pt,70,nearest,109.7426,0.4105,115.1288,0.4266,112.4357,0.4185,56.4271
+run_100ep_nearest,best_epoch_60.pt,60,nearest,109.932,0.4097,117.2884,0.4286,113.6102,0.4191,57.0147
+run_100ep_nearest,best_epoch_53.pt,53,nearest,112.8549,0.408,118.6927,0.427,115.7738,0.4175,58.0956
