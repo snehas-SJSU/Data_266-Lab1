@@ -12,6 +12,8 @@
 
 ## Setup
 
+Python 3.11 or 3.12 (our runs used 3.12). A CUDA GPU is needed to train Part 3. Parts 1 and 2 also run on CPU or Apple MPS.
+
 ```bash
 git clone https://github.com/snehas-SJSU/Data_266-Lab1.git
 cd Data_266-Lab1
@@ -19,6 +21,19 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+**Large files (not in git): download and place them like this before running.**
+
+| File | Download | Put it here |
+|---|---|---|
+| `TinyStories-train.txt` (Sneha, Part 1 full run) | Drive link 1 below (the notebook also downloads it if missing) | `task1_llm/data/` |
+| TinyStoriesV2-GPT4 train / valid (Ritika, Part 1) | Hugging Face `roneneldan/TinyStories` | any folder; pass the paths to `run_all.py` |
+| Yelp polarity (Part 2) | Sneha's notebook downloads it. Ritika: Hugging Face `fancyzhx/yelp_polarity` parquet files | Ritika: pass the paths to `run_all.py` |
+| `monet_jpg/` (300 JPGs), `photo_jpg/` (7,038 JPGs) | Drive links 2 and 3 below | `task3_gan/data/monet_jpg/`, `task3_gan/data/photo_jpg/` (no extra parent folder) |
+| Sneha Part 3 `best.pt` | Sneha's Drive link below | `task3_gan/sneha_singh/checkpoints/best.pt` |
+| Ritika Part 3 checkpoint | Ritika's Drive link below | `task3_gan/ritika_mukesh_neema/checkpoints/ckpt_final.pt` |
+
+**Viewing results without retraining:** each notebook is saved with its outputs, so open it to see them. Running all cells starts a new full training run (Part 3 takes hours on a GPU). Metrics, samples, and plots are also in each member's `results.md`, metrics CSV, and `outputs/`.
 
 ---
 
@@ -52,6 +67,17 @@ python task3_gan/sneha_singh/evaluate_local.py
 ```
 
 Part 3 trains on a CUDA GPU. Parts 1 and 2 also run on CPU or Apple MPS, only slower. Ritika's `run_all.py` scripts also accept `--smoke_test`.
+
+### Checkpoint → result
+
+| Part | Member | Checkpoint | Result |
+|---|---|---|---|
+| 1 | Sneha | `task1_llm/sneha_singh/checkpoints/best.pt` (epoch 10) | Val CE 0.857, perplexity 2.36 |
+| 1 | Ritika | `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt` (12 epochs) | Val CE 0.778, perplexity 2.18 |
+| 2 | Sneha | `task2_sentiment/sneha_singh/checkpoints/baseline_full.pt`, `experimental_a_full.pt` (BiLSTM), `experimental_b_full.pt` (TextCNN) | Best: BiLSTM, macro-F1 0.942 |
+| 2 | Ritika | `task2_sentiment/ritika_mukesh_neema/checkpoints/baseline.pt`, `bilstm.pt`, `textcnn.pt` | Best: BiLSTM, macro-F1 0.934 |
+| 3 | Sneha | `task3_gan/sneha_singh/checkpoints/best.pt` (Drive, epoch 80) | `submission.csv`: FID 107.20, MiFID 0.415 |
+| 3 | Ritika | `task3_gan/ritika_mukesh_neema/checkpoints/ckpt_final.pt` (Drive, epoch 80) | Photo→Monet FID 123.70, Monet→photo FID 120.72 |
 
 ---
 
