@@ -186,7 +186,7 @@ jupyter nbconvert --to notebook --execute --inplace \
 
 ### Sneha Singh — `task3_gan/sneha_singh/`
 
-- `src/part3_cyclegan.ipynb` (Colab run with outputs), `src/config.json`, `make_submission.py`, `evaluate_local.py`, `score_checkpoints.py`, `audit_agreement.py`
+- `src/part3_cyclegan.ipynb` (Colab run with outputs), `src/config.json`, `make_submission.py`, `evaluate_local.py`, `score_checkpoints.py`, `finetune_ema.py` (fine-tune experiment, not submitted), `audit_agreement.py`
 - `submission.csv` (FID + MiFID for Kaggle)
 - `full_metrics_report.csv`, `metrics_report.csv` (long format: final metrics, human audit, per-epoch losses, scored checkpoints), `results.md`, `failure_analysis.md`
 - Sample grid + loss curves; checkpoint scores `outputs/checkpoint_scores_epochs86_100.csv`; 30-image audit under `outputs/human_audit/`
