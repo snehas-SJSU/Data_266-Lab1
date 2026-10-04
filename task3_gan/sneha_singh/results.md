@@ -40,5 +40,4 @@ Losses at epoch 93: G 3.96, D 0.112, cycle 1.645, identity 0.739, NaN count 0. A
 ## Kaggle
 - Team: PairProgramming_Team_05
 - Upload file: `submission.csv` (`ID,FID,MiFID` = 1, 99.8386168442841, 0.41217851638793945)
-- Kaggle score of this submission: 50.1253 (selected as final)
-- Leaderboard rank: 9. The board lists the team's best entry, −45.1953, from an earlier upload made before switching to the course evaluation script.
+- Kaggle score of this submission: 50.1253 
