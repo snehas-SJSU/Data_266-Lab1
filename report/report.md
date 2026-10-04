@@ -383,11 +383,13 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 
 # Kaggle score
 
-Team `PairProgramming_Team_05`. Score uses the new professor evaluation script: (FID + MiFID) / 2, each averaged over both directions. Current `submission.csv`: FID 99.84, MiFID 0.412, score 50.13.
+Team `PairProgramming_Team_05`. Score is (FID + MiFID) / 2, each averaged over both directions, computed with the course evaluation script. Final `submission.csv`: FID 99.84, MiFID 0.412.
 
-| Team | Public score | Rank |
+| Team | Final submission score | Leaderboard rank |
 |---|---|---|
-| PairProgramming_Team_05 | 50.13 (local professor script; Kaggle value after upload) | to be recorded |
+| PairProgramming_Team_05 | 50.1253 | 9 |
+
+The leaderboard lists each team's best entry. Our rank 9 comes from an earlier upload (−45.1953) made before we switched to the course evaluation script. The final submission, selected for the final score, is 50.1253.
 
 <div class="cite">
 

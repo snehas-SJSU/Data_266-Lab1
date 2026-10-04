@@ -209,7 +209,8 @@ python task3_gan/sneha_singh/evaluate_local.py
 | Upload file | `task3_gan/sneha_singh/submission.csv` |
 | FID / MiFID | 99.84 / 0.412 (average of both directions, professor script on Colab L4) |
 | Score | 50.13 |
-| Leaderboard rank | to be recorded after the Kaggle upload |
+| Kaggle score (final submission) | 50.1253 |
+| Leaderboard rank | 9 (the public board lists the team's best entry, −45.1953, from an earlier upload made before switching to the course evaluation script) |
 
 **Status:** `best.pt` is epoch 93 of the 100-epoch run, selected by professor-script score among epochs 86–100. Professor eval is in `submission.csv` (FID 99.84, MiFID 0.412). A2B Monet→photo FID 101.39 (6-view averaging). B2A photo→Monet FID 98.29.
 
