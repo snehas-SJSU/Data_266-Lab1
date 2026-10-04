@@ -24,8 +24,8 @@ From `outputs/samples/grid.png` and the audit set:
 
 ## 30-sample audit
 
-- Rater: me (earlier run, same 30 indices; sheet in git history)
-- Submitted-model sheet (two raters): `outputs/human_audit/audit_30.csv`
+- Rater: me, on images from an earlier checkpoint of this CycleGAN (80-epoch run, same 30 indices)
+- Sheet and images: `outputs/human_audit/audit_30.csv`, `a2b_*.jpg`
 - Scale: style 0–2, content 0–2, artifacts 0–2 (higher = worse), mem Y/N
 
 ### My pass (quick summary)

@@ -297,7 +297,7 @@ What I saw in my audit of an earlier run of the same CycleGAN, and in this grid:
 - **Soft reverse.** A few Monet-to-photo frames go soft or pick up a dark blob.
 - **Content.** The layout of the photo usually survives. I did not mark any of my 30 as a copied training Monet.
 
-On the 0–2 sheet for the earlier run my averages were style 1.4 and content 1.7, where higher is better, and artifacts 1.4, where higher is worse. The two-rater audit of the submitted images uses the same 30 indices.
+On the 0–2 sheet my averages were style 1.40 and content 1.67, where higher is better, and artifacts 1.43, where higher is worse. The audit was rated on images from an earlier checkpoint of this CycleGAN (80-epoch run, same 30 indices) and was not repeated for the final epoch-93 checkpoint.
 
 Full notes: [task3_gan/sneha_singh/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task3_gan/sneha_singh/failure_analysis.md)
 
@@ -352,9 +352,9 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 
 | | Sneha | Ritika | Cohen's kappa |
 |---|---|---|---|
-| Style | | | |
-| Content | | | |
-| Artifacts | | | |
+| Style | 1.40 | | |
+| Content | 1.67 | | |
+| Artifacts | 1.43 | | |
 
 <div class="joint">
 

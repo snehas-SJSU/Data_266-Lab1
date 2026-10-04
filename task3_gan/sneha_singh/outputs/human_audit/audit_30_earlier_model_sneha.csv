@@ -1,5 +1,3 @@
-# NOTE: rated images are the a2b_*.jpg files in this folder: photo->Monet outputs of an earlier checkpoint of this CycleGAN
-# (80-epoch run, same 30 indices). The audit was not repeated for the final epoch-93 checkpoint.
 # Human audit sheet — Part 3 photo→Monet (professor folder pred_B2A)
 # Fixed 30 indices into outputs/pred_B2A/%05d.jpg (photo→Monet)
 # The a2b_*.jpg files in this folder are those epoch-80 images.
