@@ -38,8 +38,39 @@ photo → Monet. Its generator only ever sees the same 300 paintings as inputs.
 Late epochs at a nearly flat learning rate still move by about ±0.5 in score, and Monet → photo FID alone swings by
 up to ~3 points between neighbouring epochs (e.g. 96.9 at epoch 96, 99.3 at epoch 98). The submitted checkpoint is
 the best of 60 scored candidates on the same 300+300 images the TA script uses, so its score includes some of that
-luck. The TA score only uses 300 images per folder: even two sets of real photos score about FID 80 against each
-other, which is the floor this metric can reach.
+luck.
+
+## Case 6: FID depends on the sample size (evaluation, not the model)
+
+The TA script compares only the first 300 images of each folder, and FID with 300 samples in a 2,048-dimensional
+feature space is biased upward. Measured with the TA's own code (`src/ta_eval.py`) on **real** images only:
+
+| Comparison (real vs real) | FID | MiFID |
+|---|---|---|
+| photos [0:300] vs photos [300:600] | 80.54 | 0.4356 |
+| photos [0:150] vs photos [150:300] | 115.43 | 0.4358 |
+| Monets [0:150] vs Monets [150:300] | 105.12 | 0.3975 |
+
+So even a perfect Monet → photo generator would score about 80, and halving the sample adds ~35 FID points. Our
+93.9 / 97.3 should be read against that floor, not against 0. It also means scores from different scorers or sample
+sizes cannot be compared: the v1 run scored FID 104.30 with `kaggle_score.py` (all 7,038 images vs `real_stats.npz`)
+but 123.70 with the local 300-image metric. Fix the method and N before comparing numbers.
+
+MiFID in this script is the mean cosine distance between real and generated features paired by index. Real-vs-real
+pairs score 0.40–0.44, the same range as our outputs (0.40 / 0.41), so here it measures how different two unrelated
+images are rather than memorisation.
+
+## Process issues hit along the way
+
+- **v1 extension runs (earlier, before v2):** `ckpt_final.pt` had no `"epoch"` key, so `--resume_from` raised a
+  `KeyError`; checkpoints written only to Colab's `/content` were lost on a runtime reset; and resuming past
+  `n_epochs` left the learning rate at ~0, so naive resumes changed nothing. v2 saves the full training state
+  (`checkpoints/last.pt`, including the epoch, optimizers and schedulers) every epoch, directly to Google Drive.
+- **TA notebook loader:** the first version of `src/ta_eval.py` also executed the notebook's final cell (it starts
+  with `import pandas` but uses the scores) and then skipped the cell that defines `calculate_fid_mifid`. Both were
+  caught by unit tests before any training; the loader now skips only the cells that run the evaluation.
+- **Data download:** `gdown --folder` stops at 50 files per folder, so the 7,038 photos were copied from a Google
+  Drive shortcut instead (the notebook's data cell checks for exactly 300 / 7,038 images).
 
 ## What worked (for contrast)
 

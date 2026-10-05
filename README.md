@@ -218,9 +218,10 @@ python task3_gan/sneha_singh/evaluate_local.py
 
 - `src/part3_cyclegan.ipynb` (built from the real files by `src/build_notebook.py`), `src/config.json` (run settings), `src/full_metrics.json`
 - `src/`: `train.py`, `models.py`, `dataset.py`, `augment.py` (DiffAugment), `utils.py` (image pool, LR schedule, EMA), `inference.py`, `ta_eval.py`, `generate.py`, `full_metrics.py`, `sample_grid.py`, `human_audit.py`, `kaggle_score.py`, `run_all.py`
-- `evaluate_local.py` — the TA's evaluation script (writes `submission.csv`); `full_metrics_report.csv` — all other metrics
+- `evaluate_local.py` — the TA's evaluation script (writes `submission.csv`); `metrics_report.csv` — every required metric in one file; `full_metrics_report.csv` — all other metric detail
 - `results.md`, `failure_analysis.md`; `outputs/`: loss curves, `train_log.jsonl`, `train_metrics.json`, `checkpoint_scores.csv`, `sample_grid.png`, 30-image `human_audit/`, console logs; v1 files in `outputs/history_v1/`
-- Checkpoints on Drive (`checkpoints/README.md`); raw logs: `reproducibility/raw_logs/ritika_mukesh_neema/task3_gan/v2/`
+- `checkpoints/best.pt` (91 MB, in git; all checkpoints also on Drive, link in `checkpoints/README.md`); generated samples in `outputs/pred_A2B/` (all 300) and `outputs/pred_B2A/` (the 300 the TA script scores)
+- Raw logs: `reproducibility/raw_logs/ritika_mukesh_neema/task3_gan/v2/`
 
 **Model (v2):** ResNet-9 generators (64 filters, nearest-neighbour upsampling), 70×70 PatchGAN discriminators, LSGAN + cycle L1 (λ 10) + identity (5), DiffAugment, real label 0.9, EMA 0.999, batch 4, 800 steps/epoch, 125 epochs (50 + 75 decay), AMP. 28,285,832 parameters. Colab NVIDIA A100, 4.53 h. The last 30 epochs were scored with the TA's notebook; `best.pt` is epoch 110.
 

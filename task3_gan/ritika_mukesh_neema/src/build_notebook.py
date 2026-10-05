@@ -99,6 +99,7 @@ def main():
         (os.path.join(MEMBER, "evaluate_local.py"), "## TA evaluation script (`evaluate_local.py`, writes `submission.csv`)"),
         (os.path.join(HERE, "full_metrics.py"), "## All other metrics (KID, precision/recall, cycle L1, LPIPS, content cosine)"),
         (os.path.join(HERE, "sample_grid.py"), "## Visual check grid"),
+        (os.path.join(HERE, "metrics_report.py"), "## Required metrics in one file (`metrics_report.csv`)"),
         (os.path.join(HERE, "human_audit.py"), "## Human audit prep/scoring"),
     ]:
         src = read(path)
@@ -145,6 +146,10 @@ def main():
     if sub:
         cells.append(md_cell("### submission.csv (Kaggle upload; leaderboard = -(FID + MiFID) / 2)"))
         cells.append(code_cell("print(open('../submission.csv').read())", outputs=stream_output(sub)))
+    report = read(os.path.join(MEMBER, "metrics_report.csv"))
+    if report:
+        cells.append(md_cell("### metrics_report.csv (every required metric, both directions)"))
+        cells.append(code_cell("print(open('../metrics_report.csv').read())", outputs=stream_output(report)))
     cells.append(md_cell("## Visual check: photo | photo->Monet | Monet | Monet->photo"))
     cells.append(code_cell(
         "from IPython.display import Image\nImage('../outputs/sample_grid.png')",

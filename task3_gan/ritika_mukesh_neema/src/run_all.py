@@ -7,7 +7,8 @@ Usage (data already at task3_gan/data/monet_jpg and photo_jpg):
 
 Steps: train.py (settings from config.json; resumes automatically from
 ../checkpoints/last.pt) -> generate.py (best checkpoint) -> ../evaluate_local.py (the TA's
-evaluation script -> submission.csv) -> full_metrics.py (all other metrics -> full_metrics_report.csv).
+evaluation script -> submission.csv) -> full_metrics.py (all other metrics -> full_metrics_report.csv)
+-> sample_grid.py -> metrics_report.py (required metrics in one file -> metrics_report.csv).
 
 Smoke test (tiny run in separate folders, a few minutes, never touches the real run):
     python run_all.py --smoke_test
@@ -49,6 +50,9 @@ def main():
     if args.skip_lpips:
         eval_cmd.append("--skip_lpips")
     run(eval_cmd)
+    if not args.smoke_test:
+        run([sys.executable, "sample_grid.py"])
+        run([sys.executable, "metrics_report.py"])  # required metrics in one file -> ../metrics_report.csv
     print(f"\nAll done. Outputs in {out_dir}, checkpoints in {ckpt_dir}, Kaggle file {sub}")
     print("Next: python human_audit.py prepare   (then send outputs/human_audit/ to your 2 raters)")
 

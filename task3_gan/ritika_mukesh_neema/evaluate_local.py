@@ -12,7 +12,8 @@ Usage (from this folder, after src/generate.py has written outputs/pred_A2B and 
 Computes, in both directions on the first 300 images of each folder (sorted by filename):
   FID_B2A, MiFID_B2A: real Monet vs generated Monet (pred_B2A)
   FID_A2B, MiFID_A2B: real photos vs generated photos (pred_A2B)
-and writes submission.csv = ID, mean FID, mean MiFID  (Kaggle leaderboard = -(FID + MiFID) / 2).
+and writes submission.csv = ID, mean FID, mean MiFID  (Kaggle leaderboard = -(FID + MiFID) / 2),
+plus outputs/ta_scores.json with the per-direction values (added at the end; the TA code is unchanged).
 All other metrics (KID, precision/recall, LPIPS, ...) are in src/full_metrics.py.
 """
 import sys
@@ -182,3 +183,9 @@ submission = pd.DataFrame([{
 submission.to_csv(SUBMISSION, index=False)
 print(submission)
 print("Wrote", SUBMISSION, "| leaderboard score = -(FID + MiFID) / 2 =", -round((sub_fid + sub_mifid) / 2, 4))
+
+# (addition, not in the TA notebook) the same numbers per direction, for metrics_report.csv
+import json
+with open(os.path.join(OUT_DIR, "ta_scores.json"), "w") as f:
+    json.dump({"fid_B2A": fid_B2A, "mifid_B2A": mifid_B2A, "fid_A2B": fid_A2B, "mifid_A2B": mifid_A2B,
+               "fid": float(sub_fid), "mifid": float(sub_mifid), "score": float((sub_fid + sub_mifid) / 2)}, f, indent=2)

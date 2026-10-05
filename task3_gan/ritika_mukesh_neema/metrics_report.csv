@@ -1,0 +1,40 @@
+metric,direction,value,source
+FID,photo->Monet (B2A),93.89168342782855,evaluate_local.py (TA script)
+FID,Monet->photo (A2B),97.31576111859283,evaluate_local.py (TA script)
+MiFID,photo->Monet (B2A),0.39906683564186096,evaluate_local.py (TA script)
+MiFID,Monet->photo (A2B),0.4117964208126068,evaluate_local.py (TA script)
+submission FID (mean of both),both,95.60372227321069,evaluate_local.py (TA script) -> submission.csv
+submission MiFID (mean of both),both,0.4054316282272339,evaluate_local.py (TA script) -> submission.csv
+score (FID + MiFID) / 2,both,48.00457695071896,leaderboard shows the negative
+Kaggle leaderboard score,both,-48.00457695071896,-(FID + MiFID) / 2 of submission.csv
+Kaggle leaderboard rank,both,pending,fill with --kaggle_rank
+KID mean,photo->Monet (B2A),0.004617662634700537,src/full_metrics.py
+KID std,photo->Monet (B2A),0.0010866400552913547,src/full_metrics.py
+KID mean,Monet->photo (A2B),0.015035915188491344,src/full_metrics.py
+KID std,Monet->photo (A2B),0.0023444227408617735,src/full_metrics.py
+precision,photo->Monet (B2A),0.4766666666666667,src/full_metrics.py
+recall,photo->Monet (B2A),0.6366666666666667,src/full_metrics.py
+precision,Monet->photo (A2B),0.7133333333333334,src/full_metrics.py
+recall,Monet->photo (A2B),0.38333333333333336,src/full_metrics.py
+cycle-reconstruction L1,photo->Monet->photo,0.06931468576192856,src/full_metrics.py (100 images)
+cycle-reconstruction L1,Monet->photo->Monet,0.06434094849973918,src/full_metrics.py (100 images)
+LPIPS input vs reconstruction,photo->Monet->photo,0.14207921199500562,src/full_metrics.py
+LPIPS input vs reconstruction,Monet->photo->Monet,0.19447262600064277,src/full_metrics.py
+content cosine input vs translation,photo->Monet (B2A),0.8288900909572839,src/full_metrics.py
+content cosine input vs translation,Monet->photo (A2B),0.7300931386090815,src/full_metrics.py
+generator / discriminator loss curves,both,outputs/loss_curves.png,per-epoch values in outputs/train_metrics.json
+final generator loss,both,2.945758494436741,outputs/train_metrics.json
+final discriminator loss,both,0.26274894895032047,outputs/train_metrics.json
+final cycle-consistency loss (weighted),both,1.3417884908616542,outputs/train_metrics.json
+final identity loss (weighted),both,0.5490289028361439,outputs/train_metrics.json
+gradient norm mean (G + D),both,32.18280984476207,outputs/train_metrics.json
+gradient norm max (G + D),both,469.91819763183594,outputs/train_metrics.json
+NaN / Inf count,both,0,outputs/train_metrics.json
+parameter count (G_A2B + G_B2A + D_A + D_B),both,28285832,outputs/train_metrics.json
+training time (s),both,16310.263185977936,outputs/train_metrics.json
+images per second (per domain),both,24.52443565373508,outputs/train_metrics.json
+peak GPU memory (MB),both,17368.2568359375,outputs/train_metrics.json
+peak process memory (MB),both,10198.83984375,outputs/train_metrics.json
+epochs / steps,both,125 / 100000,outputs/train_metrics.json
+submitted checkpoint,both,checkpoints/best.pt,"epoch 110 raw weights, best of 60 scored in outputs/checkpoint_scores.csv"
+human audit score / inter-rater agreement,photo->Monet (B2A),pending,30 blinded samples prepared in outputs/human_audit/; run human_audit.py score after both raters

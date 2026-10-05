@@ -39,6 +39,25 @@ CycleGAN design and fixes what held v1 back:
   no norm on the first layer. 2,764,737 parameters each.
 - **Total:** 28,285,832 parameters. No pretrained weights in any generator or discriminator.
 
+## Hyperparameter justification
+
+| Choice | Value | Justification |
+|---|---|---|
+| Generator depth / width | ResNet-9, 64 filters | 9 residual blocks is the CycleGAN design for 256×256 images (6 is for 128×128); 64 filters is the standard width and gives each generator 11.4M parameters |
+| Upsampling | nearest ×2 + 3×3 conv | stride-2 transposed convolutions leave checkerboard patterns; resize-convolution avoids them at the same parameter count |
+| Discriminator | 70×70 PatchGAN | judges local texture patches, which is where Monet's style lives; keeps the discriminator small (2.8M parameters) |
+| Adversarial loss | least-squares (MSE) | more stable gradients than the original cross-entropy GAN loss |
+| Cycle weight λ | 10 | the CycleGAN paper value; the cycle loss is what keeps the content when the data is unpaired |
+| Identity weight | 5 (0.5 × λ) | paper value; stops the generators from shifting colours of images already in the target style |
+| Learning rate / Adam betas | 2e-4, (0.5, 0.999) | standard GAN settings; β1 0.5 reduces momentum oscillation between G and D |
+| Schedule | 50 constant + 75 linear decay | most of the gain comes while the learning rate decays, so the decay phase is the longer one |
+| Batch / steps per epoch | 4 / 800 | 3,200 images per epoch so the photo domain is well covered; batch 4 fits easily with AMP |
+| DiffAugment | color, translation, cutout | with only 300 Monets the discriminator overfits quickly; augmenting every image it sees prevents that |
+| Real label | 0.9 | one-sided label smoothing keeps the discriminator from becoming over-confident |
+| Image pool | 50 | paper value; the discriminator also sees older fakes, which damps oscillation |
+| EMA decay | 0.999 | averages roughly the last 1,000 steps; scored alongside the raw weights |
+| Input transform | 256×256, horizontal flip | the images are already 256×256, so training happens at the same scale the TA script evaluates |
+
 ## Training
 
 Settings are in `src/config.json` (command-line flags override it).
@@ -83,6 +102,9 @@ Both selections are made on the images the TA script evaluates, so the chosen sc
 epoch-to-epoch noise of this metric (late epochs vary by about ±0.5 in score).
 
 ## Metrics (both directions, submitted checkpoint)
+
+Every required metric is also collected in one file, `metrics_report.csv` (built by `src/metrics_report.py`);
+`full_metrics_report.csv` holds the detailed output of `src/full_metrics.py`.
 
 **Official (TA script, first 300 images per folder):**
 
@@ -129,7 +151,9 @@ in both directions.
 ## Visual quality
 
 `outputs/sample_grid.png` (columns: photo | photo→Monet | Monet | Monet→photo). See `failure_analysis.md` for the
-specific failure cases.
+specific failure cases. Generated samples are committed in `outputs/pred_A2B/` (all 300) and `outputs/pred_B2A/`
+(the first 300 in sorted order, i.e. the images the TA script scores); the full 7,038 photo→Monet set is rebuilt with
+`src/generate.py`.
 
 ## Human audit
 
@@ -152,7 +176,8 @@ python train.py                                  # settings from config.json; re
 python generate.py --ckpt ../checkpoints/best.pt # outputs/pred_A2B (300), outputs/pred_B2A (7,038)
 cd .. && python evaluate_local.py                # TA script -> submission.csv
 cd src && python full_metrics.py --ckpt ../checkpoints/best.pt   # -> full_metrics_report.csv, src/full_metrics.json
-python sample_grid.py && python human_audit.py prepare
+python sample_grid.py && python metrics_report.py   # -> outputs/sample_grid.png, ../metrics_report.csv
+python human_audit.py prepare
 ```
 One command: `python run_all.py` (smoke test: `python run_all.py --smoke_test`). On Colab the run used
 `python train.py --ckpt_dir <Drive>/checkpoints --out_dir <Drive>/outputs`.

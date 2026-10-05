@@ -1,7 +1,7 @@
 # Checkpoints (Ritika Mukesh Neema, Part 3 v2)
 
-The `.pt` files are not in git (`.gitignore`: `task3_gan/**/checkpoints/*.pt`; each is 45–430 MB).
-They are on Google Drive: https://drive.google.com/drive/folders/1UCvPH_Z5sNjOiCQ-IjDyEJippmuAtNNv?usp=sharing
+`best.pt` (the submitted model, 91 MB) is committed to git, force-added past `.gitignore` and under GitHub's 100 MB
+limit, like Sneha's `best.pt`. All files, including the larger ones, are on Google Drive: https://drive.google.com/drive/folders/1UCvPH_Z5sNjOiCQ-IjDyEJippmuAtNNv?usp=sharing
 
 | File | What it is | Size |
 |---|---|---|

@@ -38,6 +38,8 @@ Raw logs under `reproducibility/raw_logs/ritika_mukesh_neema/` are unedited.
   - `python generate.py --ckpt ../checkpoints/best.pt` -> `outputs/pred_A2B` (300, 6-view average), `outputs/pred_B2A` (7,038)
   - `python evaluate_local.py` (TA script) -> `submission.csv`: FID 95.6037, MiFID 0.4054, score 48.0046 (B2A FID 93.892 / MiFID 0.3991; A2B FID 97.316 / MiFID 0.4118)
   - `python full_metrics.py --ckpt ../checkpoints/best.pt` -> `full_metrics_report.csv`, `src/full_metrics.json`
+  - `python sample_grid.py`, `python metrics_report.py` -> `outputs/sample_grid.png`, `metrics_report.csv` (required metrics in one file)
+  - Committed: `checkpoints/best.pt` (91 MB), `outputs/pred_A2B/` (300) and the first 300 of `outputs/pred_B2A/` (the images the TA script scores)
 - Results / failures: `task3_gan/ritika_mukesh_neema/results.md`, `failure_analysis.md`; notebook `src/part3_cyclegan.ipynb` (built by `src/build_notebook.py` from the real files)
 - Raw logs: `reproducibility/raw_logs/ritika_mukesh_neema/task3_gan/v2/` (`train_log.jsonl` per-step training log, `checkpoint_scores.csv`, console logs of generate / TA script / metrics)
 
