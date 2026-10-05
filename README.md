@@ -261,15 +261,13 @@ Same Drive folder for the team (raw data only):
 
 Part 2 is not in this table. Yelp polarity is not a file we host. Each notebook downloads `fancyzhx/yelp_polarity` from Hugging Face at run time.
 
-### 2. Individual links — Ritika
+### 2. Individual links — Sneha
 
-Sneha's checkpoints for all three parts are **on git** (Part 3 `best.pt` is 43 MB). The datasets stay in the common table above.
+Sneha's checkpoints for all three parts are **on git** (Part 3 `best.pt` ). The datasets stay in the common table above.
 
 **Ritika Mukesh Neema**
 
-| File | Link |
-|---|---|
-| Part 3 `best.pt` | https://drive.google.com/file/d/1Wlu22EKbp4QATijRbNBbDOFFGHLHUiNj/view |
+Ritika's checkpoints for all three parts are **on git** (Part 3 `best.pt` ). The datasets stay in the common table above.
 
 ---
 
