@@ -27,8 +27,8 @@ FID and MiFID: unchanged professor evaluation script (Inception-v3, first 300 so
 
 | Direction | FID | KID | MiFID | Precision | Recall | LPIPS | content cos | cycle L1 |
 |---|---|---|---|---|---|---|---|---|
-| A2B (Monet→photo) | 94.83 | – | 0.412 | – | – | – | – | – |
-| B2A (photo→Monet) | 95.78 | – | 0.406 | – | – | – | – | – |
+| A2B (Monet→photo) | 94.83 | 0.014 | 0.412 | 0.710 | 0.340 | 0.201 | 0.745 | 0.088 |
+| B2A (photo→Monet) | 95.78 | 0.005 | 0.406 | 0.497 | 0.617 | 0.184 | 0.812 | 0.076 |
 
 `submission.csv`: FID **95.30**, MiFID **0.409**, score (FID + MiFID) / 2 = **47.857**.
 

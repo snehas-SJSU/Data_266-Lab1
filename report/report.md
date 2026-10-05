@@ -338,12 +338,12 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 |---|---|---|---|---|
 | Epochs / batch | 50 + 50, batch 4 | same run | 50 + 75, batch 4 | same run |
 | FID | 95.78 | 94.83 | 93.89 | 97.32 |
-| KID | – | – | 0.005 | 0.015 |
-| Precision | – | – | 0.477 | 0.713 |
-| Recall | – | – | 0.637 | 0.383 |
-| Cycle L1 | – | – | 0.069 | 0.064 |
-| LPIPS | – | – | 0.142 | 0.194 |
-| Content cosine | – | – | 0.829 | 0.730 |
+| KID | 0.005 | 0.014 | 0.005 | 0.015 |
+| Precision | 0.497 | 0.710 | 0.477 | 0.713 |
+| Recall | 0.617 | 0.340 | 0.637 | 0.383 |
+| Cycle L1 | 0.076 | 0.088 | 0.069 | 0.064 |
+| LPIPS | 0.184 | 0.201 | 0.142 | 0.194 |
+| Content cosine | 0.812 | 0.745 | 0.829 | 0.730 |
 | Params | 28.3M | same run | 28.3M | same run |
 | Time / images per sec | 19,836 s / 16.1 | same run | 16,310 s / 24.5 | same run |
 | Peak memory | 6,855 MB | same run | 17,368 MB | same run |
