@@ -18,11 +18,11 @@ run_submitted,checkpoints/best.pt (epoch 91),average_A2B_B2A,submission_MiFID,0.
 run_submitted,checkpoints/best.pt (epoch 91),average_A2B_B2A,score_(FID+MiFID)/2,47.857,computed from submission.csv
 run_submitted,checkpoints/best.pt (epoch 91),A2B,inference,"average of 6 views (original, flip, four 4-px shifts)",make_submission.py
 run_submitted,checkpoints/best.pt (epoch 91),B2A,inference,single pass,make_submission.py
-run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_style_mean_1to5,3.80,mapped from original 0-2 sheet (0→1, 1→3, 2→5); solo rater
-run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_content_mean_1to5,4.33,mapped from original 0-2 sheet (0→1, 1→3, 2→5); solo rater
-run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_artifacts_mean_1to5,2.13,mapped and flipped so 5 = clean; solo rater
-run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_overall_mean_1to5,3.42,mean of style content artifacts; solo rater
-run_submitted,outputs/human_audit/audit_30.csv,B2A,cohens_kappa,,second rater blank; kappa not computed
+run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_style_mean_1to5,3.83,"Sneha: 3.80, Ritika: 3.87; exact agreement 76.7%, kappa 0.560"
+run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_content_mean_1to5,4.20,"Sneha: 4.33, Ritika: 4.07; exact agreement 80.0%, kappa 0.591"
+run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_artifacts_mean_1to5,2.07,"Sneha: 2.13, Ritika: 2.00; exact agreement 80.0%, kappa 0.600"
+run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_overall_mean_1to5,3.37,"Sneha: 3.42, Ritika: 3.31; 30 samples 2 raters"
+run_submitted,outputs/human_audit/audit_30.csv,B2A,cohens_kappa,0.584,"mean kappa across style (0.560), content (0.591), artifacts (0.600)"
 run_submitted,epoch 1,training,g_loss,8.109,raw_logs/sneha_singh/task3_gan/train_full_ngf64_sneha.log
 run_submitted,epoch 1,training,d_loss,0.396,raw_logs/sneha_singh/task3_gan/train_full_ngf64_sneha.log
 run_submitted,epoch 1,training,cycle_loss,5.003,raw_logs/sneha_singh/task3_gan/train_full_ngf64_sneha.log

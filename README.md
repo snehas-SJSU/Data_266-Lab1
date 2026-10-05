@@ -212,7 +212,7 @@ python task3_gan/sneha_singh/evaluate_local.py
 | Kaggle score (final submission) | 47.857 (earlier upload 50.1253) |
 | Leaderboard rank | 9 (the public board lists the team's best entry, −45.1953, from an earlier upload made before switching to the course evaluation script) |
 
-**Status:** `best.pt` is epoch 91 (raw weights) of the 100-epoch 64-filter run, selected by professor-script score among epochs 76–100. Professor eval is in `submission.csv` (FID 95.30, MiFID 0.409). A2B Monet→photo FID 94.83 (6-view averaging). B2A photo→Monet FID 95.78. Human audit (`outputs/human_audit/audit_30.csv`) is the earlier 80-epoch images at the same 30 indices, on a 1–5 scale: style 3.80, content 4.33, artifacts 2.13, overall 3.42, none marked memorised. It was not repeated on epoch 91. There is no kappa, because the second rater’s columns are blank.
+**Status:** `best.pt` is epoch 91 (raw weights) of the 100-epoch 64-filter run, selected by professor-script score among epochs 76–100. Professor eval is in `submission.csv` (FID 95.30, MiFID 0.409). A2B Monet→photo FID 94.83 (6-view averaging). B2A photo→Monet FID 95.78. Human audit (`outputs/human_audit/audit_30.csv`) is the earlier 80-epoch images at the same 30 indices, on a 1–5 scale: style 3.80, content 4.33, artifacts 2.13, overall 3.42, none marked memorised. It was not repeated on epoch 91. Ritika rated the same 30 images: style 3.87, content 4.07, artifacts 2.00, overall 3.31. Cohen’s kappa: style 0.560, content 0.591, artifacts 0.600 (exact agreement 76.7% / 80.0% / 80.0%); both raters marked none as memorised.
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 

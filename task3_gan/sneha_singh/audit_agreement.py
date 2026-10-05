@@ -28,8 +28,10 @@ def main():
             continue
         x, y = zip(*pairs)
         agree = sum(i == j for i, j in pairs) / len(pairs)
-        kappa = cohen_kappa_score(x, y)
-        line = f"{crit}: n={len(pairs)}  agreement={agree:.1%}  kappa={kappa:.3f}"
+        if len(set(x + y)) == 1:   # every answer the same: kappa is undefined
+            line = f"{crit}: n={len(pairs)}  agreement={agree:.1%}  kappa=undefined (all '{x[0]}')"
+        else:
+            line = f"{crit}: n={len(pairs)}  agreement={agree:.1%}  kappa={cohen_kappa_score(x, y):.3f}"
         if crit != "mem":
             line += f"  mean_{RATERS[0]}={sum(map(int, x)) / len(x):.2f}  mean_{RATERS[1]}={sum(map(int, y)) / len(y):.2f}"
         print(line)

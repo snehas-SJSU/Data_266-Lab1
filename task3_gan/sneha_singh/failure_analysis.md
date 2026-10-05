@@ -38,9 +38,15 @@ From `outputs/samples/grid.png` and the audit set:
 | Basically broken / band noise | A few (e.g. 01455, 04853) |
 | Looks like a copied training Monet | None that I flagged (all N) |
 
-Means from `audit_30.csv` (30 images, 1–5): style 3.80, content 4.33, artifacts 2.13, overall 3.42.
-These are the original 0–2 marks placed on 1–5 (style and content 0→1, 1→3, 2→5; artifacts flipped so 5 means clean).
-None of the 30 is marked memorised. The second rater’s columns are blank, so the kappa column is empty.
+Means from `audit_30.csv` (30 images, 1–5):
+- **Sneha:** style 3.80, content 4.33, artifacts 2.13, overall 3.42. (Original 0–2 marks placed on 1–5; artifacts flipped so 5 means clean).
+- **Ritika:** style 3.87, content 4.07, artifacts 2.00, overall 3.31.
+- **Combined mean:** style 3.83, content 4.20, artifacts 2.07, overall 3.37.
+- **Agreement & Cohen's kappa (`audit_agreement.py`):**
+  - Style: 76.7% agreement, $\kappa = 0.560$
+  - Content: 80.0% agreement, $\kappa = 0.591$
+  - Artifacts: 80.0% agreement, $\kappa = 0.600$
+  - Memorization: 100.0% agreement; kappa undefined because every answer is N (neither rater flagged any copied training Monets; all N).
 Content is the strongest part; artifacts are the main complaint.
 
 ## Cycle check

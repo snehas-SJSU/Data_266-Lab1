@@ -297,7 +297,7 @@ What I saw in my audit of an earlier run of the same CycleGAN, and in this grid:
 - **Soft reverse.** A few Monet-to-photo frames go soft or pick up a dark blob.
 - **Content.** The layout of the photo usually survives. I did not mark any of my 30 as a copied training Monet.
 
-On the 1–5 sheet in `outputs/human_audit/audit_30.csv` my means are style 3.80, content 4.33, and artifacts 2.13, where higher is better and 5 means clean. Overall is 3.42. These are the original 0–2 marks placed on 1–5. None of the 30 is marked as a copied Monet. Those scores are on the 80-epoch images at the same 30 indices, not on the submitted epoch-91 checkpoint. The second rater’s columns are blank, so there is no kappa.
+On the 1–5 sheet in `outputs/human_audit/audit_30.csv` Sneha and Ritika independently audited the same 30 images. Sneha’s means are style 3.80, content 4.33, artifacts 2.13, overall 3.42 (original 0–2 marks placed on 1–5; 5 is clean). Ritika’s means are style 3.87, content 4.07, artifacts 2.00, overall 3.31. Inter-rater agreement is 76.7% for style (Cohen’s kappa 0.560), 80.0% for content (kappa 0.591), and 80.0% for artifacts (kappa 0.600). Both raters marked none of the 30 as memorized (100% agreement; kappa is undefined when every answer is the same). Those scores are on the 80-epoch images at the same 30 indices, not on the submitted epoch-91 checkpoint.
 
 Full notes: [task3_gan/sneha_singh/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task3_gan/sneha_singh/failure_analysis.md)
 
@@ -354,14 +354,14 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | Identity loss (weighted) | 0.589 | same run | 0.549 | same run |
 | Gradient norm | – | same run | 32.18 mean, 469.9 max | same run |
 
-**Human audit score** on the 30 photo → Monet images. Both sheets use 1–5, higher is better, and for artifacts 5 means clean. Sneha’s numbers are her original 0–2 marks placed on that scale. Cohen’s kappa needs a second rater on the same images. Her second-rater columns are blank, so that column is empty. Ritika’s kappa is in the next table, from two raters on her own 30 images.
+**Human audit of Sneha’s model** (`task3_gan/sneha_singh/outputs/human_audit/`): 30 photo → Monet samples from an earlier checkpoint (80 epochs, same 30 indices), scored independently by Sneha and Ritika on a 1–5 scale (5 = best; for artifacts, 5 = clean). Both raters agree 100% that no samples show memorization.
 
-| | Sneha | Ritika | Cohen's kappa |
-|---|---|---|---|
-| Style | 3.80 | | |
-| Content | 4.33 | | |
-| Artifacts | 2.13 | | |
-| Overall | 3.42 | | |
+| | Sneha | Ritika | Mean | Exact agreement | Cohen's kappa |
+|---|---|---|---|---|---|
+| Style | 3.80 | 3.87 | 3.83 | 76.7% | 0.560 |
+| Content | 4.33 | 4.07 | 4.20 | 80.0% | 0.591 |
+| Artifacts | 2.13 | 2.00 | 2.07 | 80.0% | 0.600 |
+| Overall | 3.42 | 3.31 | 3.37 | — | — |
 
 **Human audit of Ritika’s model** (`task3_gan/ritika_mukesh_neema/outputs/human_audit/`): 30 blinded photo → Monet samples from `best.pt`, scored by two independent raters on a 1–5 scale (5 = best; for artifacts, 5 = no visible artifacts).
 
