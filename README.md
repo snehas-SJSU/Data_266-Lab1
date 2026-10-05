@@ -241,7 +241,7 @@ cd .. && python evaluate_local.py
 | FID / MiFID (TA script, both directions averaged) | 95.6037 / 0.4054 |
 | Photo→Monet / Monet→photo FID | 93.892 / 97.316 |
 | Score | 48.0046 (leaderboard −48.0046) |
-| Leaderboard rank | to be recorded |
+| Leaderboard rank | 9|
 
 v1 (80 epochs × 300 images, RTX 5090): local FID 123.70 / 120.72; Kaggle FID 104.30 / MiFID 0.413 with `kaggle_score.py` (`real_stats.npz`, a different scorer). Kept in `outputs/history_v1/`.
 
