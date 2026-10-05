@@ -27,9 +27,15 @@ class ResidualBlock(nn.Module):
 
 
 class ResnetGenerator(nn.Module):
-    """c7s1-64, d128, d256, R256*n_blocks, u128, u64, c7s1-3 (Zhu et al. naming)."""
+    """c7s1-64, d128, d256, R256*n_blocks, u128, u64, c7s1-3 (Zhu et al. naming).
 
-    def __init__(self, in_ch=3, out_ch=3, ngf=64, n_blocks=9):
+    upsample="convtranspose" is the original paper's decoder. upsample="nearest" replaces each
+    transposed convolution with a nearest-neighbour x2 resize followed by a 3x3 convolution
+    ("resize-convolution", Odena et al. 2016), which removes the checkerboard artifacts that
+    stride-2 transposed convolutions produce. Both variants have the same parameter count.
+    """
+
+    def __init__(self, in_ch=3, out_ch=3, ngf=64, n_blocks=9, upsample="convtranspose"):
         super().__init__()
         model = [
             nn.ReflectionPad2d(3),
@@ -51,11 +57,17 @@ class ResnetGenerator(nn.Module):
             model += [ResidualBlock(ch)]
         # upsampling
         for _ in range(2):
-            model += [
-                nn.ConvTranspose2d(ch, ch // 2, kernel_size=3, stride=2, padding=1, output_padding=1),
-                nn.InstanceNorm2d(ch // 2),
-                nn.ReLU(inplace=True),
-            ]
+            if upsample == "nearest":
+                model += [
+                    nn.Upsample(scale_factor=2, mode="nearest"),
+                    nn.ReflectionPad2d(1),
+                    nn.Conv2d(ch, ch // 2, kernel_size=3),
+                ]
+            elif upsample == "convtranspose":
+                model += [nn.ConvTranspose2d(ch, ch // 2, kernel_size=3, stride=2, padding=1, output_padding=1)]
+            else:
+                raise ValueError(f"unknown upsample mode {upsample!r}")
+            model += [nn.InstanceNorm2d(ch // 2), nn.ReLU(inplace=True)]
             ch //= 2
         model += [
             nn.ReflectionPad2d(3),

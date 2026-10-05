@@ -31,7 +31,8 @@ def make_transform(img_size, train=True):
 
 
 class UnpairedImageDataset(Dataset):
-    def __init__(self, dir_a, dir_b, img_size=256, train=True):
+    def __init__(self, dir_a, dir_b, img_size=256, train=True, epoch_size=None):
+        self.epoch_size = epoch_size
         self.files_a = list_images(dir_a)
         self.files_b = list_images(dir_b)
         if len(self.files_a) == 0 or len(self.files_b) == 0:
@@ -51,6 +52,12 @@ class UnpairedImageDataset(Dataset):
         # via random sampling (see __getitem__) -- just spread across more
         # epochs rather than crammed into one. Total photo coverage over a
         # full training run is unaffected; only wall-clock-per-epoch changes.
+        #
+        # epoch_size (optional) overrides that: e.g. 3,200 samples per epoch cycles
+        # the 300 Monets ~11 times and draws 3,200 random photos, so an epoch
+        # covers far more of the photo domain than one pass over 300 Monets.
+        if self.epoch_size:
+            return int(self.epoch_size)
         return min(len(self.files_a), len(self.files_b))
 
     def __getitem__(self, idx):

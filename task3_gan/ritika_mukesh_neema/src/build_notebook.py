@@ -4,8 +4,8 @@ Assembles part3_cyclegan.ipynb from the real source files and the real logged
 outputs of your completed run. Run this FROM INSIDE:
     Data_266-Lab1/task3_gan/ritika_mukesh_neema/src/
 
-    cd ~/Desktop/Data_266-Lab1/task3_gan/ritika_mukesh_neema/src
-    python3 build_notebook.py
+    cd task3_gan/ritika_mukesh_neema/src
+    python build_notebook.py
 
 It reads your actual .py files and actual outputs/*.json|.csv|.log|.png (no
 fabricated numbers), and writes part3_cyclegan.ipynb next to this script.
@@ -59,7 +59,7 @@ def image_output(png_path):
             b64 = base64.b64encode(f.read()).decode("ascii")
         return [{
             "output_type": "display_data",
-            "data": {"image/png": b64, "text/plain": ["<Figure: loss curves>"]},
+            "data": {"image/png": b64, "text/plain": ["<Figure>"]},
             "metadata": {},
         }]
     except FileNotFoundError:
@@ -76,85 +76,80 @@ def main():
     cells = []
 
     cells.append(md_cell(
-        "# Task 3 — CycleGAN Photo <-> Monet Style Transfer\n"
+        "# Task 3 — CycleGAN Photo <-> Monet Style Transfer (v2)\n"
         "**Author:** Ritika Mukesh Neema\n\n"
-        "Real source from `src/*.py` (ResNet generators, PatchGAN discriminators, "
-        "LSGAN + cycle-consistency + identity loss, image replay buffer), followed "
-        "by the real captured console output and metrics from the completed "
-        "80-epoch run on an RTX 5090 (see `results.md`, `outputs/console_train.log`, "
-        "`outputs/full_metrics_report.csv`)."
+        "Real source from `src/` and the member root, followed by the real outputs of the v2 run: "
+        "training on a Colab NVIDIA A100 (artifacts in `outputs/`: `train_log.jsonl`, `train_metrics.json`, "
+        "`checkpoint_scores.csv`, `loss_curves.png`), then generation, the TA's evaluation script and the "
+        "full metrics on the submitted checkpoint `checkpoints/best.pt` (epoch 110), run locally on an "
+        "RTX 4060 Laptop GPU (console logs in `outputs/console_*.log`). Nothing below is re-executed or "
+        "hand-edited. See `results.md` and `failure_analysis.md`."
     ))
 
-    for fname, title in [
-        ("dataset.py", "## Dataset"),
-        ("utils.py", "## Utilities (image buffer, checkpointing, etc.)"),
-        ("models.py", "## Models — ResNet generators + PatchGAN discriminators"),
-        ("train.py", "## Training loop (LSGAN + cycle-consistency + identity loss)"),
-        ("generate.py", "## Generation (translate held-out photos/Monets)"),
-        ("evaluate_local.py", "## Local evaluation (FID / KID / LPIPS / cycle-L1 / content-cosine)"),
-        ("human_audit.py", "## Human audit prep/scoring"),
+    for path, title in [
+        (os.path.join(HERE, "config.json"), "## Run settings (`src/config.json`)"),
+        (os.path.join(HERE, "dataset.py"), "## Dataset (unpaired domains, epoch length)"),
+        (os.path.join(HERE, "models.py"), "## Models — ResNet generators + PatchGAN discriminators"),
+        (os.path.join(HERE, "augment.py"), "## DiffAugment for the discriminators"),
+        (os.path.join(HERE, "utils.py"), "## Utilities (image pool, LR schedule, EMA, thermal guard)"),
+        (os.path.join(HERE, "inference.py"), "## Inference helpers (checkpoint loading, view averaging, JPEG saving)"),
+        (os.path.join(HERE, "ta_eval.py"), "## TA evaluation code used during training (checkpoint scoring)"),
+        (os.path.join(HERE, "train.py"), "## Training loop (LSGAN + cycle-consistency + identity loss)"),
+        (os.path.join(HERE, "generate.py"), "## Generation (pred_A2B / pred_B2A)"),
+        (os.path.join(MEMBER, "evaluate_local.py"), "## TA evaluation script (`evaluate_local.py`, writes `submission.csv`)"),
+        (os.path.join(HERE, "full_metrics.py"), "## All other metrics (KID, precision/recall, cycle L1, LPIPS, content cosine)"),
+        (os.path.join(HERE, "sample_grid.py"), "## Visual check grid"),
+        (os.path.join(HERE, "human_audit.py"), "## Human audit prep/scoring"),
     ]:
-        path = os.path.join(HERE, fname)
         src = read(path)
         if not src:
             continue
         cells.append(md_cell(title))
         cells.append(code_cell(src))
 
-    # --- real training output ---
-    console_train = read(os.path.join(OUT, "console_train.log"))
+    # --- training (Colab A100) ---
     train_metrics = read(os.path.join(OUT, "train_metrics.json"))
-
-    cells.append(md_cell("## Run: `python train.py` (80 epochs, RTX 5090)\n"
-                          "Real console output from the completed training run:"))
-    cells.append(code_cell(
-        "# Captured from outputs/console_train.log (last 50 lines) — not re-executed here\n"
-        "print(open('../outputs/console_train.log').read())",
-        outputs=stream_output(tail_lines(console_train, 50) if console_train else "(console_train.log not found)"),
-    ))
     if train_metrics:
-        cells.append(md_cell("### Final train_metrics.json"))
+        tm = json.loads(train_metrics)
+        tm.pop("loss_history", None)
+        cells.append(md_cell("## Run: `python train.py` (125 epochs, Colab NVIDIA A100)\n"
+                             "Final `outputs/train_metrics.json` (the per-epoch loss history is in the file):"))
         cells.append(code_cell(
-            "import json\nprint(json.dumps(json.load(open('../outputs/train_metrics.json')), indent=2))",
-            outputs=stream_output(json.dumps(json.loads(train_metrics), indent=2)),
+            "import json\n"
+            "m = json.load(open('../outputs/train_metrics.json')); m.pop('loss_history')\n"
+            "print(json.dumps(m, indent=2))",
+            outputs=stream_output(json.dumps(tm, indent=2)),
         ))
-
     cells.append(md_cell("### Loss curves"))
     cells.append(code_cell(
         "from IPython.display import Image\nImage('../outputs/loss_curves.png')",
         outputs=image_output(os.path.join(OUT, "loss_curves.png")),
     ))
+    scores = read(os.path.join(OUT, "checkpoint_scores.csv"))
+    if scores:
+        cells.append(md_cell("### Checkpoint scores (TA method, last 30 epochs, raw and EMA weights)"))
+        cells.append(code_cell("print(open('../outputs/checkpoint_scores.csv').read())", outputs=stream_output(scores)))
 
-    # --- generation output ---
-    console_generate = read(os.path.join(OUT, "console_generate.log"))
-    cells.append(md_cell("## Run: `python generate.py`\nReal captured output:"))
+    # --- generation, TA score, metrics (local) ---
+    for log, title in [
+        ("console_generate.log", "## Run: `python generate.py --ckpt ../checkpoints/best.pt`"),
+        ("console_evaluate_local.log", "## Run: `python evaluate_local.py` (TA script -> submission.csv)"),
+        ("console_full_metrics.log", "## Run: `python full_metrics.py --ckpt ../checkpoints/best.pt`"),
+    ]:
+        text = read(os.path.join(OUT, log))
+        cells.append(md_cell(title + "\nReal captured output:"))
+        cells.append(code_cell(f"print(open('../outputs/{log}').read())",
+                               outputs=stream_output(tail_lines(text, 80) if text else f"({log} not found)")))
+
+    sub = read(os.path.join(MEMBER, "submission.csv"))
+    if sub:
+        cells.append(md_cell("### submission.csv (Kaggle upload; leaderboard = -(FID + MiFID) / 2)"))
+        cells.append(code_cell("print(open('../submission.csv').read())", outputs=stream_output(sub)))
+    cells.append(md_cell("## Visual check: photo | photo->Monet | Monet | Monet->photo"))
     cells.append(code_cell(
-        "print(open('../outputs/console_generate.log').read())",
-        outputs=stream_output(console_generate if console_generate else "(console_generate.log not found)"),
+        "from IPython.display import Image\nImage('../outputs/sample_grid.png')",
+        outputs=image_output(os.path.join(OUT, "sample_grid.png")),
     ))
-
-    # --- eval output ---
-    console_eval = read(os.path.join(OUT, "console_eval.log"))
-    full_metrics_csv = read(os.path.join(OUT, "full_metrics_report.csv"))
-    full_metrics_json = read(os.path.join(OUT, "full_metrics_report.json"))
-
-    cells.append(md_cell("## Run: `python evaluate_local.py`\nReal captured output:"))
-    cells.append(code_cell(
-        "print(open('../outputs/console_eval.log').read())",
-        outputs=stream_output(tail_lines(console_eval, 60) if console_eval else "(console_eval.log not found)"),
-    ))
-    if full_metrics_json:
-        cells.append(md_cell("### full_metrics_report.json"))
-        cells.append(code_cell(
-            "import json\nprint(json.dumps(json.load(open('../outputs/full_metrics_report.json')), indent=2))",
-            outputs=stream_output(json.dumps(json.loads(full_metrics_json), indent=2)),
-        ))
-    if full_metrics_csv:
-        cells.append(md_cell("### full_metrics_report.csv"))
-        cells.append(code_cell(
-            "print(open('../outputs/full_metrics_report.csv').read())",
-            outputs=stream_output(full_metrics_csv),
-        ))
 
     notebook = {
         "cells": cells,

@@ -1,0 +1,55 @@
+C:\Ritika_cuda\Data_266-Lab1\task3_gan\ritika_mukesh_neema\src\full_metrics.py:79: DeprecationWarning: The `disp` argument is deprecated and will be removed in SciPy 1.18.0.
+  covmean = linalg.sqrtm(sigma1.dot(sigma2), disp=False)
+C:\Ritika_cuda\venv\Lib\site-packages\torchvision\models\_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+C:\Ritika_cuda\venv\Lib\site-packages\torchvision\models\_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading Inception v3 feature extractor (downloads pretrained weights on first run)...
+Extracting features: real monet (A) / real photo (B) / fake monet (pred_B2A) / fake photo (pred_A2B)...
+Computing FID / KID / precision-recall (both directions)...
+Loading generators for cycle-reconstruction / LPIPS / content-cosine metrics...
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: C:\Ritika_cuda\venv\Lib\site-packages\lpips\weights\v0.1\alex.pth
+
+Wrote ../outputs\full_metrics_report.json and ..\full_metrics_report.csv
+{
+  "fid_photo_to_monet_B2A": 92.68177795400318,
+  "fid_monet_to_photo_A2B": 98.61520976256475,
+  "kid_photo_to_monet_B2A": 0.004617662634700537,
+  "kid_photo_to_monet_B2A_std": 0.0010866400552913547,
+  "kid_monet_to_photo_A2B": 0.015035915188491344,
+  "kid_monet_to_photo_A2B_std": 0.0023444227408617735,
+  "precision_photo_to_monet_B2A": 0.4766666666666667,
+  "recall_photo_to_monet_B2A": 0.6366666666666667,
+  "precision_monet_to_photo_A2B": 0.7133333333333334,
+  "recall_monet_to_photo_A2B": 0.38333333333333336,
+  "cycle_A_monet_photo_monet": {
+    "cycle_l1_mean": 0.06434094849973918,
+    "lpips_mean": 0.19447262600064277,
+    "content_cosine_sim_mean": 0.7300931386090815,
+    "n_images": 100
+  },
+  "cycle_B_photo_monet_photo": {
+    "cycle_l1_mean": 0.06931468576192856,
+    "lpips_mean": 0.14207921199500562,
+    "content_cosine_sim_mean": 0.8288900909572839,
+    "n_images": 100
+  },
+  "device": "cuda",
+  "total_parameter_count": 28285832,
+  "epochs_trained": 125,
+  "steps": 100000,
+  "final_loss_G": 2.945758494436741,
+  "final_loss_D": 0.26274894895032047,
+  "final_loss_cycle": 1.3417884908616542,
+  "final_loss_identity": 0.5490289028361439,
+  "mean_grad_norm": 32.18280984476207,
+  "max_grad_norm": 469.91819763183594,
+  "nan_or_inf_events": 0,
+  "total_training_time_sec": 16310.263185977936,
+  "avg_images_per_sec": 24.52443565373508,
+  "peak_memory_mb": 10198.83984375,
+  "peak_gpu_memory_mb": 17368.2568359375,
+  "best_ta_score": 48.0133,
+  "best_ta_checkpoint": "epoch 110 raw"
+}

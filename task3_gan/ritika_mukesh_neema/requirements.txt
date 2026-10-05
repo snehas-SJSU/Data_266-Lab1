@@ -4,4 +4,6 @@ numpy
 scipy
 matplotlib
 Pillow
+tqdm
+pandas
 lpips

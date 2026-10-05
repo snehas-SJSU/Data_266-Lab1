@@ -30,7 +30,7 @@ pip install -r requirements.txt
 | TinyStoriesV2-GPT4 train / valid (Ritika, Part 1) | Hugging Face `roneneldan/TinyStories` | any folder; pass the paths to `run_all.py` |
 | Yelp polarity (Part 2) | Sneha's notebook downloads it. Ritika: Hugging Face `fancyzhx/yelp_polarity` parquet files | Ritika: pass the paths to `run_all.py` |
 | `monet_jpg/` (300 JPGs), `photo_jpg/` (7,038 JPGs) | Drive links 2 and 3 below | `task3_gan/data/monet_jpg/`, `task3_gan/data/photo_jpg/` (no extra parent folder) |
-| Ritika Part 3 checkpoint | Ritika's Drive link below | `task3_gan/ritika_mukesh_neema/checkpoints/ckpt_final.pt` |
+| Ritika Part 3 checkpoint | Drive link in `task3_gan/ritika_mukesh_neema/checkpoints/README.md` | `task3_gan/ritika_mukesh_neema/checkpoints/best.pt` |
 
 **Viewing results without retraining:** each notebook is saved with its outputs, so open it to see them. Running all cells starts a new full training run (Part 3 takes hours on a GPU). Metrics, samples, and plots are also in each member's `results.md`, metrics CSV, and `outputs/`.
 
@@ -77,7 +77,7 @@ Part 3 trains on a CUDA GPU. Parts 1 and 2 also run on CPU or Apple MPS, only sl
 | 2 | Sneha | `task2_sentiment/sneha_singh/checkpoints/baseline_full.pt`, `experimental_a_full.pt` (BiLSTM), `experimental_b_full.pt` (TextCNN) | Best: BiLSTM, macro-F1 0.942 |
 | 2 | Ritika | `task2_sentiment/ritika_mukesh_neema/checkpoints/baseline.pt`, `bilstm.pt`, `textcnn.pt` | Best: BiLSTM, macro-F1 0.934 |
 | 3 | Sneha | `task3_gan/sneha_singh/checkpoints/best.pt` (epoch 93) | `submission.csv`: FID 99.84, MiFID 0.412 (score 50.13) |
-| 3 | Ritika | `task3_gan/ritika_mukesh_neema/checkpoints/ckpt_final.pt` (Drive, epoch 80) | Photo→Monet FID 123.70, Monet→photo FID 120.72 |
+| 3 | Ritika | `task3_gan/ritika_mukesh_neema/checkpoints/best.pt` (Drive, epoch 110 of 125) | `submission.csv`: FID 95.60, MiFID 0.405 (score 48.00, TA script) |
 
 ---
 
@@ -216,22 +216,33 @@ python task3_gan/sneha_singh/evaluate_local.py
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 
-- `src/part3_cyclegan.ipynb`, `src/config.json`, scripts `dataset.py`, `models.py`, `train.py`, `generate.py`, `evaluate_local.py`, `kaggle_score.py`, `human_audit.py`, `run_all.py`
-- `submission.csv`, `metrics_report.csv`, `outputs/full_metrics_report.csv`, `results.md`, `failure_analysis.md`
-- Loss curves, train logs, generation manifest under `outputs/`
-- `best.pt` on Drive (link below)
-- Raw logs: `reproducibility/raw_logs/ritika_mukesh_neema/task3_gan/`
+- `src/part3_cyclegan.ipynb` (built from the real files by `src/build_notebook.py`), `src/config.json` (run settings), `src/full_metrics.json`
+- `src/`: `train.py`, `models.py`, `dataset.py`, `augment.py` (DiffAugment), `utils.py` (image pool, LR schedule, EMA), `inference.py`, `ta_eval.py`, `generate.py`, `full_metrics.py`, `sample_grid.py`, `human_audit.py`, `kaggle_score.py`, `run_all.py`
+- `evaluate_local.py` — the TA's evaluation script (writes `submission.csv`); `full_metrics_report.csv` — all other metrics
+- `results.md`, `failure_analysis.md`; `outputs/`: loss curves, `train_log.jsonl`, `train_metrics.json`, `checkpoint_scores.csv`, `sample_grid.png`, 30-image `human_audit/`, console logs; v1 files in `outputs/history_v1/`
+- Checkpoints on Drive (`checkpoints/README.md`); raw logs: `reproducibility/raw_logs/ritika_mukesh_neema/task3_gan/v2/`
 
-**Model:** ResNet generators (9 blocks), PatchGAN discriminators, batch 1, 80 epochs (40 + 40 decay), lr 2e-4, cycle λ 10. 28,285,832 parameters. NVIDIA RTX 5090, about 27.7 min.
+**Model (v2):** ResNet-9 generators (64 filters, nearest-neighbour upsampling), 70×70 PatchGAN discriminators, LSGAN + cycle L1 (λ 10) + identity (5), DiffAugment, real label 0.9, EMA 0.999, batch 4, 800 steps/epoch, 125 epochs (50 + 75 decay), AMP. 28,285,832 parameters. Colab NVIDIA A100, 4.53 h. The last 30 epochs were scored with the TA's notebook; `best.pt` is epoch 110.
 
-**Status:** photo→Monet (B2A) FID 123.70, Monet→photo (A2B) FID 120.72 (her `evaluate_local.py`, 300 images).
+**How to run**
+
+```bash
+cd task3_gan/ritika_mukesh_neema/src
+python run_all.py                                   # train -> generate -> TA script -> full metrics (smoke: --smoke_test)
+# or, from the downloaded checkpoint:
+python generate.py --ckpt ../checkpoints/best.pt
+cd .. && python evaluate_local.py
+```
 
 | Item | Value |
 |---|---|
 | Upload file | `task3_gan/ritika_mukesh_neema/submission.csv` |
-| Local FID (training-split, not official) | 123.70 |
-| Kaggle FID / MiFID | 104.30 / 0.413 (her `kaggle_score.py`: all 7,038 photo→Monet images vs `real_stats.npz`) |
-| Public score | -52.3574 (own submission, own Kaggle account) |
+| FID / MiFID (TA script, both directions averaged) | 95.6037 / 0.4054 |
+| Photo→Monet / Monet→photo FID | 93.892 / 97.316 |
+| Score | 48.0046 (leaderboard −48.0046) |
+| Leaderboard rank | to be recorded |
+
+v1 (80 epochs × 300 images, RTX 5090): local FID 123.70 / 120.72; Kaggle FID 104.30 / MiFID 0.413 with `kaggle_score.py` (`real_stats.npz`, a different scorer). Kept in `outputs/history_v1/`.
 
 ---
 

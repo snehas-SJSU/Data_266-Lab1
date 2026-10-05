@@ -1,5 +1,6 @@
 """
-Task 3.2 - Evaluation and Analysis.
+Task 3.2 - Evaluation and Analysis: every metric except the official FID / MiFID
+(those come from ../evaluate_local.py, the TA's script).
 
 Computes every metric in the assignment's Task 3 metrics list that can be
 computed locally (both directions where applicable):
@@ -30,7 +31,7 @@ from PIL import Image
 import torchvision.transforms as T
 import torchvision.models as tvm
 
-from models import ResnetGenerator
+from inference import load_generators
 from dataset import list_images
 from utils import denorm
 
@@ -181,12 +182,12 @@ def cycle_reconstruction_and_lpips(G_A2B, G_B2A, folder, device, preprocess_256,
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--ckpt", default="../checkpoints/ckpt_final.pt")
+    ap.add_argument("--ckpt", default="../checkpoints/best.pt")
     ap.add_argument("--data_dir_a", default="../../data/monet_jpg")
     ap.add_argument("--data_dir_b", default="../../data/photo_jpg")
     ap.add_argument("--out_dir", default="../outputs")
     ap.add_argument("--img_size", type=int, default=256)
-    ap.add_argument("--n_blocks", type=int, default=9)
+    ap.add_argument("--n_blocks", type=int, default=None, help="default: from the checkpoint")
     ap.add_argument("--max_images_for_fid", type=int, default=300)
     ap.add_argument("--max_images_for_cycle", type=int, default=100)
     ap.add_argument("--skip_lpips", action="store_true", help="skip LPIPS if the package/weights aren't available")
@@ -217,11 +218,8 @@ def main():
     prec_A2B, rec_A2B = compute_precision_recall(feat_real_B, feat_fake_B)
 
     print("Loading generators for cycle-reconstruction / LPIPS / content-cosine metrics...")
-    ckpt = torch.load(args.ckpt, map_location=device)
-    G_A2B = ResnetGenerator(n_blocks=args.n_blocks).to(device)
-    G_B2A = ResnetGenerator(n_blocks=args.n_blocks).to(device)
-    G_A2B.load_state_dict(ckpt["G_A2B"]); G_A2B.eval()
-    G_B2A.load_state_dict(ckpt["G_B2A"]); G_B2A.eval()
+    # architecture (filters / blocks / upsampling) comes from the checkpoint's own config
+    G_A2B, G_B2A, _, _ = load_generators(args.ckpt, device, n_blocks=args.n_blocks)
 
     lpips_model = None
     if not args.skip_lpips:
@@ -267,6 +265,9 @@ def main():
     }
 
     with open(os.path.join(args.out_dir, "full_metrics_report.json"), "w") as f:
+        json.dump(report, f, indent=2)
+    # repo structure: <member>/src/ also holds the full metrics file
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "full_metrics.json"), "w") as f:
         json.dump(report, f, indent=2)
 
     flat_row = {}

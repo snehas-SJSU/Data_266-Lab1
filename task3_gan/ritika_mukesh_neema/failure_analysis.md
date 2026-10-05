@@ -1,23 +1,55 @@
-# Task 3 — Failure Analysis: CycleGAN Photo ↔ Monet
+# Task 3 — Failure Analysis: CycleGAN Photo ↔ Monet (v2)
 
 **Author:** Ritika Mukesh Neema
 
-Two real, metric-grounded failure modes observed in this run's local evaluation (`outputs/full_metrics_report.json`), plus one process limitation.
+Submitted checkpoint: `checkpoints/best.pt` (epoch 110, raw weights; TA score 48.0046). The image observations
+below are from `outputs/sample_grid.png` (6 fixed rows; columns photo | photo→Monet | Monet | Monet→photo) and the
+30 audit images in `outputs/human_audit/`; the numbers are from `full_metrics_report.csv` and `outputs/checkpoint_scores.csv`.
 
-## Case 1: Low precision / high recall asymmetry in the photo→Monet direction (B2A)
+## Case 1: smooth gradients and flat areas get streaks (photo → Monet)
 
-The photo→Monet direction — the one Kaggle actually scores — has precision 0.327 but recall 0.570 (improved precision/recall, Kynkaanniemi et al. 2019, k=3, 300-image sample). Recall this high relative to precision means many of the *real* Monet images' neighborhoods are being reached by *some* generated sample (good mode coverage), but a large fraction of individual generated images fall outside any real image's local neighborhood in Inception feature space (low fidelity per-sample). Concretely: the generator produces a reasonably diverse spread of outputs, but a sizeable share of those outputs are not convincing Monet-style images on their own.
+The beach-at-dusk row of the grid is the clearest failure: a smooth pink-to-blue sky becomes an orange-yellow field
+covered in vertical streaks, and the soft colour gradient is lost. Flat skies in other rows show a finer version of
+the same grain. A Monet painting never has a perfectly smooth area, so the generator fills every flat region with
+brush texture, and with nothing in the photo to anchor it the texture turns into repeated streaks.
 
-This is consistent with a model that hasn't trained long enough to sharpen its mapping — cycle-consistency and identity losses can keep outputs roughly in the right global distribution (driving recall up) well before the discriminator has forced individual samples to be locally realistic (which would raise precision). The other direction, monet→photo (A2B), shows the flipped pattern (precision 0.613, recall 0.207): fewer modes covered, but the outputs that are produced are closer to real photos. This is the expected asymmetry for a 300-image domain (Monet) vs. a 7,038-image domain (photo) — there is far more real-photo structure for A2B's discriminator to enforce against, while B2A's target domain (Monet) is small and its discriminator saturates faster without stabilizing fine style texture across the output distribution.
+## Case 2: night and dark scenes (photo → Monet)
 
-## Case 2: Training stopped well short of convergence given KID's variance
+The night-mountain row turns a deep blue sky into a muted, textured blue-grey, and the moon becomes a smeared
+orange blob. Monet's 300 paintings are almost all daylight scenes, so dark inputs are far from anything the Monet
+discriminator has seen and the colours drift toward the daylight palette.
 
-KID (bootstrapped over 50 subsets) for B2A is 0.0267 ± 0.0029 — a non-trivial standard deviation relative to the mean, which (together with final generator loss still at 4.84, not clearly plateaued) indicates the model was still improving when training stopped at 80 total epochs (40 + 40 decay). The original CycleGAN paper trains 200 epochs; this run used 40% of that budget.
+## Case 3: text and watermarks survive as ghosts
 
-## Process limitation (not a model-quality failure)
+The same night photo has a watermark ("DanielMcVey.Com") in the corner, and a faint copy of it is still visible
+after translation. The cycle-consistency loss rewards keeping every detail needed to rebuild the photo, so
+high-contrast text is carried through instead of being painted over.
 
-Cycle-reconstruction L1/LPIPS/content-cosine are computed on only 100 images per direction (`--max_images_for_cycle 100`, `evaluate_local.py`), not the full dataset — a deliberate speed/cost tradeoff for local evaluation. This means the cycle-consistency numbers in `metrics_report.csv` carry more sampling noise than the FID/KID numbers (which use up to 300 images).
+## Case 4: Monet → photo keeps painterly texture and narrow coverage
 
-## Pending: qualitative/visual failure inspection
+Monet → photo outputs keep the composition well (boats, cliffs, river bank) but still show brush-stroke texture, and
+they come out darker and more saturated than real photos, with smeared dark blobs in dark paintings (last row of the
+grid). The metrics agree: precision 0.713 but recall only 0.383, i.e. the outputs look photographic but cover a
+narrow slice of real photos. This direction has a higher FID (97.3 vs 93.9) and KID (0.0150 vs 0.0046) than
+photo → Monet. Its generator only ever sees the same 300 paintings as inputs.
 
-A human visual audit of 30 blinded photo→Monet samples (2 raters, Cohen's kappa) is specified in the assignment and tracked in `src/human_audit.py` / `outputs/human_audit/` — this has not been run yet. Specific per-image failure examples (e.g., color bleed, texture artifacts, structural distortion) will be added here once that audit is complete, rather than asserted without having actually looked at the generated images.
+## Case 5: the score is noisy, and the selection uses the evaluation images
+
+Late epochs at a nearly flat learning rate still move by about ±0.5 in score, and Monet → photo FID alone swings by
+up to ~3 points between neighbouring epochs (e.g. 96.9 at epoch 96, 99.3 at epoch 98). The submitted checkpoint is
+the best of 60 scored candidates on the same 300+300 images the TA script uses, so its score includes some of that
+luck. The TA score only uses 300 images per folder: even two sets of real photos score about FID 80 against each
+other, which is the floor this metric can reach.
+
+## What worked (for contrast)
+
+Content preservation is strong in both directions: forests, misty lakes and cloudy fields keep their layout and are
+convincingly restyled (rows 3, 5, 6 of the grid), and cycle reconstruction L1 is 0.064 / 0.069. Training was stable
+throughout (no NaN / Inf in 100,000 steps, discriminator loss 0.26–0.36).
+
+## Process limitations
+
+- Cycle L1 / LPIPS / content cosine are computed on 100 images per direction (`--max_images_for_cycle 100`), so they
+  are noisier than FID/KID (300 images).
+- The content-cosine metric is computed in pixel space, a cheap proxy that rewards keeping colours as well as content.
+- Human audit: the 30 blinded samples are prepared; the two raters' scores and Cohen's kappa are still pending.

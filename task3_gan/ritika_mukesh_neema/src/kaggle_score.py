@@ -1,7 +1,7 @@
 """
 Compute this competition's official FID / MiFID against the provided
 real_stats.npz (precomputed real-Monet Inception stats + 300 real feature
-vectors), using the SAME Inception-v3 feature extractor as evaluate_local.py,
+vectors), using the SAME Inception-v3 feature extractor as full_metrics.py,
 and write the Kaggle submission CSV (ID,FID,MiFID).
 """
 import argparse
@@ -14,7 +14,7 @@ import torch
 from scipy import linalg
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
-from evaluate_local import get_inception_feature_extractor, extract_features  # noqa: E402
+from full_metrics import get_inception_feature_extractor, extract_features  # noqa: E402
 
 
 def compute_fid_from_stats(mu1, sigma1, feat_fake):
@@ -63,7 +63,7 @@ def main():
     mu_real, sigma_real, feats_real = stats["mu_real"], stats["sigma_real"], stats["feats_real"]
     print(f"Loaded real_stats.npz: mu_real {mu_real.shape}, sigma_real {sigma_real.shape}, feats_real {feats_real.shape}")
 
-    print("Loading Inception v3 feature extractor (same as evaluate_local.py)...")
+    print("Loading Inception v3 feature extractor (same as full_metrics.py)...")
     inception, preprocess = get_inception_feature_extractor(device)
 
     print(f"Extracting features from {args.pred_dir} ...")
