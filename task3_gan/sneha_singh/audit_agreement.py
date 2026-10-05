@@ -1,7 +1,7 @@
 """Human audit summary for Part 3: mean scores per rater and inter-rater agreement.
 
 Reads outputs/human_audit/audit_30.csv (two raters, 30 fixed photo->Monet images) and prints,
-for style, content, and artifacts: each rater's mean (0-2), percent agreement, and Cohen's kappa.
+for style, content, and artifacts: each rater's mean (1-5), percent agreement, and Cohen's kappa.
 
 Usage (from the repo root):
   python task3_gan/sneha_singh/audit_agreement.py

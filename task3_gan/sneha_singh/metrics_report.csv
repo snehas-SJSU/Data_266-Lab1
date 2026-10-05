@@ -18,6 +18,11 @@ run_submitted,checkpoints/best.pt (epoch 91),average_A2B_B2A,submission_MiFID,0.
 run_submitted,checkpoints/best.pt (epoch 91),average_A2B_B2A,score_(FID+MiFID)/2,47.857,computed from submission.csv
 run_submitted,checkpoints/best.pt (epoch 91),A2B,inference,"average of 6 views (original, flip, four 4-px shifts)",make_submission.py
 run_submitted,checkpoints/best.pt (epoch 91),B2A,inference,single pass,make_submission.py
+run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_style_mean_1to5,3.80,mapped from original 0-2 sheet (0→1, 1→3, 2→5); solo rater
+run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_content_mean_1to5,4.33,mapped from original 0-2 sheet (0→1, 1→3, 2→5); solo rater
+run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_artifacts_mean_1to5,2.13,mapped and flipped so 5 = clean; solo rater
+run_submitted,outputs/human_audit/audit_30.csv,B2A,human_audit_overall_mean_1to5,3.42,mean of style content artifacts; solo rater
+run_submitted,outputs/human_audit/audit_30.csv,B2A,cohens_kappa,,second rater blank; kappa not computed
 run_submitted,epoch 1,training,g_loss,8.109,raw_logs/sneha_singh/task3_gan/train_full_ngf64_sneha.log
 run_submitted,epoch 1,training,d_loss,0.396,raw_logs/sneha_singh/task3_gan/train_full_ngf64_sneha.log
 run_submitted,epoch 1,training,cycle_loss,5.003,raw_logs/sneha_singh/task3_gan/train_full_ngf64_sneha.log

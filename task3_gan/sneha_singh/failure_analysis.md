@@ -26,7 +26,7 @@ From `outputs/samples/grid.png` and the audit set:
 
 - Rater: me, on images from an earlier checkpoint of this CycleGAN (80-epoch run, same 30 indices)
 - Sheet and images: `outputs/human_audit/audit_30.csv`, `a2b_*.jpg`
-- Scale: style 0–2, content 0–2, artifacts 0–2 (higher = worse), mem Y/N
+- Scale: 1–5, higher is better. For artifacts, 5 means clean. mem Y/N
 
 ### My pass (quick summary)
 
@@ -38,8 +38,9 @@ From `outputs/samples/grid.png` and the audit set:
 | Basically broken / band noise | A few (e.g. 01455, 04853) |
 | Looks like a copied training Monet | None that I flagged (all N) |
 
-Means from `audit_30.csv` (30 images, 0–2): style 1.40, content 1.67, artifacts 1.43.
-None of the 30 is marked memorised. The second rater’s columns are blank, so there is no kappa.
+Means from `audit_30.csv` (30 images, 1–5): style 3.80, content 4.33, artifacts 2.13, overall 3.42.
+These are the original 0–2 marks placed on 1–5 (style and content 0→1, 1→3, 2→5; artifacts flipped so 5 means clean).
+None of the 30 is marked memorised. The second rater’s columns are blank, so the kappa column is empty.
 Content is the strongest part; artifacts are the main complaint.
 
 ## Cycle check
