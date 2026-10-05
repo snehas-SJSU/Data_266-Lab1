@@ -135,6 +135,12 @@ Every required metric is also collected in one file, `metrics_report.csv` (built
 | Training time, images/s | 16,310 s, 24.5 |
 | Peak memory (GPU / process) | 17,368 MB / 10,199 MB |
 
+## Follow-up experiment: 80 filters (not submitted)
+
+The same code with a wider generator (`--ngf 80`, 41.1M parameters, 100 epochs) reached lower training losses but a
+worse TA score: best 48.5916 (epoch 96 raw), per-direction combo 48.5472, against 48.01 / 47.80 for the submitted 64-filter
+run. Files and the full comparison are in `outputs/experiments/ngf80/`; discussion in `failure_analysis.md` (Case 7).
+
 ## Inference settings
 
 Monet → photo averages 6 flipped/shifted views (`--views_a2b 6`, `src/inference.py`); photo → Monet is a single pass.

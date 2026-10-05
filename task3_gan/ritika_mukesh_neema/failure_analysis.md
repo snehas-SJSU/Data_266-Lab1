@@ -72,6 +72,20 @@ images are rather than memorisation.
 - **Data download:** `gdown --folder` stops at 50 files per folder, so the 7,038 photos were copied from a Google
   Drive shortcut instead (the notebook's data cell checks for exactly 300 / 7,038 images).
 
+## Case 7: a wider generator fit better but scored worse
+
+A follow-up run widened both generators from 64 to 80 filters (41.1M parameters instead of 28.3M; 100 epochs; files in
+`outputs/experiments/ngf80/`). Every training loss ended lower — G 2.74 vs 2.95, cycle 1.21 vs 1.34, identity 0.50 vs
+0.55 — and training was just as stable (0 NaN). But the TA score was worse: best 48.59 vs 48.01 (combo 48.55 vs 47.80).
+Its first scored epoch (learning rate at 48% of peak) scored 51.0, while the 64-filter run's first scored epoch (41% of
+peak) scored 48.7; the wider model improved by 2.4 points during the decay but did not close the gap. The loss is mostly in Monet→photo (best FID 98.1 vs 96.5); photo→Monet reached 95.2.
+
+With only 300 Monet paintings, the extra capacity went into fitting the training images more closely rather than into
+outputs whose Inception statistics are closer to real images. The discriminators were not widened, and the
+learning rate, schedule and augmentation were tuned for 64 filters, so a wider model would likely need its own
+settings. The runs also differ in schedule length (100 vs 125 epochs), so this is evidence, not proof, that 64 filters
+is the better width here.
+
 ## What worked (for contrast)
 
 Content preservation is strong in both directions: forests, misty lakes and cloudy fields keep their layout and are

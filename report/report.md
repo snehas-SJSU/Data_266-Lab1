@@ -327,6 +327,7 @@ KID, precision/recall, cycle L1, LPIPS (input vs reconstruction) and content cos
 - **Night scenes.** Dark photos drift toward Monet's daylight palette, and a moon becomes an orange smear.
 - **Monet → photo.** Outputs keep the layout but stay painterly and dark. Recall is 0.383, so they cover a narrow part of the photo domain.
 - **Noise and selection.** Late epochs move by about ±0.5 in score, and the best epoch is chosen on the images the TA script scores.
+- **Wider generator.** A follow-up run with 80 filters (41.1M parameters) ended with lower training losses but a worse score, 48.59 (combo 48.55), so the 64-filter model stays the submission (`outputs/experiments/ngf80/`).
 - **Human audit.** Two independent raters scored 30 blinded photo→Monet samples from 1 to 5. Means: style 3.35, content 4.22, artifacts 3.05, overall 3.54. Cohen's kappa 0.17 / 0.20 / 0.59 (exact agreement 50% / 47% / 73%); the raters are within one point on at least 96.7% of images. Both name the same problems: streaky flat skies, dark corner blobs, watermarks. Full write-up: `task3_gan/ritika_mukesh_neema/failure_analysis.md`.
 
 ## 3.C Team comparison

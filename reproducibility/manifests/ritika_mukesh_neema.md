@@ -44,6 +44,16 @@ Raw logs under `reproducibility/raw_logs/ritika_mukesh_neema/` are unedited.
 - Raw logs: `reproducibility/raw_logs/ritika_mukesh_neema/task3_gan/v2/` (`train_log.jsonl` per-step training log, `checkpoint_scores.csv`, console logs of generate / TA script / metrics)
 
 ---
+## Run — Part 3 CycleGAN v2 with 80 filters (experiment — not submitted)
+
+- Date: 2026-10-05
+- Same code and `src/config.json` as the v2 run; command-line changes `--ngf 80 --n_epochs_decay 50 --score_last 25`
+- Train: Colab NVIDIA A100 80 GB, AMP, 100 epochs (50 + 50 decay), 80,000 steps; 16,614 s; 19.3 images/s; peak GPU memory 26,918 MB; params 41,071,240; nan_count 0
+- Command: `python train.py --ngf 80 --n_epochs_decay 50 --score_last 25 --ckpt_dir /content/drive/MyDrive/ritika_v2_ngf80/checkpoints --out_dir /content/drive/MyDrive/ritika_v2_ngf80/outputs`
+- Result (TA method, training-time): best 48.5916 (epoch 96 raw), per-direction combo 48.5472 — worse than the submitted 64-filter run (48.0133)
+- Files: `task3_gan/ritika_mukesh_neema/outputs/experiments/ngf80/` (checkpoint_scores.csv, train_metrics.json, train_log.jsonl, loss_curves.png); checkpoints not kept
+
+---
 ## Run — Part 3 CycleGAN v1 (full — superseded by v2)
 
 - Date: 2026-09-28, ~12:30-15:30 PT
