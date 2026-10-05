@@ -1,8 +1,8 @@
 # Part 3 — Failure / error analysis (Sneha Singh)
 
-Submitted checkpoint: epoch 93 of the 100-epoch run (50 + 50 decay, 32 base filters, DiffAugment, identity weight 5, Colab L4 + AMP).
+Submitted checkpoint: epoch 91 of the 100-epoch run (50 + 50 decay, 64 base filters, DiffAugment, EMA, identity weight 5, AMP).
 The image observations below are from my audit of an earlier run of the same CycleGAN; the 30-image audit of the submitted
-images is in `outputs/human_audit/audit_30.csv`. Numbers are for the epoch-93 checkpoint.
+images is in `outputs/human_audit/audit_30.csv`. Numbers are for the epoch-91 checkpoint.
 
 ## What usually goes wrong in the images
 
@@ -45,30 +45,29 @@ So content is the strongest part; artifacts are the main complaint.
 
 From `full_metrics_report.csv`:
 
-| | cycle L1 | LPIPS vs source | content cosine vs source | FID | MiFID |
-|---|---|---|---|---|---|
-| A2B (Monet→photo) | 0.083 | 0.360 | 0.636 | 101.39 | 0.418 |
-| B2A (photo→Monet) | 0.083 | 0.396 | 0.595 | 98.29 | 0.406 |
+| | FID | MiFID |
+|---|---|---|
+| A2B (Monet→photo) | 94.83 | 0.412 |
+| B2A (photo→Monet) | 95.78 | 0.406 |
 
-Cycle L1 is about 0.083 at epoch 93 (cycle loss went from ~4.7 → ~1.64).
-B2A content cosine is 0.60 and A2B 0.64 (LPIPS 0.40 and 0.36).
+Cycle loss went from ~5.0 at epoch 1 to ~1.42 at epoch 91.
 
 ## Training / loss curves
 
 Looking at `outputs/loss_curves/losses.png`:
 
 - G, cycle, and identity all go down smoothly. Training didn’t stall.
-- D stays around 0.25–0.31 for the first 40 epochs, then falls to about 0.11 by epoch 93. Discriminator is winning a lot
+- D stays around 0.26–0.31 for the first 40 epochs, then falls to about 0.22 by epoch 91. Discriminator still wins
   late in training — that might be why textures get noisy instead of clean brushstrokes.
-- Epoch 52 has one spike (D 1.19) where the learning-rate decay starts; it recovers by epoch 54.
+- Epoch 50 has one spike (D 0.65) right before the learning-rate decay starts; it recovers by epoch 51.
 - Grad norms bounce around but don’t explode. `nan_count = 0`.
 - We did 100 epochs (lab budget), not the paper’s 200, so leftover artifacts
   aren’t shocking.
 
 ## MiFID / memorization
 
-Professor script (Colab L4), both directions: A2B FID **101.39**, MiFID **0.418**. B2A FID **98.29**, MiFID **0.406**.
-`submission.csv` is the average: FID **99.84**, MiFID **0.412** (score 50.13).
+Professor script (GPU), both directions: A2B FID **94.83**, MiFID **0.412**. B2A FID **95.78**, MiFID **0.406**.
+`submission.csv` is the average: FID **95.30**, MiFID **0.409** (score 47.857).
 When I rated, images looked like stylized versions of that photo, not pasted
 Monet paintings. The main issue is shared grainy texture across many outputs.
 
@@ -76,6 +75,5 @@ Scores came from `evaluate_local.py`, which follows the professor notebook (Ince
 
 ## Next steps if we retrain
 
-Epochs 86–100 score between 51.1 and 52.1 with single-pass inference (`outputs/checkpoint_scores_epochs86_100.csv`), so the model has plateaued.
-Averaging 6 flipped/shifted views lowers Monet→photo FID from 105.2 to 101.4; the same averaging raises photo→Monet FID, so that direction stays single pass.
-Fine-tuning from epoch 93 with a generator EMA reached 50.77 (`outputs/checkpoint_scores_finetune_ema.csv`), so the submission stays on epoch 93.
+Epochs 85–100 score between 47.8 and 49.4 (`outputs/checkpoint_scores_epochs76_100.csv`), so the model has plateaued.
+Averaging 6 flipped/shifted views lowers Monet→photo FID from 96.5 to 94.8; for photo→Monet it does not help, so that direction stays single pass.

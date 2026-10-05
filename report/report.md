@@ -265,24 +265,24 @@ Precision, recall, the other F1 scores, bootstrap intervals, examples per second
 
 I trained an unpaired CycleGAN. The Kaggle direction is photo to Monet. The generators are mine. I did not use a pretrained model to make the images. Inception and the other nets in the eval script are only for measuring.
 
-Each generator is a ResNet with 9 blocks at 256×256, 32 base filters, reflection padding, instance norm, and a tanh output. Upsampling is nearest-neighbor times two, then a stride-1 convolution, not a transposed convolution. Each discriminator is a PatchGAN trained with least-squares loss, and every image it sees, real or fake, goes through DiffAugment (colour, translation, cutout). The losses are adversarial, cycle L1 with λ = 10, and identity with weight 5. Real labels are smoothed to 0.9. An image pool of 50 feeds the discriminator. Batch size is 4. I trained 50 epochs at a constant learning rate and 50 more with linear decay. Each epoch is 800 steps and resamples 3,200 photos. The shorter Monet loader is cycled so those photos actually get used. `pred_B2A` is photo→Monet (7,038 images). `pred_A2B` is Monet→photo (300 images). Those are the professor folder names.
+Each generator is a ResNet with 9 blocks at 256×256, 64 base filters, reflection padding, instance norm, and a tanh output. Upsampling is nearest-neighbor times two, then a stride-1 convolution, not a transposed convolution. Each discriminator is a PatchGAN trained with least-squares loss, and every image it sees, real or fake, goes through DiffAugment (colour, translation, cutout). The losses are adversarial, cycle L1 with λ = 10, and identity with weight 5. The generators also keep an EMA copy (decay 0.999). Real labels are smoothed to 0.9. An image pool of 50 feeds the discriminator. Batch size is 4. I trained 50 epochs at a constant learning rate and 50 more with linear decay. Each epoch is 800 steps and resamples 3,200 photos. The shorter Monet loader is cycled so those photos actually get used. `pred_B2A` is photo→Monet (7,038 images). `pred_A2B` is Monet→photo (300 images). Those are the professor folder names.
 
-Training was on a Colab NVIDIA L4 with mixed precision. It took 19,483 s (about 5.4 hours) and peaked near 3,361 MB, with 11.2M parameters. I scored the last 15 epochs with the professor method (`checkpoint_scores_epochs86_100.csv`); epoch 93 scored best and is `checkpoints/best.pt` (43 MB, in git). For Monet→photo the output is averaged over 6 views of the input (original, horizontal flip, four 4-pixel shifts); photo→Monet is a single pass. `make_submission.py` rebuilds both folders from `best.pt`.
+Epochs 1–84 ran on a Colab NVIDIA A100 and epochs 85–100 were resumed on an NVIDIA RTX 4060 Laptop GPU, with mixed precision. It took 19,836 s (about 5.5 hours) and peaked near 6,855 MB, with 28.3M parameters. I scored epochs 76–100, raw and EMA weights, with the professor method (`checkpoint_scores_epochs76_100.csv`); epoch 91 (raw weights) scored best and is `checkpoints/best.pt` (87 MB, generators only, in git). For Monet→photo the output is averaged over 6 views of the input (original, horizontal flip, four 4-pixel shifts); photo→Monet is a single pass. `make_submission.py` rebuilds both folders from `best.pt`.
 
 The Monet and photo folders are in one Drive folder: [https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link](https://drive.google.com/drive/folders/1BXYfhW8uZ6umK1TZFW8Un62mZVK72L7Y?usp=share_link)
 
-| Direction | FID | KID | MiFID | LPIPS | Content cosine | Cycle L1 |
-|---|---|---|---|---|---|---|
-| Photo → Monet (`pred_B2A`) | 98.29 | 0.012 | 0.406 | 0.396 | 0.595 | 0.083 |
-| Monet → photo (`pred_A2B`) | 101.39 | 0.019 | 0.418 | 0.360 | 0.636 | 0.083 |
+| Direction | FID | MiFID |
+|---|---|---|
+| Photo → Monet (`pred_B2A`) | 95.78 | 0.406 |
+| Monet → photo (`pred_A2B`) | 94.83 | 0.412 |
 
-FID is the Fréchet distance between Inception features of the generated images and the real target images. MiFID is the average cosine distance of those features on the first 300 sorted images, which is the professor script. Lower is better on both. FID and MiFID were computed on Colab (L4) with the unchanged professor script. `submission.csv` is the average of both directions: FID 99.84, MiFID 0.412, score 50.13.
+FID is the Fréchet distance between Inception features of the generated images and the real target images. MiFID is the average cosine distance of those features on the first 300 sorted images, which is the professor script. Lower is better on both. FID and MiFID were computed on GPU with the unchanged professor script. `submission.csv` is the average of both directions: FID 95.30, MiFID 0.409, score 47.857.
 
-Epochs 86–100 scored between 51.1 and 52.1 with single-pass inference, so the model had plateaued. View averaging lowered Monet→photo FID from 105.2 to 101.4 but raised photo→Monet FID, so only Monet→photo uses it. Fine-tuning from epoch 93 with a generator EMA reached 50.77, so the submission stays on epoch 93.
+Epochs 85–100 scored between 47.8 and 49.4, so the model had plateaued. View averaging lowered Monet→photo FID from 96.5 to 94.8; for photo→Monet it did not help, so only Monet→photo uses it. My earlier 32-filter run without EMA scored 50.13.
 
-Losses fell across the 100 epochs. The discriminator loss stayed near 0.3 for the first 40 epochs and fell to about 0.11 by epoch 93, which is low. The generator is not winning that fight, and I think that is why the brush texture gets noisy.
+Losses fell across the 100 epochs. The discriminator loss stayed near 0.3 for the first 40 epochs, jumped to 0.65 at epoch 50, and fell to about 0.22 by epoch 91. The generator is not winning that fight, and I think that is why the brush texture gets noisy.
 
-![CycleGAN losses and gradient norm](../task3_gan/sneha_singh/outputs/loss_curves/losses.png)
+![CycleGAN losses](../task3_gan/sneha_singh/outputs/loss_curves/losses.png)
 
 The grid is four photos, the Monet version of each, four real Monets, and the photo version of those.
 
@@ -297,7 +297,7 @@ What I saw in my audit of an earlier run of the same CycleGAN, and in this grid:
 - **Soft reverse.** A few Monet-to-photo frames go soft or pick up a dark blob.
 - **Content.** The layout of the photo usually survives. I did not mark any of my 30 as a copied training Monet.
 
-On the 0–2 sheet my averages were style 1.40 and content 1.67, where higher is better, and artifacts 1.43, where higher is worse. The audit was rated on images from an earlier checkpoint of this CycleGAN (80-epoch run, same 30 indices) and was not repeated for the final epoch-93 checkpoint.
+On the 0–2 sheet my averages were style 1.40 and content 1.67, where higher is better, and artifacts 1.43, where higher is worse. The audit was rated on images from an earlier checkpoint of this CycleGAN (80-epoch run, same 30 indices) and was not repeated for the final epoch-91 checkpoint.
 
 Full notes: [task3_gan/sneha_singh/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task3_gan/sneha_singh/failure_analysis.md)
 
@@ -336,22 +336,22 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | | Sneha photo → Monet | Sneha Monet → photo | Ritika photo → Monet | Ritika Monet → photo |
 |---|---|---|---|---|
 | Epochs / batch | 50 + 50, batch 4 | same run | 50 + 75, batch 4 | same run |
-| FID | 98.29 | 101.39 | 93.89 | 97.32 |
-| KID | 0.012 | 0.019 | 0.005 | 0.015 |
-| Precision | 0.679 | 0.747 | 0.477 | 0.713 |
-| Recall | 0.120 | 0.078 | 0.637 | 0.383 |
-| Cycle L1 | 0.083 | 0.083 | 0.069 | 0.064 |
-| LPIPS | 0.396 | 0.360 | 0.142 | 0.194 |
-| Content cosine | 0.595 | 0.636 | 0.829 | 0.730 |
-| Params | 11.2M | same run | 28.3M | same run |
-| Time / images per sec | 19,483 s / 32.9 | same run | 16,310 s / 24.5 | same run |
-| Peak memory | 3,361 MB | same run | 17,368 MB | same run |
+| FID | 95.78 | 94.83 | 93.89 | 97.32 |
+| KID | – | – | 0.005 | 0.015 |
+| Precision | – | – | 0.477 | 0.713 |
+| Recall | – | – | 0.637 | 0.383 |
+| Cycle L1 | – | – | 0.069 | 0.064 |
+| LPIPS | – | – | 0.142 | 0.194 |
+| Content cosine | – | – | 0.829 | 0.730 |
+| Params | 28.3M | same run | 28.3M | same run |
+| Time / images per sec | 19,836 s / 16.1 | same run | 16,310 s / 24.5 | same run |
+| Peak memory | 6,855 MB | same run | 17,368 MB | same run |
 | NaN count | 0 | same run | 0 | same run |
-| Generator loss | 3.960 | same run | 2.946 | same run |
-| Discriminator loss | 0.112 | same run | 0.263 | same run |
-| Cycle loss | 1.645 | same run | 1.342 | same run |
-| Identity loss (weighted) | 0.739 | same run | 0.549 | same run |
-| Gradient norm | 122.13 | same run | 32.18 mean, 469.9 max | same run |
+| Generator loss | 3.191 | same run | 2.946 | same run |
+| Discriminator loss | 0.224 | same run | 0.263 | same run |
+| Cycle loss | 1.420 | same run | 1.342 | same run |
+| Identity loss (weighted) | 0.589 | same run | 0.549 | same run |
+| Gradient norm | – | same run | 32.18 mean, 469.9 max | same run |
 
 **Human audit score** on the 30 photo → Monet images. Style and content are 0–2, higher is better. Artifacts are 0–2, higher is worse. Cohen’s kappa is the inter-rater agreement for both of us on the same 30 images.
 
@@ -372,13 +372,13 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 
 <div class="joint">
 
-**Strength.** Sneha’s photo-to-Monet FID is 98.29. Ritika’s is 93.89. With the TA script, Sneha’s `submission.csv` scores 50.13 and Ritika’s 48.00.
+**Strength.** Sneha’s photo-to-Monet FID is 95.78. Ritika’s is 93.89. With the TA script, Sneha’s `submission.csv` scores 47.86 and Ritika’s 48.00.
 
-**Weakness.** Sneha’s discriminator loss ended low at 0.11, Ritika’s at 0.26. On Sneha’s images the brush texture is grainy; Ritika’s flat skies turn streaky.
+**Weakness.** Sneha’s discriminator loss ended at 0.22, Ritika’s at 0.26. On Sneha’s images the brush texture is grainy; Ritika’s flat skies turn streaky.
 
-**Limitation.** Generator width (32 vs 64 filters), schedule and training time differ, and the tools behind KID, precision/recall and LPIPS differ between our two metric scripts, so only the TA-script FID/MiFID numbers are directly comparable.
+**Limitation.** Schedule, hardware and training time differ, and the tools behind KID, precision/recall and LPIPS differ between our two metric scripts, so only the TA-script FID/MiFID numbers are directly comparable.
 
-**Next.** Sneha’s last 15 epochs scored within one point of each other, and fine-tuning with a generator EMA did not beat epoch 93, so a lower score needs a different training setup rather than more epochs. The class upload is epoch 93: `submission.csv` with the average FID and MiFID of both directions.
+**Next.** Sneha’s epochs 85–100 scored within two points of each other, so a lower score needs a different training setup rather than more epochs. The class upload is Sneha’s epoch 91: `submission.csv` with the average FID and MiFID of both directions.
 
 </div>
 
@@ -391,19 +391,19 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | 1 — validation loss | 4 layers, emb 256, context 128. 0.857 | 4 layers, emb 128, context 256. 0.778 |
 | 1 — distinct-1 | 4 layers, emb 256, context 128. 0.225 | 4 layers, emb 128, context 256. 0.008 |
 | 2 — best model | BiLSTM (lemmatize), 550k train, 38k test. Macro-F1 0.942 | BiLSTM (Porter stem), full set. Macro-F1 0.934 |
-| 3 — photo → Monet FID | Batch 4, about 5.4 h. 98.29 (submission average FID 99.84) | Batch 4, about 4.5 h. 93.89 (submission average FID 95.60) |
+| 3 — photo → Monet FID | Batch 4, about 5.5 h. 95.78 (submission average FID 95.30) | Batch 4, about 4.5 h. 93.89 (submission average FID 95.60) |
 
 ---
 
 # Kaggle score
 
-Team `PairProgramming_Team_05`. Score is (FID + MiFID) / 2, each averaged over both directions, computed with the course evaluation script. Final `submission.csv`: FID 99.84, MiFID 0.412.
+Team `PairProgramming_Team_05`. Score is (FID + MiFID) / 2, each averaged over both directions, computed with the course evaluation script. Final `submission.csv`: FID 95.30, MiFID 0.409.
 
 | Team | Final submission score | Leaderboard rank |
 |---|---|---|
-| PairProgramming_Team_05 | 50.1253 | 9 |
+| PairProgramming_Team_05 | 47.857 | 9 |
 
-The leaderboard lists each team's best entry. Our rank 9 comes from an earlier upload (−45.1953) made before we switched to the course evaluation script. The final submission, selected for the final score, is 50.1253.
+The leaderboard lists each team's best entry. Our rank 9 comes from an earlier upload (−45.1953) made before we switched to the course evaluation script. The final submission, selected for the final score, is 47.857 (an earlier course-script upload scored 50.1253).
 
 <div class="cite">
 

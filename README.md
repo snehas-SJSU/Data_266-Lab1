@@ -76,7 +76,7 @@ Part 3 trains on a CUDA GPU. Parts 1 and 2 also run on CPU or Apple MPS, only sl
 | 1 | Ritika | `task1_llm/ritika_mukesh_neema/checkpoints/ckpt_final.pt` (12 epochs) | Val CE 0.778, perplexity 2.18 |
 | 2 | Sneha | `task2_sentiment/sneha_singh/checkpoints/baseline_full.pt`, `experimental_a_full.pt` (BiLSTM), `experimental_b_full.pt` (TextCNN) | Best: BiLSTM, macro-F1 0.942 |
 | 2 | Ritika | `task2_sentiment/ritika_mukesh_neema/checkpoints/baseline.pt`, `bilstm.pt`, `textcnn.pt` | Best: BiLSTM, macro-F1 0.934 |
-| 3 | Sneha | `task3_gan/sneha_singh/checkpoints/best.pt` (epoch 93) | `submission.csv`: FID 99.84, MiFID 0.412 (score 50.13) |
+| 3 | Sneha | `task3_gan/sneha_singh/checkpoints/best.pt` (epoch 91) | `submission.csv`: FID 95.30, MiFID 0.409 (score 47.857) |
 | 3 | Ritika | `task3_gan/ritika_mukesh_neema/checkpoints/best.pt` (Drive, epoch 110 of 125) | `submission.csv`: FID 95.60, MiFID 0.405 (score 48.00, TA script) |
 
 ---
@@ -186,15 +186,15 @@ jupyter nbconvert --to notebook --execute --inplace \
 
 ### Sneha Singh — `task3_gan/sneha_singh/`
 
-- `src/part3_cyclegan.ipynb` (Colab run with outputs), `src/config.json`, `make_submission.py`, `evaluate_local.py`, `score_checkpoints.py`, `finetune_ema.py` (fine-tune experiment, not submitted), `audit_agreement.py`
+- `src/part3_cyclegan.ipynb` (training cells + evaluation with outputs), `src/train_full_colab_epochs1-84.py`, `src/train_full_resume_epochs85-100.py`, `src/config.json`, `make_submission.py`, `evaluate_local.py`, `score_checkpoints.py`, `build_submission.py`, `ta_score.py`, `audit_agreement.py`
 - `submission.csv` (FID + MiFID for Kaggle)
 - `full_metrics_report.csv`, `metrics_report.csv` (long format: final metrics, human audit, per-epoch losses, scored checkpoints), `results.md`, `failure_analysis.md`
-- Sample grid + loss curves; checkpoint scores `outputs/checkpoint_scores_epochs86_100.csv`; 30-image audit under `outputs/human_audit/`
-- `checkpoints/best.pt` (43 MB, in git): epoch 93
+- Sample grid + loss curves; checkpoint scores `outputs/checkpoint_scores_epochs76_100.csv`; 30-image audit under `outputs/human_audit/`
+- `checkpoints/best.pt` (87 MB, in git): epoch 91 generators
 
 **How to run**
 
-- Train: CUDA GPU, `"smoke": false`, AMP (100 epochs, ~5.4 h on a Colab L4, peak ~3361 MB).
+- Train: CUDA GPU, `"smoke": false`, AMP (100 epochs, ~5.5 h: epochs 1–84 on a Colab A100, 85–100 resumed on an RTX 4060 Laptop GPU; peak ~6855 MB).
 - Submission from `best.pt`, then metrics:
 
 ```bash
@@ -207,12 +207,12 @@ python task3_gan/sneha_singh/evaluate_local.py
 | Item | Value |
 |---|---|
 | Upload file | `task3_gan/sneha_singh/submission.csv` |
-| FID / MiFID | 99.84 / 0.412 (average of both directions, professor script on Colab L4) |
-| Score | 50.13 |
-| Kaggle score (final submission) | 50.1253 |
+| FID / MiFID | 95.30 / 0.409 (average of both directions, professor script on GPU) |
+| Score | 47.857 |
+| Kaggle score (final submission) | 47.857 (earlier upload 50.1253) |
 | Leaderboard rank | 9 (the public board lists the team's best entry, −45.1953, from an earlier upload made before switching to the course evaluation script) |
 
-**Status:** `best.pt` is epoch 93 of the 100-epoch run, selected by professor-script score among epochs 86–100. Professor eval is in `submission.csv` (FID 99.84, MiFID 0.412). A2B Monet→photo FID 101.39 (6-view averaging). B2A photo→Monet FID 98.29.
+**Status:** `best.pt` is epoch 91 (raw weights) of the 100-epoch 64-filter run, selected by professor-script score among epochs 76–100. Professor eval is in `submission.csv` (FID 95.30, MiFID 0.409). A2B Monet→photo FID 94.83 (6-view averaging). B2A photo→Monet FID 95.78.
 
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 

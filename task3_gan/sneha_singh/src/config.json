@@ -16,7 +16,7 @@
   "photos_per_epoch_smoke": 8,
   "photos_per_epoch_full": 3200,
   "n_res_blocks": 9,
-  "ngf": 32,
+  "ngf": 64,
   "ndf": 64,
   "learning_rate": 0.0002,
   "d_learning_rate": 0.0002,
@@ -27,11 +27,12 @@
   "use_amp": true,
   "pool_size": 50,
   "label_smoothing": 0.9,
-  "num_workers": 0,
+  "num_workers": 6,
   "save_every": 1,
   "n_sample_grid": 4,
   "n_submit_smoke": 16,
   "n_submit_full": 7038,
-  "notes": "Submitted run: generator 9 residual blocks with 32 base filters, DiffAugment (color, translation, cutout) on both discriminators, identity weight 5 (lambda_identity 0.5 x lambda_cycle 10), 100 epochs x 800 steps (50 constant + 50 linear decay), batch 4, AMP, nearest upsampling, Colab NVIDIA L4. Submitted checkpoint: epoch 93 (checkpoints/best.pt).",
-  "diffaugment": "color,translation,cutout"
+  "notes": "Submitted run: generator 9 residual blocks with 64 base filters, DiffAugment (color, translation, cutout) on both discriminators, identity weight 5 (lambda_identity 0.5 x lambda_cycle 10), EMA copies of the generators (decay 0.999) scored alongside the raw weights, 100 epochs x 800 steps (50 constant + 50 linear decay), batch 4, AMP, nearest upsampling, seed 670. Epochs 1-84 on Colab NVIDIA A100, 85-100 resumed on an NVIDIA RTX 4060 Laptop GPU. Submitted checkpoint: epoch 91, raw weights.",
+  "diffaugment": "color,translation,cutout",
+  "ema_decay": 0.999
 }

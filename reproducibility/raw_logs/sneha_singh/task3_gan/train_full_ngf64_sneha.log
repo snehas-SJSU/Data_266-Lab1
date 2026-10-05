@@ -1,0 +1,228 @@
+START {'name': 'ngf64', 'ngf': 64, 'epochs_const': 50, 'epochs_decay': 50, 'steps': 800, 'photos_per_epoch': 3200, 'lr': 0.0002, 'lr_d': 0.0002, 'lambda_cycle': 10.0, 'lambda_identity': 0.5, 'smooth': 0.9, 'ema': 0.999, 'score_last': 25, 'workers': 6, 'seed': 670, 'max_temp': 95, 'resume_temp': 74, 'repo': '/content/Data_266-Lab1', 'out': '/content/drive/MyDrive/part3_full', 'smoke': False} | device cuda | params 28,273,544
+epoch 1/100 g=8.109 d=0.396 cycle=5.003 id=2.289 nan=0 lr=2.00e-04 epoch_min=2.2 train_h=0.04
+epoch 2/100 g=6.811 d=0.334 cycle=4.037 id=1.877 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.07
+epoch 3/100 g=6.278 d=0.332 cycle=3.641 id=1.717 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.11
+epoch 4/100 g=6.025 d=0.329 cycle=3.470 id=1.625 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.14
+epoch 5/100 g=5.762 d=0.323 cycle=3.271 id=1.550 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.18
+epoch 6/100 g=5.538 d=0.324 cycle=3.118 id=1.480 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.21
+epoch 7/100 g=5.547 d=0.307 cycle=3.101 id=1.473 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.25
+epoch 8/100 g=5.355 d=0.311 cycle=2.969 id=1.419 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.28
+epoch 9/100 g=5.269 d=0.309 cycle=2.903 id=1.396 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.32
+epoch 10/100 g=5.136 d=0.306 cycle=2.810 id=1.359 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.35
+epoch 11/100 g=5.054 d=0.307 cycle=2.754 id=1.335 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.39
+epoch 12/100 g=4.954 d=0.304 cycle=2.676 id=1.302 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.42
+epoch 13/100 g=4.932 d=0.303 cycle=2.659 id=1.292 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.45
+epoch 14/100 g=4.863 d=0.303 cycle=2.607 id=1.268 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.49
+epoch 15/100 g=4.802 d=0.300 cycle=2.562 id=1.247 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.52
+epoch 16/100 g=4.749 d=0.292 cycle=2.509 id=1.225 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.56
+epoch 17/100 g=4.741 d=0.294 cycle=2.510 id=1.220 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.59
+epoch 18/100 g=4.652 d=0.293 cycle=2.448 id=1.192 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.63
+epoch 19/100 g=4.669 d=0.287 cycle=2.457 id=1.192 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.66
+epoch 20/100 g=4.622 d=0.287 cycle=2.416 id=1.175 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.70
+epoch 21/100 g=4.552 d=0.290 cycle=2.368 id=1.147 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.73
+epoch 22/100 g=4.512 d=0.288 cycle=2.344 id=1.137 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.77
+epoch 23/100 g=4.388 d=0.293 cycle=2.281 id=1.102 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.80
+epoch 24/100 g=4.352 d=0.297 cycle=2.267 id=1.095 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.84
+epoch 25/100 g=4.363 d=0.289 cycle=2.265 id=1.088 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.87
+epoch 26/100 g=4.273 d=0.295 cycle=2.214 id=1.056 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.91
+epoch 27/100 g=4.324 d=0.295 cycle=2.239 id=1.071 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.94
+epoch 28/100 g=4.255 d=0.294 cycle=2.196 id=1.050 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=0.98
+epoch 29/100 g=4.219 d=0.291 cycle=2.175 id=1.031 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.01
+epoch 30/100 g=4.194 d=0.290 cycle=2.164 id=1.027 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.05
+epoch 31/100 g=4.171 d=0.290 cycle=2.147 id=1.014 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.08
+epoch 32/100 g=4.182 d=0.289 cycle=2.146 id=1.008 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.12
+epoch 33/100 g=4.132 d=0.292 cycle=2.126 id=0.996 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.15
+epoch 34/100 g=4.099 d=0.285 cycle=2.090 id=0.976 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.19
+epoch 35/100 g=4.068 d=0.283 cycle=2.076 id=0.964 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.22
+epoch 36/100 g=4.097 d=0.279 cycle=2.083 id=0.967 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.26
+epoch 37/100 g=4.174 d=0.272 cycle=2.117 id=0.983 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.29
+epoch 38/100 g=4.076 d=0.273 cycle=2.045 id=0.955 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.33
+epoch 39/100 g=4.089 d=0.265 cycle=2.044 id=0.947 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.36
+epoch 40/100 g=4.089 d=0.258 cycle=2.035 id=0.944 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.40
+epoch 41/100 g=4.018 d=0.260 cycle=1.999 id=0.918 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.43
+epoch 42/100 g=4.000 d=0.260 cycle=1.985 id=0.910 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.47
+epoch 43/100 g=4.026 d=0.258 cycle=1.990 id=0.912 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.50
+epoch 44/100 g=4.077 d=0.251 cycle=2.006 id=0.915 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.54
+epoch 45/100 g=3.994 d=0.259 cycle=1.969 id=0.899 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.57
+epoch 46/100 g=3.985 d=0.256 cycle=1.983 id=0.897 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.61
+epoch 47/100 g=3.938 d=0.258 cycle=1.943 id=0.886 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.64
+epoch 48/100 g=4.053 d=0.245 cycle=1.986 id=0.903 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.68
+epoch 49/100 g=3.996 d=0.248 cycle=1.954 id=0.885 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.71
+epoch 50/100 g=4.223 d=0.647 cycle=1.976 id=0.888 nan=0 lr=2.00e-04 epoch_min=2.1 train_h=1.75
+epoch 51/100 g=3.514 d=0.352 cycle=1.857 id=0.841 nan=0 lr=1.96e-04 epoch_min=2.1 train_h=1.78
+epoch 52/100 g=3.458 d=0.349 cycle=1.816 id=0.823 nan=0 lr=1.92e-04 epoch_min=2.1 train_h=1.82
+epoch 53/100 g=3.447 d=0.349 cycle=1.806 id=0.815 nan=0 lr=1.88e-04 epoch_min=2.1 train_h=1.85
+epoch 54/100 g=3.476 d=0.341 cycle=1.806 id=0.816 nan=0 lr=1.84e-04 epoch_min=2.1 train_h=1.89
+epoch 55/100 g=3.474 d=0.315 cycle=1.777 id=0.802 nan=0 lr=1.80e-04 epoch_min=2.1 train_h=1.92
+epoch 56/100 g=3.578 d=0.270 cycle=1.778 id=0.792 nan=0 lr=1.76e-04 epoch_min=2.1 train_h=1.96
+epoch 57/100 g=3.687 d=0.261 cycle=1.806 id=0.806 nan=0 lr=1.72e-04 epoch_min=2.1 train_h=1.99
+epoch 58/100 g=3.623 d=0.266 cycle=1.766 id=0.785 nan=0 lr=1.68e-04 epoch_min=2.1 train_h=2.03
+epoch 59/100 g=3.684 d=0.261 cycle=1.785 id=0.795 nan=0 lr=1.64e-04 epoch_min=2.1 train_h=2.06
+epoch 60/100 g=3.707 d=0.257 cycle=1.801 id=0.798 nan=0 lr=1.60e-04 epoch_min=2.1 train_h=2.10
+epoch 61/100 g=3.556 d=0.262 cycle=1.722 id=0.763 nan=0 lr=1.56e-04 epoch_min=2.1 train_h=2.13
+epoch 62/100 g=3.565 d=0.260 cycle=1.720 id=0.758 nan=0 lr=1.52e-04 epoch_min=2.1 train_h=2.17
+epoch 63/100 g=3.586 d=0.255 cycle=1.726 id=0.762 nan=0 lr=1.48e-04 epoch_min=2.1 train_h=2.20
+epoch 64/100 g=3.573 d=0.259 cycle=1.716 id=0.750 nan=0 lr=1.44e-04 epoch_min=2.1 train_h=2.24
+epoch 65/100 g=3.537 d=0.258 cycle=1.699 id=0.741 nan=0 lr=1.40e-04 epoch_min=2.1 train_h=2.27
+epoch 66/100 g=3.510 d=0.260 cycle=1.689 id=0.739 nan=0 lr=1.36e-04 epoch_min=2.1 train_h=2.31
+epoch 67/100 g=3.450 d=0.260 cycle=1.653 id=0.717 nan=0 lr=1.32e-04 epoch_min=2.1 train_h=2.34
+epoch 68/100 g=3.472 d=0.261 cycle=1.660 id=0.718 nan=0 lr=1.28e-04 epoch_min=2.1 train_h=2.38
+epoch 69/100 g=3.433 d=0.256 cycle=1.641 id=0.709 nan=0 lr=1.24e-04 epoch_min=2.1 train_h=2.41
+epoch 70/100 g=3.438 d=0.254 cycle=1.638 id=0.704 nan=0 lr=1.20e-04 epoch_min=2.1 train_h=2.45
+epoch 71/100 g=3.468 d=0.252 cycle=1.640 id=0.707 nan=0 lr=1.16e-04 epoch_min=2.1 train_h=2.48
+epoch 72/100 g=3.417 d=0.253 cycle=1.613 id=0.693 nan=0 lr=1.12e-04 epoch_min=2.1 train_h=2.52
+epoch 73/100 g=3.439 d=0.251 cycle=1.619 id=0.693 nan=0 lr=1.08e-04 epoch_min=2.1 train_h=2.55
+epoch 74/100 g=3.400 d=0.247 cycle=1.589 id=0.682 nan=0 lr=1.04e-04 epoch_min=2.1 train_h=2.59
+epoch 75/100 g=3.373 d=0.248 cycle=1.581 id=0.678 nan=0 lr=1.00e-04 epoch_min=2.1 train_h=2.62
+epoch 76/100 g=3.361 d=0.244 cycle=1.566 id=0.671 nan=0 lr=9.60e-05 epoch_min=2.1 train_h=2.66
+SCORE {'epoch': 76, 'weights': 'raw', 'g': 3.361, 'd': 0.244, 'fid_b2a': 101.714, 'fid_a2b': 100.133, 'mifid': 0.412, 'score': 50.6679}
+  -> new best 50.6679 (epoch 76, raw weights), saved /content/drive/MyDrive/part3_full/ngf64/best.pt
+SCORE {'epoch': 76, 'weights': 'ema', 'g': 3.361, 'd': 0.244, 'fid_b2a': 98.838, 'fid_a2b': 97.773, 'mifid': 0.4126, 'score': 49.3588}
+  -> new best 49.3588 (epoch 76, ema weights), saved /content/drive/MyDrive/part3_full/ngf64/best.pt
+epoch 77/100 g=3.336 d=0.243 cycle=1.550 id=0.661 nan=0 lr=9.20e-05 epoch_min=2.1 train_h=2.69
+SCORE {'epoch': 77, 'weights': 'raw', 'g': 3.336, 'd': 0.243, 'fid_b2a': 99.297, 'fid_a2b': 99.022, 'mifid': 0.4135, 'score': 49.7864}
+SCORE {'epoch': 77, 'weights': 'ema', 'g': 3.336, 'd': 0.243, 'fid_b2a': 98.272, 'fid_a2b': 98.076, 'mifid': 0.4125, 'score': 49.2933}
+  -> new best 49.2933 (epoch 77, ema weights), saved /content/drive/MyDrive/part3_full/ngf64/best.pt
+epoch 78/100 g=3.357 d=0.240 cycle=1.556 id=0.662 nan=0 lr=8.80e-05 epoch_min=2.1 train_h=2.73
+SCORE {'epoch': 78, 'weights': 'raw', 'g': 3.357, 'd': 0.24, 'fid_b2a': 98.306, 'fid_a2b': 98.201, 'mifid': 0.412, 'score': 49.3326}
+SCORE {'epoch': 78, 'weights': 'ema', 'g': 3.357, 'd': 0.24, 'fid_b2a': 98.357, 'fid_a2b': 97.511, 'mifid': 0.4127, 'score': 49.1733}
+  -> new best 49.1733 (epoch 78, ema weights), saved /content/drive/MyDrive/part3_full/ngf64/best.pt
+epoch 79/100 g=3.327 d=0.240 cycle=1.538 id=0.658 nan=0 lr=8.40e-05 epoch_min=2.1 train_h=2.76
+SCORE {'epoch': 79, 'weights': 'raw', 'g': 3.327, 'd': 0.24, 'fid_b2a': 99.098, 'fid_a2b': 99.515, 'mifid': 0.4114, 'score': 49.8588}
+SCORE {'epoch': 79, 'weights': 'ema', 'g': 3.327, 'd': 0.24, 'fid_b2a': 98.367, 'fid_a2b': 97.552, 'mifid': 0.4123, 'score': 49.1858}
+epoch 80/100 g=3.302 d=0.240 cycle=1.518 id=0.643 nan=0 lr=8.00e-05 epoch_min=2.1 train_h=2.80
+SCORE {'epoch': 80, 'weights': 'raw', 'g': 3.302, 'd': 0.24, 'fid_b2a': 100.819, 'fid_a2b': 97.402, 'mifid': 0.412, 'score': 49.7611}
+SCORE {'epoch': 80, 'weights': 'ema', 'g': 3.302, 'd': 0.24, 'fid_b2a': 98.261, 'fid_a2b': 97.316, 'mifid': 0.413, 'score': 49.1009}
+  -> new best 49.1009 (epoch 80, ema weights), saved /content/drive/MyDrive/part3_full/ngf64/best.pt
+epoch 81/100 g=3.325 d=0.236 cycle=1.526 id=0.645 nan=0 lr=7.60e-05 epoch_min=2.1 train_h=2.83
+SCORE {'epoch': 81, 'weights': 'raw', 'g': 3.325, 'd': 0.236, 'fid_b2a': 96.854, 'fid_a2b': 99.582, 'mifid': 0.4124, 'score': 49.3153}
+SCORE {'epoch': 81, 'weights': 'ema', 'g': 3.325, 'd': 0.236, 'fid_b2a': 97.478, 'fid_a2b': 97.659, 'mifid': 0.4124, 'score': 48.9906}
+  -> new best 48.9906 (epoch 81, ema weights), saved /content/drive/MyDrive/part3_full/ngf64/best.pt
+epoch 82/100 g=3.295 d=0.235 cycle=1.505 id=0.636 nan=0 lr=7.20e-05 epoch_min=2.1 train_h=2.87
+SCORE {'epoch': 82, 'weights': 'raw', 'g': 3.295, 'd': 0.235, 'fid_b2a': 98.845, 'fid_a2b': 99.716, 'mifid': 0.4143, 'score': 49.8475}
+SCORE {'epoch': 82, 'weights': 'ema', 'g': 3.295, 'd': 0.235, 'fid_b2a': 97.918, 'fid_a2b': 97.418, 'mifid': 0.4129, 'score': 49.0404}
+epoch 83/100 g=3.285 d=0.235 cycle=1.496 id=0.635 nan=0 lr=6.80e-05 epoch_min=2.1 train_h=2.90
+SCORE {'epoch': 83, 'weights': 'raw', 'g': 3.285, 'd': 0.235, 'fid_b2a': 99.253, 'fid_a2b': 97.423, 'mifid': 0.4116, 'score': 49.375}
+SCORE {'epoch': 83, 'weights': 'ema', 'g': 3.285, 'd': 0.235, 'fid_b2a': 98.489, 'fid_a2b': 97.454, 'mifid': 0.4125, 'score': 49.1922}
+epoch 84/100 g=3.302 d=0.233 cycle=1.508 id=0.631 nan=0 lr=6.40e-05 epoch_min=2.1 train_h=2.94
+SCORE {'epoch': 84, 'weights': 'raw', 'g': 3.302, 'd': 0.233, 'fid_b2a': 100.053, 'fid_a2b': 97.698, 'mifid': 0.4116, 'score': 49.6437}
+SCORE {'epoch': 84, 'weights': 'ema', 'g': 3.302, 'd': 0.233, 'fid_b2a': 98.367, 'fid_a2b': 97.424, 'mifid': 0.4121, 'score': 49.1538}
+epoch 85/100 g=3.294 d=0.229 cycle=1.492 id=0.628 nan=0 lr=6.00e-05 epoch_min=2.1 train_h=2.97
+RESUMING after epoch 84 | lr 6.40e-05
+epoch 85/100 g=3.272 d=0.230 cycle=1.482 id=0.624 nan=0 lr=6.00e-05 epoch_min=9.6 train_h=3.10
+SCORE {'epoch': 85, 'weights': 'raw', 'g': 3.272, 'd': 0.23, 'fid_b2a': 95.325, 'fid_a2b': 97.174, 'mifid_b2a': 0.4077, 'mifid_a2b': 0.4159, 'mifid': 0.4118, 'score': 48.3306}
+  -> combo: photo->Monet from epoch 85 raw (FID 95.325) + Monet->photo from epoch 85 raw (FID 97.174) = 48.3307
+  -> new best 48.3306 (epoch 85, raw weights), saved C:\Sneha_cuda\runs_full\ngf64\best.pt
+SCORE {'epoch': 85, 'weights': 'ema', 'g': 3.272, 'd': 0.23, 'fid_b2a': 97.552, 'fid_a2b': 97.691, 'mifid_b2a': 0.4081, 'mifid_a2b': 0.4158, 'mifid': 0.412, 'score': 49.0168}
+epoch 86/100 g=3.229 d=0.232 cycle=1.463 id=0.612 nan=0 lr=5.60e-05 epoch_min=9.5 train_h=3.26
+SCORE {'epoch': 86, 'weights': 'raw', 'g': 3.229, 'd': 0.232, 'fid_b2a': 98.141, 'fid_a2b': 98.621, 'mifid_b2a': 0.4092, 'mifid_a2b': 0.4163, 'mifid': 0.4128, 'score': 49.397}
+SCORE {'epoch': 86, 'weights': 'ema', 'g': 3.229, 'd': 0.232, 'fid_b2a': 96.896, 'fid_a2b': 97.01, 'mifid_b2a': 0.4073, 'mifid_a2b': 0.4152, 'mifid': 0.4113, 'score': 48.6821}
+  -> combo: photo->Monet from epoch 85 raw (FID 95.325) + Monet->photo from epoch 86 ema (FID 97.010) = 48.2895
+epoch 87/100 g=3.248 d=0.230 cycle=1.463 id=0.611 nan=0 lr=5.20e-05 epoch_min=9.5 train_h=3.42
+SCORE {'epoch': 87, 'weights': 'raw', 'g': 3.248, 'd': 0.23, 'fid_b2a': 97.408, 'fid_a2b': 96.749, 'mifid_b2a': 0.4067, 'mifid_a2b': 0.415, 'mifid': 0.4108, 'score': 48.7446}
+  -> combo: photo->Monet from epoch 85 raw (FID 95.325) + Monet->photo from epoch 87 raw (FID 96.749) = 48.2242
+SCORE {'epoch': 87, 'weights': 'ema', 'g': 3.248, 'd': 0.23, 'fid_b2a': 97.277, 'fid_a2b': 97.427, 'mifid_b2a': 0.4078, 'mifid_a2b': 0.4157, 'mifid': 0.4118, 'score': 48.8817}
+epoch 88/100 g=3.244 d=0.224 cycle=1.451 id=0.609 nan=0 lr=4.80e-05 epoch_min=9.5 train_h=3.57
+SCORE {'epoch': 88, 'weights': 'raw', 'g': 3.244, 'd': 0.224, 'fid_b2a': 95.896, 'fid_a2b': 96.982, 'mifid_b2a': 0.4079, 'mifid_a2b': 0.4165, 'mifid': 0.4122, 'score': 48.4255}
+SCORE {'epoch': 88, 'weights': 'ema', 'g': 3.244, 'd': 0.224, 'fid_b2a': 97.182, 'fid_a2b': 97.021, 'mifid_b2a': 0.4081, 'mifid_a2b': 0.4157, 'mifid': 0.4119, 'score': 48.7567}
+epoch 89/100 g=3.234 d=0.226 cycle=1.444 id=0.602 nan=0 lr=4.40e-05 epoch_min=9.6 train_h=3.73
+SCORE {'epoch': 89, 'weights': 'raw', 'g': 3.234, 'd': 0.226, 'fid_b2a': 95.17, 'fid_a2b': 97.649, 'mifid_b2a': 0.4056, 'mifid_a2b': 0.4159, 'mifid': 0.4108, 'score': 48.4102}
+  -> combo: photo->Monet from epoch 89 raw (FID 95.170) + Monet->photo from epoch 87 raw (FID 96.749) = 48.1849
+SCORE {'epoch': 89, 'weights': 'ema', 'g': 3.234, 'd': 0.226, 'fid_b2a': 96.43, 'fid_a2b': 96.831, 'mifid_b2a': 0.4077, 'mifid_a2b': 0.4149, 'mifid': 0.4113, 'score': 48.5209}
+epoch 90/100 g=3.188 d=0.225 cycle=1.428 id=0.592 nan=0 lr=4.00e-05 epoch_min=9.5 train_h=3.89
+SCORE {'epoch': 90, 'weights': 'raw', 'g': 3.188, 'd': 0.225, 'fid_b2a': 97.019, 'fid_a2b': 96.847, 'mifid_b2a': 0.407, 'mifid_a2b': 0.4147, 'mifid': 0.4108, 'score': 48.6719}
+SCORE {'epoch': 90, 'weights': 'ema', 'g': 3.188, 'd': 0.225, 'fid_b2a': 96.417, 'fid_a2b': 96.626, 'mifid_b2a': 0.4068, 'mifid_a2b': 0.4149, 'mifid': 0.4108, 'score': 48.4663}
+  -> combo: photo->Monet from epoch 89 raw (FID 95.170) + Monet->photo from epoch 90 ema (FID 96.626) = 48.1541
+epoch 91/100 g=3.191 d=0.224 cycle=1.420 id=0.589 nan=0 lr=3.60e-05 epoch_min=9.5 train_h=4.05
+SCORE {'epoch': 91, 'weights': 'raw', 'g': 3.191, 'd': 0.224, 'fid_b2a': 95.609, 'fid_a2b': 94.781, 'mifid_b2a': 0.4057, 'mifid_a2b': 0.4121, 'mifid': 0.4089, 'score': 47.802}
+  -> combo: photo->Monet from epoch 89 raw (FID 95.170) + Monet->photo from epoch 91 raw (FID 94.781) = 47.6922
+  -> new best 47.802 (epoch 91, raw weights), saved C:\Sneha_cuda\runs_full\ngf64\best.pt
+SCORE {'epoch': 91, 'weights': 'ema', 'g': 3.191, 'd': 0.224, 'fid_b2a': 96.787, 'fid_a2b': 96.472, 'mifid_b2a': 0.4081, 'mifid_a2b': 0.4151, 'mifid': 0.4116, 'score': 48.5205}
+  [thermal] GPU at 84 C, pausing until 74 C ...
+  [thermal] cooled to 58 C, resuming
+epoch 92/100 g=3.192 d=0.223 cycle=1.421 id=0.592 nan=0 lr=3.20e-05 epoch_min=9.9 train_h=4.22
+SCORE {'epoch': 92, 'weights': 'raw', 'g': 3.192, 'd': 0.223, 'fid_b2a': 95.627, 'fid_a2b': 96.921, 'mifid_b2a': 0.4063, 'mifid_a2b': 0.4158, 'mifid': 0.4111, 'score': 48.3427}
+SCORE {'epoch': 92, 'weights': 'ema', 'g': 3.192, 'd': 0.223, 'fid_b2a': 96.506, 'fid_a2b': 96.516, 'mifid_b2a': 0.4074, 'mifid_a2b': 0.415, 'mifid': 0.4112, 'score': 48.4611}
+epoch 93/100 g=3.190 d=0.219 cycle=1.405 id=0.582 nan=0 lr=2.80e-05 epoch_min=9.7 train_h=4.38
+SCORE {'epoch': 93, 'weights': 'raw', 'g': 3.19, 'd': 0.219, 'fid_b2a': 95.751, 'fid_a2b': 98.058, 'mifid_b2a': 0.4067, 'mifid_a2b': 0.4162, 'mifid': 0.4114, 'score': 48.6582}
+SCORE {'epoch': 93, 'weights': 'ema', 'g': 3.19, 'd': 0.219, 'fid_b2a': 96.154, 'fid_a2b': 96.242, 'mifid_b2a': 0.4071, 'mifid_a2b': 0.415, 'mifid': 0.4111, 'score': 48.3045}
+  [thermal] GPU at 84 C, pausing until 74 C ...
+  [thermal] cooled to 58 C, resuming
+epoch 94/100 g=3.164 d=0.220 cycle=1.397 id=0.582 nan=0 lr=2.40e-05 epoch_min=9.9 train_h=4.54
+SCORE {'epoch': 94, 'weights': 'raw', 'g': 3.164, 'd': 0.22, 'fid_b2a': 96.129, 'fid_a2b': 97.254, 'mifid_b2a': 0.4055, 'mifid_a2b': 0.4162, 'mifid': 0.4109, 'score': 48.5511}
+SCORE {'epoch': 94, 'weights': 'ema', 'g': 3.164, 'd': 0.22, 'fid_b2a': 95.836, 'fid_a2b': 96.698, 'mifid_b2a': 0.4063, 'mifid_a2b': 0.4149, 'mifid': 0.4106, 'score': 48.3388}
+epoch 95/100 g=3.169 d=0.218 cycle=1.396 id=0.578 nan=0 lr=2.00e-05 epoch_min=9.6 train_h=4.70
+SCORE {'epoch': 95, 'weights': 'raw', 'g': 3.169, 'd': 0.218, 'fid_b2a': 97.328, 'fid_a2b': 96.734, 'mifid_b2a': 0.4048, 'mifid_a2b': 0.4139, 'mifid': 0.4094, 'score': 48.72}
+SCORE {'epoch': 95, 'weights': 'ema', 'g': 3.169, 'd': 0.218, 'fid_b2a': 95.768, 'fid_a2b': 96.715, 'mifid_b2a': 0.4065, 'mifid_a2b': 0.4146, 'mifid': 0.4105, 'score': 48.3261}
+  [thermal] GPU at 84 C, pausing until 74 C ...
+  [thermal] cooled to 58 C, resuming
+epoch 96/100 g=3.143 d=0.216 cycle=1.382 id=0.573 nan=0 lr=1.60e-05 epoch_min=9.8 train_h=4.87
+SCORE {'epoch': 96, 'weights': 'raw', 'g': 3.143, 'd': 0.216, 'fid_b2a': 96.868, 'fid_a2b': 95.511, 'mifid_b2a': 0.4064, 'mifid_a2b': 0.415, 'mifid': 0.4107, 'score': 48.3}
+SCORE {'epoch': 96, 'weights': 'ema', 'g': 3.143, 'd': 0.216, 'fid_b2a': 96.142, 'fid_a2b': 96.294, 'mifid_b2a': 0.4058, 'mifid_a2b': 0.4147, 'mifid': 0.4103, 'score': 48.3143}
+epoch 97/100 g=3.156 d=0.215 cycle=1.373 id=0.571 nan=0 lr=1.20e-05 epoch_min=9.6 train_h=5.02
+SCORE {'epoch': 97, 'weights': 'raw', 'g': 3.156, 'd': 0.215, 'fid_b2a': 97.576, 'fid_a2b': 95.766, 'mifid_b2a': 0.4059, 'mifid_a2b': 0.4141, 'mifid': 0.41, 'score': 48.5404}
+SCORE {'epoch': 97, 'weights': 'ema', 'g': 3.156, 'd': 0.215, 'fid_b2a': 96.475, 'fid_a2b': 96.364, 'mifid_b2a': 0.4061, 'mifid_a2b': 0.4144, 'mifid': 0.4103, 'score': 48.4147}
+epoch 98/100 g=3.130 d=0.217 cycle=1.370 id=0.568 nan=0 lr=8.00e-06 epoch_min=9.7 train_h=5.19
+SCORE {'epoch': 98, 'weights': 'raw', 'g': 3.13, 'd': 0.217, 'fid_b2a': 96.516, 'fid_a2b': 96.159, 'mifid_b2a': 0.4054, 'mifid_a2b': 0.415, 'mifid': 0.4102, 'score': 48.3737}
+SCORE {'epoch': 98, 'weights': 'ema', 'g': 3.13, 'd': 0.217, 'fid_b2a': 96.386, 'fid_a2b': 96.278, 'mifid_b2a': 0.406, 'mifid_a2b': 0.4152, 'mifid': 0.4106, 'score': 48.3713}
+  [thermal] GPU at 84 C, pausing until 74 C ...
+  [thermal] cooled to 59 C, resuming
+epoch 99/100 g=3.117 d=0.215 cycle=1.361 id=0.564 nan=0 lr=4.00e-06 epoch_min=10.0 train_h=5.35
+SCORE {'epoch': 99, 'weights': 'raw', 'g': 3.117, 'd': 0.215, 'fid_b2a': 95.997, 'fid_a2b': 96.06, 'mifid_b2a': 0.4054, 'mifid_a2b': 0.4148, 'mifid': 0.4101, 'score': 48.2192}
+SCORE {'epoch': 99, 'weights': 'ema', 'g': 3.117, 'd': 0.215, 'fid_b2a': 96.349, 'fid_a2b': 96.13, 'mifid_b2a': 0.406, 'mifid_a2b': 0.4147, 'mifid': 0.4104, 'score': 48.3249}
+epoch 100/100 g=3.113 d=0.213 cycle=1.355 id=0.561 nan=0 lr=0.00e+00 epoch_min=9.7 train_h=5.51
+SCORE {'epoch': 100, 'weights': 'raw', 'g': 3.113, 'd': 0.213, 'fid_b2a': 96.155, 'fid_a2b': 95.87, 'mifid_b2a': 0.4058, 'mifid_a2b': 0.4147, 'mifid': 0.4103, 'score': 48.2115}
+SCORE {'epoch': 100, 'weights': 'ema', 'g': 3.113, 'd': 0.213, 'fid_b2a': 96.13, 'fid_a2b': 96.36, 'mifid_b2a': 0.4059, 'mifid_a2b': 0.4152, 'mifid': 0.4105, 'score': 48.3278}
+DONE train_h=5.51 peak_memory_mb=6855
+  {'epoch': 91, 'weights': 'raw', 'g': 3.191, 'd': 0.224, 'fid_b2a': 95.609, 'fid_a2b': 94.781, 'mifid_b2a': 0.4057, 'mifid_a2b': 0.4121, 'mifid': 0.4089, 'score': 47.802}
+  {'epoch': 100, 'weights': 'raw', 'g': 3.113, 'd': 0.213, 'fid_b2a': 96.155, 'fid_a2b': 95.87, 'mifid_b2a': 0.4058, 'mifid_a2b': 0.4147, 'mifid': 0.4103, 'score': 48.2115}
+  {'epoch': 99, 'weights': 'raw', 'g': 3.117, 'd': 0.215, 'fid_b2a': 95.997, 'fid_a2b': 96.06, 'mifid_b2a': 0.4054, 'mifid_a2b': 0.4148, 'mifid': 0.4101, 'score': 48.2192}
+  {'epoch': 96, 'weights': 'raw', 'g': 3.143, 'd': 0.216, 'fid_b2a': 96.868, 'fid_a2b': 95.511, 'mifid_b2a': 0.4064, 'mifid_a2b': 0.415, 'mifid': 0.4107, 'score': 48.3}
+  {'epoch': 93, 'weights': 'ema', 'g': 3.19, 'd': 0.219, 'fid_b2a': 96.154, 'fid_a2b': 96.242, 'mifid_b2a': 0.4071, 'mifid_a2b': 0.415, 'mifid': 0.4111, 'score': 48.3045}
+  {'epoch': 96, 'weights': 'ema', 'g': 3.143, 'd': 0.216, 'fid_b2a': 96.142, 'fid_a2b': 96.294, 'mifid_b2a': 0.4058, 'mifid_a2b': 0.4147, 'mifid': 0.4103, 'score': 48.3143}
+  {'epoch': 99, 'weights': 'ema', 'g': 3.117, 'd': 0.215, 'fid_b2a': 96.349, 'fid_a2b': 96.13, 'mifid_b2a': 0.406, 'mifid_a2b': 0.4147, 'mifid': 0.4104, 'score': 48.3249}
+  {'epoch': 95, 'weights': 'ema', 'g': 3.169, 'd': 0.218, 'fid_b2a': 95.768, 'fid_a2b': 96.715, 'mifid_b2a': 0.4065, 'mifid_a2b': 0.4146, 'mifid': 0.4105, 'score': 48.3261}
+  {'epoch': 100, 'weights': 'ema', 'g': 3.113, 'd': 0.213, 'fid_b2a': 96.13, 'fid_a2b': 96.36, 'mifid_b2a': 0.4059, 'mifid_a2b': 0.4152, 'mifid': 0.4105, 'score': 48.3278}
+  {'epoch': 85, 'weights': 'raw', 'g': 3.272, 'd': 0.23, 'fid_b2a': 95.325, 'fid_a2b': 97.174, 'mifid_b2a': 0.4077, 'mifid_a2b': 0.4159, 'mifid': 0.4118, 'score': 48.3306}
+  {'epoch': 94, 'weights': 'ema', 'g': 3.164, 'd': 0.22, 'fid_b2a': 95.836, 'fid_a2b': 96.698, 'mifid_b2a': 0.4063, 'mifid_a2b': 0.4149, 'mifid': 0.4106, 'score': 48.3388}
+  {'epoch': 92, 'weights': 'raw', 'g': 3.192, 'd': 0.223, 'fid_b2a': 95.627, 'fid_a2b': 96.921, 'mifid_b2a': 0.4063, 'mifid_a2b': 0.4158, 'mifid': 0.4111, 'score': 48.3427}
+  {'epoch': 98, 'weights': 'ema', 'g': 3.13, 'd': 0.217, 'fid_b2a': 96.386, 'fid_a2b': 96.278, 'mifid_b2a': 0.406, 'mifid_a2b': 0.4152, 'mifid': 0.4106, 'score': 48.3713}
+  {'epoch': 98, 'weights': 'raw', 'g': 3.13, 'd': 0.217, 'fid_b2a': 96.516, 'fid_a2b': 96.159, 'mifid_b2a': 0.4054, 'mifid_a2b': 0.415, 'mifid': 0.4102, 'score': 48.3737}
+  {'epoch': 89, 'weights': 'raw', 'g': 3.234, 'd': 0.226, 'fid_b2a': 95.17, 'fid_a2b': 97.649, 'mifid_b2a': 0.4056, 'mifid_a2b': 0.4159, 'mifid': 0.4108, 'score': 48.4102}
+  {'epoch': 97, 'weights': 'ema', 'g': 3.156, 'd': 0.215, 'fid_b2a': 96.475, 'fid_a2b': 96.364, 'mifid_b2a': 0.4061, 'mifid_a2b': 0.4144, 'mifid': 0.4103, 'score': 48.4147}
+  {'epoch': 88, 'weights': 'raw', 'g': 3.244, 'd': 0.224, 'fid_b2a': 95.896, 'fid_a2b': 96.982, 'mifid_b2a': 0.4079, 'mifid_a2b': 0.4165, 'mifid': 0.4122, 'score': 48.4255}
+  {'epoch': 92, 'weights': 'ema', 'g': 3.192, 'd': 0.223, 'fid_b2a': 96.506, 'fid_a2b': 96.516, 'mifid_b2a': 0.4074, 'mifid_a2b': 0.415, 'mifid': 0.4112, 'score': 48.4611}
+  {'epoch': 90, 'weights': 'ema', 'g': 3.188, 'd': 0.225, 'fid_b2a': 96.417, 'fid_a2b': 96.626, 'mifid_b2a': 0.4068, 'mifid_a2b': 0.4149, 'mifid': 0.4108, 'score': 48.4663}
+  {'epoch': 91, 'weights': 'ema', 'g': 3.191, 'd': 0.224, 'fid_b2a': 96.787, 'fid_a2b': 96.472, 'mifid_b2a': 0.4081, 'mifid_a2b': 0.4151, 'mifid': 0.4116, 'score': 48.5205}
+  {'epoch': 89, 'weights': 'ema', 'g': 3.234, 'd': 0.226, 'fid_b2a': 96.43, 'fid_a2b': 96.831, 'mifid_b2a': 0.4077, 'mifid_a2b': 0.4149, 'mifid': 0.4113, 'score': 48.5209}
+  {'epoch': 97, 'weights': 'raw', 'g': 3.156, 'd': 0.215, 'fid_b2a': 97.576, 'fid_a2b': 95.766, 'mifid_b2a': 0.4059, 'mifid_a2b': 0.4141, 'mifid': 0.41, 'score': 48.5404}
+  {'epoch': 94, 'weights': 'raw', 'g': 3.164, 'd': 0.22, 'fid_b2a': 96.129, 'fid_a2b': 97.254, 'mifid_b2a': 0.4055, 'mifid_a2b': 0.4162, 'mifid': 0.4109, 'score': 48.5511}
+  {'epoch': 93, 'weights': 'raw', 'g': 3.19, 'd': 0.219, 'fid_b2a': 95.751, 'fid_a2b': 98.058, 'mifid_b2a': 0.4067, 'mifid_a2b': 0.4162, 'mifid': 0.4114, 'score': 48.6582}
+  {'epoch': 90, 'weights': 'raw', 'g': 3.188, 'd': 0.225, 'fid_b2a': 97.019, 'fid_a2b': 96.847, 'mifid_b2a': 0.407, 'mifid_a2b': 0.4147, 'mifid': 0.4108, 'score': 48.6719}
+  {'epoch': 86, 'weights': 'ema', 'g': 3.229, 'd': 0.232, 'fid_b2a': 96.896, 'fid_a2b': 97.01, 'mifid_b2a': 0.4073, 'mifid_a2b': 0.4152, 'mifid': 0.4113, 'score': 48.6821}
+  {'epoch': 95, 'weights': 'raw', 'g': 3.169, 'd': 0.218, 'fid_b2a': 97.328, 'fid_a2b': 96.734, 'mifid_b2a': 0.4048, 'mifid_a2b': 0.4139, 'mifid': 0.4094, 'score': 48.72}
+  {'epoch': 87, 'weights': 'raw', 'g': 3.248, 'd': 0.23, 'fid_b2a': 97.408, 'fid_a2b': 96.749, 'mifid_b2a': 0.4067, 'mifid_a2b': 0.415, 'mifid': 0.4108, 'score': 48.7446}
+  {'epoch': 88, 'weights': 'ema', 'g': 3.244, 'd': 0.224, 'fid_b2a': 97.182, 'fid_a2b': 97.021, 'mifid_b2a': 0.4081, 'mifid_a2b': 0.4157, 'mifid': 0.4119, 'score': 48.7567}
+  {'epoch': 87, 'weights': 'ema', 'g': 3.248, 'd': 0.23, 'fid_b2a': 97.277, 'fid_a2b': 97.427, 'mifid_b2a': 0.4078, 'mifid_a2b': 0.4157, 'mifid': 0.4118, 'score': 48.8817}
+  {'epoch': '81', 'weights': 'ema', 'g': '3.325', 'd': '0.236', 'fid_b2a': '97.478', 'fid_a2b': '97.659', 'mifid': '0.4124', 'score': '48.9906'}
+  {'epoch': 85, 'weights': 'ema', 'g': 3.272, 'd': 0.23, 'fid_b2a': 97.552, 'fid_a2b': 97.691, 'mifid_b2a': 0.4081, 'mifid_a2b': 0.4158, 'mifid': 0.412, 'score': 49.0168}
+  {'epoch': '82', 'weights': 'ema', 'g': '3.295', 'd': '0.235', 'fid_b2a': '97.918', 'fid_a2b': '97.418', 'mifid': '0.4129', 'score': '49.0404'}
+  {'epoch': '80', 'weights': 'ema', 'g': '3.302', 'd': '0.24', 'fid_b2a': '98.261', 'fid_a2b': '97.316', 'mifid': '0.413', 'score': '49.1009'}
+  {'epoch': '84', 'weights': 'ema', 'g': '3.302', 'd': '0.233', 'fid_b2a': '98.367', 'fid_a2b': '97.424', 'mifid': '0.4121', 'score': '49.1538'}
+  {'epoch': '78', 'weights': 'ema', 'g': '3.357', 'd': '0.24', 'fid_b2a': '98.357', 'fid_a2b': '97.511', 'mifid': '0.4127', 'score': '49.1733'}
+  {'epoch': '79', 'weights': 'ema', 'g': '3.327', 'd': '0.24', 'fid_b2a': '98.367', 'fid_a2b': '97.552', 'mifid': '0.4123', 'score': '49.1858'}
+  {'epoch': '83', 'weights': 'ema', 'g': '3.285', 'd': '0.235', 'fid_b2a': '98.489', 'fid_a2b': '97.454', 'mifid': '0.4125', 'score': '49.1922'}
+  {'epoch': '77', 'weights': 'ema', 'g': '3.336', 'd': '0.243', 'fid_b2a': '98.272', 'fid_a2b': '98.076', 'mifid': '0.4125', 'score': '49.2933'}
+  {'epoch': '81', 'weights': 'raw', 'g': '3.325', 'd': '0.236', 'fid_b2a': '96.854', 'fid_a2b': '99.582', 'mifid': '0.4124', 'score': '49.3153'}
+  {'epoch': '78', 'weights': 'raw', 'g': '3.357', 'd': '0.24', 'fid_b2a': '98.306', 'fid_a2b': '98.201', 'mifid': '0.412', 'score': '49.3326'}
+  {'epoch': '76', 'weights': 'ema', 'g': '3.361', 'd': '0.244', 'fid_b2a': '98.838', 'fid_a2b': '97.773', 'mifid': '0.4126', 'score': '49.3588'}
+  {'epoch': '83', 'weights': 'raw', 'g': '3.285', 'd': '0.235', 'fid_b2a': '99.253', 'fid_a2b': '97.423', 'mifid': '0.4116', 'score': '49.375'}
+  {'epoch': 86, 'weights': 'raw', 'g': 3.229, 'd': 0.232, 'fid_b2a': 98.141, 'fid_a2b': 98.621, 'mifid_b2a': 0.4092, 'mifid_a2b': 0.4163, 'mifid': 0.4128, 'score': 49.397}
+  {'epoch': '84', 'weights': 'raw', 'g': '3.302', 'd': '0.233', 'fid_b2a': '100.053', 'fid_a2b': '97.698', 'mifid': '0.4116', 'score': '49.6437'}
+  {'epoch': '80', 'weights': 'raw', 'g': '3.302', 'd': '0.24', 'fid_b2a': '100.819', 'fid_a2b': '97.402', 'mifid': '0.412', 'score': '49.7611'}
+  {'epoch': '77', 'weights': 'raw', 'g': '3.336', 'd': '0.243', 'fid_b2a': '99.297', 'fid_a2b': '99.022', 'mifid': '0.4135', 'score': '49.7864'}
+  {'epoch': '82', 'weights': 'raw', 'g': '3.295', 'd': '0.235', 'fid_b2a': '98.845', 'fid_a2b': '99.716', 'mifid': '0.4143', 'score': '49.8475'}
+  {'epoch': '79', 'weights': 'raw', 'g': '3.327', 'd': '0.24', 'fid_b2a': '99.098', 'fid_a2b': '99.515', 'mifid': '0.4114', 'score': '49.8588'}
+  {'epoch': '76', 'weights': 'raw', 'g': '3.361', 'd': '0.244', 'fid_b2a': '101.714', 'fid_a2b': '100.133', 'mifid': '0.412', 'score': '50.6679'}
+BEST 47.802  ->  C:\Sneha_cuda\runs_full\ngf64\best.pt
+COMBO 47.6922  ->  C:\Sneha_cuda\runs_full\ngf64\best_combo.pt  (photo->Monet: epoch 89 raw, Monet->photo: epoch 91 raw)

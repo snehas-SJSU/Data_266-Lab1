@@ -101,21 +101,29 @@ unedited.
 - Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full_100ep.log`
 - Result (professor script, Colab L4): FID 107.01, MiFID 0.417, score 53.72. Replaced by the run below.
 
-## Run — Part 3 CycleGAN (full — submitted)
+## Run — Part 3 CycleGAN (full, 32 base filters — earlier run)
 
-- Date: train 2026-10-03 (Colab NVIDIA L4), submission built 2026-10-03
+- Date: train 2026-10-03 (Colab NVIDIA L4)
 - Task: `task3_gan`
 - Smoke: false
-- Config: `task3_gan/sneha_singh/src/config.json` — 50 + 50 epochs (linear decay), 800 steps/epoch, 3,200 photos resampled per epoch, batch 4, generator 9 blocks / 32 base filters, DiffAugment (color, translation, cutout), identity weight 5, label smoothing 0.9, lr 2e-4, AMP, nearest upsampling
-- Device: Colab NVIDIA L4 (CUDA)
-- Train time: 19,482.5 s (~5.4 h); peak_memory_mb: 3361.5; parameters: 11,223,560
-- Notebook with outputs: `task3_gan/sneha_singh/src/part3_cyclegan.ipynb`
-- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full_light.log` (100 epoch lines)
-- Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` — epoch 93 (43 MB, in git), selected by professor-script score among epochs 86–100 (`outputs/checkpoint_scores_epochs86_100.csv`)
+- Config: same as below but 32 base filters, no EMA; parameters 11,223,560; 19,482.5 s; peak 3361.5 MB
+- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full_light.log`; checkpoint scores `outputs/checkpoint_scores_epochs86_100.csv`
+- Result: epoch 93, FID 99.84, MiFID 0.412, score 50.13 (Kaggle 50.1253). Fine-tuning with a generator EMA (`train_finetune_ema.log`, `outputs/checkpoint_scores_finetune_ema.csv`) reached 50.77. Replaced by the run below.
+
+## Run — Part 3 CycleGAN (full, 64 base filters — submitted)
+
+- Date: train 2026-10-04, submission built 2026-10-05
+- Task: `task3_gan`
+- Smoke: false
+- Config: `task3_gan/sneha_singh/src/config.json` — 50 + 50 epochs (linear decay), 800 steps/epoch, 3,200 photos resampled per epoch, batch 4, generator 9 blocks / 64 base filters, generator EMA 0.999, DiffAugment (color, translation, cutout), identity weight 5, label smoothing 0.9, lr 2e-4, AMP, nearest upsampling, seed 670
+- Device: epochs 1–84 Colab NVIDIA A100; epochs 85–100 resumed on an NVIDIA RTX 4060 Laptop GPU (CUDA)
+- Train time: 19,836 s (~5.5 h); peak_memory_mb: 6855; parameters: 28,273,544
+- Scripts: `src/train_full_colab_epochs1-84.py`, `src/train_full_resume_epochs85-100.py`; notebook `src/part3_cyclegan.ipynb`
+- Raw log: `reproducibility/raw_logs/sneha_singh/task3_gan/train_full_ngf64_sneha.log` (100 epoch lines)
+- Checkpoint: `task3_gan/sneha_singh/checkpoints/best.pt` — epoch 91, raw weights, generators only (87 MB, in git), selected by professor-script score among epochs 76–100 (`outputs/checkpoint_scores_epochs76_100.csv`)
 - Inference: Monet→photo averaged over 6 flipped/shifted views, photo→Monet single pass (`make_submission.py`)
-- Submission: `task3_gan/sneha_singh/submission.csv` — FID 99.84, MiFID 0.412, score 50.13 (professor script, Colab L4)
-- Per direction (Colab L4): A2B FID 101.39, MiFID 0.418 · B2A FID 98.29, MiFID 0.406
-- Extra experiment: fine-tuning from epoch 93 with a generator EMA (`train_finetune_ema.log`, `outputs/checkpoint_scores_finetune_ema.csv`), best 50.77, not submitted
+- Submission: `task3_gan/sneha_singh/submission.csv` — FID 95.30, MiFID 0.409, score 47.857 (professor script, GPU)
+- Per direction: A2B FID 94.83, MiFID 0.412 · B2A FID 95.78, MiFID 0.406
 - Commands: `python task3_gan/sneha_singh/make_submission.py`, then `python task3_gan/sneha_singh/evaluate_local.py`
 
 ## Run — Part 2 Sentiment (full)
