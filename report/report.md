@@ -21,7 +21,7 @@ Each part below has two individual write-ups and then one team comparison. Secti
 |---|---|---|
 | 1 — GPT (TinyStories) | 4 layers, emb 256, context 128, 10 epochs, RTX 5090 | 4 layers, emb 128, context 256, 12 epochs, Colab Tesla T4 |
 | 2 — Yelp polarity | BiLSTM best, macro-F1 0.942, full train set, Colab Tesla T4 | BiLSTM best, macro-F1 0.934, full 560k set, Colab Tesla T4 |
-| 3 — CycleGAN | Batch 4, 100 epochs, Colab NVIDIA L4, about 5.4 h, photo→Monet FID 98.29 | Batch 4, 125 epochs, Colab NVIDIA A100, about 4.5 h, photo→Monet FID 93.89 |
+| 3 — CycleGAN | Batch 4, 100 epochs, A100 then RTX 4060, about 5.5 h, photo→Monet FID 95.78 | Batch 4, 125 epochs, Colab NVIDIA A100, about 4.5 h, photo→Monet FID 93.89 |
 
 We share the raw data. The rows above are two separate runs of the same part, not a split of who had to do which part.
 
@@ -297,7 +297,7 @@ What I saw in my audit of an earlier run of the same CycleGAN, and in this grid:
 - **Soft reverse.** A few Monet-to-photo frames go soft or pick up a dark blob.
 - **Content.** The layout of the photo usually survives. I did not mark any of my 30 as a copied training Monet.
 
-On the 0–2 sheet my averages were style 1.40 and content 1.67, where higher is better, and artifacts 1.43, where higher is worse. The audit was rated on images from an earlier checkpoint of this CycleGAN (80-epoch run, same 30 indices) and was not repeated for the final epoch-91 checkpoint.
+On the 0–2 sheet in `outputs/human_audit/audit_30.csv` my means are style 1.40 and content 1.67, where higher is better, and artifacts 1.43, where higher is worse. None of the 30 is marked as a copied Monet. Those scores are on the 80-epoch images at the same 30 indices, not on the submitted epoch-91 checkpoint. The second rater’s columns are blank, so there is no kappa.
 
 Full notes: [task3_gan/sneha_singh/failure_analysis.md](https://github.com/snehas-SJSU/Data_266-Lab1/blob/main/task3_gan/sneha_singh/failure_analysis.md)
 

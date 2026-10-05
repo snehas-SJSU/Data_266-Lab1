@@ -38,8 +38,9 @@ From `outputs/samples/grid.png` and the audit set:
 | Basically broken / band noise | A few (e.g. 01455, 04853) |
 | Looks like a copied training Monet | None that I flagged (all N) |
 
-Average-ish from my scores: style ~1.4, content ~1.7, artifacts ~1.4.
-So content is the strongest part; artifacts are the main complaint.
+Means from `audit_30.csv` (30 images, 0–2): style 1.40, content 1.67, artifacts 1.43.
+None of the 30 is marked memorised. The second rater’s columns are blank, so there is no kappa.
+Content is the strongest part; artifacts are the main complaint.
 
 ## Cycle check
 

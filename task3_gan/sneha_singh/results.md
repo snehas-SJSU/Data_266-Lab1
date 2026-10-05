@@ -35,7 +35,7 @@ FID and MiFID: unchanged professor evaluation script (Inception-v3, first 300 so
 Losses at epoch 91: G 3.191, D 0.224, cycle 1.420, identity 0.589, NaN count 0. All values are in `full_metrics_report.csv`; `metrics_report.csv` has the same in long format plus per-epoch losses and every scored checkpoint.
 
 ## Human audit
-`outputs/human_audit/audit_30.csv`: 30 fixed photo→Monet images (`a2b_*.jpg` in that folder), rated on an earlier checkpoint of this CycleGAN (80-epoch run, same 30 indices); not repeated for the final epoch-91 checkpoint. Sneha's means (0–2): style 1.40, content 1.67, artifacts 1.43 (higher = worse), 0 of 30 marked as memorised. `audit_agreement.py` prints both raters' means and Cohen's kappa once Ritika's column is filled.
+`outputs/human_audit/audit_30.csv`: 30 fixed photo→Monet images (`a2b_*.jpg` in that folder), rated on an earlier checkpoint of this CycleGAN (80-epoch run, same 30 indices); not repeated for the submitted epoch-91 checkpoint. My means (0–2): style 1.40, content 1.67, artifacts 1.43 (higher = worse), 0 of 30 marked as memorised. The second rater’s columns are blank, so there is no kappa.
 
 ## Kaggle
 - Team: PairProgramming_Team_05
