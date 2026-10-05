@@ -7,7 +7,7 @@ submission FID (mean of both),both,95.60372227321069,evaluate_local.py (TA scrip
 submission MiFID (mean of both),both,0.4054316282272339,evaluate_local.py (TA script) -> submission.csv
 score (FID + MiFID) / 2,both,48.00457695071896,leaderboard shows the negative
 Kaggle leaderboard score,both,-48.00457695071896,-(FID + MiFID) / 2 of submission.csv
-Kaggle leaderboard rank,both,pending,fill with --kaggle_rank
+Kaggle leaderboard rank,both,9,team rank on the public leaderboard (best team entry)
 KID mean,photo->Monet (B2A),0.004617662634700537,src/full_metrics.py
 KID std,photo->Monet (B2A),0.0010866400552913547,src/full_metrics.py
 KID mean,Monet->photo (A2B),0.015035915188491344,src/full_metrics.py

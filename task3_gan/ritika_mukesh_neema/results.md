@@ -181,7 +181,7 @@ Monet-like results on misty lakes.
 
 - Upload file: `submission.csv` (`ID,FID,MiFID` = `1, 95.60372227321069, 0.4054316282272339`)
 - Leaderboard score: −48.0046 (−(FID + MiFID) / 2)
-- Rank: to be recorded after upload
+- Rank: 9 — the team's position on the public leaderboard (Kaggle ranks a team by its best entry), as recorded in the team README
 - The images behind it are the direct output of this CycleGAN (`src/generate.py` from `checkpoints/best.pt`).
 
 ## How to reproduce

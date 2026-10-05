@@ -361,6 +361,15 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | Content | 1.67 | | |
 | Artifacts | 1.43 | | |
 
+**Human audit of Ritika’s model** (`task3_gan/ritika_mukesh_neema/outputs/human_audit/`): 30 blinded photo → Monet samples from `best.pt`, scored by two independent raters on a 1–5 scale (5 = best; for artifacts, 5 = no visible artifacts).
+
+| | Rater A | Rater B | Mean | Exact agreement | Cohen's kappa |
+|---|---|---|---|---|---|
+| Style | 3.47 | 3.23 | 3.35 | 50.0% | 0.17 |
+| Content | 4.47 | 3.97 | 4.22 | 46.7% | 0.20 |
+| Artifacts | 3.13 | 2.97 | 3.05 | 73.3% | 0.59 |
+| Overall | | | 3.54 | | |
+
 <div class="joint">
 
 **Strength.** Sneha’s photo-to-Monet FID is 98.29. Ritika’s is 93.89. With the TA script, Sneha’s `submission.csv` scores 50.13 and Ritika’s 48.00.
