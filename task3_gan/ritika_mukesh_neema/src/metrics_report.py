@@ -84,8 +84,14 @@ def main():
 
     audit_path = os.path.join(OUT, "human_audit", "human_audit_results.json")
     if os.path.exists(audit_path):
+        src = "outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
         for k, v in load(audit_path).items():
-            rows.append((f"human audit: {k}", "photo->Monet (B2A)", v, "outputs/human_audit/human_audit_results.json"))
+            if isinstance(v, dict):  # per criterion: mean score, Cohen's kappa, % agreement
+                rows.append((f"human audit {k}: mean score (1-5)", "photo->Monet (B2A)", v["mean_score_1_to_5"], src))
+                rows.append((f"human audit {k}: Cohen's kappa", "photo->Monet (B2A)", v["cohens_kappa"], src))
+                rows.append((f"human audit {k}: % agreement", "photo->Monet (B2A)", v["pct_agreement"], src))
+            else:
+                rows.append((f"human audit: {k}", "photo->Monet (B2A)", v, src))
     else:
         rows.append(("human audit score / inter-rater agreement", "photo->Monet (B2A)", "pending",
                      "30 blinded samples prepared in outputs/human_audit/; run human_audit.py score after both raters"))

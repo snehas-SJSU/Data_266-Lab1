@@ -37,4 +37,14 @@ peak GPU memory (MB),both,17368.2568359375,outputs/train_metrics.json
 peak process memory (MB),both,10198.83984375,outputs/train_metrics.json
 epochs / steps,both,125 / 100000,outputs/train_metrics.json
 submitted checkpoint,both,checkpoints/best.pt,"epoch 110 raw weights, best of 60 scored in outputs/checkpoint_scores.csv"
-human audit score / inter-rater agreement,photo->Monet (B2A),pending,30 blinded samples prepared in outputs/human_audit/; run human_audit.py score after both raters
+human audit style: mean score (1-5),photo->Monet (B2A),3.35,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
+human audit style: Cohen's kappa,photo->Monet (B2A),0.16974169741697426,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
+human audit style: % agreement,photo->Monet (B2A),0.5,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
+human audit content_preservation: mean score (1-5),photo->Monet (B2A),4.216666666666667,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
+human audit content_preservation: Cohen's kappa,photo->Monet (B2A),0.20398009950248758,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
+human audit content_preservation: % agreement,photo->Monet (B2A),0.4666666666666667,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
+human audit artifacts: mean score (1-5),photo->Monet (B2A),3.05,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
+human audit artifacts: Cohen's kappa,photo->Monet (B2A),0.5911413969335604,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
+human audit artifacts: % agreement,photo->Monet (B2A),0.7333333333333333,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
+human audit: overall_mean_human_audit_score_1_to_5,photo->Monet (B2A),3.5388888888888888,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"
+human audit: n_samples,photo->Monet (B2A),30,"outputs/human_audit/human_audit_results.json (2 raters, 30 blinded samples)"

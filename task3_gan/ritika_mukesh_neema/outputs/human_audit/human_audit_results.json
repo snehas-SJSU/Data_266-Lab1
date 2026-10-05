@@ -1,0 +1,19 @@
+{
+  "style": {
+    "pct_agreement": 0.5,
+    "cohens_kappa": 0.16974169741697426,
+    "mean_score_1_to_5": 3.35
+  },
+  "content_preservation": {
+    "pct_agreement": 0.4666666666666667,
+    "cohens_kappa": 0.20398009950248758,
+    "mean_score_1_to_5": 4.216666666666667
+  },
+  "artifacts": {
+    "pct_agreement": 0.7333333333333333,
+    "cohens_kappa": 0.5911413969335604,
+    "mean_score_1_to_5": 3.05
+  },
+  "overall_mean_human_audit_score_1_to_5": 3.5388888888888888,
+  "n_samples": 30
+}

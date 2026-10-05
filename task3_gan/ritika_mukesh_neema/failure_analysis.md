@@ -83,4 +83,10 @@ throughout (no NaN / Inf in 100,000 steps, discriminator loss 0.26–0.36).
 - Cycle L1 / LPIPS / content cosine are computed on 100 images per direction (`--max_images_for_cycle 100`), so they
   are noisier than FID/KID (300 images).
 - The content-cosine metric is computed in pixel space, a cheap proxy that rewards keeping colours as well as content.
-- Human audit: the 30 blinded samples are prepared; the two raters' scores and Cohen's kappa are still pending.
+- Human audit (2 raters, 30 blinded samples): overall 3.54 / 5 — content 4.22, style 3.35, artifacts 3.05. Both raters'
+  notes confirm Cases 1–3 (streaks in flat skies, dark corner blobs, watermarks) and single out misty lakes as the most
+  Monet-like results. Kappa is moderate for artifacts (0.59) and slight for style / content (0.17 / 0.20); exact-match
+  kappa on a 5-point scale is strict, and the raters are within one point on ≥96.7% of images.
+- One returned rating sheet was not used: several of its notes described content that is not in the images
+  (e.g. a waterfall, reflections, a tree where the images show waves, a forest, a sculpture), so it was replaced by an
+  independent rater who scored from the contact sheet.

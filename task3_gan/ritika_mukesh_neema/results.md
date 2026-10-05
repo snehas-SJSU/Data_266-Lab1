@@ -157,9 +157,25 @@ specific failure cases. Generated samples are committed in `outputs/pred_A2B/` (
 
 ## Human audit
 
-`src/human_audit.py prepare` selected 30 fixed photo→Monet outputs (seed 42) and copied them, blinded, to
-`outputs/human_audit/` with `rater_A_template.csv` / `rater_B_template.csv`. **Ratings are pending:** once both raters
-fill them in, `python human_audit.py score` reports the mean scores and Cohen's kappa / % agreement.
+`src/human_audit.py prepare` selected 30 fixed photo→Monet outputs (seed 42) and copied them, blinded
+(`sample_01.jpg` … `sample_30.jpg`, no model or source information), to `outputs/human_audit/`. Two independent raters
+scored every image from 1 to 5 on style (Monet-likeness), content preservation and artifacts (5 = cleanest), without
+seeing each other's sheets (`rater_A_scores.csv`, `rater_B_scores.csv`). `python human_audit.py score` →
+`outputs/human_audit/human_audit_results.json`:
+
+| Criterion | Rater A mean | Rater B mean | Mean (both) | Exact agreement | Cohen's kappa |
+|---|---|---|---|---|---|
+| Style | 3.47 | 3.23 | 3.35 | 50.0% | 0.17 |
+| Content preservation | 4.47 | 3.97 | 4.22 | 46.7% | 0.20 |
+| Artifacts | 3.13 | 2.97 | 3.05 | 73.3% | 0.59 |
+| **Overall human audit score** | | | **3.54 / 5** | | |
+
+Both raters rate content highest and artifacts lowest, matching the metrics (strong content cosine, visible streaks
+and blobs). Agreement is moderate for artifacts (κ 0.59) and slight for style and content (κ 0.17 / 0.20): kappa here
+needs the exact same 1–5 score, and the raters often differ by one point: they are within one point on 100% (style)
+and 96.7% (content, artifacts) of the images, and rater A scores content higher on 15 images vs 1 for rater B.
+Their notes name the same problems — dark corner blobs, vertical streaks in flat skies, watermarks, and the most
+Monet-like results on misty lakes.
 
 ## Kaggle
 
