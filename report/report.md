@@ -321,6 +321,10 @@ KID, precision/recall, cycle L1, LPIPS (input vs reconstruction) and content cos
 
 ![CycleGAN losses](../task3_gan/ritika_mukesh_neema/outputs/loss_curves.png)
 
+The grid is six photos and the Monet version of each, next to six real Monets and the photo version of those (rows evenly spaced through the sorted file lists, from `best.pt`).
+
+![Photo, generated Monet, real Monet, generated photo](../task3_gan/ritika_mukesh_neema/outputs/sample_grid.png)
+
 ### Failure notes
 
 - **Flat areas.** Smooth skies and gradients turn into streaky brush texture, worst on a beach-at-dusk photo.

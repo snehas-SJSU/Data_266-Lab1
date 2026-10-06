@@ -156,8 +156,11 @@ in both directions.
 
 ## Visual quality
 
-`outputs/sample_grid.png` (columns: photo | photo→Monet | Monet | Monet→photo). See `failure_analysis.md` for the
-specific failure cases. Generated samples are committed in `outputs/pred_A2B/` (all 300) and `outputs/pred_B2A/`
+Columns: photo | photo→Monet | Monet | Monet→photo (`outputs/sample_grid.png`, from `checkpoints/best.pt`).
+
+![Photo, generated Monet, real Monet, generated photo](outputs/sample_grid.png)
+
+See `failure_analysis.md` for the specific failure cases. Generated samples are committed in `outputs/pred_A2B/` (all 300) and `outputs/pred_B2A/`
 (the first 300 in sorted order, i.e. the images the TA script scores); the full 7,038 photo→Monet set is rebuilt with
 `src/generate.py`.
 
@@ -187,6 +190,7 @@ Monet-like results on misty lakes.
 
 - Upload file: `submission.csv` (`ID,FID,MiFID` = `1, 95.60372227321069, 0.4054316282272339`)
 - Leaderboard score: −48.0046 (−(FID + MiFID) / 2)
+- Uploaded 2026-10-06 (submission 56868546, "Ritika Mukesh Neema - CycleGAN v2, 64 filters, epoch 110"): Kaggle public score **−48.0045** (Kaggle's own display of −48.00458). The private score is shown when the competition closes.
 - Rank: 9 — the team's position on the public leaderboard (Kaggle ranks a team by its best entry), as recorded in the team README
 - The images behind it are the direct output of this CycleGAN (`src/generate.py` from `checkpoints/best.pt`).
 

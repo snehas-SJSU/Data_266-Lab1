@@ -214,6 +214,14 @@ python task3_gan/sneha_singh/evaluate_local.py
 
 **Status:** `best.pt` is epoch 91 (raw weights) of the 100-epoch 64-filter run, selected by professor-script score among epochs 76–100. Professor eval is in `submission.csv` (FID 95.30, MiFID 0.409). A2B Monet→photo FID 94.83 (6-view averaging). B2A photo→Monet FID 95.78. Human audit (`outputs/human_audit/audit_30.csv`) is the earlier 80-epoch images at the same 30 indices, on a 1–5 scale: style 3.80, content 4.33, artifacts 2.13, overall 3.42, none marked memorised. It was not repeated on epoch 91. Ritika rated the same 30 images: style 3.87, content 4.07, artifacts 2.00, overall 3.31. Cohen’s kappa: style 0.560, content 0.591, artifacts 0.600 (exact agreement 76.7% / 80.0% / 80.0%); both raters marked none as memorised.
 
+**Loss curves (Sneha)**
+
+![Sneha: CycleGAN losses](task3_gan/sneha_singh/outputs/loss_curves/losses.png)
+
+**Samples (Sneha):** photo | generated Monet | real Monet | generated photo
+
+![Sneha: photo, generated Monet, real Monet, generated photo](task3_gan/sneha_singh/outputs/samples/grid.png)
+
 ### Ritika Mukesh Neema — `task3_gan/ritika_mukesh_neema/`
 
 - `src/part3_cyclegan.ipynb` (built from the real files by `src/build_notebook.py`), `src/config.json` (run settings), `src/full_metrics.json`
@@ -244,6 +252,14 @@ cd .. && python evaluate_local.py
 | Leaderboard rank | 9|
 
 v1 (80 epochs × 300 images, RTX 5090): local FID 123.70 / 120.72; Kaggle FID 104.30 / MiFID 0.413 with `kaggle_score.py` (`real_stats.npz`, a different scorer). Kept in `outputs/history_v1/`.
+
+**Loss curves (Ritika)**
+
+![Ritika: CycleGAN losses](task3_gan/ritika_mukesh_neema/outputs/loss_curves.png)
+
+**Samples (Ritika):** photo | generated Monet | real Monet | generated photo
+
+![Ritika: photo, generated Monet, real Monet, generated photo](task3_gan/ritika_mukesh_neema/outputs/sample_grid.png)
 
 ---
 

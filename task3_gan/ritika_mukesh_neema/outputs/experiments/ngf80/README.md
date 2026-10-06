@@ -21,5 +21,7 @@ Files here are the run's own outputs, unedited: `checkpoint_scores.csv`, `train_
 | Images/s, peak GPU memory | 24.5, 17,368 MB | 19.3, 26,918 MB |
 | NaN / Inf | 0 | 0 |
 
+![80-filter loss curves](loss_curves.png)
+
 Result: lower training losses, but worse FID in both directions — see `failure_analysis.md` (Case 7).
 The two runs also differ in schedule length (125 vs 100 epochs), so this is not a pure width comparison.
