@@ -82,15 +82,15 @@ I trained for 12 epochs, batch 64, learning rate 0.0003, with linear warmup and 
 | Cross-entropy | 0.860 | 0.778 |
 | Perplexity | 2.36 | 2.18 |
 | Bits per character | 1.240 | 1.122 |
-| Generalization gap | | −0.082 |
-| Top-1 next-character accuracy | | 0.755 |
-| Distinct-1 / 2 / 3 | | 0.008 / 0.054 / 0.137 |
-| Repeated 4-gram rate | | 0.206 |
-| Max gradient norm / NaN count | | 4.99 / 0 |
-| Parameters | | 0.88M |
-| Train tokens/sec | | 177,917 |
-| Generation tokens/sec | | 239 |
-| Peak memory / train time | | 1,749 MB / 1,727 s |
+| Generalization gap (val − train) | — | −0.082 |
+| Top-1 next-character accuracy | — | 0.755 |
+| Distinct-1 / 2 / 3 (generated samples) | — | 0.008 / 0.054 / 0.137 |
+| Repeated 4-gram rate (generated samples) | — | 0.206 |
+| Max gradient norm / NaN count | 4.99 / 0 | — |
+| Parameters | 0.88M | — |
+| Train tokens/sec | 177,917 | — |
+| Generation tokens/sec | — | 239 |
+| Peak memory / train time | 1,749 MB / 1,727 s | — |
 
 ![Part 1 training and validation loss](../task1_llm/ritika_mukesh_neema/outputs/loss_curve.png)
 
@@ -228,7 +228,7 @@ Same three model families. The tables use the same columns. Both of us trained o
 | BiLSTM | 0.934 | 0.934 | 0.982 | 0.982 | 0.868 | 0.051 | 0.025 | < 0.001 | 3.24M | 798 s | 2,274 |
 | TextCNN | 0.926 | 0.926 | 0.979 | 0.979 | 0.852 | 0.055 | 0.021 | 0.00022 | 3.12M | 267 s | 2,450 |
 
-Precision, recall, the other F1 scores, bootstrap intervals, examples per second, and slice scores are in the next table. Slice scores are filled where the metrics file has a short-review or long-review column.
+Precision, recall, the other F1 scores, bootstrap intervals, examples per second, and slice scores are in the next table. Short and long are the two halves of each person's test set split at the median review length (Ritika: 43 tokens; her slices are computed from the saved test predictions in `outputs/*_test_predictions.npz`).
 
 | Metric | Sneha baseline | Sneha BiLSTM | Sneha TextCNN | Ritika baseline | Ritika BiLSTM | Ritika TextCNN |
 |---|---|---|---|---|---|---|
@@ -240,10 +240,10 @@ Precision, recall, the other F1 scores, bootstrap intervals, examples per second
 | Macro-F1 95% CI | 0.929–0.934 | 0.939–0.944 | 0.935–0.940 | 0.919–0.925 | 0.931–0.936 | 0.923–0.928 |
 | MCC 95% CI | 0.859–0.868 | 0.879–0.888 | 0.870–0.879 | 0.838–0.849 | 0.863–0.873 | 0.847–0.857 |
 | Examples/sec | 11,807 | 3,464 | 754 | 20,181 | 3,159 | 9,432 |
-| Short macro-F1 | 0.934 | 0.947 | 0.940 | | | |
-| Short error rate | 0.065 | 0.052 | 0.059 | | | |
-| Long macro-F1 | 0.927 | 0.934 | 0.933 | | | |
-| Long error rate | 0.072 | 0.065 | 0.066 | | | |
+| Short macro-F1 | 0.934 | 0.947 | 0.940 | 0.919 | 0.932 | 0.927 |
+| Short error rate | 0.065 | 0.052 | 0.059 | 0.080 | 0.068 | 0.072 |
+| Long macro-F1 | 0.927 | 0.934 | 0.933 | 0.923 | 0.934 | 0.923 |
+| Long error rate | 0.072 | 0.065 | 0.066 | 0.076 | 0.065 | 0.076 |
 
 <div class="joint">
 
@@ -374,7 +374,7 @@ Both models are ResNet-9 CycleGANs with a PatchGAN and least-squares loss. Lower
 | Style | 3.47 | 3.23 | 3.35 | 50.0% | 0.17 |
 | Content | 4.47 | 3.97 | 4.22 | 46.7% | 0.20 |
 | Artifacts | 3.13 | 2.97 | 3.05 | 73.3% | 0.59 |
-| Overall | | | 3.54 | | |
+| Overall | 3.69 | 3.39 | 3.54 | 56.7% | — |
 
 <div class="joint">
 
