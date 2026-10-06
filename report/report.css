@@ -1,22 +1,232 @@
-@page { size: Letter; margin: 0.8in 0.85in; }
-body { font-family: Palatino, "Palatino Linotype", "Book Antiqua", serif; font-size: 11pt; line-height: 1.45; color: #111; max-width: none; margin: 0; }
-h1, h2, h3 { font-family: Palatino, serif; font-weight: bold; line-height: 1.2; }
-h1 { font-size: 20pt; margin: 0 0 0.6em; page-break-before: always; }
-h2 { font-size: 15pt; margin: 1.3em 0 0.5em; }
-h3 { font-size: 12.5pt; margin: 1.1em 0 0.4em; }
-.cover { text-align: center; padding-top: 1.8in; page-break-after: always; }
-.cover h1 { font-size: 28pt; page-break-before: avoid; margin-bottom: 0.4em; }
-.cover .team { font-size: 14pt; margin: 0.3em 0 1em; }
-.cover .names { font-size: 12pt; margin: 0.2em 0; }
-table { border-collapse: collapse; width: 100%; margin: 0.8em 0 1em; font-size: 9pt; page-break-inside: avoid; }
-th, td { border: 1px solid #c8c8c8; padding: 4px 6px; text-align: left; vertical-align: top; }
-th { background: #eeeeee; font-weight: bold; }
-img { max-width: 100%; max-height: 8.6in; width: auto; height: auto; display: block; margin: 0.6em auto 0.2em; page-break-inside: avoid; }
-figure { margin: 0.8em 0; page-break-inside: avoid; }
-figcaption { font-size: 10pt; text-align: left; margin-top: 0.3em; }
-code { font-family: Menlo, monospace; font-size: 0.86em; }
-pre { font-family: Menlo, monospace; font-size: 8.5pt; background: #f6f6f6; padding: 8px; white-space: pre-wrap; }
-a { color: #1a4fa0; }
-.joint { border-left: 3px solid #999; background: #f7f7f7; padding: 0.4em 1em; margin: 1em 0; }
-.cite { font-size: 10pt; }
-hr { border: none; border-top: 1px solid #ddd; margin: 1.5em 0; }
+@page {
+  size: Letter;
+  margin: 0.6in 0.65in;
+}
+
+body {
+  font-family: Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: 9.8pt;
+  line-height: 1.38;
+  color: #1a1a1a;
+  max-width: none;
+  margin: 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: Palatino, Georgia, serif;
+  font-weight: bold;
+  line-height: 1.2;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+h1 {
+  font-size: 17pt;
+  margin: 0.9em 0 0.3em;
+  border-bottom: 1.5px solid #333;
+  padding-bottom: 3px;
+}
+
+h2 {
+  font-size: 12.5pt;
+  margin: 1.0em 0 0.35em;
+  color: #222;
+}
+
+h3 {
+  font-size: 10.8pt;
+  margin: 0.85em 0 0.25em;
+  color: #333;
+}
+
+p {
+  margin: 0.45em 0;
+  orphans: 2;
+  widows: 2;
+}
+
+ul, ol {
+  margin: 0.4em 0;
+  padding-left: 1.4em;
+}
+
+li {
+  margin: 0.2em 0;
+}
+
+/* Cover */
+.cover {
+  text-align: center;
+  padding-top: 2.8in;
+  page-break-after: always;
+  break-after: page;
+}
+.cover h1 {
+  font-size: 28pt;
+  border-bottom: none;
+  margin-bottom: 0.3em;
+  page-break-before: avoid;
+}
+.cover .team {
+  font-size: 15pt;
+  margin: 0.3em 0 1.5em;
+  color: #444;
+}
+.cover .names {
+  font-size: 12.5pt;
+  margin: 0.3em 0;
+  color: #222;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.4em 0;
+  font-size: 8.5pt;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+th, td {
+  border: 1px solid #d0d0d0;
+  padding: 3px 5px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f4f4f4;
+  font-weight: 600;
+  color: #222;
+}
+
+tr:nth-child(even) td {
+  background: #fafafa;
+}
+
+/* Figures & Images */
+figure {
+  margin: 0.5em auto;
+  text-align: center;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+img {
+  display: block;
+  margin: 0.3em auto;
+  max-width: 58%;
+  max-height: 2.2in;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Sample grids: keep compact and proportional */
+img[src*="grid"] {
+  max-width: 3.0in !important;
+  max-height: 3.0in !important;
+  margin: 0.4em auto !important;
+}
+
+/* Wide figures: EDA plots and loss curves */
+img[src*="losses"], img[src*="loss_curve"], img[src*="eda"], img[src*="confusion_matrices"] {
+  max-width: 75% !important;
+  max-height: 2.1in !important;
+}
+
+figcaption {
+  font-size: 8.5pt;
+  color: #555;
+  text-align: center;
+  margin-top: 0.2em;
+  font-style: italic;
+}
+
+/* 3-column row for Sneha's 3 confusion matrices */
+.cm-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0.5em 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.cm-col {
+  flex: 1;
+  text-align: center;
+}
+
+.cm-col img {
+  max-width: 100% !important;
+  max-height: 1.65in !important;
+  margin: 0 auto;
+}
+
+.cm-col .caption {
+  font-size: 8pt;
+  color: #555;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+code {
+  font-family: Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: #f4f4f4;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+pre {
+  font-family: Menlo, Monaco, Consolas, monospace;
+  font-size: 8pt;
+  background: #f7f7f7;
+  padding: 6px;
+  border: 1px solid #e5e5e5;
+  white-space: pre-wrap;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+a {
+  color: #1a4fa0;
+  text-decoration: none;
+}
+
+.joint {
+  border-left: 3px solid #666;
+  background: #f8f8f8;
+  padding: 0.4em 0.8em;
+  margin: 0.4em 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.cite ol {
+  margin: 0.2em 0 0;
+  padding-left: 1.2em;
+}
+.cite li {
+  margin: 0.1em 0;
+  padding: 0;
+}
+.cite {
+  font-size: 8pt;
+  margin-top: 0.4em;
+  line-height: 1.3;
+}
+.cite h2 {
+  font-size: 10pt;
+  margin: 0.4em 0 0.2em;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 1.0em 0;
+}

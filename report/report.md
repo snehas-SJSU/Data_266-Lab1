@@ -164,11 +164,20 @@ The length and class balance of this run:
 
 Confusion matrices on the test set:
 
-![Baseline confusion matrix](../task2_sentiment/sneha_singh/outputs/baseline_cm_full.png)
-
-![BiLSTM confusion matrix](../task2_sentiment/sneha_singh/outputs/experimental_a_cm_full.png)
-
-![TextCNN confusion matrix](../task2_sentiment/sneha_singh/outputs/experimental_b_cm_full.png)
+<div class="cm-row">
+<div class="cm-col">
+<img src="../task2_sentiment/sneha_singh/outputs/baseline_cm_full.png" alt="Baseline confusion matrix" />
+<div class="caption">Baseline (MeanPool)</div>
+</div>
+<div class="cm-col">
+<img src="../task2_sentiment/sneha_singh/outputs/experimental_a_cm_full.png" alt="BiLSTM confusion matrix" />
+<div class="caption">BiLSTM</div>
+</div>
+<div class="cm-col">
+<img src="../task2_sentiment/sneha_singh/outputs/experimental_b_cm_full.png" alt="TextCNN confusion matrix" />
+<div class="caption">TextCNN</div>
+</div>
+</div>
 
 ### Error review
 
