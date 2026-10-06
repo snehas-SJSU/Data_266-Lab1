@@ -195,6 +195,14 @@ I trained the same three families, with embeddings learned from scratch. My base
 
 My BiLSTM is the best of my three. McNemar against my baseline is p < 0.001 for the BiLSTM and p = 0.00022 for the TextCNN, so on my test set both sequence models beat the mean pool.
 
+The length and class balance of my test set (37,997 reviews; lengths are capped at 200 tokens, which makes the spike at 200):
+
+![Yelp test review length and class balance (Ritika)](../task2_sentiment/ritika_mukesh_neema/outputs/eda_review_length_classbalance.png)
+
+Confusion matrices on my test set:
+
+![Baseline, BiLSTM and TextCNN confusion matrices (Ritika)](../task2_sentiment/ritika_mukesh_neema/outputs/confusion_matrices.png)
+
 ### Error review
 
 I reviewed 20 TextCNN mistakes.

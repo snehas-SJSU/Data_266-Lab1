@@ -178,6 +178,14 @@ jupyter nbconvert --to notebook --execute --inplace \
 
 **Status:** full run done (503,945 train / 55,993 val / 37,997 test, 5 epochs, Colab Tesla T4). Best model is the BiLSTM, macro-F1 0.934.
 
+**Test-set length and class balance (Ritika)**
+
+![Ritika: test review length and class balance](task2_sentiment/ritika_mukesh_neema/outputs/eda_review_length_classbalance.png)
+
+**Confusion matrices on the test set (Ritika):** baseline, BiLSTM, TextCNN
+
+![Ritika: confusion matrices](task2_sentiment/ritika_mukesh_neema/outputs/confusion_matrices.png)
+
 ---
 
 ## Part 3 — CycleGAN (photo ↔ Monet)
